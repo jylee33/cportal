@@ -1,4 +1,4 @@
-package com.hamonsoft.repository;
+package com.hamonsoft.cportal.repository;
 
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.repository.MemberRepository;

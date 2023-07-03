@@ -1,4 +1,4 @@
-package com.hamonsoft.cportal;
+package com.hamonsoft.cportal.config;
 
 import com.hamonsoft.cportal.repository.JdbcTemplateMemberRepository;
 import com.hamonsoft.cportal.repository.JpaMemberRepository;

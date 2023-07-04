@@ -24,7 +24,7 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping(value = "/home")
+    @GetMapping(value = "/")
     public String home(Locale locale, Model model) {
         logger.info("Welcome home! The client locale is {}.", locale);
 
@@ -36,8 +36,7 @@ public class HomeController {
         model.addAttribute("serverTime", formattedDate);
         model.addAttribute("name", "Jay");
 
-        logger.info("test ====================================");
-
-        return "thymeleaf/home";
+//        return "thymeleaf/home";  // JSP 와 Thymeleaf 를 동시에 사용하기 위해서는 application.properties 에 설정하고, return "thymeleaf/home" 을 사용해야 한다.
+        return "home";
     }
 }

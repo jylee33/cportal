@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 @Mapper
 @Repository
-public interface UserMapper {
+public interface UserRepository {
 
     ArrayList<HashMap<String, Object>> findAll();
 

@@ -67,7 +67,7 @@
 			</div>
 			<div class="col-md-12">
 				<button type="submit" id="btn_pay" class="btn btn-primary">결제하기</button>
-				<button type="submit" id="btn_cancel" class="btn btn-warning">환불하기</button>
+<%--				<button type="submit" id="btn_cancel" class="btn btn-warning">환불하기</button>--%>
 			</div>
 		</div>
 	</form>

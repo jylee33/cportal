@@ -45,6 +45,8 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java:8.0.25'
     runtimeOnly 'com.h2database:h2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.4.7'
+
 }
 
 tasks.named('test') {

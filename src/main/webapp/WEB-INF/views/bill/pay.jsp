@@ -12,17 +12,41 @@
 	<form class="needs-validation" novalidate onsubmit="goPaymentAPI()">
 		<div class="row">
 			<div class="col-sm-6">
-				<label for="firstName" class="form-label">name</label>
+				<label for="firstName" class="form-label">PRODUCT</label>
 				<input type="text" class="form-control" id="firstName" placeholder=""
-					   value="HM" name="name" required/>
+					   value="NETIS CLOUD ENTERPRISE" name="name" readonly="readonly" required/>
 				<%--				<div class="invalid-feedback">Your first name is required.</div>--%>
 			</div>
 			<div class="col-md-12">
-				<label for="username" class="form-label">Username</label>
+				<label for="username" class="form-label">구매자</label>
 				<div class="input-group has-validation">
 					<%--					<span class="input-group-text">@</span>--%>
-					<input type="text" class="form-control" readonly="readonly" id="username" value="hamonsoft" required/>
+					<input type="text" class="form-control" id="username" value="hamonsoft" required/>
 					<%--				<div class="invalid-feedback">Your username is required.</div>--%>
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<label for="mobile" class="form-label">전화번호</label>
+				<div class="input-group has-validation">
+					<input type="text" class="form-control" id="mobile" value="010-1234-5678" required/>
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<label for="pay_method" class="form-label">결제수단</label>
+				<div class="input-group has-validation">
+					<select id="pay_method" name="pay_method" disabled>
+						<option value="card">card</option>
+						<option value="cash">cash</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<label for="price" class="form-label">가격</label>
+				<div class="input-group has-validation">
+					<input type="text" class="form-control" id="price" value="1" required/>
 				</div>
 			</div>
 
@@ -30,7 +54,7 @@
 				<label for="email" class="form-label">Email
 					<span class="text-muted">(Optional)</span></label>
 				<input type="email" class="form-control" id="email" placeholder="you@example.com" name="email"
-					   value="jylee@hamonsoft.co.kr" readonly="readonly"/>
+					   value="jylee@hamonsoft.co.kr"/>
 				<%--				<div class="invalid-feedback">Please enter a valid email address for shipping updates.</div>--%>
 			</div>
 
@@ -74,13 +98,13 @@
 		IMP.request_pay({
 			pg: "html5_inicis.INIBillTst",//"kcp.INIBillTst",
 			// customer_uid: "RldZHse07tEdv7luguc4oh6bJdcWvLluhsbo8Jg3dIL94Azrw3BhDuFKDjLTavBHxeBNjgOgKdKwfqTy", // 카드(빌링키)와 1:1로 대응하는 값
-			pay_method: "card",
+			pay_method: $('#pay_method').val(),
 			merchant_uid: orderId,   // 주문번호
-			name: "NETIS CLOUD ENTERPRISE",
-			amount: 1,                         // 숫자 타입
+			name: $('#firstName').val(),
+			amount: $('#price').val(),                         // 숫자 타입
 			buyer_email: $('#email').val(),
 			buyer_name: $('#username').val(),
-			buyer_tel: "010-4242-4242",
+			buyer_tel: $('#mobile').val(),
 			buyer_addr: $('#address').val(),
 			buyer_postcode: "01181"
 		}, function (rsp) { // callback

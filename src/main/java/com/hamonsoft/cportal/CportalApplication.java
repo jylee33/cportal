@@ -11,8 +11,8 @@ import javax.servlet.ServletInputStream;
 public class CportalApplication extends SpringBootServletInitializer {
 
     @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(ServletInputStream.class);
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(CportalApplication.class);
     }
 
     public static void main(String[] args) {

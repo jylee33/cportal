@@ -20,14 +20,17 @@ plugins {
 }
 
 bootWar {
-    archivesBaseName = 'cportal'
-    archiveFileName = 'cportal.war'
+    archivesBaseName = 'ROOT'
+    archiveFileName = 'ROOT.war'
     archiveVersion = '1.0.0'
 }
 
 group = 'com.hamonsoft'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+
+//bootWar.enabled = false
+//war.enabled = true
 
 repositories {
     mavenCentral()
@@ -46,6 +49,7 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.4.7'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
 }
 

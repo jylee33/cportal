@@ -6,7 +6,8 @@
 
 <%
     MailSend ms = new MailSend();
-    ms.MailSend();
+//    ms.MailSend();
+    ms.MailSend2();
 
     out.println("COMPLETE");
 %>

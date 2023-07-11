@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -31,8 +32,8 @@ public class MailController {
     }
 
     @GetMapping(value = "test_mail")
-    public String test_mail(Model model) {
-        model.addAttribute("name", "test");
+    public String test_mail(@RequestParam("mailto") String mailto, Model model) {
+        model.addAttribute("mailto", mailto);
         return "mail/test_mail";
     }
 

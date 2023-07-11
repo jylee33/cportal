@@ -49,7 +49,7 @@ public class MailSend {
     }
 
     // HTML 형식으로 메일 전송하기
-    public void MailSend2() {
+    public void MailSend2(String mailto) {
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -71,7 +71,8 @@ public class MailSend {
             msg.setSentDate(new Date());
 
             msg.setFrom(new InternetAddress("yubbi33@gmail.com", "HAMONSOFT"));
-            InternetAddress to = new InternetAddress("jylee@hamonsoft.co.kr");
+//            InternetAddress to = new InternetAddress("jylee@hamonsoft.co.kr");
+            InternetAddress to = new InternetAddress(mailto);
             msg.setRecipient(Message.RecipientType.TO, to);
             msg.setSubject("NETIS CLOUD 서비스 가입 안내", "UTF-8");
             String body = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 서비스 가입 안내 메일입니다.</H1>"+ "<img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">"

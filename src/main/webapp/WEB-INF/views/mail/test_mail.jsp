@@ -7,7 +7,9 @@
 <%
     MailSend ms = new MailSend();
 //    ms.MailSend();
-    ms.MailSend2();
+
+    String mailto = request.getParameter("mailto");
+    ms.MailSend2(mailto);
 
     out.println("COMPLETE");
 %>

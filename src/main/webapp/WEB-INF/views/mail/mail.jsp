@@ -4,13 +4,24 @@
 
 <%@include file="../include/header.jsp" %>
 
-<div class="form-group" style="width: 38%; margin: 10px auto;">
-    <button type="button" class="btn btn-primary btn-lg btn-block" onclick="send_mail()">메일 보내기</button>
-</div>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <label for="mailto" class="form-label">받는 사람</label>
+            <div class="input-group has-validation">
+                <input type="text" class="form-control" id="mailto" value="jylee@hamonsoft.co.kr" required/>
+            </div>
+        </div>
+        <div class="form-group" style="width: 38%; margin: 10px auto;">
+            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="send_mail()">메일 보내기</button>
+        </div>
+    </div>
+</section>
 
 <script type="text/javascript">
 	function send_mail(){
-		window.open("mail/test_mail", "", "width=370, height=360, resizable=no, scrollbars=no, status=no");
+        var mailto = $('#mailto').val();
+		window.open("mail/test_mail?mailto=" + mailto, "", "width=370, height=360, resizable=no, scrollbars=no, status=no");
 	}
 </script>
 

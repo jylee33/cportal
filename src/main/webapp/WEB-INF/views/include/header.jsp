@@ -63,8 +63,8 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li><a href="/bill/pay"><i class="fa fa-circle-o"></i> 결제</a></li>
-            <li><a href="/mail"><i class="fa fa-circle-o"></i> 메일</a></li>
+            <li><a href="/bill/pay"><i class="fa fa-book"></i> 결제</a></li>
+            <li><a href="/mail"><i class="fa fa-envelope"></i> 메일</a></li>
           </ul>
         </section>
         <!-- /.sidebar -->

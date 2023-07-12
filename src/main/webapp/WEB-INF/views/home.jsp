@@ -5,12 +5,12 @@
 <%@include file="include/header.jsp" %>
 
 <!-- Main content -->
-<section class="content">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="box">
-				<div class="box-header with-border">
-					<h3 class="box-title">HOME PAGE</h3> - ${serverTime }
+<section class="bg-light py-5">
+    <div class="container px-5">
+        <div class="row gx-5 justify-content-center">
+            <div class="col-xxl-8">
+                <div class="text-center my-5">
+					<h3 class="box-title">HOME PAGE</h3>${serverTime }
 				</div>
 			</div>
 		</div>

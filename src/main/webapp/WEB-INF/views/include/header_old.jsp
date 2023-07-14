@@ -35,7 +35,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="/" class="logo">
+        <a href="/v1/home" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>N</b>ET</span>
             <!-- logo for regular state and mobile devices -->
@@ -334,8 +334,8 @@
                         <i class="fa fa-dashboard"></i> <span>TEST</span> <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/bill/pay"><i class="fa fa-circle-o"></i> 결제</a></li>
-                        <li><a href="/mail"><i class="fa fa-circle-o"></i> 메일</a></li>
+                        <li><a href="/v1/bill/pay"><i class="fa fa-circle-o"></i> 결제</a></li>
+                        <li><a href="/v1/mail"><i class="fa fa-circle-o"></i> 메일</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

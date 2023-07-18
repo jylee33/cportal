@@ -110,7 +110,7 @@ public class MailSend {
         logger.info("GroupMailSend --------------------------------------");
         logger.info("mailsubject --- " + mailSubject);
 
-        Resource resource = new ClassPathResource("groupmail.xlsx");
+        Resource resource = new ClassPathResource("upload/groupmail.xlsx");
 
         logger.info(resource.getFilename());
         logger.info(resource.getFile().getParent());
@@ -154,7 +154,7 @@ public class MailSend {
         }
 
         try {
-            InputStream file = new ClassPathResource("groupmail.xlsx").getInputStream();
+            InputStream file = new ClassPathResource("upload/groupmail.xlsx").getInputStream();
             XSSFWorkbook workbook = new XSSFWorkbook(file);
 
             int rowindex = 0;

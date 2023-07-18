@@ -57,16 +57,16 @@ public class MailController {
 
     @PostMapping(value = "uploadexcel")
     public void uploadExcelPOST(MultipartFile[] uploadFile) throws IOException {
-        logger.info("uploadTestPOST............");
+        logger.info("uploadExcelPOST............");
 
-        Resource resource = new ClassPathResource("");
+        Resource resource = new ClassPathResource("upload/sample.txt");
 
         logger.info(resource.getDescription());
         logger.info(resource.getFilename());
-        logger.info(resource.getFile().getPath());
+        logger.info(resource.getFile().getParent());
 
         // 내가 업로드 파일을 저장할 경로
-        String uploadFolder = resource.getFile().getPath();
+        String uploadFolder = resource.getFile().getParent();
 
         for (MultipartFile multipartFile : uploadFile) {
             String uploadFileName = multipartFile.getOriginalFilename();

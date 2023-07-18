@@ -59,14 +59,14 @@ public class MailController {
     public void uploadExcelPOST(MultipartFile[] uploadFile) throws IOException {
         logger.info("uploadTestPOST............");
 
-        Resource resource = new ClassPathResource("upload/sample.xlsx");
+        Resource resource = new ClassPathResource("");
 
         logger.info(resource.getDescription());
         logger.info(resource.getFilename());
-        logger.info(resource.getFile().getParent());
+        logger.info(resource.getFile().getPath());
 
         // 내가 업로드 파일을 저장할 경로
-        String uploadFolder = resource.getFile().getParent();
+        String uploadFolder = resource.getFile().getPath();
 
         for (MultipartFile multipartFile : uploadFile) {
             String uploadFileName = multipartFile.getOriginalFilename();
@@ -75,7 +75,7 @@ public class MailController {
             File saveFile = new File(uploadFolder, uploadFileName);
 
             try {
-//                saveFile.delete();
+                saveFile.delete();
                 // void transferTo(File dest) throws IOException 업로드한 파일 데이터를 지정한 파일에 저장
                 multipartFile.transferTo(saveFile);
             } catch (Exception e) {

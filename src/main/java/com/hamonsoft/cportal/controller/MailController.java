@@ -4,12 +4,18 @@ import com.hamonsoft.cportal.service.BoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
 
 
 @Controller
@@ -47,5 +53,34 @@ public class MailController {
     public String groupmail_send(@RequestParam("mailsubject") String mailsubject, Model model) {
         model.addAttribute("mailsubject", mailsubject);
         return "mail/groupmail_send";
+    }
+
+    @PostMapping(value = "uploadexcel")
+    public void uploadExcelPOST(MultipartFile[] uploadFile) throws IOException {
+        logger.info("uploadTestPOST............");
+
+        Resource resource = new ClassPathResource("upload/sample.xlsx");
+
+        logger.info(resource.getDescription());
+        logger.info(resource.getFilename());
+        logger.info(resource.getFile().getParent());
+
+        // 내가 업로드 파일을 저장할 경로
+        String uploadFolder = resource.getFile().getParent();
+
+        for (MultipartFile multipartFile : uploadFile) {
+            String uploadFileName = multipartFile.getOriginalFilename();
+            uploadFileName = "groupmail.xlsx";
+            // 저장할 파일, 생성자로 경로와 이름을 지정해줌.
+            File saveFile = new File(uploadFolder, uploadFileName);
+
+            try {
+//                saveFile.delete();
+                // void transferTo(File dest) throws IOException 업로드한 파일 데이터를 지정한 파일에 저장
+                multipartFile.transferTo(saveFile);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

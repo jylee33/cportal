@@ -16,7 +16,8 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
 
 public class MailSend {
 
@@ -110,6 +111,11 @@ public class MailSend {
         logger.info("GroupMailSend --------------------------------------");
         logger.info("mailsubject --- " + mailSubject);
 
+        DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
+        Resource resource = resourceLoader.getResource("classpath:resources/upload/groupmail.xlsx");
+
+        logger.info(resource.getFilename());
+
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -127,7 +133,7 @@ public class MailSend {
         Session session = Session.getDefaultInstance(prop, auth);
 
         try {
-            InputStream inputStream = new ClassPathResource("mailbody.html").getInputStream();
+            InputStream inputStream = new ClassPathResource("upload/mailbody.html").getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             StringBuilder sb = new StringBuilder();
             String line;
@@ -149,7 +155,7 @@ public class MailSend {
         }
 
         try {
-            InputStream file = new ClassPathResource("groupmail.xlsx").getInputStream();
+            InputStream file = new ClassPathResource("upload/groupmail.xlsx").getInputStream();
             XSSFWorkbook workbook = new XSSFWorkbook(file);
 
             int rowindex = 0;

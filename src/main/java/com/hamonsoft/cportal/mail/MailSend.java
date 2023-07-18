@@ -8,9 +8,7 @@ import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.Date;
 import java.util.Properties;
 
@@ -107,9 +105,10 @@ public class MailSend {
     }
 
     // HTML 형식으로 메일 전송하기
-    public void GroupMailSend() throws IOException {
+    public void GroupMailSend(String mailSubject) throws IOException {
 
         logger.info("GroupMailSend --------------------------------------");
+        logger.info("mailsubject --- " + mailSubject);
 
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");
@@ -121,10 +120,33 @@ public class MailSend {
 
         String mail_id = "yubbi33@gmail.com";
         String mail_pw = "dxoxmoxptbanvhvg";
+        String mailBody = "";
 
         Authenticator auth = new MailAuth(mail_id, mail_pw);
 
         Session session = Session.getDefaultInstance(prop, auth);
+
+        try {
+            InputStream inputStream = new ClassPathResource("mailbody.html").getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder sb = new StringBuilder();
+            String line;
+
+//            bufferedReader.lines()
+//                    .forEach(System.out::println);
+
+            while ((line = bufferedReader.readLine()) != null)
+            {
+                sb.append(line);
+//                sb.append('\n');
+            }
+
+            bufferedReader.close();
+            mailBody = sb.toString();
+//            logger.info(mailBody);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         try {
             InputStream file = new ClassPathResource("groupmail.xlsx").getInputStream();
@@ -196,10 +218,10 @@ public class MailSend {
                     msg.setFrom(new InternetAddress(mailFromAddress, mailFromName));
                     InternetAddress to = new InternetAddress(mailToAddress);
                     msg.setRecipient(Message.RecipientType.TO, to);
-                    msg.setSubject("NETIS CLOUD 서비스 가입 안내", "UTF-8");
-                    String body = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 서비스 가입 안내 메일입니다.</H1>" + "<img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">"
-                            + "<br><a href=\"http://hamonsoft.co.kr\">하몬소프트</a>";
-                    msg.setContent(body, "text/html;charset=utf-8");
+                    msg.setSubject(mailSubject, "UTF-8");
+//                    String mailBody = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 서비스 가입 안내 메일입니다.</H1>" + "<img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">"
+//                            + "<br><a href=\"http://hamonsoft.co.kr\">하몬소프트</a>";
+                    msg.setContent(mailBody, "text/html;charset=utf-8");
 
                     Transport.send(msg);
                     logger.info("SendMail ------- from : " + mailFromAddress + "[" + mailFromName + "] , to : " + mailToAddress);

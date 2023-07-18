@@ -44,7 +44,8 @@ public class MailController {
     }
 
     @GetMapping(value = "groupmail_send")
-    public String groupmail_send(Model model) {
+    public String groupmail_send(@RequestParam("mailsubject") String mailsubject, Model model) {
+        model.addAttribute("mailsubject", mailsubject);
         return "mail/groupmail_send";
     }
 }

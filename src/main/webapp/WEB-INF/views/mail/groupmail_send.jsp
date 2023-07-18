@@ -6,7 +6,9 @@
 
 <%
     MailSend ms = new MailSend();
-    ms.GroupMailSend();
+
+    String mailsubject = request.getParameter("mailsubject");
+    ms.GroupMailSend(mailsubject);
 
     out.println("COMPLETE");
 %>

@@ -18,7 +18,7 @@
                 <label>메일수신자 Excel 파일 업로드</label>
             </div>
             <div class="form_section_content">
-                <input type="file" name="uploadFile">
+                <input type="file" name="uploadExcel">
             </div>
         </div>
         <div class="form-group" style="width: 38%; margin: 10px auto;">
@@ -34,13 +34,13 @@
 	}
 
     document.querySelector("input[type=file]").addEventListener("change", function () {
-        let fileInput = document.querySelector("input[name=uploadFile]");
+        let fileInput = document.querySelector("input[name=uploadExcel]");
         let fileObj = fileInput.files[0];
         let fileList = fileInput.files;
 
         let formData = new FormData();
 
-        formData.append("uploadFile", fileObj);
+        formData.append("uploadExcel", fileObj);
 
         console.log("fileList : " + fileList);
         console.log("fileList[0].name : " + fileList[0].name);

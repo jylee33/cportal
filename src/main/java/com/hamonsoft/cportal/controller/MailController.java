@@ -56,7 +56,7 @@ public class MailController {
     }
 
     @PostMapping(value = "uploadexcel")
-    public void uploadExcelPOST(MultipartFile[] uploadFile) throws IOException {
+    public void uploadExcelPOST(MultipartFile[] uploadExcel) throws IOException {
         logger.info("uploadExcelPOST............");
 
         Resource resource = new ClassPathResource("upload/sample.txt");
@@ -68,7 +68,7 @@ public class MailController {
         // 내가 업로드 파일을 저장할 경로
         String uploadFolder = resource.getFile().getParent();
 
-        for (MultipartFile multipartFile : uploadFile) {
+        for (MultipartFile multipartFile : uploadExcel) {
             String uploadFileName = multipartFile.getOriginalFilename();
             uploadFileName = "groupmail.xlsx";
             // 저장할 파일, 생성자로 경로와 이름을 지정해줌.

@@ -18,9 +18,19 @@
                 <label>메일수신자 Excel 파일 업로드</label>
             </div>
             <div class="form_section_content">
-                <input type="file" name="uploadExcel">
+                <input type="file" id="uploadExcel" name="uploadExcel">
             </div>
         </div>
+        <P></P>
+        <div class="form_section">
+            <div class="form_section_title">
+                <label>메일 본문 HTML 파일 업로드</label>
+            </div>
+            <div class="form_section_content">
+                <input type="file" name="uploadHtml" name="uploadHtml">
+            </div>
+        </div>
+        <P></P>
         <div class="form-group" style="width: 38%; margin: 10px auto;">
             <button type="button" class="btn btn-primary btn-lg btn-block" onclick="send_mail()">메일 보내기</button>
         </div>
@@ -33,7 +43,7 @@
 		window.open("groupmail_send?mailsubject=" + mailsubject, "", "width=370, height=360, resizable=no, scrollbars=no, status=no");
 	}
 
-    document.querySelector("input[type=file]").addEventListener("change", function () {
+    document.querySelector("input[name=uploadExcel]").addEventListener("change", function () {
         let fileInput = document.querySelector("input[name=uploadExcel]");
         let fileObj = fileInput.files[0];
         let fileList = fileInput.files;
@@ -49,6 +59,30 @@
 
         $.ajax({
             url: '/mail/uploadexcel',
+            processData : false,
+            contentType : false,
+            data : formData,
+            type : 'POST',
+            dataType : 'json'
+        });
+    });
+
+    document.querySelector("input[name=uploadHtml]").addEventListener("change", function () {
+        let fileInput = document.querySelector("input[name=uploadHtml]");
+        let fileObj = fileInput.files[0];
+        let fileList = fileInput.files;
+
+        let formData = new FormData();
+
+        formData.append("uploadHtml", fileObj);
+
+        console.log("fileList : " + fileList);
+        console.log("fileList[0].name : " + fileList[0].name);
+        console.log("fileList[0].size : " + fileList[0].size);
+        console.log("fileList[0].type : " + fileList[0].type);
+
+        $.ajax({
+            url: '/mail/uploadhtml',
             processData : false,
             contentType : false,
             data : formData,

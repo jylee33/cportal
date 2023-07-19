@@ -132,7 +132,7 @@ public class MailSend {
         Session session = Session.getDefaultInstance(prop, auth);
 
         try {
-            InputStream inputStream = new ClassPathResource("mailbody.html").getInputStream();
+            InputStream inputStream = new ClassPathResource("upload/mailbody.html").getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             StringBuilder sb = new StringBuilder();
             String line;

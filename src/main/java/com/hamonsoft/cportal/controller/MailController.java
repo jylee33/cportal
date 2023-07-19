@@ -83,4 +83,34 @@ public class MailController {
             }
         }
     }
+    @PostMapping(value = "uploadhtml")
+    public void uploadHtmlPOST(MultipartFile[] uploadHtml) throws IOException {
+        logger.info("uploadHtmlPOST............");
+
+        Resource resource = new ClassPathResource("upload/sample.txt");
+
+        logger.info(resource.getDescription());
+        logger.info(resource.getFilename());
+        logger.info(resource.getFile().getParent());
+
+        // 내가 업로드 파일을 저장할 경로
+        String uploadFolder = resource.getFile().getParent();
+
+        for (MultipartFile multipartFile : uploadHtml) {
+            String uploadFileName = multipartFile.getOriginalFilename();
+            uploadFileName = "mailbody.html";
+            // 저장할 파일, 생성자로 경로와 이름을 지정해줌.
+            File saveFile = new File(uploadFolder, uploadFileName);
+
+            try {
+                saveFile.delete();
+                // void transferTo(File dest) throws IOException 업로드한 파일 데이터를 지정한 파일에 저장
+                multipartFile.transferTo(saveFile);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 }

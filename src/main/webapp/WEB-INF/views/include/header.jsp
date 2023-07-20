@@ -37,7 +37,8 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/bill/pay">결제</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/mail">메일</a></li>
+<%--                    <li class="nav-item"><a class="nav-link" href="/mail">메일</a></li>--%>
+                    <li class="nav-item"><a class="nav-link" href="/mail/groupmail">메일</a></li>
                     <%--            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>--%>
                 </ul>
             </div>

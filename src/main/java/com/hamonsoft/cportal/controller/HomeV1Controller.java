@@ -53,4 +53,16 @@ public class HomeV1Controller {
         return "v1/mail/test_mail";
     }
 
+    @GetMapping(value = "mail/groupmail")
+    public String groupmail(Model model) {
+        model.addAttribute("name", "test");
+        return "v1/mail/groupmail";
+    }
+
+    @GetMapping(value = "mail/groupmail_send")
+    public String groupmail_send(@RequestParam("mailsubject") String mailsubject, Model model) {
+        model.addAttribute("mailsubject", mailsubject);
+        return "v1/mail/groupmail_send";
+    }
+
 }

@@ -20,8 +20,8 @@ plugins {
 }
 
 bootWar {
-    archivesBaseName = 'ROOT'
-    archiveFileName = 'ROOT.war'
+    archivesBaseName = 'portal'
+    archiveFileName = 'portal.war'
     archiveVersion = '1.0.0'
 }
 

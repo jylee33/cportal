@@ -129,7 +129,9 @@ public class MailSend {
 
         Authenticator auth = new MailAuth(mail_id, mail_pw);
 
-        Session session = Session.getDefaultInstance(prop, auth);
+//        Session session = Session.getDefaultInstance(prop, auth);
+        Session session = Session.getInstance(prop, auth);
+
 
         try {
             InputStream inputStream = new ClassPathResource("upload/mailbody.html").getInputStream();
@@ -146,15 +148,16 @@ public class MailSend {
 //                sb.append('\n');
             }
 
-            bufferedReader.close();
             mailBody = sb.toString();
 //            logger.info(mailBody);
+            bufferedReader.close();
+            inputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        InputStream file = new ClassPathResource("upload/groupmail.xlsx").getInputStream();
         try {
-            InputStream file = new ClassPathResource("upload/groupmail.xlsx").getInputStream();
             XSSFWorkbook workbook = new XSSFWorkbook(file);
 
             int rowindex = 0;
@@ -240,6 +243,8 @@ public class MailSend {
             System.out.println("UnsupportedEncodingException : " + e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            file.close();
         }
 
     }

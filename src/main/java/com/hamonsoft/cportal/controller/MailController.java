@@ -75,8 +75,10 @@ public class MailController {
             File saveFile = new File(uploadFolder, uploadFileName);
 
             try {
-                saveFile.delete();
-                // void transferTo(File dest) throws IOException 업로드한 파일 데이터를 지정한 파일에 저장
+                if(saveFile.exists()) {
+                    saveFile.delete();
+                }
+                // vo\id transferTo(File dest) throws IOException 업로드한 파일 데이터를 지정한 파일에 저장
                 multipartFile.transferTo(saveFile);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -103,7 +105,9 @@ public class MailController {
             File saveFile = new File(uploadFolder, uploadFileName);
 
             try {
-                saveFile.delete();
+                if(saveFile.exists()) {
+                    saveFile.delete();
+                }
                 // void transferTo(File dest) throws IOException 업로드한 파일 데이터를 지정한 파일에 저장
                 multipartFile.transferTo(saveFile);
             } catch (Exception e) {

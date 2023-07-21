@@ -32,7 +32,7 @@ public class MailSend {
         prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
         String mail_id = "yubbi33@gmail.com";
-        String mail_pw = "dxoxmoxptbanvhvg";
+        String mail_pw = "gdmdwqrbgtdbaqnd";
 
         Authenticator auth = new MailAuth(mail_id, mail_pw);
 
@@ -72,7 +72,7 @@ public class MailSend {
         prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
         String mail_id = "yubbi33@gmail.com";
-        String mail_pw = "dxoxmoxptbanvhvg";
+        String mail_pw = "gdmdwqrbgtdbaqnd";
 
         Authenticator auth = new MailAuth(mail_id, mail_pw);
 
@@ -124,7 +124,7 @@ public class MailSend {
         prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
         String mail_id = "yubbi33@gmail.com";
-        String mail_pw = "dxoxmoxptbanvhvg";
+        String mail_pw = "gdmdwqrbgtdbaqnd";
         String mailBody = "";
 
         Authenticator auth = new MailAuth(mail_id, mail_pw);

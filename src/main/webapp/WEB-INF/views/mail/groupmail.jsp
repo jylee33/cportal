@@ -2,6 +2,8 @@
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<c:set var="path" value="<%=request.getContextPath() %>" scope="application"/>
+
 <%@include file="../include/header.jsp" %>
 
 <section class="content">
@@ -58,7 +60,7 @@
         console.log("fileList[0].type : " + fileList[0].type);
 
         $.ajax({
-            url: '/mail/uploadexcel',
+            url: '${path}/mail/uploadexcel',
             processData : false,
             contentType : false,
             data : formData,
@@ -82,7 +84,7 @@
         console.log("fileList[0].type : " + fileList[0].type);
 
         $.ajax({
-            url: '/mail/uploadhtml',
+            url: '${path}/mail/uploadhtml',
             processData : false,
             contentType : false,
             data : formData,

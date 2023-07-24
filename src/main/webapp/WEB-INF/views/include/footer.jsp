@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="<%=request.getContextPath() %>" scope="application"/>
+
 <!-- Footer-->
 <footer class="bg-white py-4 mt-auto">
     <div class="container px-5">
@@ -20,6 +24,6 @@
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="/resources/dist/js/scripts.js"></script>
+<script src="${path}/resources/dist/js/scripts.js"></script>
 </body>
 </html>

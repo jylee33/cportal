@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="<%=request.getContextPath() %>" scope="application"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,17 +11,17 @@
     <title>NETIS CLOUD</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
-    <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${path}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- Font Awesome Icons -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
           type="text/css"/>
     <!-- Ionicons -->
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
-    <link href="/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${path}/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css"/>
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link href="/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${path}/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,13 +32,13 @@
 
 </head>
 <!-- jQuery 2.1.4 -->
-<script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="${path}/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <body class="skin-blue sidebar-mini">
 <div class="wrapper">
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="/v1/home" class="logo">
+        <a href="${path}/v1/home" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>N</b>ET</span>
             <!-- logo for regular state and mobile devices -->
@@ -66,7 +69,7 @@
                                     <li><!-- start message -->
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="/resources/dist/img/user7-128x128.jpg" class="img-circle"
+                                                <img src="${path}/resources/dist/img/user7-128x128.jpg" class="img-circle"
                                                      alt="User Image"/>
                                             </div>
                                             <h4>
@@ -79,7 +82,7 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="/resources/dist/img/user3-128x128.jpg" class="img-circle"
+                                                <img src="${path}/resources/dist/img/user3-128x128.jpg" class="img-circle"
                                                      alt="user image"/>
                                             </div>
                                             <h4>
@@ -92,7 +95,7 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="/resources/dist/img/user4-128x128.jpg" class="img-circle"
+                                                <img src="${path}/resources/dist/img/user4-128x128.jpg" class="img-circle"
                                                      alt="user image"/>
                                             </div>
                                             <h4>
@@ -105,7 +108,7 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="/resources/dist/img/user3-128x128.jpg" class="img-circle"
+                                                <img src="${path}/resources/dist/img/user3-128x128.jpg" class="img-circle"
                                                      alt="user image"/>
                                             </div>
                                             <h4>
@@ -118,7 +121,7 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="/resources/dist/img/user4-128x128.jpg" class="img-circle"
+                                                <img src="${path}/resources/dist/img/user4-128x128.jpg" class="img-circle"
                                                      alt="user image"/>
                                             </div>
                                             <h4>
@@ -257,13 +260,13 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                            <img src="${path}/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
                             <span class="hidden-xs">Alexander Pierce</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                                <img src="${path}/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
                                 <p>
                                     Alexander Pierce - Web Developer
                                     <small>Member since Nov. 2012</small>
@@ -307,7 +310,7 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                    <img src="${path}/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
                 </div>
                 <div class="pull-left info">
                     <p>Alexander Pierce</p>
@@ -334,9 +337,9 @@
                         <i class="fa fa-dashboard"></i> <span>TEST</span> <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/v1/bill/pay"><i class="fa fa-circle-o"></i> 결제</a></li>
+                        <li><a href="${path}/v1/bill/pay"><i class="fa fa-circle-o"></i> 결제</a></li>
 <%--                        <li><a href="/v1/mail"><i class="fa fa-circle-o"></i> 메일</a></li>--%>
-                        <li><a href="/v1/mail/groupmail"><i class="fa fa-circle-o"></i> 메일</a></li>
+                        <li><a href="${path}/v1/mail/groupmail"><i class="fa fa-circle-o"></i> 메일</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -345,8 +348,8 @@
                             class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/resources/index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                        <li><a href="/resources/index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                        <li><a href="${path}/resources/index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                        <li><a href="${path}/resources/index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -471,7 +474,7 @@
                         <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
                     </ul>
                 </li>
-                <li><a href="/resources/documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a>
+                <li><a href="${path}/resources/documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a>
                 </li>
                 <li class="header">LABELS</li>
                 <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>

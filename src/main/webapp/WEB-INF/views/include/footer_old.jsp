@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="<%=request.getContextPath() %>" scope="application"/>
+
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
         <b>Version</b> 1.0
@@ -179,12 +183,12 @@ immediately after the control sidebar -->
 
 
 <!-- Bootstrap 3.3.2 JS -->
-<script src="/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="${path}/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <!-- FastClick -->
-<script src='/resources/plugins/fastclick/fastclick.min.js'></script>
+<script src='${path}/resources/plugins/fastclick/fastclick.min.js'></script>
 <!-- AdminLTE App -->
-<script src="/resources/dist/js/app.min.js" type="text/javascript"></script>
+<script src="${path}/resources/dist/js/app.min.js" type="text/javascript"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="/resources/dist/js/demo.js" type="text/javascript"></script>
+<script src="${path}/resources/dist/js/demo.js" type="text/javascript"></script>
 </body>
 </html>

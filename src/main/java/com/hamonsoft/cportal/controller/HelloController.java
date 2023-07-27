@@ -15,18 +15,22 @@ public class HelloController {
         model.addAttribute("data", "hello!");
         return "hello";
     }
+
+    //http://localhost:8080/portal/hello-mvc?name=Jay
     @GetMapping("hello-mvc")
     public String hello(@RequestParam("name") String name, Model model) {
         model.addAttribute("name", name);
         return "hello-template";
     }
 
+    //http://localhost:8080/portal/hello-string?name=Jay
     @GetMapping("hello-string")
     @ResponseBody
     public String helloString(@RequestParam("name") String name) {
         return "hello " + name;
     }
 
+    //http://localhost:8080/portal/hello-api?name=Jay
     @GetMapping("hello-api")
     @ResponseBody
     public Hello helloApi(@RequestParam("name") String name) {

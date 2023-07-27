@@ -33,10 +33,10 @@ public class HomeController {
 
         String formattedDate = dateFormat.format(date);
 
-        model.addAttribute("serverTime", formattedDate);
-        model.addAttribute("name", "Jay");
+//        model.addAttribute("serverTime", formattedDate);
+//        model.addAttribute("name", "Jay");
 
-//        return "thymeleaf/home";  // JSP 와 Thymeleaf 를 동시에 사용하기 위해서는 application.properties 에 설정하고, return "thymeleaf/home" 을 사용해야 한다.
-        return "home";
+        return "home";  // JSP 와 Thymeleaf 를 동시에 사용하기 위해서는 application.properties 에 설정하고, return "thymeleaf/home" 을 사용해야 한다.
+//        return "home";    // JSP 에서 사용
     }
 }

@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>NETIS CLOUD</title>
 </head>
 <body>
-Hello World!!!!!
+<div class="container">
+    <div>
+        <h1>Hello Spring</h1>
+        <p>회원 기능</p>
+        <p>
+            <a href="/members/new" th:href="@{/members/new}">회원 가입</a>
+            <a href="/members" th:href="@{/templates/members}">회원 목록</a>
+            <a href="/mail/groupmail" th:href="@{/mail/groupmail}">메일</a>
+        <p th:text="'hello ' + ${name}">hello! empty</p>
+        </p>
+    </div>
+</div>
+
 </body>
 </html>

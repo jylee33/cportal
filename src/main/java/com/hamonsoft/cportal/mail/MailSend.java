@@ -22,7 +22,7 @@ public class MailSend {
 
     private static final Logger logger = LoggerFactory.getLogger(MailSend.class);
 
-    public void MailSend() {
+    public void MailSendText() {
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -62,7 +62,7 @@ public class MailSend {
     }
 
     // HTML 형식으로 메일 전송하기
-    public void MailSend2(String mailto) {
+    public void MailSendHtml(String mailto) {
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -105,7 +105,7 @@ public class MailSend {
     }
 
     // HTML 형식으로 메일 전송하기
-    public void GroupMailSend(String mailSubject) throws IOException {
+    public void MailSendGroup(String mailSubject) throws IOException {
 
         logger.info("GroupMailSend --------------------------------------");
         logger.info("mailsubject --- " + mailSubject);

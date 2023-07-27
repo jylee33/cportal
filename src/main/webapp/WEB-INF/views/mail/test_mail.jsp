@@ -9,7 +9,7 @@
 //    ms.MailSend();
 
     String mailto = request.getParameter("mailto");
-    ms.MailSend2(mailto);
+    ms.MailSendHtml(mailto);
 
     out.println("COMPLETE");
 %>

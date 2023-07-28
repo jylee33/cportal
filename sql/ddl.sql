@@ -5,3 +5,10 @@ create table member
     name varchar(255),
     primary key(id)
 );
+
+create table member
+(
+    id bigint NOT NULL auto_increment,
+    name varchar(255),
+    primary key(id)
+);

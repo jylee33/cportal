@@ -13,25 +13,25 @@ import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import javax.swing.*;
 
-//@Configuration
-//public class SpringConfig {
-//
-//    private EntityManager em;
-//
-//    @Autowired
-//    public SpringConfig(EntityManager em) {
-//        this.em = em;
-//    }
-//
-//    @Bean
-//    public MemberService memberService() {
-//        return new MemberService(memberRepository());
-//    }
-//
-//    @Bean
-//    public MemberRepository memberRepository() {
-////        return new MemoryMemberRepository();
-////        return new JdbcTemplateMemberRepository(dataSource);
-//        return new JpaMemberRepository(em);
-//    }
-//}
+@Configuration
+public class SpringConfig {
+
+    private EntityManager em;
+
+    @Autowired
+    public SpringConfig(EntityManager em) {
+        this.em = em;
+    }
+
+    @Bean
+    public MemberService memberService() {
+        return new MemberService(memberRepository());
+    }
+
+    @Bean
+    public MemberRepository memberRepository() {
+//        return new MemoryMemberRepository();
+//        return new JdbcTemplateMemberRepository(dataSource);
+        return new JpaMemberRepository(em);
+    }
+}

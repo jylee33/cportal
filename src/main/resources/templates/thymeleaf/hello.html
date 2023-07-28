@@ -9,9 +9,10 @@
         <h1>Hello Spring</h1>
         <p>회원 기능</p>
         <p>
-            <a href="/members/new" th:href="@{/templates/thymeleaf/members/new}">회원 가입</a>
-            <a href="/members" th:href="@{/templates/thymeleaf/members}">회원 목록</a>
-            <a href="/mail/groupmail" th:href="@{/mail/groupmail}">메일</a>
+            <a th:href="@{/members/new}">회원 가입</a>
+            <a th:href="@{/members}">회원 목록</a>
+            <a th:href="@{/mail}">메일</a>
+            <a th:href="@{/mail/groupmail}">그룹메일</a>
         <p th:text="'hello ' + ${name}">hello! empty</p>
         </p>
     </div>

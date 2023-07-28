@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="thymeleaf/layout/header :: head ('메일 전송')"></head>
+
+<body class="d-flex flex-column h-100">
+<!--<header th:replace="thymeleaf/layout/header :: header"></header>-->
+
+<!-- Begin page content -->
+<div th:text="${ @mailSend.MailSendGroup(mailsubject) }"></div>
+COMPLETE
+
+<!--<footer th:replace="thymeleaf/layout/footer :: footer"></footer>-->
+
+<script th:inline="javascript">
+
+</script>
+</body>
+
+</html>

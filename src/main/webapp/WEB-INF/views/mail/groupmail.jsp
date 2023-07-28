@@ -29,7 +29,7 @@
                 <label>메일 본문 HTML 파일 업로드</label>
             </div>
             <div class="form_section_content">
-                <input type="file" name="uploadHtml" name="uploadHtml">
+                <input type="file" id="uploadHtml" name="uploadHtml">
             </div>
         </div>
         <P></P>
@@ -37,7 +37,7 @@
             <button type="button" class="btn btn-primary btn-lg btn-block" onclick="send_mail()">메일 보내기</button>
         </div>
     </div>
-</section>
+</section>>
 
 <script type="text/javascript">
 	function send_mail(){

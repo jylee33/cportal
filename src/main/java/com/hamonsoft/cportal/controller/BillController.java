@@ -25,7 +25,7 @@ public class BillController {
     @GetMapping(value = "pay")
     public String list(Model model) {
         model.addAttribute("name", "test");
-        return "bill/pay";
+        return "thymeleaf/bill/pay";
     }
 
 }

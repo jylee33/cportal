@@ -12,15 +12,15 @@ public class HelloController {
 
     @GetMapping("hello")
     public String hello(Model model) {
-        model.addAttribute("data", "hello!");
-        return "hello";
+        model.addAttribute("name", "Jay!");
+        return "thymeleaf/hello";
     }
 
     //http://localhost:8080/portal/hello-mvc?name=Jay
     @GetMapping("hello-mvc")
     public String hello(@RequestParam("name") String name, Model model) {
         model.addAttribute("name", name);
-        return "hello-template";
+        return "thymeleaf/hello-template";
     }
 
     //http://localhost:8080/portal/hello-string?name=Jay

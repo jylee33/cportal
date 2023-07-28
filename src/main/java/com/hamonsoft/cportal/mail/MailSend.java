@@ -17,7 +17,9 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MailSend {
 
     private static final Logger logger = LoggerFactory.getLogger(MailSend.class);
@@ -173,8 +175,8 @@ public class MailSend {
                 XSSFRow row = sheet.getRow(rowindex);
                 if (row != null) {
 
-                    String mailFromAddress = "yubbi33@gmail.com";
                     String mailFromName = "HAMONSOFT";
+                    String mailFromAddress = "yubbi33@gmail.com";
                     String mailToAddress = "jylee@hamonsoft.co.kr";
 
                     //셀의 수
@@ -210,10 +212,10 @@ public class MailSend {
                         }
                         switch (columnindex) {
                             case 0:
-                                mailFromAddress = value;
+                                mailFromName = value;
                                 break;
                             case 1:
-                                mailFromName = value;
+                                mailFromAddress = value;
                                 break;
                             case 2:
                                 mailToAddress = value;
@@ -229,10 +231,11 @@ public class MailSend {
                     msg.setSubject(mailSubject, "UTF-8");
 //                    String mailBody = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 서비스 가입 안내 메일입니다.</H1>" + "<img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">"
 //                            + "<br><a href=\"http://hamonsoft.co.kr\">하몬소프트</a>";
-                    msg.setContent(mailBody, "text/html;charset=utf-8");
+                    String mailBody2 = mailBody + "<p></p>회신 받을 주소 : " + mailFromAddress;
+                    msg.setContent(mailBody2, "text/html;charset=utf-8");
 
                     Transport.send(msg);
-                    logger.info("SendMail ------- from : " + mailFromAddress + "[" + mailFromName + "] , to : " + mailToAddress);
+                    logger.info("SendMail ------- from : " + mailFromName + "[" + mailFromAddress + "] , to : " + mailToAddress);
                 }
             }
         } catch(AddressException ae) {

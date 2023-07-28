@@ -61,7 +61,7 @@
 			<%--			<input class="btn btn-info" type="button" onclick="goPopup();" value="findaddress"/>--%>
 			<div class="col-md-12">
 				<label for="address" class="form-label">Address</label>
-				<input type="text" class="form-control" id="address" class="address" placeholder="1234 Main St"
+				<input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St"
 					   value="서울특별시 금천구 가산동 60-5 갑을그레이트밸리" required/>
 				<%--				<div class="invalid-feedback">Please enter your shipping address.</div>--%>
 			</div>

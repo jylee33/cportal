@@ -33,6 +33,7 @@ public class MyBatisConfig {
     public SqlSessionFactory SqlSessionFactory(@Qualifier("dataSource") DataSource DataSource, ApplicationContext applicationContext) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(DataSource);
+        sqlSessionFactoryBean.setTypeAliasesPackage("com.hamonsoft.cportal.domain");    // 엔티티의 패키지 이름을 생략할 수 있도록 한다.
         sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources(mPath));
         return sqlSessionFactoryBean.getObject();
     }

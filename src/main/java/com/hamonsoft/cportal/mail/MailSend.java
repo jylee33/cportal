@@ -231,7 +231,7 @@ public class MailSend {
                     msg.setSubject(mailSubject, "UTF-8");
 //                    String mailBody = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 서비스 가입 안내 메일입니다.</H1>" + "<img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">"
 //                            + "<br><a href=\"http://hamonsoft.co.kr\">하몬소프트</a>";
-                    String mailBody2 = mailBody + "<p></p>회신 받을 주소 : " + mailFromAddress;
+                    String mailBody2 = mailBody + "<p></p>본 메일은 발신전용입니다.<br>회신 받을 주소 : " + mailFromAddress;
                     msg.setContent(mailBody2, "text/html;charset=utf-8");
 
                     Transport.send(msg);

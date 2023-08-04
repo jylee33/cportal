@@ -1,0 +1,77 @@
+spring:
+  profiles:
+    active: dev
+
+---
+server:
+  port: 8080
+  servlet:
+    context-path: /portal
+
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+
+  main:
+    allow-bean-definition-overriding: true
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    mapper-locations: classpath:mapper/**/*Mapper.xml
+    jdbc-url: jdbc:mariadb://localhost:3306/book_ex?&serverTimezone=Asia/Seoul&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
+    username: jay
+    password: jay.123
+
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    view-names: thymeleaf/*
+  config:
+    activate:
+      on-profile: dev
+
+---
+server:
+  port: 8080
+  servlet:
+    context-path: /portal
+
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+
+  main:
+    allow-bean-definition-overriding: true
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    mapper-locations: classpath:mapper/**/*Mapper.xml
+    jdbc-url: jdbc:mariadb://localhost:53306/netis?&serverTimezone=Asia/Seoul&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
+    username: root
+    password: ntflow
+
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    view-names: thymeleaf/*
+  config:
+    activate:
+      on-profile: prod

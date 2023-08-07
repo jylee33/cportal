@@ -9,6 +9,10 @@ server:
     context-path: /portal
 
 spring:
+  config:
+    activate:
+      on-profile: dev
+
   jpa:
     show-sql: true
     hibernate:
@@ -19,11 +23,18 @@ spring:
     allow-bean-definition-overriding: true
 
   datasource:
+#    driver: com.mysql.cj.jdbc.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    jdbc-url: jdbc:mysql://localhost:3306/book_ex?&serverTimezone=Asia/Seoul&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
     driver-class-name: org.mariadb.jdbc.Driver
-    mapper-locations: classpath:mapper/**/*Mapper.xml
     jdbc-url: jdbc:mariadb://localhost:3306/book_ex?&serverTimezone=Asia/Seoul&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
     username: jay
     password: jay.123
+    mapper-locations: classpath:mapper/**/*Mapper.xml
+#    url: jdbc:h2:tcp://localhost/~/test
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#    password:
 
   mvc:
     view:
@@ -35,9 +46,6 @@ spring:
     suffix: .html
     cache: false
     view-names: thymeleaf/*
-  config:
-    activate:
-      on-profile: dev
 
 ---
 server:
@@ -46,6 +54,10 @@ server:
     context-path: /portal
 
 spring:
+  config:
+    activate:
+      on-profile: prod
+
   jpa:
     show-sql: true
     hibernate:
@@ -72,6 +84,4 @@ spring:
     suffix: .html
     cache: false
     view-names: thymeleaf/*
-  config:
-    activate:
-      on-profile: prod
+

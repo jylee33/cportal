@@ -1,7 +1,6 @@
 package com.hamonsoft.cportal.service;
 
 import com.hamonsoft.cportal.domain.Member;
-import com.hamonsoft.cportal.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

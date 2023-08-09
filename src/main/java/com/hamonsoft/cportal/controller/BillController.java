@@ -25,8 +25,7 @@ public class BillController {
     @GetMapping(value = "pay")
     public String list(Model model) {
         model.addAttribute("name", "test");
-        return "thymeleaf/bill/pay";    // thymeleaf 사용
-//        return "bill/pay";  // JSP 사용
+        return "bill/pay";
     }
 
 }

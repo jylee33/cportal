@@ -34,25 +34,25 @@ public class MailController {
     @GetMapping(value = "")
     public String mail(Model model) {
         model.addAttribute("name", "test");
-        return "thymeleaf/mail/mail";
+        return "mail/mail";
     }
 
     @GetMapping(value = "test_mail")
     public String test_mail(@RequestParam("mailto") String mailto, Model model) {
         model.addAttribute("mailto", mailto);
-        return "thymeleaf/mail/test_mail";
+        return "mail/test_mail";
     }
 
     @GetMapping(value = "groupmail")
     public String groupmail(Model model) {
 //        model.addAttribute("name", "test");
-        return "thymeleaf/mail/groupmail";
+        return "mail/groupmail";
     }
 
     @GetMapping(value = "groupmail_send")
     public String groupmail_send(@RequestParam("mailsubject") String mailsubject, Model model) {
         model.addAttribute("mailsubject", mailsubject);
-        return "thymeleaf/mail/groupmail_send";
+        return "mail/groupmail_send";
     }
 
     @PostMapping(value = "uploadexcel")

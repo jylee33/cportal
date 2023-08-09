@@ -1,9 +1,6 @@
 package com.hamonsoft.cportal.service;
 
 import com.hamonsoft.cportal.domain.Member;
-import com.hamonsoft.cportal.repository.MemberRepository;
-import com.hamonsoft.cportal.repository.MemoryMemberRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

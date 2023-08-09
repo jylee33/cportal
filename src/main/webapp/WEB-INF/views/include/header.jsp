@@ -41,7 +41,8 @@
                     <li class="nav-item"><a class="nav-link" href="${path}/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="${path}/bill/pay">결제</a></li>
                     <%--                    <li class="nav-item"><a class="nav-link" href="/mail">메일</a></li>--%>
-                    <li class="nav-item"><a class="nav-link" href="${path}/mail/groupmail">메일</a></li>
+                    <li class="nav-item"><a class="nav-link" href="${path}/mail">메일</a></li>
+                    <li class="nav-item"><a class="nav-link" href="${path}/mail/groupmail">그룹메일</a></li>
                     <%--            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>--%>
                 </ul>
             </div>

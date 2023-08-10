@@ -12,3 +12,26 @@ create table member
     name varchar(255),
     primary key(id)
 );
+
+
+-- netiscloud.tblicensepolicy definition
+
+CREATE TABLE `tblicensepolicy` (
+  `licensepolicyid` varchar(36) NOT NULL COMMENT '라이센스정책관리번호(uuid)',
+  `solutioncode` varchar(6) NOT NULL COMMENT '솔루션코드(groupcode:002)',
+  `policycode` varchar(6) NOT NULL COMMENT '라이센스등급(groupcode:001)',
+  `solutionname` varchar(50) NOT NULL COMMENT '라이센스정책솔루션명',
+  `policyname` varchar(50) NOT NULL COMMENT '라이센스정책명',
+  `licensecontent` text NOT NULL COMMENT '라이센스정책내용',
+  `licenseamount` varchar(15) NOT NULL COMMENT '라이센스기본요금',
+  `licenseint` int(4) NOT NULL COMMENT '라이센스가용장비수',
+  `aidcode` varchar(6) NOT NULL COMMENT '지원기능구분(003)',
+  `stdate` varchar(8) NOT NULL DEFAULT date_format(curdate(),'%Y%m%d') COMMENT '시작일자',
+  `eddate` varchar(8) NOT NULL DEFAULT '21991231' COMMENT '종료일자',
+  `useyn` varchar(1) NOT NULL DEFAULT '1' COMMENT '사용여부',
+  `sortno` tinyint(1) NOT NULL COMMENT '정렬기준',
+  `createdAt` datetime NOT NULL DEFAULT current_timestamp() COMMENT '등록일시',
+  `updatedAt` datetime NOT NULL DEFAULT current_timestamp() COMMENT '수정일시',
+  PRIMARY KEY (`licensepolicyid`),
+  KEY `IDX_tbpricepolicy_001` (`policycode`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='라이센스정책관리';

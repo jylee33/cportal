@@ -16,6 +16,8 @@ public interface MemberRepository {
 
     Member selectMember(String email);
 
+    void insertMember(Member member);
+
     List<Member> listAll();
 
 }

@@ -7,7 +7,7 @@
 <div class="container">
     <div>
         <p>
-            <a href="${path}/member/selectMember?email=a@a.a">회원 조회</a>
+            <a href="${path}/member/insertMember">회원 가입</a>
             <br>
             <a href="${path}/member/listAll">회원 목록 조회</a>
         </p>

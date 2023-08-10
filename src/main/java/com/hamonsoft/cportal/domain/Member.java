@@ -1,6 +1,7 @@
 package com.hamonsoft.cportal.domain;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.IdentityHashMap;
 
@@ -140,5 +141,14 @@ public class Member {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Member [email=" + email + ", membername=" + membername + ", celltel="
+                + celltel + ", businessname=" + businessname + ", businessnumber=" + businessnumber
+                + ", cloudgrade=" + cloudgrade + ", companyphone=" + companyphone
+                + ", emailcertificationyn=" + emailcertificationyn + ", withdrawalyn=" + withdrawalyn
+                + "]";
     }
 }

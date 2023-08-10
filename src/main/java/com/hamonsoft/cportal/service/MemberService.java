@@ -32,6 +32,10 @@ public class MemberService {
         return memberRepository.selectMember(email);
     }
 
+    public void insertMember(Member member) {
+        memberRepository.insertMember(member);
+    }
+
     public List<Member> listAll() {
         return memberRepository.listAll();
     }

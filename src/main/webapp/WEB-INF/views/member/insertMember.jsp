@@ -39,9 +39,9 @@
                        name="businessnumber" class="form-control" placeholder="businessnumber">
             </div>
             <div class="form-group">
-                <label>cloudgrade</label>
+                <label>licensegrade</label>
                 <div class="input-group has-validation">
-                    <select id="cloudgrade" name="cloudgrade">
+                    <select id="licensegrade" name="licensegrade">
                         <option value="1">Free</option>
                         <option value="2">Basic</option>
                         <option value="3">Pro</option>
@@ -76,6 +76,11 @@
                 <label>withdrawaldate</label>
                 <input type="number"
                        name="withdrawaldate" class="form-control" placeholder="withdrawaldate">
+            </div>
+            <div class="form-group">
+                <label>joindate</label>
+                <input type="number"
+                       name="joindate" class="form-control" placeholder="joindate">
             </div>
             <div class="form-group">
                 <label>updatedBy</label>

@@ -24,7 +24,7 @@
                             <th>password</th>
                             <th>businessname</th>
                             <th>businessnumber</th>
-                            <th>cloudgrade</th>
+                            <th>licensegrade</th>
                             <th>companyphone</th>
                             <th>emailcertificationyn</th>
                             <th>withdrawalyn</th>
@@ -44,7 +44,7 @@
                                 <td>${member.password}</td>
                                 <td>${member.businessname}</td>
                                 <td>${member.businessnumber}</td>
-                                <td>${member.cloudgrade}</td>
+                                <td>${member.licensegrade}</td>
                                 <td>${member.companyphone}</td>
                                 <td>${member.emailcertificationyn}</td>
                                 <td>${member.withdrawalyn}</td>

@@ -13,12 +13,12 @@ public class Member {
     private String password;
     private String businessname;
     private String businessnumber;
-    private int cloudgrade;
+    private int licensegrade;
     private String companyphone;
     private int emailcertificationyn;
     private String withdrawalyn;
     private String withdrawaldate;
-    private Date joindate;
+    private String joindate;
     private Date createdAt;
     private String updatedBy;
     private Date updatedAt;
@@ -71,12 +71,12 @@ public class Member {
         this.businessnumber = businessnumber;
     }
 
-    public int getCloudgrade() {
-        return cloudgrade;
+    public int getLicensegrade() {
+        return licensegrade;
     }
 
-    public void setCloudgrade(int cloudgrade) {
-        this.cloudgrade = cloudgrade;
+    public void setLicensegrade(int licensegrade) {
+        this.licensegrade = licensegrade;
     }
 
     public String getCompanyphone() {
@@ -111,11 +111,11 @@ public class Member {
         this.withdrawaldate = withdrawaldate;
     }
 
-    public Date getJoindate() {
+    public String getJoindate() {
         return joindate;
     }
 
-    public void setJoindate(Date joindate) {
+    public void setJoindate(String joindate) {
         this.joindate = joindate;
     }
 
@@ -147,7 +147,7 @@ public class Member {
     public String toString() {
         return "Member [email=" + email + ", membername=" + membername + ", celltel="
                 + celltel + ", businessname=" + businessname + ", businessnumber=" + businessnumber
-                + ", cloudgrade=" + cloudgrade + ", companyphone=" + companyphone
+                + ", licensegrade=" + licensegrade + ", companyphone=" + companyphone
                 + ", emailcertificationyn=" + emailcertificationyn + ", withdrawalyn=" + withdrawalyn
                 + "]";
     }

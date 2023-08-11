@@ -63,7 +63,7 @@ public class MemberController {
     @GetMapping(value = "listAll")
     public void listAll(Model model) {
 
-        logger.info("show all list......................");
+        logger.info("show all member list......................");
         model.addAttribute("list", memberService.listAll());
     }
 

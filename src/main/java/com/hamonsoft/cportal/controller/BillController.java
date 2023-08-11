@@ -23,8 +23,10 @@ public class BillController {
     }
 
     @GetMapping(value = "pay")
-    public String list(Model model) {
+    public String pay(Model model) {
+        logger.info("call pay ---------------");
         model.addAttribute("name", "test");
+
         return "bill/pay";
     }
 

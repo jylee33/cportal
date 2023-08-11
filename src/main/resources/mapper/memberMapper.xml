@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.hamonsoft.cportal.repository.MemberRepository">
+
+	<select id="getTime" resultType="string">
+		select now()
+	</select>
+	
+	<insert id="insertMember" >
+		insert into tbmember (email,membername,celltel,password,businessname,businessnumber,licensegrade,companyphone,emailcertificationyn,withdrawalyn,withdrawaldate,joindate,createdAt,updatedBy,updatedAt) values
+		(#{email}, #{membername}, #{celltel}, password(#{password}), #{businessname}, #{businessnumber}, #{licensegrade}, #{companyphone}, #{emailcertificationyn}, #{withdrawalyn}, #{withdrawaldate}, #{joindate}, now(), #{updatedBy}, now())
+	</insert>
+	
+	<select id="selectMember" resultType="com.hamonsoft.cportal.domain.Member">
+		select * from tbmember
+		where email=#{email}
+	</select>
+
+	<select id="listAll" resultType="Member">
+        <![CDATA[
+		select
+			email,membername,celltel,password,businessname,businessnumber,licensegrade,companyphone,emailcertificationyn,withdrawalyn,withdrawaldate,joindate,createdAt,updatedBy,updatedAt
+		from tbmember
+		]]>
+    </select>
+
+	<select id="readWithPW" resultType="com.hamonsoft.cportal.domain.Member">
+		select * from tbmember
+		where userid=#{userid} and userpw=#{userpw}
+	</select>
+	
+</mapper>

@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label>celltel</label>
-                <input type="text"
+                <input type="number"
                        name="celltel" class="form-control" placeholder="celltel">
             </div>
             <div class="form-group">
@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label>businessnumber</label>
-                <input type="text"
+                <input type="number"
                        name="businessnumber" class="form-control" placeholder="businessnumber">
             </div>
             <div class="form-group">
@@ -51,7 +51,7 @@
             </div>
             <div class="form-group">
                 <label>companyphone</label>
-                <input type="text"
+                <input type="number"
                        name="companyphone" class="form-control" placeholder="companyphone">
             </div>
             <div class="form-group">
@@ -74,7 +74,7 @@
             </div>
             <div class="form-group">
                 <label>withdrawaldate</label>
-                <input type="text"
+                <input type="number"
                        name="withdrawaldate" class="form-control" placeholder="withdrawaldate">
             </div>
             <div class="form-group">

@@ -35,3 +35,8 @@ CREATE TABLE `tblicensepolicy` (
   PRIMARY KEY (`licensepolicyid`),
   KEY `IDX_tbpricepolicy_001` (`policycode`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='라이센스정책관리';
+
+-- tbmember cloudgrade column 변경 -> licensegrade
+ALTER TABLE tbmember CHANGE cloudgrade licensegrade VARCHAR(06);
+-- tbmember column 추가 -> administratoryn
+ALTER TABLE tbmember ADD COLUMN administratoryn VARCHAR(1) AFTER emailcertificationyn;

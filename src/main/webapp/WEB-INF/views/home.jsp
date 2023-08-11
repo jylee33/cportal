@@ -10,6 +10,8 @@
             <a href="${path}/member/insertMember">회원 가입</a>
             <br>
             <a href="${path}/member/listAll">회원 목록 조회</a>
+            <br>
+            <a href="${path}/member/login">로그인</a>
         </p>
     </div>
 </div>

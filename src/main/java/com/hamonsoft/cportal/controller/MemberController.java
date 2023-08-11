@@ -75,7 +75,7 @@ public class MemberController {
         logger.info("call login get ......................");
     }
 
-    @PostMapping("login")
+    @PostMapping("loginPost")
     public void loginPost(LoginDTO dto, HttpSession session, Model model) {
         logger.info("call login post ......................");
 

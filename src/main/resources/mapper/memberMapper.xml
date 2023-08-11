@@ -27,7 +27,7 @@
 
 	<select id="login" resultType="Member">
 		select * from tbmember
-		where email=#{uid} and password=#{upw}
+		where email=#{uid} and password=password(#{upw})
 	</select>
 	
 </mapper>

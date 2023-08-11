@@ -1,9 +1,12 @@
 package com.hamonsoft.cportal.config;
 
+import com.hamonsoft.cportal.interceptor.AuthInterceptor;
+import com.hamonsoft.cportal.interceptor.LoginInterceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -12,12 +15,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.sql.DataSource;
 
 @Configuration
 @MapperScan(value = "com.hamonsoft.cportal", sqlSessionFactoryRef = "SqlSessionFactory")
-public class MyBatisConfig {
+public class MyBatisConfig extends WebMvcConfigurerAdapter {
 
     @Value("${spring.datasource.mapper-locations}")
     String mPath;
@@ -49,6 +54,29 @@ public class MyBatisConfig {
         multipartResolver.setDefaultEncoding("UTF-8"); // 파일 인코딩 설정
         multipartResolver.setMaxUploadSizePerFile(5 * 1024 * 1024); // 파일당 업로드 크기 제한 (5MB)
         return multipartResolver;
+    }
+
+    @Autowired
+    LoginInterceptor loginInterceptor;
+
+    @Autowired
+    AuthInterceptor authInterceptor;
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(loginInterceptor)
+//                .addPathPatterns("/**/*")
+//                .addPathPatterns("/**/**/*")
+                .addPathPatterns("/member/loginPost") // 해당 경로에 접근하기 전에 인터셉터가 가로챈다.
+                .excludePathPatterns("/**/*.css")
+                .excludePathPatterns("/**/**/*.css")
+                .excludePathPatterns("/boards");    // 해당 경로는 인터셉터가 가로채지 않는다.
+
+        registry.addInterceptor(authInterceptor)
+//                .addPathPatterns("/**/*")
+                .addPathPatterns("/member/listAll");
+//                .excludePathPatterns("/member/login")
+//                .excludePathPatterns("/member/insertMember");
     }
 
 }

@@ -3,6 +3,7 @@ package com.hamonsoft.cportal.service;
 import com.hamonsoft.cportal.controller.MemberController;
 import com.hamonsoft.cportal.domain.BoardVO;
 import com.hamonsoft.cportal.domain.Member;
+import com.hamonsoft.cportal.dto.LoginDTO;
 import com.hamonsoft.cportal.repository.MemberRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,4 +40,9 @@ public class MemberService {
     public List<Member> listAll() {
         return memberRepository.listAll();
     }
+
+    public Member login(LoginDTO dto) {
+        return memberRepository.login(dto);
+    }
+
 }

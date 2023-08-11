@@ -25,9 +25,9 @@
 		]]>
     </select>
 
-	<select id="readWithPW" resultType="com.hamonsoft.cportal.domain.Member">
+	<select id="login" resultType="Member">
 		select * from tbmember
-		where userid=#{userid} and userpw=#{userpw}
+		where email=#{uid} and password=#{upw}
 	</select>
 	
 </mapper>

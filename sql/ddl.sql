@@ -40,3 +40,27 @@ CREATE TABLE `tblicensepolicy` (
 ALTER TABLE tbmember CHANGE cloudgrade licensegrade VARCHAR(06);
 -- tbmember column 추가 -> administratoryn
 ALTER TABLE tbmember ADD COLUMN administratoryn VARCHAR(1) AFTER emailcertificationyn;
+
+
+CREATE TABLE `tbusedevice` (
+  `tbusedeviceid` varchar(36) NOT NULL COMMENT '사용자아이디',
+  `user_id` varchar(50) NOT NULL COMMENT '사용자아이디',
+  `useday` varchar(8) NOT NULL COMMENT '사용일자',
+  `tran_status` int(1) NOT NULL COMMENT '처리여부',
+  `info` varchar(100) NOT NULL COMMENT '장비정보',
+  `nms_count` int(4) NOT NULL COMMENT '네트워크 장비 대수',
+  `sms_count` int(4) NOT NULL COMMENT 'sms 장비 대수',
+  `dbms_count` int(4) NOT NULL COMMENT 'dbms 장비 대수',
+  `ap_count` int(4) NOT NULL COMMENT 'ap 장비 대수',
+  `fms_count` int(4) NOT NULL COMMENT 'fms 장비 대수',
+  `reason` varchar(8) NOT NULL COMMENT '결과 사용',
+  PRIMARY KEY (`tbusedeviceid`),
+  KEY `IDX_tbusedevice_001` (`user_id`,`useday`),
+  CONSTRAINT `tbusedevice_user_id_FK` FOREIGN KEY (`user_id`) REFERENCES `tbmember` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='사용자등록장비';
+
+
+<select id="login" resultType="Member">
+    select * from tbmember
+    where email=#{uid} and password=SHA2(#{upw},256)
+</select>

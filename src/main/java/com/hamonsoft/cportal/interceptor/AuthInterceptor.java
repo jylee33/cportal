@@ -24,7 +24,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
             saveDest(request);
 
             String cpath = request.getContextPath();
-            response.sendRedirect(cpath + "/member/login");
+            response.sendRedirect(cpath + "/user/login");
+
             return false;
         }
         return true;

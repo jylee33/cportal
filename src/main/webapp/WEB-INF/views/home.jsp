@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@include file="include/header.jsp" %>
@@ -11,8 +11,12 @@
             <br>
             <a href="${path}/member/listAll">회원 목록 조회</a>
             <br>
-            <a href="${path}/member/login">로그인</a>
+            <a href="${path}/user/login">로그인</a>
         </p>
+    </div>
+    <div>
+        <label>로그인된 사용자</label>
+        <input type="text" name='email' class="form-control" value="${login.email}" disabled>
     </div>
 </div>
 

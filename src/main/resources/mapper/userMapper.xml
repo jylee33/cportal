@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.hamonsoft.cportal.repository.UserRepository">
+
+	<select id="login" resultType="Member">
+		select * from tbmember
+		where email=#{uid} and password=sha2(#{upw}, 256)
+	</select>
+	
+</mapper>

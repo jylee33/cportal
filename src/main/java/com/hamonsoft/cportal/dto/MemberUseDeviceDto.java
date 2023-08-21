@@ -1,10 +1,7 @@
 package com.hamonsoft.cportal.dto;
 
-import com.hamonsoft.cportal.utils.CommUtils;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
@@ -46,13 +43,7 @@ public class MemberUseDeviceDto implements Serializable {
     private int fmsvolume;
     private int totalcharge;
     private float userate;
-    protected String decimalFormatter(String amount){
-        if(CommUtils.isPresent(amount) && !amount.contains(",")){
-            DecimalFormat decFormat = new DecimalFormat("###,###");
-            amount = "" + decFormat.format(Long.parseLong(amount));
-        }
-        return amount;
-    }
+
 //    public String getMembername() {
 //        return membername;
 //    }

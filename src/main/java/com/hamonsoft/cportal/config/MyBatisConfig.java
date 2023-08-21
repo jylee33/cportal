@@ -67,15 +67,16 @@ public class MyBatisConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(loginInterceptor)
 //                .addPathPatterns("/**/*")
 //                .addPathPatterns("/**/**/*")
-                .addPathPatterns("/member/loginPost") // 해당 경로에 접근하기 전에 인터셉터가 가로챈다.
+                .addPathPatterns("/user/loginPost") // 해당 경로에 접근하기 전에 인터셉터가 가로챈다.
                 .excludePathPatterns("/**/*.css")
                 .excludePathPatterns("/**/**/*.css")
                 .excludePathPatterns("/boards");    // 해당 경로는 인터셉터가 가로채지 않는다.
 
         registry.addInterceptor(authInterceptor)
 //                .addPathPatterns("/**/*")
+                .addPathPatterns("/member/insertMember")
                 .addPathPatterns("/member/listAll");
-//                .excludePathPatterns("/member/login")
+//                .excludePathPatterns("/user/login");
 //                .excludePathPatterns("/member/insertMember");
     }
 

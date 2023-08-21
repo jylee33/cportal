@@ -11,10 +11,14 @@
             <br>
             <a href="${path}/member/listAll">회원 목록 조회</a>
             <br>
-            <a href="${path}/member/login">로그인</a>
+            <a href="${path}/user/login">로그인</a>
             <br>
             <a href="${path}/charge/guide">과금안내</a>
         </p>
+    </div>
+    <div>
+        <label>로그인된 사용자</label>
+        <input type="text" name='email' class="form-control" value="${login.email}" disabled>
     </div>
 </div>
 

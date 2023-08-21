@@ -84,7 +84,7 @@ public class MemberController {
         if (member == null) {
             return;
         }
-
+        session.setAttribute("loginMember",member);
         model.addAttribute("member", member);
     }
 

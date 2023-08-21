@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hamonsoft.cportal.repository.ChargeGuideRepository">
+
+    <select id="selectUseDevice" resultType="map">
+        <![CDATA[
+        select usedeviceid   ,userid       ,useday        ,transtatus   ,info          ,
+               nmscount      ,smscount     ,dbmscount     ,apcount      ,fmscount      ,reason
+        from tbusedevice
+        ]]>
+    </select>
+
+
+    <select id="selectUseDeviceCount" resultType="Integer">
+        select count(*) cnt
+        from tbusedevice
+        where userid = #{email}
+          and useday = #{useDay}
+    </select>
+
+    <!--  전체리스트 조회  -->
+    <select id="doMemberDeviceList" resultType="MemberUseDevice">
+        <![CDATA[
+            select a01.membername
+                  ,a01.email
+                  ,a01.licensegrade
+                  ,a01.celltel
+                  ,a01.businessname
+                  ,a01.businessnumber
+                  ,a01.joindate
+                  ,j01.datakeepterm
+                  ,j01.datakeepunit
+                  ,j01.basevolume
+                  ,j01.basecharge
+                  ,j01.servicevolume
+                  ,j01.addvolume
+                  ,j01.addcharge
+                  ,j02.postnumber
+                  ,j02.address
+                  ,j02.detailaddress
+                  ,concat(j02.postnumber,' ',j02.address,' ',j02.detailaddress) zipaddress
+                  ,j03.totalvolume
+                  ,j03.networkvolume
+                  ,j03.servervolume
+                  ,j03.apvolume
+                  ,j03.dbmsvolume
+                  ,j03.fmsvolume
+                  ,j03.totalcharge
+              from tbmember                    a01
+                   inner join tbmemberlicense  j01
+                           on a01.email = j01.email
+                   left  join tbtaxinformation j02
+                           on a01.email = j02.email
+                   left  join tbmemberusehistory j03
+                           on a01.email = j03.email
+                          and(j03.email, j03.useday) in (select email, max(useday) from tbmemberusehistory group by email)
+             where 1 = 1
+               and a01.withdrawalyn != '1'
+             order by a01.email
+        ]]>
+
+    </select>
+    <!--  전체리스트 조회  -->
+    <select id="doMemberDeviceInfo" resultType="MemberUseDevice">
+        <![CDATA[
+            select a01.membername
+                  ,a01.email
+                  ,a01.licensegrade
+                  ,a01.celltel
+                  ,a01.businessname
+                  ,a01.businessnumber
+                  ,a01.joindate
+                  ,j01.datakeepterm
+                  ,j01.datakeepunit
+                  ,j01.basevolume + j01.servicevolume + j01.addvolume totalsoluble
+                  ,j01.basevolume
+                  ,j01.basecharge
+                  ,j01.servicevolume
+                  ,j01.addvolume
+                  ,j01.addcharge
+                  ,j02.postnumber
+                  ,j02.address
+                  ,j02.detailaddress
+                  ,concat(j02.postnumber,' ',j02.address,' ',j02.detailaddress) zipaddress
+                  ,j03.totalvolume
+                  ,j03.networkvolume
+                  ,j03.servervolume
+                  ,j03.apvolume
+                  ,j03.dbmsvolume
+                  ,j03.fmsvolume
+                  ,j03.totalcharge
+                  ,FLOOR(j03.totalvolume / (j01.basevolume + j01.servicevolume + j01.addvolume) * 100,2) userate
+              from tbmember                      a01
+                   inner join tbmemberlicense    j01
+                           on a01.email = j01.email
+                   left  join tbtaxinformation   j02
+                           on a01.email = j02.email
+                   left  join tbmemberusehistory j03
+                           on a01.email = j03.email
+                          and j03.useday= (select max(useday) from tbmemberusehistory where email = #{email})
+             where 1 = 1
+               and  a01.email =  #{email}
+               and a01.withdrawalyn != '1'
+             order by a01.email
+        ]]>
+    </select>
+
+    <select id="doMemberMonthUseInfo" resultType="MemberMonthUse">
+        <![CDATA[
+            select email          ,useyym         ,licensegrade   ,datakeepterm   ,datakeepunit   ,
+                   basevolume     ,basecharge     ,servicevolume  ,addvolume      ,addcharge      ,
+                   totalvolume    ,networkvolume  ,servervolume   ,apvolume       ,dbmsvolume     ,
+                   fmsvolume      ,etcvolume      ,totalcharge
+              from tbmemberusemonth
+             where 1 = 1
+               and email = #{email}
+             order by useyym desc
+        ]]>
+    </select>
+
+    <select id="doMemberTaxOutputInfo" resultType="MemberTaxOutput">
+        <![CDATA[
+             select a01.taxid               ,
+                    a01.email               ,
+                    a01.Representationname  ,
+                    a01.taxcompanynumber    ,
+                    a01.taxemail            ,
+                    a01.postnumber          ,
+                    a01.address             ,
+                    a01.detailaddress       ,
+                    concat(j02.postnumber,' ',j02.address,' ',j02.detailaddress) zipaddress,
+                    a01.businesscondition   ,
+                    a01.businesskind        ,
+                    a01.settlementmeans     ,
+                    a01.baseamount          ,
+                    j01.taxhistoryid        ,
+                    j01.issueyearmonth      ,
+                    j01.issueamount         ,
+                    j01.issuedate           ,
+                    j01.logindate
+               from tbtaxinformation a01
+                    left join tbtaxhistory j01
+                           on a01.taxid = j01.taxid
+              where a01.email = #{email}
+        ]]>
+    </select>
+</mapper>

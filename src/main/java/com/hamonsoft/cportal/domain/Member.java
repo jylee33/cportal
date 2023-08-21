@@ -1,9 +1,7 @@
 package com.hamonsoft.cportal.domain;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.IdentityHashMap;
 
 public class Member {
 
@@ -22,6 +20,9 @@ public class Member {
     private Date createdAt;
     private String updatedBy;
     private Date updatedAt;
+
+    private MemberLicense memberLicenseVO;
+    private MemberUseTax memberUseTaxVO;
 
     public String getEmail() {
         return email;
@@ -143,6 +144,29 @@ public class Member {
         this.updatedAt = updatedAt;
     }
 
+    public MemberLicense getMemberLicenseVO() {
+        return memberLicenseVO;
+    }
+    public void setMemberLicenseVO(MemberLicense memberLicenseVO){
+        this.memberLicenseVO = memberLicenseVO;
+    }
+
+
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "member_info_idx", referencedColumnName = "email")
+//    private MemberLicense memberLicense;
+//
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "member_info_idx", referencedColumnName = "email")
+//    private TaxInformation taxInformation;
+
+
+    public MemberUseTax getMemberUseTaxVO() {
+        return memberUseTaxVO;
+    }
+    public void setMemberUseTaxVO(MemberUseTax memberUseTaxVO){
+        this.memberUseTaxVO = memberUseTaxVO;
+    }
     @Override
     public String toString() {
         return "Member [email=" + email + ", membername=" + membername + ", celltel="

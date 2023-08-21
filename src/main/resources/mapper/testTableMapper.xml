@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hamonsoft.cportal.repository.TestTableMapper">
+
+    <select id="SelectAllList" resultType="hashmap">
+        SELECT i01.*
+        FROM (
+        SELECT ROW_NUMBER() OVER(ORDER by userCode DESC) AS rownum
+              ,sum(1) over() allcnt
+        ,usercode
+        ,username
+        FROM testTable
+        ) as i01
+        <if test="firstRecordIndex !=null and lastRecordIndex != null">
+            WHERE i01.rownum BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
+        </if>
+    </select>
+
+    <select id="testTableCount" resultType="int">
+        SELECT count(*) FROM
+        testTable
+    </select>
+
+</mapper>

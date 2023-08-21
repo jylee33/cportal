@@ -24,9 +24,9 @@ spring:
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    jdbc-url: jdbc:mariadb://localhost:3306/netiscloud?&serverTimezone=Asia/Seoul&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
-    username: root
-    password: ntflow
+    jdbc-url: jdbc:mariadb://localhost:53306/netiscloud?&serverTimezone=Asia/Seoul&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
+    username: cloud
+    password: cloud!2
     mapper-locations: classpath:mapper/**/*Mapper.xml
 
   mvc:
@@ -40,6 +40,16 @@ spring:
     cache: false
     view-names: thymeleaf/*
 
+pagehelper:
+  helper-dialect: h2
+  auto-dialect: true
+  page-size-zero: false
+  reasonable: true
+  offset-as-page-num: false
+  row-bounds-with-count: false
+  auto-runtime-dialect: false
+  close-conn: true
+  default-count: true
 ---
 server:
   port: 8080
@@ -78,3 +88,13 @@ spring:
     cache: false
     view-names: thymeleaf/*
 
+pagehelper:
+  helper-dialect: h2
+  auto-dialect: true
+  page-size-zero: false
+  reasonable: true
+  offset-as-page-num: false
+  row-bounds-with-count: false
+  auto-runtime-dialect: false
+  close-conn: true
+  default-count: true

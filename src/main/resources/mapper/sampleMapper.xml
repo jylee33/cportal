@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sampleMapper">
+    <select id="getTotalDepartmentCount" resultType="int">
+        SELECT COUNT(*)
+        FROM   spring_department
+    </select>
+
+    <select id="getAllDeptListOrderByNoDesc" resultType="map">
+        SELECT   deptno, dname, loc
+        FROM     spring_department
+        ORDER BY deptno DESC
+    </select>
+
+    <!-- resultType이 map일 때,
+         map의 key는 컬럼명을 대문자로 할당되고,
+         map의 value는 반환되는 row의 key에 해당하는 컬럼의 값이 할당된다. -->
+    <select id="findEmployeeAndDeptByNo" resultType="map" parameterType="int">
+        SELECT  e.ename, d.dname, d.loc
+        FROM    spring_department d, spring_employment e
+        WHERE   d.deptno = e.deptno AND e.empno=#{value}
+    </select>
+
+    <!-- Inner Join에서는 조인 조건 WHERE d.deptno = e.deptno 에 의해서
+         조건에 일치하는 사원과 부서정보만 조회한다. -->
+    <select id="findAllEmpDeptList" resultType="map">
+        SELECT e.empno, e.ename, d.deptno, d.dname, d.loc
+        FROM   spring_department d, spring_employment e
+        WHERE  d.deptno = e.deptno
+    </select>
+
+    <!-- Outer Join은 조인 조건에 일치하지 않는 정보가 있는 테이블 측에
+         연산자 (+)를 표기하면 된다. - 사원이 없으므로 사원 측에 (+)
+         * DB의 관점으로 보기! -->
+    <select id="findAllEmpDeptListOuterJoin" resultType="map">
+        SELECT e.empno, e.ename, d.deptno, d.dname, d.loc
+        FROM   spring_department d, spring_employment e
+        WHERE  d.deptno = e.deptno(+)
+    </select>
+
+    <!-- GROUP BY -->
+    <select id="getEmpGroupByDeptno" resultType="map">
+        SELECT   deptno, COUNT(*) AS EMP_COUNT
+        FROM     spring_employment
+        GROUP BY deptno
+    </select>
+
+    <!-- GROUP BY + JOIN -->
+    <select id="getSalGroupByLoc" resultType="map">
+        SELECT   d.loc, AVG(e.sal) AS AVG_SAL
+        FROM     spring_department d, spring_employment e
+        WHERE    d.deptno = e.deptno
+        GROUP BY d.loc
+    </select>
+
+    <!-- GROUP BY + JOIN
+         NVL(column, val) 함수 : null값을 val로 대체해서 표현
+    -->
+    <select id="getEmpGroupByDeptno2" resultType="map">
+        SELECT   d.deptno, d.dname, NVL(e.EMP_COUNT,0) AS EMP_COUNT
+        FROM     (SELECT   COUNT(empno) AS EMP_COUNT, deptno
+        FROM     spring_employment
+        GROUP BY deptno) e, spring_department d
+        WHERE    d.deptno = e.deptno(+)
+    </select>
+
+</mapper>

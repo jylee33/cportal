@@ -50,7 +50,7 @@ public class MemberController {
 
         memberService.insertMember(member);
 
-        return "redirect:/member/listAll";
+        return "redirect:/";
     }
 
     @GetMapping(value = "selectMember")

@@ -1,6 +1,9 @@
+<%@ page import="com.hamonsoft.cportal.domain.Member" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<c:set var="path" value="<%=request.getContextPath() %>" scope="application"/>
 
 <%@include file="../include/header.jsp" %>
 
@@ -16,19 +19,19 @@
     </div>
     <div class="row">
         <div class="col-xs-8">
-            <div class="checkbox icheck">
-                <label>
-                    <input type="checkbox" name="useCookie"> Remember Me
-                </label>
-            </div>
-        </div><!-- /.col -->
+<%--            <div class="checkbox icheck">--%>
+<%--                <label>--%>
+<%--                    <input type="checkbox" name="useCookie"> Remember Me--%>
+<%--                </label>--%>
+<%--            </div>--%>
+        </div>
         <div class="col-xs-4">
             <button type="submit" class="btn btn-primary btn-block btn-flat btn-login">Sign In</button>
         </div><!-- /.col -->
     </div>
 </form>
 
-<script type="text/javascript">
+<script>
 
     // $(".btn-login").on("click",function(e){
     //
@@ -37,6 +40,20 @@
     //     $("#loginForm").submit();
     //
     // });
+
+    $(document).ready(function() {
+        if ('${login.email}' != "") {
+            self.location = "${path}/";
+        }
+
+    });
+<%--    <%--%>
+<%--    Member login = (Member) session.getAttribute("login");--%>
+<%--    %>--%>
+
+
+
+
 
 </script>
 

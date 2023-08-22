@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@include file="include/header.jsp" %>
@@ -11,7 +11,12 @@
             <br>
             <a href="${path}/member/listAll">회원 목록 조회</a>
             <br>
-            <a href="${path}/user/login">로그인</a>
+            <c:if test="${empty login}">
+                <a href="${path}/user/login">로그인</a>
+            </c:if>
+            <c:if test="${not empty login}">
+                <a href="${path}/user/logout">로그아웃</a>
+            </c:if>
             <br>
             <a href="${path}/charge/guide">과금안내</a>
         </p>

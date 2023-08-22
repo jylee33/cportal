@@ -18,7 +18,7 @@
     </div>
 </section>
 
-<script type="text/javascript">
+<script>
 	function send_mail(){
         var mailto = $('#mailto').val();
 		window.open("mail/test_mail?mailto=" + mailto, "", "width=370, height=360, resizable=no, scrollbars=no, status=no");

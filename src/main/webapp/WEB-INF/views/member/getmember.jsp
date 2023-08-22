@@ -4,7 +4,7 @@
 
 <%@include file="../include/header.jsp" %>
 
-<section class="content">
+<div class="container">
     <div class="row">
         <div class="col-md-12">
             <label for="mailto" class="form-label">받는 사람</label>
@@ -16,7 +16,7 @@
             <button type="button" class="btn btn-primary btn-lg btn-block" onclick="send_mail()">메일 보내기</button>
         </div>
     </div>
-</section>
+</div>
 
 <script type="text/javascript">
     function send_mail(){

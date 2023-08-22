@@ -37,7 +37,7 @@
     </div>
 </section>
 
-<script type="text/javascript">
+<script>
 	function send_mail(){
         var mailsubject = $('#mailsubject').val();
 		window.open("groupmail_send?mailsubject=" + mailsubject, "", "width=370, height=360, resizable=no, scrollbars=no, status=no");

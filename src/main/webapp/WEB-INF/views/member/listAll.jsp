@@ -4,7 +4,7 @@
 
 <%@include file="../include/header.jsp" %>
 
-<section class="content">
+<div class="container">
     <div class="row">
         <!-- left column -->
         <div class="col-md-12">
@@ -67,9 +67,9 @@
 
     </div>
     <!-- /.row -->
-</section>
+</div>>
 
-<script type="text/javascript">
+<script>
 
 </script>
 

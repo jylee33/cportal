@@ -11,7 +11,12 @@
             <br>
             <a href="${path}/member/listAll">회원 목록 조회</a>
             <br>
-            <a href="${path}/user/login">로그인</a>
+            <c:if test="${empty login}">
+                <a href="${path}/user/login">로그인</a>
+            </c:if>
+            <c:if test="${not empty login}">
+                <a href="${path}/user/logout">로그아웃</a>
+            </c:if>
         </p>
     </div>
     <div>
@@ -21,5 +26,9 @@
 </div>
 
 </main>
+
+<script type="text/javascript">
+
+</script>
 
 <%@include file="include/footer.jsp" %>

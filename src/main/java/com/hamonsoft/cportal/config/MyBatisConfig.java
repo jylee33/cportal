@@ -74,7 +74,7 @@ public class MyBatisConfig extends WebMvcConfigurerAdapter {
 
         registry.addInterceptor(authInterceptor)
 //                .addPathPatterns("/**/*")
-                .addPathPatterns("/member/insertMember")
+//                .addPathPatterns("/member/insertMember")
                 .addPathPatterns("/member/listAll");
 //                .excludePathPatterns("/user/login");
 //                .excludePathPatterns("/member/insertMember");

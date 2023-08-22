@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="14.7" height="16.7" viewBox="0 0 14.7 16.7">
+    <defs>
+        <style>
+            .cls-1{fill:none;stroke:#36557e;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-width:1.7px}
+        </style>
+    </defs>
+    <g id="ico_user" transform="translate(.85 .85)">
+        <path id="Path" d="M13 5V3.333A3.292 3.292 0 0 0 9.75 0h-6.5A3.292 3.292 0 0 0 0 3.333V5" class="cls-1" transform="translate(0 10)"/>
+        <ellipse id="Oval" cx="3.25" cy="3.333" class="cls-1" rx="3.25" ry="3.333" transform="translate(3.25)"/>
+    </g>
+</svg>

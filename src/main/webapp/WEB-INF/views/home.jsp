@@ -4,29 +4,17 @@
 
 <%@include file="include/header.jsp" %>
 
-<div class="container">
+<div class="main">
     <div>
-        <p>
-            <a href="${path}/member/insertMember">회원 가입</a>
-            <br>
-            <a href="${path}/member/listAll">회원 목록 조회</a>
-            <br>
-            <c:if test="${empty login}">
-                <a href="${path}/user/login">로그인</a>
-            </c:if>
-            <c:if test="${not empty login}">
-                <a href="${path}/user/logout">로그아웃</a>
-            </c:if>
-            <br>
-            <a href="${path}/charge/guide">과금안내</a>
-        </p>
+        <h2>보안 토탈 <strong>클라우드 서비스</strong></h2>
+        <p><span>획기적인 SaaS 서비스를 새롭게 런칭합니다.</span>
+            <span><strong>실시간 네트워크와 서버 관리</strong>를 통한 새로운 클라우드 서비스</span></p>
+        <div class="btns">
+            <a href="#">서비스 안내</a>
+        </div>
     </div>
-    <div>
-        <label>로그인된 사용자</label>
-        <input type="text" name='email' class="form-control" value="${login.email}" disabled>
-    </div>
-</div>
 
-</main>
+</div>
+<!-- // main -->
 
 <%@include file="include/footer.jsp" %>

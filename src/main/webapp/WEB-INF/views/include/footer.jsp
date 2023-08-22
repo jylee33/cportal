@@ -4,26 +4,19 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="<%=request.getContextPath() %>" scope="application"/>
 
-<!-- Footer-->
-<footer class="bg-white py-4 mt-auto">
-    <div class="container px-5">
-        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-            <div class="col-auto">Copyright &copy; 2023 <a href="http://hamonsoft.co.kr/" target="_blank">HAMONSOFT</a>.
-                All rights reserved.
-            </div>
-            <%--      <div class="col-auto">--%>
-            <%--        <a class="small" href="#!">Privacy</a>--%>
-            <%--        <span class="mx-1">&middot;</span>--%>
-            <%--        <a class="small" href="#!">Terms</a>--%>
-            <%--        <span class="mx-1">&middot;</span>--%>
-            <%--        <a class="small" href="#!">Contact</a>--%>
-            <%--      </div>--%>
-        </div>
+<footer>
+    <div class="in">
+        <div>(주)하몬소프트 / 대표 : 강원석, 이석호  / 주소 : 서울특별시 금천구 디지털로9길 32 갑을그레이트밸리 B동 1201,1202,1203호 (본사) 2006호 (연구소)</div>
+        <div>Copyright © HAMONSOFT CO,. LTD. All Rights Reserved.</div>
     </div>
 </footer>
-<!-- Bootstrap core JS-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
-<script src="${path}/resources/dist/js/scripts.js"></script>
+<!-- // footer -->
+
+</div>
+<!-- // wrap -->
+
+<script>
+
+</script>
 </body>
 </html>

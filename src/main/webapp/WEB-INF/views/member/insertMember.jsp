@@ -32,14 +32,14 @@
         <div class="inp-area">
             <div class="label">비밀번호 *</div>
             <div class="inp-box">
-                <input type="password" class="inp2" name="password" placeholder="비밀번호를 입력하세요(영문/숫자/특수문자 조합으로 9~16자)" required>
+                <input type="password" class="inp2" name="password" id="password1" placeholder="비밀번호를 입력하세요(영문/숫자/특수문자 조합으로 9~16자)" required>
             </div>
         </div>
-        <div class="alert-msg">반드시 영문과 숫자, 특수문자를 혼합하여 9~16자 입력해주시기 바랍니다.<br>(허용 특수문자 : !@#$%^+=-)</div>
+        <div class="alert-msg" id="pwAlert">반드시 영문과 숫자, 특수문자를 혼합하여 9~16자 입력해주시기 바랍니다.<br>(허용 특수문자 : !@#$%^+=-)</div>
 
         <div class="inp-area">
             <div class="label">비밀번호 확인 *</div>
-            <div class="inp-box"><input type="password" class="inp2" name="password2" placeholder="비밀번호 확인" required></div>
+            <div class="inp-box"><input type="password" class="inp2" id="password2" placeholder="비밀번호 확인" required></div>
         </div>
 
         <h3 class="h3 mt20">관리자 정보</h3>
@@ -179,59 +179,82 @@
             }
         });
 
-        $("#insertMember").on("click", function (e) {
-            var id = $("#id").val();
-            var emailInput = $("#EmailInput").val();
-            var email = id + "@" + emailInput;
+        $('#password1').change(function () {
+            var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^+=-]).{9,16}$/;
 
-            if (id.trim().length == 0 || emailInput.trim().length == 0) {
-                alert("email 을 입력해 주세요.");
-                return;
+            var pw = $("#password1").val();
+
+            if(false === reg.test(pw)) {
+                $("#pwAlert").show();
+                $(this).focus();
+            }else {
+                $("#pwAlert").hide();
             }
-
-            $("input[name='email']").val(email);
-
-            if($("input[name='password']").val() == "" || $("input[name='password2']").val() == "") {
-                alert("암호를 입력해 주세요.");
-                return;
-            }
-
-            if($("input[name='membername']").val() == "") {
-                alert("성명을 입력해 주세요.");
-                return;
-            }
-
-            var tel1 = $("#tel1").val();
-            var tel2 = $("#tel2").val();
-            var tel3 = $("#tel3").val();
-            var celltel = tel1 + tel2 + tel3;
-
-            if (tel1.trim().length == 0 || tel2.trim().length == 0 || tel3.trim().length == 0) {
-                alert("휴대전화를 입력해 주세요.");
-                return;
-            }
-
-            $("input[name='celltel']").val(celltel);
-            alert($("input[name='celltel']").val());
-
-            if($("input[name='businessname']").val() == "") {
-                alert("회사명을 입력해 주세요.");
-                return;
-            }
-
-            if($("input[name='businessnumber']").val() == "") {
-                alert("사업자등록번호를 입력해 주세요.");
-                return;
-            }
-        //
-        //     formObj.submit();
         });
 
-        $("#searchPostNum").on("click", function (e) {
-            e.preventDefault();
+        $('#password2').change(function () {
+            if ($("#password1").val() != $("#password2").val()) {
+                alert("비밀번호가 서로 다릅니다.");
+                $("#password2").focus();
+                $("#password2").val("");
+            }
         });
 
-    });
+
+
+            $("#insertMember").on("click", function (e) {
+                var id = $("#id").val();
+                var emailInput = $("#EmailInput").val();
+                var email = id + "@" + emailInput;
+
+                if (id.trim().length == 0 || emailInput.trim().length == 0) {
+                    alert("email 을 입력해 주세요.");
+                    return;
+                }
+
+                $("input[name='email']").val(email);
+
+                if ($("#password1").val() == "" || $("#password2").val() == "") {
+                    alert("암호를 입력해 주세요.");
+                    return;
+                }
+
+                if ($("input[name='membername']").val() == "") {
+                    alert("성명을 입력해 주세요.");
+                    return;
+                }
+
+                var tel1 = $("#tel1").val();
+                var tel2 = $("#tel2").val();
+                var tel3 = $("#tel3").val();
+                var celltel = tel1 + tel2 + tel3;
+
+                if (tel1.trim().length == 0 || tel2.trim().length == 0 || tel3.trim().length == 0) {
+                    alert("휴대전화를 입력해 주세요.");
+                    return;
+                }
+
+                $("input[name='celltel']").val(celltel);
+                alert($("input[name='celltel']").val());
+
+                if ($("input[name='businessname']").val() == "") {
+                    alert("회사명을 입력해 주세요.");
+                    return;
+                }
+
+                if ($("input[name='businessnumber']").val() == "") {
+                    alert("사업자등록번호를 입력해 주세요.");
+                    return;
+                }
+                //
+                //     formObj.submit();
+            });
+
+            $("#searchPostNum").on("click", function (e) {
+                e.preventDefault();
+            });
+
+        });
 
 </script>
 

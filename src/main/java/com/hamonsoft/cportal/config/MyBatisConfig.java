@@ -59,8 +59,8 @@ public class MyBatisConfig extends WebMvcConfigurerAdapter {
     @Autowired
     LoginInterceptor loginInterceptor;
 
-    @Autowired
-    AuthInterceptor authInterceptor;
+//    @Autowired
+//    AuthInterceptor authInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -72,12 +72,17 @@ public class MyBatisConfig extends WebMvcConfigurerAdapter {
                 .excludePathPatterns("/**/**/*.css")
                 .excludePathPatterns("/boards");    // 해당 경로는 인터셉터가 가로채지 않는다.
 
-        registry.addInterceptor(authInterceptor)
+        registry.addInterceptor(authInterceptor())
 //                .addPathPatterns("/**/*")
 //                .addPathPatterns("/member/insertMember")
                 .addPathPatterns("/member/listAll");
 //                .excludePathPatterns("/user/login");
 //                .excludePathPatterns("/member/insertMember");
+    }
+
+    @Bean
+    public AuthInterceptor authInterceptor() {
+        return new AuthInterceptor();
     }
 
 }

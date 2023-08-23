@@ -21,6 +21,4 @@ public interface MemberRepository {
 
     List<Member> listAll();
 
-    Member login(LoginDTO dto);
-
 }

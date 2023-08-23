@@ -7,5 +7,15 @@
 		select * from tbmember
 		where email=#{uid} and password=sha2(#{upw}, 256)
 	</select>
+
+	<update id="keepLogin">
+		update tbmember set sessionkey = #{sessionId}, sessionlimit = #{next}
+		where email = #{uid}
+	</update>
+
+	<select id="checkUserWithSessionKey" resultType="Member">
+		select * from tbmember
+		where sessionKey = #{value} and sessionlimit > now()
+	</select>
 	
 </mapper>

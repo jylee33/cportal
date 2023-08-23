@@ -64,3 +64,6 @@ CREATE TABLE `tbusedevice` (
     select * from tbmember
     where email=#{uid} and password=SHA2(#{upw},256)
 </select>
+
+alter table tbmember add column sessionkey varchar(50) not null default 'none';
+alter table tbmember add column sessionlimit timestamp;

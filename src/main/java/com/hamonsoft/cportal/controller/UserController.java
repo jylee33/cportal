@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -46,6 +48,19 @@ public class UserController {
         }
 
         model.addAttribute("member", member);
+
+        if (dto.isUseCookie()) {
+            int amount = 60 * 60 * 24 * 7;
+            Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount));
+
+            Map<String, Object> paramMap = new HashMap<>();
+            paramMap.put("uid", member.getEmail());
+            paramMap.put("sessionId", session.getId());
+            paramMap.put("next", sessionLimit);
+
+            userService.keepLogin(paramMap);
+        }
+
     }
 
     @GetMapping("logout")
@@ -57,19 +72,27 @@ public class UserController {
         Object obj = session.getAttribute("login");
 
         if (obj != null) {
-            Member vo = (Member) obj;
+            Member member = (Member) obj;
             session.removeAttribute("login");
             session.invalidate();
 
-//            Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
-//
-//            if (loginCookie != null) {
-//                logger.info("logout.................................4");
-//                loginCookie.setPath("/");
-//                loginCookie.setMaxAge(0);
-//                response.addCookie(loginCookie);
-//                service.keepLogin(vo.getUid(), session.getId(), new Date());
-//            }
+            String cpath = request.getContextPath();
+            Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+
+            if (loginCookie != null) {
+                logger.info("logout.................................4");
+                loginCookie.setPath(cpath);
+                loginCookie.setMaxAge(0);
+                response.addCookie(loginCookie);
+
+                Map<String, Object> paramMap = new HashMap<>();
+                paramMap.put("uid", member.getEmail());
+                paramMap.put("sessionId", session.getId());
+                paramMap.put("next", new Date());
+
+                userService.keepLogin(paramMap);
+            }
+
         }
 
         return "user/logout";

@@ -70,22 +70,6 @@ public class MemberController {
         model.addAttribute("list", memberService.listAll());
     }
 
-    @GetMapping("login")
-    public void loginGet(@ModelAttribute("dto") LoginDTO dto) {
-        logger.info("call login get ......................");
-    }
 
-    @PostMapping("loginPost")
-    public void loginPost(LoginDTO dto, HttpSession session, Model model) {
-        logger.info("call login post ......................");
-
-        Member member = memberService.login(dto);
-
-        if (member == null) {
-            return;
-        }
-        session.setAttribute("loginMember",member);
-        model.addAttribute("member", member);
-    }
 
 }

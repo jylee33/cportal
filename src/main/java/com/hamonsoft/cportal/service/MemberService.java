@@ -41,8 +41,4 @@ public class MemberService {
         return memberRepository.listAll();
     }
 
-    public Member login(LoginDTO dto) {
-        return memberRepository.login(dto);
-    }
-
 }

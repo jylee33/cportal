@@ -26,7 +26,7 @@
         </div>
 
         <div class="mt20 mb30">
-            <label><input type="checkbox" class="checkbox"><div><em></em><span>아이디 저장</span></div></label>
+            <label><input type="checkbox" class="checkbox" name="useCookie"><div><em></em><span>아이디 저장</span></div></label>
         </div>
 
 

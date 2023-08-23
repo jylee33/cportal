@@ -45,14 +45,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             session.setAttribute(LOGIN, member);
             String cpath = request.getContextPath();
 
-            /* 일단 id/pw 저장 기능(Cookie) 사용하지 않음.
             if (request.getParameter("useCookie") != null) {
                 logger.info("remember me.......");
                 Cookie loginCookie = new Cookie("loginCookie", session.getId());
                 loginCookie.setPath(cpath);
                 loginCookie.setMaxAge(60 * 60 * 24 * 7);    // 초단위, 1주일
                 response.addCookie(loginCookie);
-            }*/
+            }
 
 //            response.sendRedirect(cpath);
             Object dest = session.getAttribute("dest");

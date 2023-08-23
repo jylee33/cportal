@@ -8,7 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 //@Transactional
@@ -24,6 +27,14 @@ public class UserService {
 
     public Member login(LoginDTO dto) {
         return userRepository.login(dto);
+    }
+
+    public void keepLogin(Map<String, Object> paramMap) {
+        userRepository.keepLogin(paramMap);
+    }
+
+    public Member checkUserWithSessionKey(Map<String, Object> paramMap) {
+        return userRepository.checkUserWithSessionKey(paramMap);
     }
 
 }

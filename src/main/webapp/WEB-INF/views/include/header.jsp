@@ -35,7 +35,9 @@
                     <c:if test="${not empty login}">
                         <a href="${path}/user/logout">로그아웃</a>
                     </c:if>
-                    <a href="${path}/member/insertMember">회원 가입</a>
+                    <c:if test="${empty login}">
+                        <a href="${path}/member/insertMember">회원 가입</a>
+                    </c:if>
 <%--                    <a href="${path}/member/listAll">회원 목록 조회</a>--%>
 <%--                    <a href="${path}/charge/guide">과금안내</a>--%>
                 </div>

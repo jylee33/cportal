@@ -21,6 +21,11 @@ public interface TestTableMapper {
 
     //count
     public int testTableCount() throws Exception;
+    //Paging
+    public List<Map<String, Object>> memberSetList02(Pagination pagination) throws Exception;
+
+    //count
+    public int memberSetCount02() throws Exception;
 
 
 }

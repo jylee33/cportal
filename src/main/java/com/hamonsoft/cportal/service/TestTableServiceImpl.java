@@ -37,4 +37,15 @@ public class TestTableServiceImpl implements TestTableService{
     }
 
 
+    @Override
+    public List<Map<String, Object>> memberSetList02(Pagination pagination) throws Exception {
+        // TODO Auto-generated method stub
+        return testtableMapper.memberSetList02(pagination);
+    }
+
+    @Override
+    public int memberSetCount02() throws Exception {
+        // TODO Auto-generated method stub
+        return testtableMapper.memberSetCount02();
+    }
 }

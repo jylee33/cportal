@@ -15,9 +15,9 @@
             <div class="inp-box">
                 <div class="email">
                     <input type="hidden" name="email" value="">
-                    <input type="text" class="inp2" placeholder="아이디" id="id">
+                    <input type="text" class="inp2" placeholder="아이디" id="id" required>
                     <span>@</span>
-                    <input type="text" class="inp2" placeholder="메일주소" id="EmailInput">
+                    <input type="text" class="inp2" placeholder="메일주소" id="EmailInput" required>
                     <select class="select large" style="width:130px" id="Email">
                         <option>선택</option>
                         <option>naver.com</option>
@@ -32,14 +32,14 @@
         <div class="inp-area">
             <div class="label">비밀번호 *</div>
             <div class="inp-box">
-                <input type="password" class="inp2" name="password" placeholder="비밀번호를 입력하세요(영문/숫자/특수문자 조합으로 9~16자)">
+                <input type="password" class="inp2" name="password" placeholder="비밀번호를 입력하세요(영문/숫자/특수문자 조합으로 9~16자)" required>
             </div>
         </div>
         <div class="alert-msg">반드시 영문과 숫자, 특수문자를 혼합하여 9~16자 입력해주시기 바랍니다.<br>(허용 특수문자 : !@#$%^+=-)</div>
 
         <div class="inp-area">
             <div class="label">비밀번호 확인 *</div>
-            <div class="inp-box"><input type="password" class="inp2" placeholder="비밀번호 확인"></div>
+            <div class="inp-box"><input type="password" class="inp2" name="password2" placeholder="비밀번호 확인" required></div>
         </div>
 
         <h3 class="h3 mt20">관리자 정보</h3>
@@ -47,7 +47,7 @@
         <div class="inp-area">
             <div class="label">성명 *</div>
             <div class="inp-box">
-                <input type="text" class="inp2" name="membername" placeholder="성명">
+                <input type="text" class="inp2" name="membername" placeholder="성명" required>
             </div>
         </div>
         <div class="inp-area">
@@ -55,11 +55,11 @@
             <div class="inp-box">
                 <div class="hp-box">
                     <input type="hidden" name="celltel" value="">
-                    <input type="text" class="inp2" id="tel1" placeholder="" maxlength="3">
+                    <input type="text" class="inp2" id="tel1" placeholder="" maxlength="3" required>
                     <span>-</span>
-                    <input type="text" class="inp2" id="tel2" placeholder="" maxlength="4">
+                    <input type="text" class="inp2" id="tel2" placeholder="" maxlength="4" required>
                     <span>-</span>
-                    <input type="text" class="inp2" id="tel3" placeholder="" maxlength="4">
+                    <input type="text" class="inp2" id="tel3" placeholder="" maxlength="4" required>
                 </div>
                 <button class="btn" style="display: none">휴대폰 인증</button>
             </div>
@@ -74,11 +74,11 @@
         </div>
         <div class="inp-area">
             <div class="label">회사명 *</div>
-            <div class="inp-box"><input type="text" class="inp2" name="businessname" placeholder="회사명"></div>
+            <div class="inp-box"><input type="text" class="inp2" name="businessname" placeholder="회사명" required></div>
         </div>
         <div class="inp-area">
             <div class="label">사업자등록번호 *</div>
-            <div class="inp-box"><input type="text" class="inp2" name="businessnumber" placeholder="'-'빼고 숫자만 입력하세요(10자리 체크)" maxlength="10"></div>
+            <div class="inp-box"><input type="text" class="inp2" name="businessnumber" placeholder="'-'빼고 숫자만 입력하세요(10자리 체크)" maxlength="10" required></div>
         </div>
         <div class="inp-area">
             <div class="label">등급선택 *</div>
@@ -167,6 +167,8 @@
     }
 
     $(document).ready(function () {
+        var formObj = $("form[role='form']");
+
         $('#Email').change(function () {
             console.log($(this).val());
 
@@ -178,22 +180,51 @@
         });
 
         $("#insertMember").on("click", function (e) {
-            var formObj = $("form[role='form']");
             var id = $("#id").val();
             var emailInput = $("#EmailInput").val();
             var email = id + "@" + emailInput;
 
+            if (id.trim().length == 0 || emailInput.trim().length == 0) {
+                alert("email 을 입력해 주세요.");
+                return;
+            }
+
             $("input[name='email']").val(email);
+
+            if($("input[name='password']").val() == "" || $("input[name='password2']").val() == "") {
+                alert("암호를 입력해 주세요.");
+                return;
+            }
+
+            if($("input[name='membername']").val() == "") {
+                alert("성명을 입력해 주세요.");
+                return;
+            }
 
             var tel1 = $("#tel1").val();
             var tel2 = $("#tel2").val();
             var tel3 = $("#tel3").val();
             var celltel = tel1 + tel2 + tel3;
 
-            $("input[name='celltel']").val(celltel);
-            // alert($("input[name='celltel']").val());
+            if (tel1.trim().length == 0 || tel2.trim().length == 0 || tel3.trim().length == 0) {
+                alert("휴대전화를 입력해 주세요.");
+                return;
+            }
 
-            formObj.submit();
+            $("input[name='celltel']").val(celltel);
+            alert($("input[name='celltel']").val());
+
+            if($("input[name='businessname']").val() == "") {
+                alert("회사명을 입력해 주세요.");
+                return;
+            }
+
+            if($("input[name='businessnumber']").val() == "") {
+                alert("사업자등록번호를 입력해 주세요.");
+                return;
+            }
+        //
+        //     formObj.submit();
         });
 
         $("#searchPostNum").on("click", function (e) {

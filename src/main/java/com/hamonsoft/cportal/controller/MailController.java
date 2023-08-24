@@ -116,5 +116,12 @@ public class MailController {
         }
     }
 
+    @GetMapping("mail_reset_pw")
+    public String mail_reset_pw(@RequestParam("mailto") String mailto, @RequestParam("pw") String pw, Model model) {
+        model.addAttribute("mailto", mailto);
+        model.addAttribute("pw", pw);
+        return "mail/mail_reset_pw";
+    }
+
 
 }

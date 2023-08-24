@@ -41,4 +41,8 @@ public class UserService {
         return userRepository.fineId(paramMap);
     }
 
+    public void updatePw(Map<String, Object> paramMap) {
+        userRepository.updatePw(paramMap);
+    }
+
 }

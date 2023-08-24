@@ -21,4 +21,6 @@ public interface UserRepository {
 
     String fineId(Map<String, Object> paramMap);
 
+    void updatePw(Map<String, Object> paramMap);
+
 }

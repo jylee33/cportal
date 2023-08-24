@@ -22,5 +22,10 @@
 		select email from tbmember
 		where membername = #{membername} and celltel = #{celltel}
 	</select>
+
+	<update id="updatePw">
+		update tbmember set password=sha2(#{pw}, 256)
+		where membername = #{membername} and celltel = #{celltel} and email = #{email}
+	</update>
 	
 </mapper>

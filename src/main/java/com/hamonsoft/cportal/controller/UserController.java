@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/user")
@@ -113,12 +114,40 @@ public class UserController {
 
         String uid = userService.findId(paramMap);
         model.addAttribute("uid", uid);
-
     }
 
     @GetMapping("findpw")
     public void findpw(Model model) {
         logger.info("call findpw ......................");
+    }
+
+    @PostMapping("findpwresult")
+    public void findpwresult(Member member, Model model) {
+        logger.info("call findpwresult ......................");
+
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("membername", member.getMembername());
+        paramMap.put("celltel", member.getCelltel());
+        paramMap.put("email", member.getEmail());
+
+        // random 문자열 생성
+        StringBuffer buffer = new StringBuffer();
+        Random random = new Random();
+
+        String chars[] = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z".split(",");
+
+        for ( int i=0 ; i<6 ; i++ ) {
+            buffer.append(chars[random.nextInt(chars.length)]);
+        }
+        String pw = buffer.toString();
+
+        System.out.println("PW --------------- " + pw);
+
+        paramMap.put("pw", pw);
+
+        userService.updatePw(paramMap);
+        model.addAttribute("email", member.getEmail());
+        model.addAttribute("pw", pw);
     }
 
 }

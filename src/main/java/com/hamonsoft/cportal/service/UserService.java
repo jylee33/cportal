@@ -37,4 +37,8 @@ public class UserService {
         return userRepository.checkUserWithSessionKey(paramMap);
     }
 
+    public String findId(Map<String, Object> paramMap) {
+        return userRepository.fineId(paramMap);
+    }
+
 }

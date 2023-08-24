@@ -17,5 +17,10 @@
 		select * from tbmember
 		where sessionKey = #{value} and sessionlimit > now()
 	</select>
+
+	<select id="fineId" resultType="string">
+		select email from tbmember
+		where membername = #{membername} and celltel = #{celltel}
+	</select>
 	
 </mapper>

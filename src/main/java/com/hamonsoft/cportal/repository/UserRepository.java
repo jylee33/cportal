@@ -19,4 +19,6 @@ public interface UserRepository {
 
     Member checkUserWithSessionKey(Map<String, Object> paramMap);
 
+    String fineId(Map<String, Object> paramMap);
+
 }

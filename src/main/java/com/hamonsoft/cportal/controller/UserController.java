@@ -103,6 +103,19 @@ public class UserController {
         logger.info("call findid ......................");
     }
 
+    @PostMapping("findidresult")
+    public void findidresult(Member member, Model model) {
+        logger.info("call findidresult ......................");
+
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("membername", member.getMembername());
+        paramMap.put("celltel", member.getCelltel());
+
+        String uid = userService.findId(paramMap);
+        model.addAttribute("uid", uid);
+
+    }
+
     @GetMapping("findpw")
     public void findpw(Model model) {
         logger.info("call findpw ......................");

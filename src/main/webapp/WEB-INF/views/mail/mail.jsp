@@ -2,6 +2,10 @@
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<%@ page import="com.hamonsoft.cportal.mail.*"  %>
+
+<c:set var="path" value="<%=request.getContextPath() %>" scope="application"/>
+
 <%@include file="../include/header.jsp" %>
 
 <section class="content">
@@ -21,7 +25,32 @@
 <script>
 	function send_mail(){
         var mailto = $('#mailto').val();
-		window.open("mail/test_mail?mailto=" + mailto, "", "width=370, height=360, resizable=no, scrollbars=no, status=no");
+
+        // 방법 1
+		<%--window.open("${path}/mail/test_mail?mailto=" + mailto, "", "width=370, height=360, resizable=no, scrollbars=no, status=no");--%>
+
+        // 방법 2
+<%--        <%--%>
+<%--        MailSend ms = new MailSend();--%>
+<%--        ms.MailSendHtml("jylee@hamonsoft.co.kr");--%>
+<%--        %>--%>
+
+        // 방법 3
+        var url = "${path}/mail/test_mail";
+        var params = "mailto=" + mailto;
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: params,
+            success: function (args) {
+
+            },
+            error: function (e) {
+                alert(e.responseText);
+            },
+        });
+
 	}
 </script>
 

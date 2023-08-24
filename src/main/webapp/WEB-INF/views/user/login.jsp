@@ -22,7 +22,7 @@
 
         <h4 class="h4">비밀번호</h4>
         <div class="inp-area">
-            <div class="inp-box"><input type="password" name="upw" class="inp2" placeholder="비밀번로를 입력해주세요"></div>
+            <div class="inp-box"><input type="password" name="upw" id="upw" class="inp2" placeholder="비밀번호를 입력해주세요"></div>
         </div>
 
         <div class="mt20 mb30">
@@ -46,6 +46,18 @@
         }
 
         $("#login").on("click",function(e){
+            e.preventDefault();
+
+            if ($("#uidAlert").is(":visible") == true) {
+                $("#uid").focus();
+                return;
+            }
+
+            if ($("#upw").val() == "") {
+                alert('비밀번호를 입력하세요');
+                $("#upw").focus();
+                return;
+            }
 
             $("#loginForm").submit();
 

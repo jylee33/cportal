@@ -98,4 +98,14 @@ public class UserController {
         return "user/logout";
     }
 
+    @GetMapping("findid")
+    public void findid(Model model) {
+        logger.info("call findid ......................");
+    }
+
+    @GetMapping("findpw")
+    public void findpw(Model model) {
+        logger.info("call findpw ......................");
+    }
+
 }

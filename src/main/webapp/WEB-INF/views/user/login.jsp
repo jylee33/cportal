@@ -32,8 +32,8 @@
 
         <button class="btn large block" id="login">로그인</button>
         <div class="member-find-btns">
-            <a href="#">아이디 찾기</a>
-            <a href="#">비밀번호 찾기</a>
+            <a href="${path}/user/findid">아이디 찾기</a>
+            <a href="${path}/user/findpw">비밀번호 찾기</a>
         </div>
     </form>
 </div>

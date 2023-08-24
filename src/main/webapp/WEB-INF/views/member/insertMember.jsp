@@ -182,7 +182,7 @@
         $('#password1').change(function () {
             var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^+=-]).{9,16}$/;
 
-            var pw = $("#password1").val();
+            var pw = $(this).val();
 
             if(false === reg.test(pw)) {
                 $("#pwAlert").show();

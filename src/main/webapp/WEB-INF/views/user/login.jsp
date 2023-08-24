@@ -16,9 +16,9 @@
         </div>
         <h4 class="h4">아이디</h4>
         <div class="inp-area">
-            <div class="inp-box"><input type="text" name="uid" class="inp2" placeholder="아이디(이메일)을 입력해주세요"></div>
+            <div class="inp-box"><input type="text" name="uid" id="uid" class="inp2" placeholder="아이디(이메일)을 입력해주세요"></div>
         </div>
-        <div class="alert-msg2">잘못된 이메일 형식입니다.</div>
+        <div class="alert-msg2" id="uidAlert">잘못된 이메일 형식입니다.</div>
 
         <h4 class="h4">비밀번호</h4>
         <div class="inp-area">
@@ -45,13 +45,27 @@
             self.location = "${path}/";
         }
 
+        $("#login").on("click",function(e){
+
+            $("#loginForm").submit();
+
+        });
+
+        $('#uid').change(function () {
+            var reg = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+
+            var pw = $(this).val();
+
+            if(false === reg.test(pw)) {
+                $("#uidAlert").show();
+                $(this).focus();
+            }else {
+                $("#uidAlert").hide();
+            }
+        });
+
     });
 
-    $("#login").on("click",function(e){
-
-        $("#loginForm").submit();
-
-    });
 <%--    <%--%>
 <%--    Member login = (Member) session.getAttribute("login");--%>
 <%--    %>--%>

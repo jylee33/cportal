@@ -50,7 +50,19 @@ public class MemberController {
 
         memberService.insertMember(member);
 
-        return "redirect:/";
+        return "redirect:/member/sendmail_emailcertification?email=" + member.getEmail();
+    }
+
+    @GetMapping(value = "sendmail_emailcertification")
+    public void sendmail_emailcertification(@RequestParam("email") String email, Model model) {
+
+        model.addAttribute("email", email);
+    }
+
+    @GetMapping(value = "insertmember_result")
+    public void insertmember_result(@RequestParam("email") String email, Model model) {
+        logger.info("call insertmember_result ----------------");
+        model.addAttribute("email", email);
     }
 
     @GetMapping(value = "selectMember")

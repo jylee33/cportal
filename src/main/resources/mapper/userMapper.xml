@@ -5,7 +5,7 @@
 
 	<select id="login" resultType="Member">
 		select * from tbmember
-		where email=#{uid} and password=sha2(#{upw}, 256)
+		where email=#{uid} and password=sha2(#{upw}, 256) and emailcertificationyn = 1
 	</select>
 
 	<update id="keepLogin">
@@ -26,6 +26,11 @@
 	<update id="updatePw">
 		update tbmember set password=sha2(#{pw}, 256)
 		where membername = #{membername} and celltel = #{celltel} and email = #{email}
+	</update>
+
+	<update id="update_emailcertificationyn">
+		update tbmember set emailcertificationyn = 1
+		where email = #{email}
 	</update>
 	
 </mapper>

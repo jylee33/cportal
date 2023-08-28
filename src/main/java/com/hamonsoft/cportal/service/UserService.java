@@ -45,4 +45,8 @@ public class UserService {
         userRepository.updatePw(paramMap);
     }
 
+    public void update_emailcertificationyn(Map<String, Object> paramMap) {
+        userRepository.update_emailcertificationyn(paramMap);
+    }
+
 }

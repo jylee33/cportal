@@ -150,4 +150,16 @@ public class UserController {
         model.addAttribute("pw", pw);
     }
 
+    //
+    @GetMapping("update_emailcertificationyn")
+    public void update_emailcertificationyn(@RequestParam("email") String email, Model model) {
+        logger.info("call update_emailcertificationyn Get ......................");
+
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("email", email);
+
+        userService.update_emailcertificationyn(paramMap);
+        model.addAttribute("email", email);
+    }
+
 }

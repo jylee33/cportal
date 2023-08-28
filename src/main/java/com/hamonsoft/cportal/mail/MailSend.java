@@ -279,10 +279,10 @@ public class MailSend {
             msg.setRecipient(Message.RecipientType.TO, to);
             msg.setSubject("Hamonsoft NETIS CLOUD 비밀번호 변경 안내", "UTF-8");
             String body = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 비밀번호 변경 안내 메일입니다.</H1>"
-                    + "<br>변경된 비밀번호는 <b>" + pw + "</b> 입니다."
+                    + "<br>변경된 비밀번호는 <b>" + pw + "</b>입니다."
                     + "<br>로그인 후 비밀번호를 꼭 변경하시기 바랍니다."
                     + "<P><img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">"
-                    + "<br><a href=\"http://hamonsoft.co.kr\">하몬소프트</a>";
+                    + "<br><a href=\"http://cloud.hamonsoft.com/portal\">NETIS 클라우드 서비스</a>";
             msg.setContent(body, "text/html;charset=utf-8");
 
             Transport.send(msg);

@@ -12,9 +12,10 @@
 
     if ("${member.email}" == "") {
         alert("Login Failed");
+        self.location = "${path}/user/login";
+    } else {
+        self.location = "${path}/";
     }
-
-    self.location = "${path}/";
 
 </script>
 

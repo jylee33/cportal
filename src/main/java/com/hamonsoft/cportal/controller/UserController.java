@@ -15,6 +15,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -72,8 +73,33 @@ public class UserController {
     }
 
     @GetMapping(value = "withdrawal")
-    public void withdrawal(Model model) {
+    public void withdrawal(HttpServletRequest request, Model model) {
+        logger.info("call withdrawal ......................");
 
+        HttpSession session = request.getSession();
+        Member member = (Member) session.getAttribute("login");
+        String email = member.getEmail();
+        String pw = member.getPassword();
+
+        model.addAttribute("email", email);
+        model.addAttribute("pw", pw);
+    }
+
+    @PostMapping("withdrawalresult")
+    public void withdrawalresult(Member member, Model model) {
+        logger.info("call withdrawalresult ......................");
+        logger.info(member.toString());
+        String email = member.getEmail();
+        String strnow = new SimpleDateFormat("yyyyMMdd").format(new Date());
+        logger.info(strnow);
+
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("email", email);
+        paramMap.put("strnow", strnow);
+
+        int result = userService.withdrawal(paramMap);
+        logger.info("result ...................... " + result);
+        model.addAttribute("result", result);
     }
 
 }

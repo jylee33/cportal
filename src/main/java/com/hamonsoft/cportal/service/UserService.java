@@ -29,6 +29,9 @@ public class UserService {
         return userRepository.chgpw(member);
     }
 
+    public int  withdrawal(Map<String, Object> paramMap) {
+        return userRepository.withdrawal(paramMap);
+    }
 
 
 

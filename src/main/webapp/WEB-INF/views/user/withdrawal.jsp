@@ -9,7 +9,7 @@
 <%@include file="../include/header.jsp" %>
 
 <div class="container">
-    <div class="form-wrap">
+    <form class="form-wrap" role="form" action="withdrawalresult" method="post">
         <h2 class="h2">회원정보</h2>
         <div class="tabs1">
             <a href="${path}/user/info">회원정보</a>
@@ -24,7 +24,7 @@
         </div>
         <div class="inp-area">
             <div class="label">탈퇴 계정</div>
-            <div class="inp-box"><input type="password" class="inp2" value="email@hamonsoft.com"></div>
+            <div class="inp-box"><input class="inp2" name="email" value="${email}"></div>
         </div>
 
         <div class="inp-area">
@@ -46,17 +46,44 @@
         <div class="inp-area">
             <div class="label">비밀번호 확인</div>
             <div class="inp-box">
-                <input type="password" class="inp2" placeholder="">
-                <button class="btn">비밀번호 재확인</button>
+                <input type="password" class="inp2" placeholder="" id="pw">
+                <button class="btn" id="confirmpw">비밀번호 재확인</button>
             </div>
         </div>
 
-        <button class="btn large block">비밀번호 변경</button>
-    </div>
+        <button class="btn large block" id="withdrawal" disabled>회원 탈퇴</button>
+    </form>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha256.js"></script>
 
 <script>
 
+    $(document).ready(function () {
+        var formObj = $("form[role='form']");
+
+        $("#confirmpw").on("click", function (e) {
+            e.preventDefault();
+            $("#withdrawal").attr("disabled", true);
+
+            var pw2 = CryptoJS.SHA256($("#pw").val());
+
+            if("${pw}" == pw2) {
+                console.log("비밀번호 재확인 성공");
+                $("#withdrawal").attr("disabled", false);
+            } else {
+                console.log("비밀번호 재확인 실패");
+            }
+        });
+
+        $("#withdrawal").on("click", function (e) {
+            e.preventDefault();
+
+            formObj.submit();
+        });
+
+    });
 
 </script>
 

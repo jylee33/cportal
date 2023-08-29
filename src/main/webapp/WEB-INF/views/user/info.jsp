@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        <div id="billinfo" style="display: none">
+        <div id="billinfo" style="display: block">
             <hr class="hr1 mt30">
             <h3 class="h3">세금계산서 발행</h3>
 
@@ -121,13 +121,13 @@
         var formObj = $("form[role='form']");
 
         $("#licensegrade").change(function (e) {
-            var grade = $(this).val();
-
-            if (grade == "1") {
-                $("#billinfo").hide();
-            } else {
-                $("#billinfo").show();
-            }
+            // var grade = $(this).val();
+            //
+            // if (grade == "1") {
+            //     $("#billinfo").hide();
+            // } else {
+            //     $("#billinfo").show();
+            // }
         });
 
         $("#chguserinfo").on("click", function (e) {

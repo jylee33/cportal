@@ -15,6 +15,7 @@ public interface UserRepository {
 
 
     int chgpw(Member member);
+    int withdrawal(Map<String, Object> paramMap);
 
 
 

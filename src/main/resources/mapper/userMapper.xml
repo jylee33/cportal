@@ -8,6 +8,11 @@
         where email = #{email}
     </update>
 
+    <update id="withdrawal">
+        update tbmember set withdrawalyn = '1', withdrawaldate = #{strnow}
+        where email = #{email}
+    </update>
+
 <!--	<select id="info" resultType="Member">-->
 <!--		select * from tbmember-->
 <!--		where email=#{email}-->

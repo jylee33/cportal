@@ -1,7 +1,7 @@
 package com.hamonsoft.cportal.interceptor;
 
 import com.hamonsoft.cportal.domain.Member;
-import com.hamonsoft.cportal.service.UserService;
+import com.hamonsoft.cportal.service.MemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     private static final Logger logger = LoggerFactory.getLogger(AuthInterceptor.class);
 
     @Autowired
-    UserService userService;
+    MemberService memberService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -41,7 +41,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
                 Map<String, Object> paramMap = new HashMap<>();
                 paramMap.put("value", loginCookie.getValue());
 
-                Member member = userService.checkUserWithSessionKey(paramMap);
+                Member member = memberService.checkUserWithSessionKey(paramMap);
 
                 logger.info("MEMBER : " + member);
 
@@ -51,7 +51,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
                 }
             }
 
-            response.sendRedirect(cpath + "/user/login");
+            response.sendRedirect(cpath + "/member/login");
             return false;
         }
         return true;

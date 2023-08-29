@@ -12,7 +12,7 @@
         <h2 class="h2">계정정보 찾기</h2>
         <div class="tabs1">
             <a href="#" class="active">아이디(이메일) 찾기</a>
-            <a href="${path}/user/findpw">비밀번호 찾기</a>
+            <a href="${path}/member/findpw">비밀번호 찾기</a>
         </div>
         <h4 class="h4">이름</h4>
         <div class="inp-area">

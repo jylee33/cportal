@@ -11,7 +11,7 @@
     <form class="form-wrap" role="form" action="findpwresult" method="post">
         <h2 class="h2">계정정보 찾기</h2>
         <div class="tabs1">
-            <a href="${path}/user/findid">아이디(이메일) 찾기</a>
+            <a href="${path}/member/findid">아이디(이메일) 찾기</a>
             <a href="#" class="active">비밀번호 찾기</a>
         </div>
 

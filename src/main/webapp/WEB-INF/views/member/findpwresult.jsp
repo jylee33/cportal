@@ -13,8 +13,8 @@
     <div class="form-wrap">
         <h2 class="h2">계정정보 찾기</h2>
         <div class="tabs1">
-            <a href="${path}/user/findid" class="active">아이디(이메일) 찾기</a>
-            <a href="${path}/user/findpw">비밀번호 찾기</a>
+            <a href="${path}/member/findid" class="active">아이디(이메일) 찾기</a>
+            <a href="${path}/member/findpw">비밀번호 찾기</a>
         </div>
         <div class="find-result">
             <div id="result">
@@ -63,7 +63,7 @@
 
         $("#login").on("click",function(e){
             e.preventDefault();
-            self.location = "${path}/user/login";
+            self.location = "${path}/member/login";
         });
     });
 

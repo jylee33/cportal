@@ -25,29 +25,13 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Member login(LoginDTO dto) {
-        return userRepository.login(dto);
+    public int  chgpw(Member member) {
+        return userRepository.chgpw(member);
     }
 
-    public void keepLogin(Map<String, Object> paramMap) {
-        userRepository.keepLogin(paramMap);
-    }
 
-    public Member checkUserWithSessionKey(Map<String, Object> paramMap) {
-        return userRepository.checkUserWithSessionKey(paramMap);
-    }
 
-    public String findId(Map<String, Object> paramMap) {
-        return userRepository.fineId(paramMap);
-    }
 
-    public void updatePw(Map<String, Object> paramMap) {
-        userRepository.updatePw(paramMap);
-    }
-
-    public void emailcertification(Map<String, Object> paramMap) {
-        userRepository.emailcertification(paramMap);
-    }
 
 //    public Member info(Map<String, Object> paramMap) {
 //        return userRepository.info(paramMap);

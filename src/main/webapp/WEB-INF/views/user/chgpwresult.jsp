@@ -8,15 +8,15 @@
 
 <%@include file="../include/header.jsp" %>
 
-<div class="container">
-    <a href="${path}/member/sendmail_emailcertification?email=${email}">인증메일 재발송</a>
-    <p></p>
-    <p></p>
-    <a href="${path}/member/login">로그인 바로 가기</a>
-</div>
 
 <script>
 
+    $(document).ready(function () {
+        if ("${result}" == 1) {
+            alert("비밀번호 변경 완료");
+        }
+        self.location = "${path}/user/chgpw";
+    });
 
 </script>
 

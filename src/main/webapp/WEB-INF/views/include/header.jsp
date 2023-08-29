@@ -30,10 +30,10 @@
                 <div class="menu">
                     <a href="#">서비스 안내</a>
                     <c:if test="${empty login}">
-                        <a href="${path}/user/login">로그인</a>
+                        <a href="${path}/member/login">로그인</a>
                     </c:if>
                     <c:if test="${not empty login}">
-                        <a href="${path}/user/logout">로그아웃</a>
+                        <a href="${path}/member/logout">로그아웃</a>
                     </c:if>
                     <c:if test="${empty login}">
                         <a href="${path}/member/insertMember">회원 가입</a>

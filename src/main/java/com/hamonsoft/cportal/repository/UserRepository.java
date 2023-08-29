@@ -13,17 +13,10 @@ import java.util.Map;
 @Repository
 public interface UserRepository {
 
-    Member login(LoginDTO dto);
 
-    void keepLogin(Map<String, Object> paramMap);
+    int chgpw(Member member);
 
-    Member checkUserWithSessionKey(Map<String, Object> paramMap);
 
-    String fineId(Map<String, Object> paramMap);
-
-    void updatePw(Map<String, Object> paramMap);
-
-    void emailcertification(Map<String, Object> paramMap);
 
 //    Member info(Map<String, Object> paramMap);
 

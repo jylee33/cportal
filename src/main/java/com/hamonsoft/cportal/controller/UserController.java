@@ -33,135 +33,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("login")
-    public void loginGet(@ModelAttribute("dto") LoginDTO dto) {
-        logger.info("call login get ......................");
-    }
-
-    @PostMapping("loginPost")
-    public void loginPost(LoginDTO dto, HttpSession session, Model model) {
-        logger.info("call login post ......................");
-
-        Member member = userService.login(dto);
-
-        if (member == null) {
-            return;
-        }
-
-        model.addAttribute("member", member);
-
-        if (dto.isUseCookie()) {
-            int amount = 60 * 60 * 24 * 7;
-            Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount));
-
-            Map<String, Object> paramMap = new HashMap<>();
-            paramMap.put("uid", member.getEmail());
-            paramMap.put("sessionId", session.getId());
-            paramMap.put("next", sessionLimit);
-
-            userService.keepLogin(paramMap);
-        }
-
-    }
-
-    @GetMapping("logout")
-    public String logout(HttpServletRequest request,
-                         HttpServletResponse response, HttpSession session) throws Exception {
-
-        logger.info("logout.................................");
-
-        Object obj = session.getAttribute("login");
-
-        if (obj != null) {
-            Member member = (Member) obj;
-            session.removeAttribute("login");
-            session.invalidate();
-
-            String cpath = request.getContextPath();
-            Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
-
-            if (loginCookie != null) {
-                logger.info("logout.................................4");
-                loginCookie.setPath(cpath);
-                loginCookie.setMaxAge(0);
-                response.addCookie(loginCookie);
-
-                Map<String, Object> paramMap = new HashMap<>();
-                paramMap.put("uid", member.getEmail());
-                paramMap.put("sessionId", session.getId());
-                paramMap.put("next", new Date());
-
-                userService.keepLogin(paramMap);
-            }
-
-        }
-
-        return "user/logout";
-    }
-
-    @GetMapping("findid")
-    public void findid(Model model) {
-        logger.info("call findid ......................");
-    }
-
-    @PostMapping("findidresult")
-    public void findidresult(Member member, Model model) {
-        logger.info("call findidresult ......................");
-
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("membername", member.getMembername());
-        paramMap.put("celltel", member.getCelltel());
-
-        String uid = userService.findId(paramMap);
-        model.addAttribute("uid", uid);
-    }
-
-    @GetMapping("findpw")
-    public void findpw(Model model) {
-        logger.info("call findpw ......................");
-    }
-
-    @PostMapping("findpwresult")
-    public void findpwresult(Member member, Model model) {
-        logger.info("call findpwresult ......................");
-
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("membername", member.getMembername());
-        paramMap.put("celltel", member.getCelltel());
-        paramMap.put("email", member.getEmail());
-
-        // random 문자열 생성
-        StringBuffer buffer = new StringBuffer();
-        Random random = new Random();
-
-        String chars[] = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z".split(",");
-
-        for ( int i=0 ; i<6 ; i++ ) {
-            buffer.append(chars[random.nextInt(chars.length)]);
-        }
-        String pw = buffer.toString();
-
-        System.out.println("PW --------------- " + pw);
-
-        paramMap.put("pw", pw);
-
-        userService.updatePw(paramMap);
-        model.addAttribute("email", member.getEmail());
-        model.addAttribute("pw", pw);
-    }
-
-    //
-    @GetMapping("emailcertification")
-    public void emailcertification(@RequestParam("email") String email, Model model) {
-        logger.info("call emailcertification Get ......................");
-
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("email", email);
-
-        userService.emailcertification(paramMap);
-        model.addAttribute("email", email);
-    }
-
     @GetMapping(value = "info")
     public void info(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
@@ -179,8 +50,25 @@ public class UserController {
     }
 
     @GetMapping(value = "chgpw")
-    public void chgpw(Model model) {
+    public void chgpw(HttpServletRequest request, Model model) {
+        logger.info("call chgpw ......................");
 
+        HttpSession session = request.getSession();
+        Member member = (Member) session.getAttribute("login");
+        String email = member.getEmail();
+
+        model.addAttribute("email", email);
+
+    }
+
+    @PostMapping("chgpwresult")
+    public void chgpwresult(Member member, Model model) {
+        logger.info("call chgpwresult ......................");
+        logger.info(member.toString());
+
+        int result = userService.chgpw(member);
+        logger.info("result ...................... " + result);
+        model.addAttribute("result", result);
     }
 
     @GetMapping(value = "withdrawal")

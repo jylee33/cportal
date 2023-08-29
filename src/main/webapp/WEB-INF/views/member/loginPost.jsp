@@ -13,7 +13,7 @@
     $(document).ready(function () {
         if ("${member.email}" == "") {
             alert("Login Failed");
-            self.location = "${path}/user/login";
+            self.location = "${path}/member/login";
         } else {
             self.location = "${path}/";
         }

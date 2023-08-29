@@ -5,7 +5,7 @@
 
 	<select id="login" resultType="Member">
 		select * from tbmember
-		where email=#{uid} and password=sha2(#{upw}, 256) and emailcertificationyn = 1
+		where email=#{uid} and password=sha2(#{upw}, 256) and emailcertificationyn = 1 and withdrawalyn != '1'
 	</select>
 
 	<update id="keepLogin">
@@ -29,7 +29,7 @@
 	</update>
 
 	<update id="update_emailcertificationyn">
-		update tbmember set emailcertificationyn = 1
+		update tbmember set emailcertificationyn = 1, withdrawalyn = '0'
 		where email = #{email}
 	</update>
 	

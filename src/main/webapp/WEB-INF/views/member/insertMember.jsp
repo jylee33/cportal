@@ -229,8 +229,22 @@
 
             $("input[name='email']").val(email);
 
-            if ($("#password1").val() == "" || $("#password2").val() == "") {
-                alert("암호를 입력해 주세요.");
+            if ($("#pwAlert").is(":visible") == true) {
+                $("#password1").focus();
+                return;
+            }
+
+            var pw1 = $("#password1").val();
+            var pw2 = $("#password2").val();
+
+            if (pw1 == "" || pw2 == "") {
+                alert("비밀번호를 입력해 주세요.");
+                return;
+            }
+
+            if (pw1 != pw2) {
+                alert("비밀번호를 확인해 주세요.");
+                $("#password2").focus();
                 return;
             }
 

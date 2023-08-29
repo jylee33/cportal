@@ -28,9 +28,14 @@
 		where membername = #{membername} and celltel = #{celltel} and email = #{email}
 	</update>
 
-	<update id="update_emailcertificationyn">
+	<update id="emailcertification">
 		update tbmember set emailcertificationyn = 1, withdrawalyn = '0'
 		where email = #{email}
 	</update>
+
+<!--	<select id="info" resultType="Member">-->
+<!--		select * from tbmember-->
+<!--		where email=#{email}-->
+<!--	</select>-->
 	
 </mapper>

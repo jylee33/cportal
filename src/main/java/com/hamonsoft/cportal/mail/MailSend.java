@@ -327,7 +327,7 @@ public class MailSend {
             msg.setSubject("Hamonsoft NETIS CLOUD 회원 가입 인증 안내", "UTF-8");
             String body = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 회원 가입 인증 안내 메일입니다.</H1>"
                     + "<P><img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">"
-                    + "<br><a href=\"" + cpath + "/user/update_emailcertificationyn?email=" + email + "\">이메일 인증하기</a>";
+                    + "<br><a href=\"" + cpath + "/user/emailcertification?email=" + email + "\">이메일 인증하기</a>";
             logger.info(body);
             msg.setContent(body, "text/html;charset=utf-8");
 

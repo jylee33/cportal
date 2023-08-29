@@ -23,6 +23,8 @@ public interface UserRepository {
 
     void updatePw(Map<String, Object> paramMap);
 
-    void update_emailcertificationyn(Map<String, Object> paramMap);
+    void emailcertification(Map<String, Object> paramMap);
+
+//    Member info(Map<String, Object> paramMap);
 
 }

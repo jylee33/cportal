@@ -151,15 +151,41 @@ public class UserController {
     }
 
     //
-    @GetMapping("update_emailcertificationyn")
-    public void update_emailcertificationyn(@RequestParam("email") String email, Model model) {
-        logger.info("call update_emailcertificationyn Get ......................");
+    @GetMapping("emailcertification")
+    public void emailcertification(@RequestParam("email") String email, Model model) {
+        logger.info("call emailcertification Get ......................");
 
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("email", email);
 
-        userService.update_emailcertificationyn(paramMap);
+        userService.emailcertification(paramMap);
         model.addAttribute("email", email);
+    }
+
+    @GetMapping(value = "info")
+    public void info(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Member member = (Member) session.getAttribute("login");
+        String email = member.getEmail();
+
+        logger.info("call user info --------------- email : " + email);
+
+//        Map<String, Object> paramMap = new HashMap<>();
+//        paramMap.put("email", email);
+//
+//        Member member = userService.info(paramMap);
+        model.addAttribute("member", member);
+
+    }
+
+    @GetMapping(value = "chgpw")
+    public void chgpw(Model model) {
+
+    }
+
+    @GetMapping(value = "withdrawal")
+    public void withdrawal(Model model) {
+
     }
 
 }

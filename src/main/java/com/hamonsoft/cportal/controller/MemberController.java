@@ -68,7 +68,7 @@ public class MemberController {
     @GetMapping(value = "selectMember")
     @ResponseBody
     public Member selectMember(@RequestParam("email") String email, Model model) {
-        logger.info("call getMember --------------- email : " + email);
+        logger.info("call selectMember --------------- email : " + email);
         Member member = memberService.selectMember(email);
         model.addAttribute("member", member);
 

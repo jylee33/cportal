@@ -14,16 +14,18 @@
     //    ms.MailSend();
 
     String email = request.getParameter("email");
+    String membername = request.getParameter("membername");
+    String licensegrade = request.getParameter("licensegrade");
     String url = request.getRequestURL().toString();
     String contextPath = request.getContextPath();
     String cpath = url.substring(0, url.indexOf(contextPath)) + contextPath;
-    ms.MailSend_emailcertification(cpath, email);
+    ms.MailSend_emailcertification(cpath, email, membername, licensegrade);
 
 %>
 
 <script>
 
-    self.location = "${path}/member/insertmember_result?email=" + "${email}";
+    self.location = "${path}/member/insertmember_result?email=" + "${email}" + "&membername=" + "${membername}" + "&licensegrade=" + "${licensegrade}";
 
 </script>
 

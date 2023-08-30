@@ -17,6 +17,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -55,26 +57,33 @@ public class MemberController {
 
     @Transactional
     @PostMapping(value = "insertMember")
-    public String insertMemberPost(Member member, TaxInformation taxInformation, Model model) {
+    public String insertMemberPost(Member member, TaxInformation taxInformation, Model model) throws UnsupportedEncodingException {
         logger.info("call insertMemberPost ----------------");
         logger.info(member.toString());
 
         memberService.insertMember(member);
         memberService.insertTaxInfomation(taxInformation);
 
-        return "redirect:/member/sendmail_emailcertification?email=" + member.getEmail();
+        String membername = URLEncoder.encode(member.getMembername(), "UTF-8");
+
+        return "redirect:/member/sendmail_emailcertification?email=" + member.getEmail() + "&membername=" + membername + "&licensegrade=" + member.getLicensegrade();
     }
 
     @GetMapping(value = "sendmail_emailcertification")
-    public void sendmail_emailcertification(@RequestParam("email") String email, Model model) {
+    public void sendmail_emailcertification(@RequestParam("email") String email, @RequestParam("membername") String membername, @RequestParam("licensegrade") String licensegrade, Model model) {
+        logger.info("sendmail_emailcertification call --------------------------------");
 
         model.addAttribute("email", email);
+        model.addAttribute("membername", membername);
+        model.addAttribute("licensegrade", licensegrade);
     }
 
     @GetMapping(value = "insertmember_result")
-    public void insertmember_result(@RequestParam("email") String email, Model model) {
+    public void insertmember_result(@RequestParam("email") String email, @RequestParam("membername") String membername, @RequestParam("licensegrade") String licensegrade, Model model) {
         logger.info("call insertmember_result ----------------");
         model.addAttribute("email", email);
+        model.addAttribute("membername", membername);
+        model.addAttribute("licensegrade", licensegrade);
     }
 
     @GetMapping(value = "selectMember")
@@ -213,7 +222,7 @@ public class MemberController {
 
     //
     @GetMapping("emailcertification")
-    public void emailcertification(@RequestParam("email") String email, Model model) {
+    public void emailcertification(@RequestParam("email") String email, @RequestParam("membername") String membername, @RequestParam("licensegrade") String licensegrade, Model model) {
         logger.info("call emailcertification Get ......................");
 
         Map<String, Object> paramMap = new HashMap<>();
@@ -221,6 +230,8 @@ public class MemberController {
 
         memberService.emailcertification(paramMap);
         model.addAttribute("email", email);
+        model.addAttribute("membername", membername);
+        model.addAttribute("licensegrade", licensegrade);
     }
 
 

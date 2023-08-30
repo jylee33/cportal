@@ -14,10 +14,12 @@
     //    ms.MailSend();
 
     String email = request.getParameter("email");
+    String membername = request.getParameter("membername");
+    String licensegrade = request.getParameter("licensegrade");
     String url = request.getRequestURL().toString();
     String contextPath = request.getContextPath();
     String cpath = url.substring(0, url.indexOf(contextPath)) + contextPath;
-    ms.MailSend_welcomeJoin(cpath, email);
+    ms.MailSend_welcomeJoin(cpath, email, membername, licensegrade);
 
 %>
 

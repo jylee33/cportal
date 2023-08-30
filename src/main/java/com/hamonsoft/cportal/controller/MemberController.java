@@ -1,12 +1,14 @@
 package com.hamonsoft.cportal.controller;
 
 import com.hamonsoft.cportal.domain.Member;
+import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.LoginDTO;
 import com.hamonsoft.cportal.service.MemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.WebUtils;
@@ -51,12 +53,14 @@ public class MemberController {
         logger.info("call insertMemberGet ----------------");
     }
 
+    @Transactional
     @PostMapping(value = "insertMember")
-    public String insertMemberPost(Member member, Model model) {
+    public String insertMemberPost(Member member, TaxInformation taxInformation, Model model) {
         logger.info("call insertMemberPost ----------------");
         logger.info(member.toString());
 
         memberService.insertMember(member);
+        memberService.insertTaxInfomation(taxInformation);
 
         return "redirect:/member/sendmail_emailcertification?email=" + member.getEmail();
     }

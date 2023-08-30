@@ -67,3 +67,5 @@ CREATE TABLE `tbusedevice` (
 
 alter table tbmember add column sessionkey varchar(50) not null default 'none';
 alter table tbmember add column sessionlimit timestamp;
+
+ALTER TABLE tbtaxinformation ADD COLUMN companyname VARCHAR(50) AFTER email;

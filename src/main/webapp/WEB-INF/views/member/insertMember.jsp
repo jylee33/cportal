@@ -103,48 +103,50 @@
             </div>
             <div class="inp-area">
                 <div class="label">대표자명</div>
-                <div class="inp-box"><input type="text" class="inp2" placeholder="대표자명"></div>
+                <div class="inp-box"><input type="text" class="inp2" placeholder="대표자명" name="representationname"></div>
             </div>
             <div class="inp-area">
                 <div class="label">사업자 등록 번호</div>
                 <div class="inp-box">
                     <div class="hp-box">
-                        <input type="text" class="inp2" placeholder="" maxlength="3">
+                        <input type="hidden" name="taxcompanynumber" value="">
+                        <input type="text" class="inp2" placeholder="" maxlength="3" id="tax1">
                         <span>-</span>
-                        <input type="text" class="inp2" placeholder="" maxlength="4">
+                        <input type="text" class="inp2" placeholder="" maxlength="2" id="tax2">
                         <span>-</span>
-                        <input type="text" class="inp2" placeholder="" maxlength="4">
+                        <input type="text" class="inp2" placeholder="" maxlength="5" id="tax3">
                     </div>
                 </div>
             </div>
             <div class="inp-area">
                 <div class="label">전자세금계산서<br>발행메일</div>
-                <div class="inp-box"><input type="text" class="inp2" placeholder="전자세금계산서 발행 메일을 입력하세요."></div>
+                <div class="inp-box"><input type="text" class="inp2" placeholder="전자세금계산서 발행 메일을 입력하세요." name="taxemail"></div>
             </div>
             <div class="inp-area">
                 <div class="label">주소</div>
                 <div class="inp-box">
-                    <input type="text" class="inp2" id="address1" placeholder="우편번호를 검색하세요.">
+                    <input type="hidden" name="postnumber" id="postnumber" value="">
+                    <input type="text" class="inp2" id="address1" placeholder="우편번호를 검색하세요." name="address">
                     <button class="btn" id="searchPostNum">우편번호검색</button>
                 </div>
             </div>
             <div class="inp-area">
                 <div class="label"></div>
                 <div class="inp-box">
-                    <input type="text" class="inp2" id="address2" placeholder="상세주소 등록">
+                    <input type="text" class="inp2" id="address2" placeholder="상세주소 등록" name="detailaddress">
                 </div>
             </div>
             <div class="inp-area">
                 <div class="label">업종</div>
-                <div class="inp-box"><input type="text" class="inp2" placeholder="업종을 입력하세요"></div>
+                <div class="inp-box"><input type="text" class="inp2" placeholder="업종을 입력하세요" name="businesskind"></div>
             </div>
             <div class="inp-area">
                 <div class="label">업태</div>
-                <div class="inp-box"><input type="text" class="inp2" placeholder="업태를 입력하세요"></div>
+                <div class="inp-box"><input type="text" class="inp2" placeholder="업태를 입력하세요" name="businesscondition"></div>
             </div>
             <div class="inp-area">
                 <div class="label">결재수단</div>
-                <div class="inp-box"><input type="text" class="inp2" placeholder="결재수단을 입력하세요"></div>
+                <div class="inp-box"><input type="text" class="inp2" placeholder="결재수단을 입력하세요" name="settlementmeans"></div>
             </div>
         </div>
         <div class="mb5">
@@ -161,6 +163,8 @@
         <input type="hidden" name="withdrawaldate" value="20230901">
         <input type="hidden" name="joindate" value="20230901">
         <input type="hidden" name="updatedBy" value="test">
+
+        <input type="hidden" name="baseamount" value="0">
     </form>
 </div>
 
@@ -228,6 +232,13 @@
             }
 
             $("input[name='email']").val(email);
+
+            var tax1 = $("#tax1").val();
+            var tax2 = $("#tax2").val();
+            var tax3 = $("#tax3").val();
+            var taxnum = tax1 + tax2 + tax3;
+
+            $("input[name='taxcompanynumber']").val(taxnum);
 
             if ($("#pwAlert").is(":visible") == true) {
                 $("#password1").focus();
@@ -326,9 +337,8 @@
                     }
 
                     // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                    // document.getElementById('sample6_postcode').value = data.zonecode;
+                    document.getElementById('postnumber').value = data.zonecode;
                     // document.getElementById("sample6_address").value = addr;
-
                     document.getElementById("address1").value = addr + extraAddr;
                     // 커서를 상세주소 필드로 이동한다.
                     document.getElementById("address2").focus();

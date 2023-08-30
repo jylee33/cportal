@@ -20,6 +20,7 @@
     <script type="text/javascript" src="${path}/resources/js/jquery.sumoselect.js"></script>
     <script type="text/javascript" src="${path}/resources/js/front.js"></script>
 </head>
+<link rel="icon" href="${path}/resources/favicon.ico">
 
 <body>
 <div id="wrap">

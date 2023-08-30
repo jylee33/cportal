@@ -3,6 +3,16 @@
 	
 <mapper namespace="com.hamonsoft.cportal.repository.UserRepository">
 
+    <select id="info" resultType="Member">
+        select * from tbmember
+        where email=#{email}
+    </select>
+
+    <update id="chginfo">
+        update tbmember set businessname=#{businessname}, membername=#{membername}, celltel=#{celltel}, businessname=#{businessname}, businessnumber=#{businessnumber}, licensegrade=#{licensegrade}
+        where email = #{email}
+    </update>
+
     <update id="chgpw">
         update tbmember set password=sha2(#{password}, 256)
         where email = #{email}
@@ -13,9 +23,5 @@
         where email = #{email}
     </update>
 
-<!--	<select id="info" resultType="Member">-->
-<!--		select * from tbmember-->
-<!--		where email=#{email}-->
-<!--	</select>-->
-	
+
 </mapper>

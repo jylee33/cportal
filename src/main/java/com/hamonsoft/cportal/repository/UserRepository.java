@@ -14,6 +14,8 @@ import java.util.Map;
 public interface UserRepository {
 
 
+    Member info(Member member);
+    int chginfo(Member member);
     int chgpw(Member member);
     int withdrawal(Map<String, Object> paramMap);
 

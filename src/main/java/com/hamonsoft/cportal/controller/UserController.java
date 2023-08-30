@@ -42,12 +42,19 @@ public class UserController {
 
         logger.info("call user info --------------- email : " + email);
 
-//        Map<String, Object> paramMap = new HashMap<>();
-//        paramMap.put("email", email);
-//
-//        Member member = userService.info(paramMap);
-        model.addAttribute("member", member);
+        Member secMember = userService.info(member);
+        model.addAttribute("member", secMember);
 
+    }
+
+    @PostMapping("chginforesult")
+    public void chginforesult(Member member, Model model) {
+        logger.info("call chginforesult ......................");
+        logger.info(member.toString());
+
+        int result = userService.chginfo(member);
+        logger.info("result ...................... " + result);
+        model.addAttribute("result", result);
     }
 
     @GetMapping(value = "chgpw")

@@ -252,7 +252,7 @@ public class MailSend {
 
     }
 
-    public void MailSendResetPW(String mailto, String pw) {
+    public void MailSendResetPW(String cpath, String mailto, String pw) {
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -282,7 +282,7 @@ public class MailSend {
                     + "<br>변경된 비밀번호는 <b>" + pw + "</b>입니다."
                     + "<br>로그인 후 비밀번호를 꼭 변경하시기 바랍니다."
                     + "<P><img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">"
-                    + "<br><a href=\"http://cloud.hamonsoft.com/portal\">NETIS 클라우드 서비스</a>";
+                    + "<br><a href=\"" + cpath + "\">NETIS 클라우드 서비스</a>";
             msg.setContent(body, "text/html;charset=utf-8");
 
             Transport.send(msg);
@@ -327,7 +327,7 @@ public class MailSend {
             msg.setSubject("Hamonsoft NETIS CLOUD 회원 가입 인증 안내", "UTF-8");
             String body = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 회원 가입 인증 안내 메일입니다.</H1>"
                     + "<P><img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">"
-                    + "<br><a href=\"" + cpath + "/user/emailcertification?email=" + email + "\">이메일 인증하기</a>";
+                    + "<br><a href=\"" + cpath + "/member/emailcertification?email=" + email + "\">이메일 인증하기</a>";
             logger.info(body);
             msg.setContent(body, "text/html;charset=utf-8");
 

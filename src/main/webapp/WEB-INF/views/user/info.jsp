@@ -11,7 +11,7 @@
 <%@include file="../include/header.jsp" %>
 
 <div class="container">
-    <form class="form-wrap" role="form" method="post">
+    <form class="form-wrap" role="form" action="chginforesult" method="post">
         <h2 class="h2">회원정보</h2>
         <div class="tabs1">
             <a href="#" class="active">회원정보</a>
@@ -20,16 +20,16 @@
         </div>
         <div class="inp-area">
             <div class="label">이메일 *</div>
-            <div class="inp-box"><input type="text" class="inp2" placeholder="이메일" name="email" id="email" required></div>
+            <div class="inp-box"><input type="text" class="inp2" placeholder="이메일" name="email" id="email" value="${member.email}" readonly></div>
         </div>
         <div class="inp-area">
             <div class="label">성명 *</div>
-            <div class="inp-box"><input type="text" class="inp2" placeholder="성명" name="membername" required></div>
+            <div class="inp-box"><input type="text" class="inp2" placeholder="성명" name="membername" value="${member.membername}" required></div>
         </div>
         <div class="inp-area">
             <div class="label">휴대전화 *</div>
             <div class="inp-box">
-                <input type="text" class="inp2" placeholder="휴대전화" name="celltel" required>
+                <input type="text" class="inp2" placeholder="휴대전화" name="celltel" value="${member.celltel}" required>
                 <button class="btn" style="display: none">인증번호전송</button>
             </div>
         </div>
@@ -43,16 +43,16 @@
         </div>
         <div class="inp-area">
             <div class="label">회사명 *</div>
-            <div class="inp-box"><input type="text" class="inp2" placeholder="회사명" name="businessname" required></div>
+            <div class="inp-box"><input type="text" class="inp2" placeholder="회사명" name="businessname" value="${member.businessname}" required></div>
         </div>
         <div class="inp-area">
             <div class="label">사업자등록번호 *</div>
-            <div class="inp-box"><input type="text" class="inp2" placeholder="'-'빼고 숫자만 입력하세요(10자리 체크)" maxlength="10" name="businessnumber" required></div>
+            <div class="inp-box"><input type="text" class="inp2" placeholder="'-'빼고 숫자만 입력하세요(10자리 체크)" maxlength="10" name="businessnumber" value="${member.businessnumber}" required></div>
         </div>
         <div class="inp-area">
             <div class="label">등급선택 *</div>
             <div class="inp-box">
-                <select class="select large" name="licensegrade" id="licensegrade">
+                <select class="large" name="licensegrade" id="licensegrade">
                     <option value="1">Free</option>
                     <option value="2">Basic</option>
                     <option value="3">Pro</option>
@@ -119,6 +119,9 @@
 
     $(document).ready(function () {
         var formObj = $("form[role='form']");
+
+        $("#licensegrade").val("${member.licensegrade}").prop("selected", true);
+        $("#licensegrade").SumoSelect();
 
         $("#licensegrade").change(function (e) {
             // var grade = $(this).val();

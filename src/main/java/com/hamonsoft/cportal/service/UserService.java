@@ -25,19 +25,22 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public Member info(Member member) {
+        return userRepository.info(member);
+    }
+
+    public int  chginfo(Member member) {
+        return userRepository.chginfo(member);
+    }
+
     public int  chgpw(Member member) {
         return userRepository.chgpw(member);
     }
+
 
     public int  withdrawal(Map<String, Object> paramMap) {
         return userRepository.withdrawal(paramMap);
     }
 
-
-
-
-//    public Member info(Map<String, Object> paramMap) {
-//        return userRepository.info(paramMap);
-//    }
 
 }

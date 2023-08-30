@@ -8,6 +8,18 @@
 
 <%@include file="../include/header.jsp" %>
 
+<%
+
+    MailSend ms = new MailSend();
+    //    ms.MailSend();
+
+    String email = request.getParameter("email");
+    String url = request.getRequestURL().toString();
+    String contextPath = request.getContextPath();
+    String cpath = url.substring(0, url.indexOf(contextPath)) + contextPath;
+    ms.MailSend_welcomeJoin(cpath, email);
+
+%>
 
 <script>
 

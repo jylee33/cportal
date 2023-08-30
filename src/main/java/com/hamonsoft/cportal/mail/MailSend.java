@@ -2,6 +2,7 @@ package com.hamonsoft.cportal.mail;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 
 import javax.mail.*;
@@ -252,6 +253,7 @@ public class MailSend {
 
     }
 
+//    public void MailSendResetPW(@Value("${my.path}")String cpath, String mailto, String pw) {
     public void MailSendResetPW(String cpath, String mailto, String pw) {
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");
@@ -298,6 +300,7 @@ public class MailSend {
 
     }
 
+//        public void MailSend_emailcertification(@Value("${my.path}")String cpath, String email) {
     public void MailSend_emailcertification(String cpath, String email) {
         logger.info("MailSend to ------------------------- " + email);
 

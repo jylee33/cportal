@@ -3,6 +3,9 @@ spring:
     active: dev
 
 ---
+my:
+  path: http://localhost:8080/portal
+
 server:
   port: 8080
   servlet:
@@ -51,6 +54,8 @@ pagehelper:
   close-conn: true
   default-count: true
 ---
+my:
+  path: http://cloud.hamonsoft.com/portal
 server:
   port: 8080
   servlet:

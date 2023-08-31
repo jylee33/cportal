@@ -10,11 +10,6 @@
 
 <div class="container">
     <div class="form-wrap">
-<%--        <a href="${path}/member/sendmail_emailcertification?email=${email}&membername=${membername}&licensegrade=${licensegrade}">인증메일 재발송</a>--%>
-<%--        <p></p>--%>
-<%--        <p></p>--%>
-<%--        <a href="${path}/member/login">로그인 바로 가기</a>--%>
-
         <div class="form-desc">회원 가입 인증 안내 메일을 발송하였습니다.</div>
         <button class="btn large block" id="resendmail">인증메일 재발송</button>
         <br>

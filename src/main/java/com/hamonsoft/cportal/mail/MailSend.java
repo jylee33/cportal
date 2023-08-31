@@ -91,6 +91,7 @@ public class MailSend {
             InternetAddress to = new InternetAddress(mailto);
             msg.setRecipient(Message.RecipientType.TO, to);
             msg.setSubject("NETIS CLOUD 서비스 가입 안내", "UTF-8");
+
             String body = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 서비스 가입 안내 메일입니다.</H1>" + "<img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">"
                     + "<br><a href=\"http://hamonsoft.co.kr\">하몬소프트</a>";
             msg.setContent(body, "text/html;charset=utf-8");
@@ -230,6 +231,7 @@ public class MailSend {
                     InternetAddress to = new InternetAddress(mailToAddress);
                     msg.setRecipient(Message.RecipientType.TO, to);
                     msg.setSubject(mailSubject, "UTF-8");
+
 //                    String mailBody = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 서비스 가입 안내 메일입니다.</H1>" + "<img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">"
 //                            + "<br><a href=\"http://hamonsoft.co.kr\">하몬소프트</a>";
                     String mailBody2 = mailBody + "<p></p>본 메일은 발신전용입니다.<br>회신 받을 주소 : " + mailFromAddress;
@@ -253,9 +255,9 @@ public class MailSend {
 
     }
 
-//    public void MailSendResetPW(@Value("${my.path}")String cpath, String mailto, String pw) {
-    public void MailSendResetPW(String cpath, String mailto, String pw) {
+    public void MailSendResetPW(String prof, String cpath, String mailto, String pw) {
         logger.info("MailSendResetPW to ------------------------- " + mailto);
+        logger.info("active profile - " + prof);
 
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");
@@ -282,12 +284,16 @@ public class MailSend {
             InternetAddress to = new InternetAddress(mailto);
             msg.setRecipient(Message.RecipientType.TO, to);
             msg.setSubject("Hamonsoft NETIS CLOUD 비밀번호 변경 안내", "UTF-8");
+
             String body = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 비밀번호 변경 안내 메일입니다.</H1>"
                     + "<br>변경된 비밀번호는 <b>" + pw + "</b>입니다."
                     + "<br>로그인 후 비밀번호를 꼭 변경하시기 바랍니다."
-                    + "<P><img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">"
-                    + "<br><a href=\"http://cloud.hamonsoft.com/portal\">NETIS 클라우드 서비스</a>";
-//                    + "<br><a href=\"" + cpath + "\">NETIS 클라우드 서비스</a>";
+                    + "<P><img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">";
+            if(prof.equals("dev")) {
+                body = body +"<br><a href=\"" + cpath + "\">NETIS 클라우드 서비스</a>";
+            } else {
+                body = body + "<br><a href=\"http://cloud.hamonsoft.com/portal\">NETIS 클라우드 서비스</a>";
+            }
             msg.setContent(body, "text/html;charset=utf-8");
 
             Transport.send(msg);
@@ -302,9 +308,9 @@ public class MailSend {
 
     }
 
-//        public void MailSend_emailcertification(@Value("${my.path}")String cpath, String email) {
-    public void MailSend_emailcertification(String cpath, String email, String membername, String licensegrade) {
+    public void MailSend_emailcertification(String prof, String cpath, String email, String membername, String licensegrade) {
         logger.info("MailSend_emailcertification to ------------------------- " + email);
+        logger.info("active profile - " + prof);
 
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");
@@ -331,10 +337,15 @@ public class MailSend {
             InternetAddress to = new InternetAddress(email);
             msg.setRecipient(Message.RecipientType.TO, to);
             msg.setSubject("Hamonsoft NETIS CLOUD 회원 가입 인증 안내", "UTF-8");
+
             String body = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 회원 가입 인증 안내 메일입니다.</H1>"
-                    + "<P><img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">"
-                    + "<br><a href=\"http://cloud.hamonsoft.com/portal/member/emailcertification?email=" + email + "&membername=" + membername + "&licensegrade=" + licensegrade + "\">이메일 인증하기</a>";
-//                    + "<br><a href=\"" + cpath + "/member/emailcertification?email=" + email + "\">이메일 인증하기</a>";
+                    + "<P><img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">";
+            if(prof.equals("dev")) {
+                body = body + "<br><a href=\"" + cpath + "/member/emailcertification?email=" + email + "&membername=" + membername + "&licensegrade=" + licensegrade + "\">이메일 인증하기</a>";
+            } else {
+                body = body + "<br><a href=\"http://cloud.hamonsoft.com/portal/member/emailcertification?email=" + email + "&membername=" + membername + "&licensegrade=" + licensegrade + "\">이메일 인증하기</a>";
+            }
+
             logger.info(body);
             msg.setContent(body, "text/html;charset=utf-8");
 
@@ -378,14 +389,15 @@ public class MailSend {
             InternetAddress to = new InternetAddress(email);
             msg.setRecipient(Message.RecipientType.TO, to);
             msg.setSubject("Hamonsoft NETIS CLOUD 회원 가입 완료 안내", "UTF-8");
+
             String body = """
                     <table cellspacing="0" cellpadding="0" width="900">
                         <tr>
                             <td style="border:1px solid #ddd; vertical-align: top;">
-                                <table cellspacing="0" cellpadding="0" width="100%">
+                                <table cellspacing="0" cellpadding="0" width="100%%">
                                     <tr>
                                         <td style="height: 90px; background-color: #4e96d4;">
-                                            <table cellspacing="0" cellpadding="0" width="100%">
+                                            <table cellspacing="0" cellpadding="0" width="100%%">
                                                 <tr>
                                                     <td style="vertical-align: middle; padding-left: 20px;"><img src="http://cloud.hamonsoft.com/portal/resources/images/common/logo1.png"></td>
                                                     <td style="font-size:25px; color:#fff; font-weight:700; text-align: right; padding-right:20px">회원가입 완료 안내</td>
@@ -395,24 +407,20 @@ public class MailSend {
                                     </tr>
                                     <tr>
                                         <td style="padding:50px 10px; text-align: center; font-size:20px; line-height: 35px; color:#222; letter-spacing: -1.5px;">안녕하세요 주식회사 하몬소프트입니다.<br>
-                                            <strong style="font-weight:700; color:#4e96d4">
-                        """;
-            body = body + membername;
-            body = body + """
-                                            </strong> 고객님의 회원가입을 환영하며, 고객님이 가입한<br>
-                                            <strong style="font-weight:700; color:#4e96d4">FREE</strong> 등급의 라이센스 정책 및 지원기능은 다음과 같습니다.<br><br>
-                                            <table cellspacing="0" cellpadding="0" width="100%" style="border-collapse: collapse;">
+                                            <strong style="font-weight:700; color:#4e96d4">%s</strong> 고객님의 회원가입을 환영하며, 고객님이 가입한<br>
+                                            <strong style="font-weight:700; color:#4e96d4">%s</strong> 등급의 라이센스 정책 및 지원기능은 다음과 같습니다.<br><br>
+                                            <table cellspacing="0" cellpadding="0" width="100%%" style="border-collapse: collapse;">
                                                 <colgroup>
-                                                    <col style="width:48%">
-                                                    <col style="width:4%">
-                                                    <col style="width:48%">
+                                                    <col style="width:48%%">
+                                                    <col style="width:4%%">
+                                                    <col style="width:48%%">
                                                 </colgroup>
                                                 <tr>
                                                     <td style="letter-spacing: -0.5px; vertical-align: top;">
-                                                        <table cellspacing="0" cellpadding="0" width="100%" style="border-collapse: collapse;">
+                                                        <table cellspacing="0" cellpadding="0" width="100%%" style="border-collapse: collapse;">
                                                             <colgroup>
-                                                                <col style="width:50%">
-                                                                <col style="width:50%">
+                                                                <col style="width:50%%">
+                                                                <col style="width:50%%">
                                                             </colgroup>
                                                             <tr>
                                                                 <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px; background-color: #f8f8fa;border-top:2px solid #f58520;">솔루션</td>
@@ -457,10 +465,10 @@ public class MailSend {
                                                     <td>&nbsp;</td>
                                         
                                                     <td  style="letter-spacing: -0.5px;vertical-align: top;">
-                                                        <table cellspacing="0" cellpadding="0" width="100%" style="border-collapse: collapse;">
+                                                        <table cellspacing="0" cellpadding="0" width="100%%" style="border-collapse: collapse;">
                                                             <colgroup>
-                                                                <col style="width:50%">
-                                                                <col style="width:50%">
+                                                                <col style="width:50%%">
+                                                                <col style="width:50%%">
                                                             </colgroup>
                                                             <thead>
                                                                 <tr>
@@ -563,7 +571,7 @@ public class MailSend {
                             </td>
                         </tr>
                     </table>
-                    """;
+                    """.formatted(membername, licensegrade);
 //            logger.info(body);
             msg.setContent(body, "text/html;charset=utf-8");
 

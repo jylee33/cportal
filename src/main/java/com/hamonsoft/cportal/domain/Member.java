@@ -13,6 +13,7 @@ public class Member {
     private String businessnumber;
     private int licensegrade;
     private String companyphone;
+    private String administratoryn;
     private int emailcertificationyn;
     private String withdrawalyn;
     private String withdrawaldate;
@@ -88,6 +89,13 @@ public class Member {
         this.companyphone = companyphone;
     }
 
+    public int getAdministratoryn() {
+        return administratoryn;
+    }
+
+    public void setAdministratoryn(int administratoryn) {
+        this.administratoryn = administratoryn;
+    }
     public int getEmailcertificationyn() {
         return emailcertificationyn;
     }
@@ -179,6 +187,7 @@ public class Member {
                 ", businessnumber='" + businessnumber + '\'' +
                 ", licensegrade=" + licensegrade +
                 ", companyphone='" + companyphone + '\'' +
+                ", administratoryn=" + administratoryn +
                 ", emailcertificationyn=" + emailcertificationyn +
                 ", withdrawalyn='" + withdrawalyn + '\'' +
                 ", withdrawaldate='" + withdrawaldate + '\'' +

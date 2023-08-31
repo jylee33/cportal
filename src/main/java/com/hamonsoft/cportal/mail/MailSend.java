@@ -399,7 +399,7 @@ public class MailSend {
                                         <td style="height: 90px; background-color: #4e96d4;">
                                             <table cellspacing="0" cellpadding="0" width="100%%">
                                                 <tr>
-                                                    <td style="vertical-align: middle; padding-left: 20px;"><img src="http://cloud.hamonsoft.com/portal/resources/images/common/logo1.png"></td>
+                                                    <td style="vertical-align: middle; padding-left: 20px;"><img src="https://dongha.dev/hamon/logo1.png"></td>
                                                     <td style="font-size:25px; color:#fff; font-weight:700; text-align: right; padding-right:20px">회원가입 완료 안내</td>
                                                 </tr>
                                             </table>

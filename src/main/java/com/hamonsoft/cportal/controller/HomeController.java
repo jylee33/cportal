@@ -38,4 +38,15 @@ public class HomeController {
 
         return "home";
     }
+
+    @GetMapping("serviceintroduction")
+    public void serviceintroduction(Model model) {
+        logger.info("call serviceintroduction ......................");
+    }
+
+    @GetMapping("serviceguide")
+    public void serviceguide(Model model) {
+        logger.info("call serviceguide ......................");
+    }
+
 }

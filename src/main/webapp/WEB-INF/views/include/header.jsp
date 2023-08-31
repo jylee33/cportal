@@ -29,7 +29,8 @@
             <a href="${path}/"><h1>NETIS 클라우드 서비스</h1></a>
             <div class="right">
                 <div class="menu">
-                    <a href="#">서비스 안내</a>
+                    <a href="${path}/serviceguide">서비스 안내</a>
+                    <a href="${path}/serviceintroduction">서비스 소개</a>
                     <c:if test="${empty login}">
                         <a href="${path}/member/login">로그인</a>
                     </c:if>

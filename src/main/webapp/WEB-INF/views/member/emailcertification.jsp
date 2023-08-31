@@ -19,7 +19,25 @@
     String url = request.getRequestURL().toString();
     String contextPath = request.getContextPath();
     String cpath = url.substring(0, url.indexOf(contextPath)) + contextPath;
-    ms.MailSend_welcomeJoin(cpath, email, membername, licensegrade);
+
+    String strGrade = "FREE";
+    switch (licensegrade) {
+        case "1":
+            strGrade = "FREE";
+            break;
+        case "2":
+            strGrade = "BASIC";
+            break;
+        case "3":
+            strGrade = "PRO";
+            break;
+        case "4":
+            strGrade = "ENTERPRISE";
+            break;
+        default:
+            break;
+    }
+    ms.MailSend_welcomeJoin(cpath, email, membername, strGrade);
 
 %>
 

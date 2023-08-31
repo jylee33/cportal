@@ -92,7 +92,7 @@ public class MailSend {
             msg.setRecipient(Message.RecipientType.TO, to);
             msg.setSubject("NETIS CLOUD 서비스 가입 안내", "UTF-8");
 
-            String body = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 서비스 가입 안내 메일입니다.</H1>" + "<img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">"
+            String body = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 서비스 가입 안내 메일입니다.</H1>" + "<img src=\"https://dongha.dev/hamon/logo1.png\">"
                     + "<br><a href=\"http://hamonsoft.co.kr\">하몬소프트</a>";
             msg.setContent(body, "text/html;charset=utf-8");
 
@@ -232,7 +232,7 @@ public class MailSend {
                     msg.setRecipient(Message.RecipientType.TO, to);
                     msg.setSubject(mailSubject, "UTF-8");
 
-//                    String mailBody = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 서비스 가입 안내 메일입니다.</H1>" + "<img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">"
+//                    String mailBody = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 서비스 가입 안내 메일입니다.</H1>" + "<img src=\"https://dongha.dev/hamon/logo1.png\">"
 //                            + "<br><a href=\"http://hamonsoft.co.kr\">하몬소프트</a>";
                     String mailBody2 = mailBody + "<p></p>본 메일은 발신전용입니다.<br>회신 받을 주소 : " + mailFromAddress;
                     msg.setContent(mailBody2, "text/html;charset=utf-8");
@@ -288,7 +288,7 @@ public class MailSend {
             String body = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 비밀번호 변경 안내 메일입니다.</H1>"
                     + "<br>변경된 비밀번호는 <b>" + pw + "</b>입니다."
                     + "<br>로그인 후 비밀번호를 꼭 변경하시기 바랍니다."
-                    + "<P><img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">";
+                    + "<P><img src=\"https://dongha.dev/hamon/logo1.png\">";
             if(prof.equals("dev")) {
                 body = body +"<br><a href=\"" + cpath + "\">NETIS 클라우드 서비스</a>";
             } else {
@@ -339,7 +339,7 @@ public class MailSend {
             msg.setSubject("Hamonsoft NETIS CLOUD 회원 가입 인증 안내", "UTF-8");
 
             String body = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 회원 가입 인증 안내 메일입니다.</H1>"
-                    + "<P><img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">";
+                    + "<P><img src=\"https://dongha.dev/hamon/logo1.png\">";
             if(prof.equals("dev")) {
                 body = body + "<br><a href=\"" + cpath + "/member/emailcertification?email=" + email + "&membername=" + membername + "&licensegrade=" + licensegrade + "\">이메일 인증하기</a>";
             } else {

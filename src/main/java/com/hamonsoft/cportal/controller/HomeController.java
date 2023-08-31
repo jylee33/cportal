@@ -49,4 +49,9 @@ public class HomeController {
         logger.info("call serviceguide ......................");
     }
 
+    @GetMapping("download")
+    public void download(Model model) {
+        logger.info("call download ......................");
+    }
+
 }

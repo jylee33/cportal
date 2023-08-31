@@ -1,12 +1,14 @@
 package com.hamonsoft.cportal.controller;
 
 import com.hamonsoft.cportal.domain.Member;
+import com.hamonsoft.cportal.domain.MemberTaxInformation;
 import com.hamonsoft.cportal.dto.LoginDTO;
 import com.hamonsoft.cportal.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.WebUtils;
@@ -42,12 +44,26 @@ public class UserController {
 
         logger.info("call user info --------------- email : " + email);
 
-//        Map<String, Object> paramMap = new HashMap<>();
-//        paramMap.put("email", email);
-//
-//        Member member = userService.info(paramMap);
-        model.addAttribute("member", member);
+        MemberTaxInformation info = userService.info(member);
+        model.addAttribute("info", info);
 
+    }
+
+    @Transactional
+    @PostMapping("chginforesult")
+    public void chginforesult(MemberTaxInformation info, Model model) {
+        logger.info("call chginforesult ......................");
+        logger.info(info.toString());
+
+        int result1 = userService.chgmember(info);
+        logger.info("userService.chgmember result ...................... " + result1);
+        int result2 = userService.chgtaxinformation(info);
+        logger.info("userService.chgtaxinformation result ...................... " + result2);
+
+        int result = result1 & result2;
+        logger.info("result ...................... " + result2);
+
+        model.addAttribute("result", result);
     }
 
     @GetMapping(value = "chgpw")

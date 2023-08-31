@@ -1,6 +1,7 @@
 package com.hamonsoft.cportal.service;
 
 import com.hamonsoft.cportal.domain.Member;
+import com.hamonsoft.cportal.domain.MemberTaxInformation;
 import com.hamonsoft.cportal.dto.LoginDTO;
 import com.hamonsoft.cportal.repository.UserRepository;
 import org.slf4j.Logger;
@@ -25,19 +26,26 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public MemberTaxInformation info(Member member) {
+        return userRepository.info(member);
+    }
+
+    public int  chgmember(MemberTaxInformation info) {
+        return userRepository.chgmember(info);
+    }
+
+    public int  chgtaxinformation(MemberTaxInformation info) {
+        return userRepository.chgtaxinformation(info);
+    }
+
     public int  chgpw(Member member) {
         return userRepository.chgpw(member);
     }
+
 
     public int  withdrawal(Map<String, Object> paramMap) {
         return userRepository.withdrawal(paramMap);
     }
 
-
-
-
-//    public Member info(Map<String, Object> paramMap) {
-//        return userRepository.info(paramMap);
-//    }
 
 }

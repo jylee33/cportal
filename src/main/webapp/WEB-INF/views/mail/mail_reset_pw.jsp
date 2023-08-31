@@ -10,7 +10,11 @@
 
     String mailto = request.getParameter("mailto");
     String pw = request.getParameter("pw");
-    ms.MailSendResetPW(mailto, pw);
+    String url = request.getRequestURL().toString();
+    String contextPath = request.getContextPath();
+    String cpath = url.substring(0, url.indexOf(contextPath)) + contextPath;
+
+    ms.MailSendResetPW(cpath, mailto, pw);
 
     out.println("COMPLETE");
 %>

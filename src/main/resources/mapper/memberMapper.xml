@@ -11,6 +11,11 @@
 		insert into tbmember (email,membername,celltel,password,businessname,businessnumber,licensegrade,companyphone,emailcertificationyn,withdrawalyn,withdrawaldate,joindate,createdAt,updatedBy,updatedAt) values
 		(#{email}, #{membername}, #{celltel}, sha2(#{password}, 256), #{businessname}, #{businessnumber}, #{licensegrade}, #{companyphone}, #{emailcertificationyn}, #{withdrawalyn}, #{withdrawaldate}, #{joindate}, now(), #{updatedBy}, now())
 	</insert>
+
+	<insert id="insertTaxInfomation" >
+		insert into tbtaxinformation (taxid, email, Representationname, taxcompanynumber, taxemail, postnumber, address, detailaddress, businesscondition, businesskind, settlementmeans, baseamount, createdAt, updatedBy, updatedAt) values
+			(uuid(), #{email}, #{representationname}, #{taxcompanynumber}, #{taxemail}, #{postnumber}, #{address}, #{detailaddress}, #{businesscondition}, #{businesskind}, #{settlementmeans}, #{baseamount}, now(), #{updatedBy}, now())
+	</insert>
 	
 	<select id="selectMember" resultType="com.hamonsoft.cportal.domain.Member">
 		select * from tbmember

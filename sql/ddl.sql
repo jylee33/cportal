@@ -68,6 +68,9 @@ CREATE TABLE `tbusedevice` (
 alter table tbmember add column sessionkey varchar(50) not null default 'none';
 alter table tbmember add column sessionlimit timestamp;
 
+ALTER TABLE tbtaxinformation ADD COLUMN companyname VARCHAR(50) AFTER email;
+
+
 /* 2023.08.31 추가 */
 alter table tbmember add column administratoryn varchar(1) DEFAULT 'N' COMMENT '관리자여부(groupcode=999) 사업자등록번호가 하몬인경우',
 

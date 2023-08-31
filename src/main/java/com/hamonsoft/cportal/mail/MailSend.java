@@ -2,6 +2,7 @@ package com.hamonsoft.cportal.mail;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 
 import javax.mail.*;
@@ -252,7 +253,10 @@ public class MailSend {
 
     }
 
-    public void MailSendResetPW(String mailto, String pw) {
+//    public void MailSendResetPW(@Value("${my.path}")String cpath, String mailto, String pw) {
+    public void MailSendResetPW(String cpath, String mailto, String pw) {
+        logger.info("MailSendResetPW to ------------------------- " + mailto);
+
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -283,6 +287,7 @@ public class MailSend {
                     + "<br>로그인 후 비밀번호를 꼭 변경하시기 바랍니다."
                     + "<P><img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">"
                     + "<br><a href=\"http://cloud.hamonsoft.com/portal\">NETIS 클라우드 서비스</a>";
+//                    + "<br><a href=\"" + cpath + "\">NETIS 클라우드 서비스</a>";
             msg.setContent(body, "text/html;charset=utf-8");
 
             Transport.send(msg);
@@ -297,8 +302,9 @@ public class MailSend {
 
     }
 
-    public void MailSend_emailcertification(String cpath, String email) {
-        logger.info("MailSend to ------------------------- " + email);
+//        public void MailSend_emailcertification(@Value("${my.path}")String cpath, String email) {
+    public void MailSend_emailcertification(String cpath, String email, String membername, String licensegrade) {
+        logger.info("MailSend_emailcertification to ------------------------- " + email);
 
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");
@@ -327,8 +333,238 @@ public class MailSend {
             msg.setSubject("Hamonsoft NETIS CLOUD 회원 가입 인증 안내", "UTF-8");
             String body = "<H1>안녕하세요. Hamonsoft NETIS CLOUD 회원 가입 인증 안내 메일입니다.</H1>"
                     + "<P><img src=\"http://hamonsoft.co.kr/wp-content/uploads/2019/07/it-specialist0.png\">"
-                    + "<br><a href=\"" + cpath + "/user/emailcertification?email=" + email + "\">이메일 인증하기</a>";
+                    + "<br><a href=\"http://cloud.hamonsoft.com/portal/member/emailcertification?email=" + email + "&membername=" + membername + "&licensegrade=" + licensegrade + "\">이메일 인증하기</a>";
+//                    + "<br><a href=\"" + cpath + "/member/emailcertification?email=" + email + "\">이메일 인증하기</a>";
             logger.info(body);
+            msg.setContent(body, "text/html;charset=utf-8");
+
+            Transport.send(msg);
+
+        } catch (AddressException ae) {
+            System.out.println("AddressException : " + ae.getMessage());
+        } catch (MessagingException me) {
+            System.out.println("MessagingException : " + me.getMessage());
+        } catch (UnsupportedEncodingException e) {
+            System.out.println("UnsupportedEncodingException : " + e.getMessage());
+        }
+
+    }
+
+    public void MailSend_welcomeJoin(String cpath, String email, String membername, String licensegrade) {
+        logger.info("MailSend_welcomeJoin to ------------------------- " + email);
+
+        Properties prop = System.getProperties();
+        prop.put("mail.smtp.starttls.enable", "true");
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
+
+        String mail_id = "cloud@hamonsoft.co.kr";
+        String mail_pw = "wtzhnnyphsiohohi";
+
+        Authenticator auth = new MailAuth(mail_id, mail_pw);
+
+        Session session = Session.getDefaultInstance(prop, auth);
+
+        MimeMessage msg = new MimeMessage(session);
+
+        try {
+            msg.setSentDate(new Date());
+
+            msg.setFrom(new InternetAddress("yubbi33@gmail.com", "HAMONSOFT"));
+//            InternetAddress to = new InternetAddress("jylee@hamonsoft.co.kr");
+            InternetAddress to = new InternetAddress(email);
+            msg.setRecipient(Message.RecipientType.TO, to);
+            msg.setSubject("Hamonsoft NETIS CLOUD 회원 가입 완료 안내", "UTF-8");
+            String body = """
+                    <table cellspacing="0" cellpadding="0" width="900">
+                        <tr>
+                            <td style="border:1px solid #ddd; vertical-align: top;">
+                                <table cellspacing="0" cellpadding="0" width="100%">
+                                    <tr>
+                                        <td style="height: 90px; background-color: #4e96d4;">
+                                            <table cellspacing="0" cellpadding="0" width="100%">
+                                                <tr>
+                                                    <td style="vertical-align: middle; padding-left: 20px;"><img src="http://cloud.hamonsoft.com/portal/resources/images/common/logo1.png"></td>
+                                                    <td style="font-size:25px; color:#fff; font-weight:700; text-align: right; padding-right:20px">회원가입 완료 안내</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:50px 10px; text-align: center; font-size:20px; line-height: 35px; color:#222; letter-spacing: -1.5px;">안녕하세요 주식회사 하몬소프트입니다.<br>
+                                            <strong style="font-weight:700; color:#4e96d4">
+                        """;
+            body = body + membername;
+            body = body + """
+                                            </strong> 고객님의 회원가입을 환영하며, 고객님이 가입한<br>
+                                            <strong style="font-weight:700; color:#4e96d4">FREE</strong> 등급의 라이센스 정책 및 지원기능은 다음과 같습니다.<br><br>
+                                            <table cellspacing="0" cellpadding="0" width="100%" style="border-collapse: collapse;">
+                                                <colgroup>
+                                                    <col style="width:48%">
+                                                    <col style="width:4%">
+                                                    <col style="width:48%">
+                                                </colgroup>
+                                                <tr>
+                                                    <td style="letter-spacing: -0.5px; vertical-align: top;">
+                                                        <table cellspacing="0" cellpadding="0" width="100%" style="border-collapse: collapse;">
+                                                            <colgroup>
+                                                                <col style="width:50%">
+                                                                <col style="width:50%">
+                                                            </colgroup>
+                                                            <tr>
+                                                                <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px; background-color: #f8f8fa;border-top:2px solid #f58520;">솔루션</td>
+                                                                <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px; background-color: #f8f8fa;border-top:2px solid #f58520;">가격정책</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">기본요금</td>
+                                                                <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">무료</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">네트워크</td>
+                                                                <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">5대 이하<br>기본 기능 제공</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">서버</td>
+                                                                <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">5대 이하<br>기본 기능 제공</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">AP</td>
+                                                                <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">5대 이하(단독형)<br>AP 2대 이사(무선컨트롤러 포함)</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">데이터베이스</td>
+                                                                <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">5대 이하<br>기본 기능 제공</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">환경 센스</td>
+                                                                <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">5대 이하(단독감시형)<br>기본 기능 제공</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2" style="text-align: left; font-size:12px; line-height:1.6; padding:15px;background-color: #f9f9f9;border:1px solid #ddd; word-break: keep-all;">위 라이선스 정책은 개별 인프라 단독 감시 기준 정책이며 여러 인프라를 통합 모니터링하는 경우 아래의 정책 적용<br>
+                                                                    1) 라이선스는 Credit 단위로 적용 Free/Basic/Pro 각 5/25/50/100 Credit 기본 제공 <br>
+                                                                    2) 추가 Credit 구매 5 Credit / 100,000원, 10 Credit 180,000 제공<br>
+                                                                    2) 네트워크 장비, 서버, 데이터베이스 각 1대당 1 Credit 적용<br>
+                                                                    3) 무선 AP/환경 센서 각 2대 당 1 Credit 적용<br>
+                                                                    4) 무선 컨트롤러 / RTU 각 1대당 5 Credit 적용<br>
+                                                                    5) 트래픽 분석 라이선스 1,000 Flow/min 5 Credit, 5,000 Flow/min 25 Credit, 10,000 Flow/min 50 Credit 적용
+                                                                  </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td>&nbsp;</td>
+                                        
+                                                    <td  style="letter-spacing: -0.5px;vertical-align: top;">
+                                                        <table cellspacing="0" cellpadding="0" width="100%" style="border-collapse: collapse;">
+                                                            <colgroup>
+                                                                <col style="width:50%">
+                                                                <col style="width:50%">
+                                                            </colgroup>
+                                                            <thead>
+                                                                <tr>
+                                                                    <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px; background-color: #f8f8fa;border-top:2px solid #f58520;">기능</td>
+                                                                    <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px; background-color: #f8f8fa;border-top:2px solid #f58520;">지원여부(기간)</td>
+                                                                </tr>
+                                                                </thead><tbody>
+                                                                    <tr>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">데이터 보관 기간</td>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">1일</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">구성/성능/장애정보</td>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">O</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">감시 정책 설정</td>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">O</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">Syslog/Trap 모니터링</td>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">O</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">보고서</td>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">O</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">대시보드</td>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">성능비교</td>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">사용자 지정 OID 성능</td>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">Configuration 백업</td>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">L4 VIP/RIP 성능</td>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">자산관리</td>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">문자메시지 알림</td>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">이메일/메신저 알림</td>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">TCP Port/URL 감시</td>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">Rack 실장 관리</td>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">성능 예측</td>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">상관 분석</td>
+                                                                        <td style=" text-align: center; font-size:12px; border:1px solid #ddd; padding:5px; line-height:20px;">-</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                           \s
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tbody>
+                                                   \s
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:20px; background-color: #f9f9f9; font-size:14px; line-height: 22px; color:#088888;">
+                                            본 메일은 발신 전용 메일로 회신되지 얺습니다.<br>
+                                            문의 사항은 help@hamonsoft.co.kr에 문의해 주시기 바랍니다.<br><br>
+                                           \s
+                                            (주)하몬소프트      대표자 강원석 이석호   사업자 등록번호 119-86-04153<br>
+                                            서울특별시 금천구 가산동 60-5 갑을그레이트 밸리 B동 1201,1202,1203, 2006호
+                                        
+                                           \s
+                                           \s
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    """;
+//            logger.info(body);
             msg.setContent(body, "text/html;charset=utf-8");
 
             Transport.send(msg);

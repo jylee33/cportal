@@ -1,148 +1,162 @@
 package com.hamonsoft.cportal.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.apache.ibatis.annotations.Mapper;
+import java.util.Date;
 
-@Mapper
-@Getter
-@Setter
 public class TaxInformation {
-    private String taxid;
-    private String email;
-    private String Representationname;
+
+    private String email;    //세금계산서발송기관메일
+    private String companyname;
+    private String representationname;
     private String taxcompanynumber;
-    private String taxemail;
-    private String postnumber;
-    private String address;
-    private String detailaddress;
-    private String businesscondition;
-    private String businesskind;
-    private String settlementmeans;
-    private int baseamount;
-    private int createdAt;
-    private String updatedBy;
-    private int updatedAt;
-    private String getTaxid() {
-        return taxid;
-    }
-    private void setTaxid(String taxid) {
-        this.taxid = taxid;
-    }
-    private String getEmail() {
+    private String taxemail;    //세금계산서발송기관메일
+    private String postnumber;  //우편번호
+    private String address;     //주소
+    private String detailaddress;   //상세주소
+    private String businesscondition;   //업태
+    private String businesskind;    //업종
+    private String settlementmeans; //결제방법
+    private int baseamount; //기본금액
+    private Date createdAt; //등록일시
+    private String updatedBy;   //수정자
+    private Date updatedAt; //수정일시
+
+    public String getEmail() {
         return email;
     }
-    private void setEmail(String email) {
+
+    public void setEmail(String email) {
         this.email = email;
     }
-    private String getRepresentationname() {
-        return Representationname;
+
+    public String getCompanyname() {
+        return companyname;
     }
-    private void setRepresentationname(String Representationname) {
-        this.Representationname = Representationname;
+
+    public void setCompanyname(String companyname) {
+        this.companyname = companyname;
     }
-    private String getTaxcompanynumber() {
+
+    public String getRepresentationname() {
+        return representationname;
+    }
+
+    public void setRepresentationname(String representationname) {
+        this.representationname = representationname;
+    }
+
+    public String getTaxcompanynumber() {
         return taxcompanynumber;
     }
-    private void setTaxcompanynumber(String taxcompanynumber) {
+
+    public void setTaxcompanynumber(String taxcompanynumber) {
         this.taxcompanynumber = taxcompanynumber;
     }
-    private String getTaxemail() {
+
+    public String getTaxemail() {
         return taxemail;
     }
-    private void setTaxemail(String taxemail) {
+
+    public void setTaxemail(String taxemail) {
         this.taxemail = taxemail;
     }
-    private String getPostnumber() {
+
+    public String getPostnumber() {
         return postnumber;
     }
-    private void setPostnumber(String postnumber) {
+
+    public void setPostnumber(String postnumber) {
         this.postnumber = postnumber;
     }
-    private String getAddress() {
+
+    public String getAddress() {
         return address;
     }
-    private void setAddress(String address) {
+
+    public void setAddress(String address) {
         this.address = address;
     }
-    private String getDetailaddress() {
+
+    public String getDetailaddress() {
         return detailaddress;
     }
-    private void setDetailaddress(String detailaddress) {
+
+    public void setDetailaddress(String detailaddress) {
         this.detailaddress = detailaddress;
     }
-    private String getBusinesscondition() {
+
+    public String getBusinesscondition() {
         return businesscondition;
     }
-    private void setBusinesscondition(String businesscondition) {
+
+    public void setBusinesscondition(String businesscondition) {
         this.businesscondition = businesscondition;
     }
-    private String getBusinesskind() {
+
+    public String getBusinesskind() {
         return businesskind;
     }
-    private void setBusinesskind(String businesskind) {
+
+    public void setBusinesskind(String businesskind) {
         this.businesskind = businesskind;
     }
-    private String getSettlementmeans() {
+
+    public String getSettlementmeans() {
         return settlementmeans;
     }
-    private void setSettlementmeans(String settlementmeans) {
+
+    public void setSettlementmeans(String settlementmeans) {
         this.settlementmeans = settlementmeans;
     }
-    private int getBaseamount() {
+
+    public int getBaseamount() {
         return baseamount;
     }
-    private void setBaseamount(int baseamount) {
+
+    public void setBaseamount(int baseamount) {
         this.baseamount = baseamount;
     }
-    private int getCreatedAt() {
+
+    public Date getCreatedAt() {
         return createdAt;
     }
-    private void setCreatedAt(int createdAt) {
+
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
-    private String getUpdatedBy() {
+
+    public String getUpdatedBy() {
         return updatedBy;
     }
-    private void setUpdatedBy(String updatedBy) {
+
+    public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
     }
-    private int getUpdatedAt() {
+
+    public Date getUpdatedAt() {
         return updatedAt;
     }
-    private void setUpdatedAt(int updatedAt) {
+
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 
     @Override
     public String toString() {
-        return "TaxInformationVO [taxid=" + taxid + ",email=" + email + ", Representationname=" + Representationname + ", taxcompanynumber=" + taxcompanynumber
-                + ", taxemail=" + taxemail + ", postnumber=" + postnumber
-                + ", address=" + address + ", detailaddress=" + detailaddress
-                + ", businesscondition=" + businesscondition + ", businesskind=" + businesskind
-                + ", settlementmeans=" + settlementmeans + ", baseamount=" + baseamount
-                + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
-                + "]";
-
+        return "TaxInformation{" +
+                "email='" + email + '\'' +
+                ", representationname='" + representationname + '\'' +
+                ", taxcompanynumber='" + taxcompanynumber + '\'' +
+                ", taxemail='" + taxemail + '\'' +
+                ", postnumber='" + postnumber + '\'' +
+                ", address='" + address + '\'' +
+                ", detailaddress='" + detailaddress + '\'' +
+                ", businesscondition='" + businesscondition + '\'' +
+                ", businesskind='" + businesskind + '\'' +
+                ", settlementmeans='" + settlementmeans + '\'' +
+                ", baseamount=" + baseamount +
+                ", createdAt=" + createdAt +
+                ", updatedBy='" + updatedBy + '\'' +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
-/*
-    @Override
-    public String toString() {
-        String str = super.toString();
-        return "MemberLicenseVO{" +
-                "scream='" + scream + '\'' +
-                '}'+str;
-    }
-
-    @OneToOne
-    @JoinColumn(name = "email", referencedColumnName = "email", insertable = false, updatable = false)
-    private Member member;
-    public static MemberLicenseVO of (String email) {
-        return MemberLicenseVO.builder()
-                .email(member.getEmail())
-                .removed(false)
-                .build();
-    }
-
- */
 }

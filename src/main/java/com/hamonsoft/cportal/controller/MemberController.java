@@ -234,5 +234,19 @@ public class MemberController {
         model.addAttribute("licensegrade", licensegrade);
     }
 
+    @GetMapping("agreeterms")
+    public void agreeterms(Model model) {
+        logger.info("call agreeterms ......................");
+    }
+
+    @GetMapping("agreemarketing")
+    public void agreemarketing(Model model) {
+        logger.info("call agreemarketing ......................");
+    }
+
+    @GetMapping("personalinformation")
+    public void personalinformation(Model model) {
+        logger.info("call findpw ......................");
+    }
 
 }

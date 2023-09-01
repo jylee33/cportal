@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hamonsoft.cportal.repository.JsonUseVolumeRepository">
+    <!--  사용자 전체 건수  -->
+    <select id="JsonUseVolumeCount" resultType="int">
+        select count(*)
+        from tbmemberusehistory            a01
+        where 1 = 1
+          and a01.email = #{userid}
+          and a01.useday = date_format(curdate(),'%Y%m%d')
+    </select>
+    <!--  사용자등록장비  -->
+    <insert id="jsonUseDeviceInsert">
+        insert into tbusedevice(
+            usedeviceid     ,userid          ,useday          ,transtatus      ,info            ,
+            nmscount        ,smscount        ,dbmscount       ,apcount         ,fmscount        ,
+            reason                                                                              )
+        values(uuid()       ,#{userid}       ,date_format(curdate(),'%Y%m%d'),+#{transtatus},+#{info},
+               #{nmscount}  , #{smscount}  ,#{apcount}      ,#{dbmscount}    ,#{fmscount}     ,
+               #{reason}                                                                       )
+    </insert>
+    <!--  사용자라이센스과금일자별내역  -->
+    <insert id="JsonUseVolumeInsert">
+        insert into tbmemberusehistory(
+            email            ,useday           ,licensegrade     ,datakeepterm     ,datakeepunit     ,
+            basevolume       ,basecharge       ,servicevolume    ,addvolume        ,addcharge        ,
+            totalvolume      ,networkvolume    ,servervolume     ,apvolume         ,dbmsvolume       ,
+            fmsvolume        ,totalcharge                                                            )
+        select email            ,date_format(curdate(),'%Y%m%d'),licensegrade,datakeepterm,datakeepunit ,
+               basevolume       ,basecharge       ,servicevolume    ,addvolume        ,addcharge        ,
+               #{nmscount} +#{smscount}  +#{dbmscount}      +#{apcount}    +#{fmscount}     ,
+               #{nmscount} , #{smscount}  ,#{apcount}      ,#{dbmscount}    ,#{fmscount}     ,
+               basecharge + addcharge
+        from tbmemberlicense
+        where 1 = 1
+          and email = #{userid}
+    </insert>
+</mapper>

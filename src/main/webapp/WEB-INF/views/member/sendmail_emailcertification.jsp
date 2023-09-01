@@ -6,12 +6,16 @@
 
 <c:set var="path" value="<%=request.getContextPath() %>" scope="application"/>
 
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<spring:eval var="prof" expression="@environment.getProperty('spring.profiles.active')" />
+
+<c:set var="profile" value="${prof}"/>
+
 <%@include file="../include/header.jsp" %>
 
 <%
 
     MailSend ms = new MailSend();
-    //    ms.MailSend();
 
     String email = request.getParameter("email");
     String membername = request.getParameter("membername");
@@ -19,7 +23,9 @@
     String url = request.getRequestURL().toString();
     String contextPath = request.getContextPath();
     String cpath = url.substring(0, url.indexOf(contextPath)) + contextPath;
-    ms.MailSend_emailcertification(cpath, email, membername, licensegrade);
+    String profile = (String)pageContext.getAttribute("profile");
+
+    ms.MailSend_emailcertification(profile, cpath, email, membername, licensegrade);
 
 %>
 

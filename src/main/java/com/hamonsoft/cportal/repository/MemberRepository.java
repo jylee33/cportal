@@ -1,5 +1,6 @@
 package com.hamonsoft.cportal.repository;
 
+import com.hamonsoft.cportal.domain.Authentication;
 import com.hamonsoft.cportal.domain.BoardVO;
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.domain.TaxInformation;
@@ -22,6 +23,8 @@ public interface MemberRepository {
     void insertMember(Member member);
 
     void insertTaxInfomation(TaxInformation taxInformation);
+
+    void insertAuthentication(Authentication authentication);
 
     List<Member> listAll();
 

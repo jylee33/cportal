@@ -29,7 +29,11 @@
             <a href="${path}/"><h1>NETIS 클라우드 서비스</h1></a>
             <div class="right">
                 <div class="menu">
-                    <a href="#">서비스 안내</a>
+                    <a href="${path}/serviceguide">서비스 안내</a>
+                    <a href="${path}/serviceintroduction">서비스 소개</a>
+                    <c:if test="${not empty login}">
+                        <a href="${path}/download">자료실</a>
+                    </c:if>
                     <c:if test="${empty login}">
                         <a href="${path}/member/login">로그인</a>
                     </c:if>
@@ -39,12 +43,13 @@
                     <c:if test="${empty login}">
                         <a href="${path}/member/insertMember">회원 가입</a>
                     </c:if>
-                    <c:if test="${not empty login}">
-                        <a href="${path}/user/info">회원정보</a>
-                    </c:if>
 <%--                    <a href="${path}/member/listAll">회원 목록 조회</a>--%>
 <%--                    <a href="${path}/charge/guide">과금안내</a>--%>
                 </div>
+                <c:if test="${not empty login}">
+                    <a href="http://cloud.hamonsoft.com" target="_blank" class="btn-link">Netis 통합모니터링 서비스</a>
+                    <a href="${path}/user/info" class="btn-user">${login.membername}</a>
+                </c:if>
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 package com.hamonsoft.cportal.service;
 
 import com.hamonsoft.cportal.controller.MemberController;
+import com.hamonsoft.cportal.domain.Authentication;
 import com.hamonsoft.cportal.domain.BoardVO;
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.domain.TaxInformation;
@@ -41,6 +42,10 @@ public class MemberService {
 
     public void insertTaxInfomation(TaxInformation taxInformation) {
         memberRepository.insertTaxInfomation(taxInformation);
+    }
+
+    public void insertAuthentication(Authentication authentication) {
+        memberRepository.insertAuthentication(authentication);
     }
 
     public List<Member> listAll() {

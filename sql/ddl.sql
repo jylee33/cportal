@@ -65,7 +65,7 @@ CREATE TABLE `tbusedevice` (
     where email=#{uid} and password=SHA2(#{upw},256)
 </select>
 
-alter table tbmember add column sessionkey varchar(50) not null default 'none';
-alter table tbmember add column sessionlimit timestamp;
+alter table tbmember add column sessionkey varchar(50) not null default 'none' COMMENT '로그인 세션 아이디';
+alter table tbmember add column sessionlimit timestamp COMMENT '아이디 저장 만료 기간';
 
-ALTER TABLE tbtaxinformation ADD COLUMN companyname VARCHAR(50) AFTER email;
+ALTER TABLE tbtaxinformation ADD COLUMN companyname VARCHAR(50) AFTER email COMMENT '법인(회사)명';

@@ -89,11 +89,11 @@ public class Member {
         this.companyphone = companyphone;
     }
 
-    public int getAdministratoryn() {
+    public String getAdministratoryn() {
         return administratoryn;
     }
 
-    public void setAdministratoryn(int administratoryn) {
+    public void setAdministratoryn(String administratoryn) {
         this.administratoryn = administratoryn;
     }
     public int getEmailcertificationyn() {

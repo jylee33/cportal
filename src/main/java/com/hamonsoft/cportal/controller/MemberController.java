@@ -1,5 +1,6 @@
 package com.hamonsoft.cportal.controller;
 
+import com.hamonsoft.cportal.domain.Authentication;
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.LoginDTO;
@@ -57,12 +58,13 @@ public class MemberController {
 
     @Transactional
     @PostMapping(value = "insertMember")
-    public String insertMemberPost(Member member, TaxInformation taxInformation, Model model) throws UnsupportedEncodingException {
+    public String insertMemberPost(Member member, TaxInformation taxInformation, Authentication authentication, Model model) throws UnsupportedEncodingException {
         logger.info("call insertMemberPost ----------------");
         logger.info(member.toString());
 
         memberService.insertMember(member);
         memberService.insertTaxInfomation(taxInformation);
+        memberService.insertAuthentication(authentication);
 
         String membername = URLEncoder.encode(member.getMembername(), "UTF-8");
 

@@ -164,7 +164,6 @@
                                             <td id=c_basecharge class="text-center">${charge.basecharge}</td>
                                             <td id=c_addvolume class="text-center">${charge.addvolume}</td>
                                             <td id=c_addcharge class="text-center">${charge.addcharge}</td>
-                                            <td id=c_datakeepnm class="text-center">${charge.datakeepnm}</td>
                                             <td id=c_totalvolume class="text-center">${charge.totalvolume}</td>
                                             <td id=c_networkvolume class="text-center">${charge.networkvolume}</td>
                                             <td id=c_servervolume class="text-center">${charge.servervolume}</td>
@@ -182,13 +181,18 @@
                         </table>
                     </div>
                     <div class="pagenate">
-                        <a href="#" class="prev"><i class="xi-angle-left-thin"></i></a>
-                        <a href="#" class="active">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#" class="next"><i class="xi-angle-right-thin"></i></a>
+                        <a href="javascript:void(0);" class="prev" onclick="movePage(1,${pagination1.cntPerPage},${pagination1.pageSize});"><i class="xi-angle-left-thin"></i></a>
+                        <c:forEach begin="${pagination1.firstPage}"
+                                   end="${pagination1.lastPage}" var="idx">
+                            <a
+                                    style="color:<c:out value="${pagination.currentPage == idx ? 'color: #fff; background: #182743; border-color:#182743; position: relative; z-index:2px;' : ''}"/> "
+                                    href="javascript:void(0);"
+                                    onclick="movePage(${idx},${pagination1.cntPerPage},${pagination1.pageSize});"><c:out
+                                    value="${idx}" /></a>
+                        </c:forEach>
+                        <a href="javascript:void(0);" class="next"
+                           onclick="movePage(${pagination1.currentPage}<c:if test="${pagination1.hasNextPage == true}">+1</c:if>,${pagination1.cntPerPage},${pagination1.pageSize});">
+                            <i class="xi-angle-right-thin"></i></a>
                     </div>
                 </div>
                 <!-- // 금안내내역 -->
@@ -231,13 +235,18 @@
                         </table>
                     </div>
                     <div class="pagenate">
-                        <a href="#" class="prev"><i class="xi-angle-left-thin"></i></a>
-                        <a href="#" class="active">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#" class="next"><i class="xi-angle-right-thin"></i></a>
+                        <a href="javascript:void(0);" class="prev" onclick="movePage(1,${pagination2.cntPerPage},${pagination2.pageSize});"><i class="xi-angle-left-thin"></i></a>
+                        <c:forEach begin="${pagination2.firstPage}"
+                                   end="${pagination2.lastPage}" var="idx">
+                            <a
+                                    style="color:<c:out value="${pagination.currentPage == idx ? 'color: #fff; background: #182743; border-color:#182743; position: relative; z-index:2px;' : ''}"/> "
+                                    href="javascript:void(0);"
+                                    onclick="movePage(${idx},${pagination2.cntPerPage},${pagination2.pageSize});"><c:out
+                                    value="${idx}" /></a>
+                        </c:forEach>
+                        <a href="javascript:void(0);" class="next"
+                           onclick="movePage(${pagination2.currentPage}<c:if test="${pagination2.hasNextPage == true}">+1</c:if>,${pagination2.cntPerPage},${pagination2.pageSize});">
+                            <i class="xi-angle-right-thin"></i></a>
                     </div>
                 </div>
                 <!-- // 세금계산서 발행내역 -->
@@ -260,7 +269,29 @@
 </div>
 <!-- // wrap -->
 
-<script>
+<script language="javascript">
+        //10,20,30개씩 selectBox 클릭 이벤트
+        function changeSelectBox(currentPage, cntPerPage, pageSize){
+        var selectValue = $("#cntSelectBox").children("option:selected").val();
+        movePage(currentPage, selectValue, pageSize);
+
+    }
+
+        $(document).ready(function () {
+        var formObj = $("form[role='form']");
+
+        // formObj.submit();
+    });
+        //페이지 이동
+        function movePage(currentPage, cntPerPage, pageSize){
+
+        var url = "${pageContext.request.contextPath}/charge/individualinfo";
+        url = url + "?currentPage="+currentPage;
+        url = url + "&cntPerPage="+cntPerPage;
+        url = url + "&pageSize="+pageSize;
+
+        location.href=url;
+    }
 
 </script>
 <%@include file="../include/footer.jsp" %>

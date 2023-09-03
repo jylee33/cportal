@@ -82,7 +82,7 @@
     <select id="memberInfoList" resultType="hashmap">
         select a.*
         from(
-        select a01.membername
+        select a01.membername          -- memberInfoList
         ,a01.email
         ,a01.licensegrade
         ,a01.celltel
@@ -97,12 +97,12 @@
         ,j01.servicevolume
         ,j01.addvolume
         ,j01.addcharge
+        ,j01.stdate
+        ,j01.eddate
         ,j02.postnumber
         ,j02.address
         ,j02.detailaddress
         ,concat(j02.postnumber,' ',j02.address,' ',j02.detailaddress) zipaddress
-        ,j02.stdate
-        ,j02.eddate
         ,j03.totalvolume
         ,j03.networkvolume
         ,j03.servervolume
@@ -204,7 +204,6 @@
              ,j01.addvolume             -- 추가장비수량
              ,j01.addcharge             -- 추가라이센스요금
              ,j01.basecharge + IFNULL(j01.addcharge,0) totcharge  -- 라이센스합계금액
-             ,round(IFNULL(j03.totalvolume,0) / (j01.basevolume + IFNULL(j01.servicevolume,0) + IFNULL(j01.addvolume,0)) * 100,2) userate
              ,j02.Representationname    -- 대표자
              ,j02.businesskind          -- 업태
              ,j02.businesscondition     -- 업종
@@ -212,7 +211,7 @@
              ,j02.address               -- 주소
              ,j02.detailaddress         -- 상세주소
              ,concat(j02.postnumber,' ',j02.address,' ',j02.detailaddress) zipaddress
-             ,IFNULL(j03.useyym,'')       useyym
+             ,j03.useyym                  useyym
              ,IFNULL(j03.totalvolume,0)   totalvolume
              ,IFNULL(j03.networkvolume,0) networkvolume
              ,IFNULL(j03.servervolume,0)  servervolume
@@ -221,7 +220,7 @@
              ,IFNULL(j03.fmsvolume,0)     fmsvolume
              ,IFNULL(j03.totalcharge,0)   totalcharge
              ,round(IFNULL(j03.totalvolume,0) / (j01.basevolume + IFNULL(j01.servicevolume,0) + IFNULL(j01.addvolume,0)) * 100,2) userate
-             ,row_number() over(order by a01.joindate DESC, a01.email) AS rownum
+             ,row_number() over(order by j03.useyym DESC) AS rownum
         from tbmember                      a01
                  inner join tbmemberlicense    j01
                             on a01.email = j01.email
@@ -232,6 +231,7 @@
         where 1 = 1
           and a01.email = #{email}
           and a01.withdrawalyn != '1'
+        order by j03.useyym DESC
     </select>
 
 
@@ -257,7 +257,8 @@
              ,j02.address               -- 주소
              ,j02.detailaddress         -- 상세주소
              ,concat(j02.postnumber,' ',j02.address,' ',j02.detailaddress) zipaddress
-             ,row_number() over(order by j01.issueyearmonth DESC, j01.createdAt) AS rownum
+             ,j01.createdAt
+             ,row_number() over(order by j01.issueyearmonth DESC, j01.createdAt desc) AS rownum
         from tbmember                    a01
                  inner join tbtaxinformation j02
                  inner join tbtaxhistory     j01
@@ -266,14 +267,127 @@
         where 1 = 1
           and a01.email = #{strEmail}
           and a01.withdrawalyn != '1'
-        order by j01.issueyearmonth DESC, j01.createdAt
+        order by j01.issueyearmonth DESC, j01.createdAt desc
     </select>
+
+
+    <!--  과금내역 정보 조회  paging구현-->
+    <select id="memberChargePageList" resultType="hashmap">
+        select a.*
+        from(select a01.membername          -- 회원명
+        ,a01.email                 -- 이메일
+        ,a01.licensegrade          -- 라이센스등급
+        ,a01.celltel               -- 회원전화번호
+        ,a01.businessname          -- 사업장명
+        ,a01.businessnumber        -- 사업자등록번호
+        ,a01.joindate              -- 가입일자
+        ,case when a01.withdrawalyn = '0' then '회원' when a01.withdrawalyn = '1' then '탈퇴' else '중지' end statusnm  -- 회원상태
+        ,j01.datakeepterm          -- 데이터보관기간
+        ,j01.datakeepunit          -- 데이터보관단위(D:일,M:월,Y:년)
+        ,concat(j01.datakeepterm,'(',if(j01.datakeepunit='D','일',if(j01.datakeepunit='M','월', '년')),')') datakeepnm
+        ,j01.basevolume + IFNULL(j01.servicevolume,0) + IFNULL(j01.addvolume,0) totalsoluble -- 전체가용장비
+        ,j01.basevolume            -- 기본장비수량
+        ,j01.basecharge            -- 기본요금(라이센스요금)
+        ,j01.servicevolume         -- 서비스장비수량
+        ,j01.addvolume             -- 추가장비수량
+        ,j01.addcharge             -- 추가라이센스요금
+        ,j01.basecharge + IFNULL(j01.addcharge,0) totcharge  -- 라이센스합계금액
+        ,j02.Representationname    -- 대표자
+        ,j02.businesskind          -- 업태
+        ,j02.businesscondition     -- 업종
+        ,j02.postnumber            -- 우편번호
+        ,j02.address               -- 주소
+        ,j02.detailaddress         -- 상세주소
+        ,concat(j02.postnumber,' ',j02.address,' ',j02.detailaddress) zipaddress
+        ,j03.useyym                  useyym
+        ,IFNULL(j03.totalvolume,0)   totalvolume
+        ,IFNULL(j03.networkvolume,0) networkvolume
+        ,IFNULL(j03.servervolume,0)  servervolume
+        ,IFNULL(j03.apvolume,0)      apvolume
+        ,IFNULL(j03.dbmsvolume,0)    dbmsvolume
+        ,IFNULL(j03.fmsvolume,0)     fmsvolume
+        ,IFNULL(j03.totalcharge,0)   totalcharge
+        ,round(IFNULL(j03.totalvolume,0) / (j01.basevolume + IFNULL(j01.servicevolume,0) + IFNULL(j01.addvolume,0)) * 100,2) userate
+        ,row_number() over(order by j03.useyym DESC) AS rownum
+        from tbmember                      a01
+        inner join tbmemberlicense    j01
+        on a01.email = j01.email
+        inner  join tbtaxinformation   j02
+        on a01.email = j02.email
+        inner  join tbmemberusemonth j03
+        on a01.email = j03.email
+        where 1 = 1
+        and a01.email = #{searchName}
+        and a01.withdrawalyn != '1') as a
+        where 1 = 1
+        <if test="firstRecordIndex !=null and lastRecordIndex != null">
+            and a.rownum BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
+        </if>
+        order by a.useyym DESC
+    </select>
+
+
+    <!--  세금계산서 내역 정보 조회   paging구현 -->
+    <select id="memberTaxPageList" resultType="hashmap">
+        select a.*
+        from(
+        select a01.membername          -- 회원명
+        ,a01.email                 -- 이메일
+        ,a01.licensegrade          -- 라이센스등급
+        ,a01.celltel               -- 회원전화번호
+        ,a01.businessname          -- 사업장명
+        ,a01.businessnumber        -- 사업자등록번호
+        ,a01.joindate              -- 가입일자
+        ,case when a01.withdrawalyn = '0' then '회원' when a01.withdrawalyn = '1' then '탈퇴' else '중지' end statusnm
+        ,j01.taxhistoryid          -- 세금계산서발행내역
+        ,j01.taxid                 -- 세금계산서발행기관정보
+        ,j01.issueyearmonth        -- 발행년월
+        ,j01.issueamount           -- 발행금액
+        ,j01.issuedate             -- 발행일자
+        ,j02.representationname    -- 대표자
+        ,j02.businesskind          -- 업태
+        ,j02.businesscondition     -- 업종
+        ,j02.postnumber            -- 우편번호
+        ,j02.address               -- 주소
+        ,j02.detailaddress         -- 상세주소
+        ,concat(j02.postnumber,' ',j02.address,' ',j02.detailaddress) zipaddress
+        ,j01.createdAt
+        ,row_number() over(order by j01.issueyearmonth DESC, j01.createdAt desc) AS rownum
+        from tbmember                    a01
+        inner join tbtaxinformation j02
+        inner join tbtaxhistory     j01
+        on j02.taxid = j01.taxid
+        on a01.email = j02.email
+        where 1 = 1
+        and a01.email = #{searchName}
+        and a01.withdrawalyn != '1')  as a
+        where 1 = 1
+        <if test="firstRecordIndex !=null and lastRecordIndex != null">
+            and a.rownum BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
+        </if>
+        order by a.issueyearmonth DESC, a.createdAt desc
+    </select>
+
+
 
     <!--  과금내역, 세금계산서 건수  -->
     <select id="memberChargeAndTaxCount" resultType="hashmap">
         select 'charge' div, count(useyym) from tbmemberusemonth where email = #{email}  <!-- 과금건수 -->
         union all
         select 'tax' div, count(useyym) from tbtaxhistory where email = #{email}         <!-- 세금계산서 건수 -->
+    </select>
+
+    <!--  과금내역 건수  -->
+    <select id="memberChargeCount" resultType="int">
+        select count(useyym) from tbmemberusemonth where email = #{email}  <!-- 과금건수 -->
+    </select>
+    <!--  세금계산서 건수  -->
+    <select id="memberTaxCount" resultType="int">
+        select count(taxhistoryid)
+        from tbtaxhistory
+        where taxid in (select taxid
+        from tbtaxinformation
+        where (email, createdAt) in (select email, max(createdAt) from tbtaxinformation where email = #{email}))         <!-- 세금계산서 건수 -->
     </select>
 
     <!-- 라이센스 수정  -->

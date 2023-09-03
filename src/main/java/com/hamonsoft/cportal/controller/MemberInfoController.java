@@ -108,7 +108,7 @@ public class MemberInfoController {
     public List<Map<String, Object>> MemberIndividual(@PathVariable("email") String email, HttpServletRequest request,
                                  String stremail, Model model) throws Exception {
         String strEmail = request.getParameter("stremail");
-        logger.info("strEmail ---->"+strEmail);
+        logger.info("MemberIndividual strEmail ---->"+strEmail);
         strEmail = email;
         Enumeration<String> params = request.getParameterNames();
         while(params.hasMoreElements()) {
@@ -141,7 +141,8 @@ public class MemberInfoController {
     @RequestMapping(value = "/memberchargelist")
     public ModelAndView memberchargelist(Map<String, Object> map, HttpServletRequest request, String email) throws Exception {
         String strEmail = request.getParameter("email");
-        strEmail = email;
+
+    //    strEmail = email;
         Enumeration<String> params = request.getParameterNames();
         while(params.hasMoreElements()) {
             String name = (String) params.nextElement();
@@ -152,7 +153,7 @@ public class MemberInfoController {
         mav.setViewName("/charge/memberchargelist");
         HttpSession session = request.getSession();
         Member member = (Member) session.getAttribute("login");
-        logger.info("strEmail ---->"+strEmail);
+        logger.info("memberchargelist strEmail ---->"+strEmail);
         logger.info("TestTableController MemberInfo ---->"+member.getEmail());
         logger.info("TestTableController MemberInfo ---->"+member.getEmailcertificationyn());
         logger.info("TestTableController MemberInfo ---->"+member.getBusinessname());
@@ -184,28 +185,38 @@ public class MemberInfoController {
     }
 
 
-
-    @PostMapping(value = "/individualinfo")
-    public ModelAndView MemberIndividual(Map<String, Object> map, HttpServletRequest request) throws Exception {
+    @RequestMapping(value = "/individualinfo")
+    public ModelAndView MemberIndividual(
+            @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
+            @RequestParam(value = "20", required = false, defaultValue = "20") int cntPerPage,
+            @RequestParam(value = "20", required = false, defaultValue = "20") int pageSize,
+            Map<String, Object> map, HttpServletRequest request) throws Exception {
 
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("/charge/MemberIndividual");
+        mav.setViewName("/charge/individualinfo");
         HttpSession session = request.getSession();
         Member member = (Member) session.getAttribute("login");
-        logger.info("MemberInfoController member ---->"+member.toString());
-        logger.info("MemberInfoController member ---->"+member.getEmail());
-        logger.info("MemberInfoController member ---->"+member.getEmailcertificationyn());
-        logger.info("MemberInfoController member ---->"+member.getBusinessname());
+        logger.info("MemberInfoController individualinfo member ---->"+member.getEmail()+"  getAdministratoryn--> "+member.getAdministratoryn());
+
         //String strEmail = memberInfo.toString();
         mav.addObject("userInfo",memberinfoService.memberLicenseInfo(member.getEmail()));
-        mav.addObject("chargeInfo",memberinfoService.memberChargeInfo(member.getEmail()));
-        mav.addObject("taxInfo",memberinfoService.memberTaxInfo(member.getEmail()));
+
+        int listCnt = memberinfoService.memberChargeCount(member.getEmail());
+        Pagination pagination = new Pagination(currentPage, cntPerPage, pageSize, member.getEmail());
+        pagination.setTotalRecordCount(listCnt);
+        mav.addObject("pagination1",pagination);
+        mav.addObject("chargeInfo",memberinfoService.memberChargePageInfo(pagination));
+
+        listCnt = memberinfoService.memberTaxCount(member.getEmail());
+        pagination = new Pagination(currentPage, cntPerPage, pageSize, member.getEmail());
+        pagination.setTotalRecordCount(listCnt);
+        mav.addObject("pagination2",pagination);
+        mav.addObject("taxInfo",memberinfoService.memberTaxPageInfo(pagination));
         logger.info("mav.getViewName() = mav.getViewName() --->" +mav.getViewName());
         logger.info("mav.getModelMap() = mav.getModelMap() --->" +mav.getModelMap());
-        logger.info("mav.getModelMap() = mav.getModelMap() --->" +memberinfoService.memberLicenseInfo(member.getEmail()).toString());
         return mav;
-    }
 
+    }
 
 
     @ResponseBody
@@ -213,7 +224,7 @@ public class MemberInfoController {
     public String MemberInfoPostSave(@RequestBody MemberLicenseDto memberLicenseDto) throws Exception {
         logger.info("memberLicenseDto --> "+memberLicenseDto);
 
-       // memberinfoService.licenseUpdate(memberLicenseDto);
+        memberinfoService.licenseUpdate(memberLicenseDto);
        // licenseUpdate
         return null;
     }

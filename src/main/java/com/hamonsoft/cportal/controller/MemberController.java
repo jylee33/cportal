@@ -1,10 +1,13 @@
 package com.hamonsoft.cportal.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hamonsoft.cportal.domain.Authentication;
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.LoginDTO;
+import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.service.MemberService;
+import com.hamonsoft.cportal.service.RestApiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +35,12 @@ public class MemberController {
     private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
     MemberService memberService;
+    RestApiService restApiService;
 
     @Autowired
-    public MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService, RestApiService restApiService) {
         this.memberService = memberService;
+        this.restApiService = restApiService;
     }
 
     @GetMapping(value = "")
@@ -58,7 +63,7 @@ public class MemberController {
 
     @Transactional
     @PostMapping(value = "insertMember")
-    public String insertMemberPost(Member member, TaxInformation taxInformation, Authentication authentication, Model model) throws UnsupportedEncodingException {
+    public String insertMemberPost(Member member, TaxInformation taxInformation, Authentication authentication, Model model) throws UnsupportedEncodingException, JsonProcessingException {
         logger.info("call insertMemberPost ----------------");
         logger.info(member.toString());
 

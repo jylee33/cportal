@@ -112,6 +112,19 @@
                 <div class="inp-box"><input type="text" class="inp2" placeholder="대표자명" name="representationname"></div>
             </div>
             <div class="inp-area">
+                <div class="label">사업장 전화번호</div>
+                <div class="inp-box">
+                    <div class="hp-box">
+                        <input type="hidden" name="companyphone" value="">
+                        <input type="text" class="inp2" id="companyphone1" placeholder="" maxlength="3" required value="02">
+                        <span>-</span>
+                        <input type="text" class="inp2" id="companyphone2" placeholder="" maxlength="4" required value="1234">
+                        <span>-</span>
+                        <input type="text" class="inp2" id="companyphone3" placeholder="" maxlength="4" required value="5678">
+                    </div>
+                </div>
+            </div>
+            <div class="inp-area">
                 <div class="label">사업자 등록 번호</div>
                 <div class="inp-box">
                     <div class="hp-box">
@@ -164,12 +177,10 @@
         </div>
         <div class="msg1">본 마케팅 활용 및 정보수신에 동의를 거부하실 수 있으며 이경우 회원가입은 가능하나 일부 서비스 이용 및 이벤트 안내 등의 서비스 제공이 제한 될 수 있습니다.</div>
         <button class="btn large block" id="insertMember">회원가입</button>
-        <input type="hidden" name="companyphone" value="Hamonsoft">
         <input type="hidden" name="emailcertificationyn" value="0">
         <input type="hidden" name="withdrawalyn" value="1">
-        <input type="hidden" name="withdrawaldate" value="20230901">
-        <input type="hidden" name="joindate" value="20230901">
-        <input type="hidden" name="updatedBy" value="test">
+        <input type="hidden" name="withdrawaldate" value="">
+        <input type="hidden" name="updatedBy" value="administrator">
 
         <input type="hidden" name="baseamount" value="0">
     </form>
@@ -188,6 +199,7 @@
 
         if ("${result}" == "fail") {
             alert("${reason}");
+            self.location = "${path}/member/insertMember";
             return;
         }
 
@@ -297,6 +309,13 @@
 
             $("input[name='celltel']").val(celltel);
             // alert($("input[name='celltel']").val());
+
+            var companyphone1 = $("#companyphone1").val();
+            var companyphone2 = $("#companyphone2").val();
+            var companyphone3 = $("#companyphone3").val();
+            var companyphone = companyphone1 + companyphone2 + companyphone3;
+
+            $("input[name='companyphone']").val(companyphone);
 
             if ($("input[name='businessname']").val() == "") {
                 alert("회사명을 입력해 주세요.");

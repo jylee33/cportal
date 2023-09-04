@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.dto.ResultDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ public class RestApiService {
     private static final Logger logger = LoggerFactory.getLogger(RestApiService.class);
 
 
-    public ResultDto addUser() throws JsonProcessingException {
+    public ResultDto addUser(Member member) throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
         url += "/user_manager/add_user";
 
@@ -40,13 +41,13 @@ public class RestApiService {
         // Body set
         Map<String, Object> body = new HashMap<>();
 
-        body.put("USER_ID", "jylee@hamonsoft.co.kr");
-        body.put("PASSWORD", "a");
-        body.put("USER_NAME", "하몬소프트");
-        body.put("GRP_NAME", "HAMON");
-        body.put("EMAIL", "jylee@hamonsoft.co.kr");
-        body.put("CELL_TEL", "01028013349");
-        body.put("CLOUD_GRADE", "3");
+        body.put("USER_ID", member.getEmail());
+        body.put("PASSWORD", member.getPassword());
+        body.put("USER_NAME", member.getMembername());
+        body.put("GRP_NAME", member.getGrpname());
+        body.put("EMAIL", member.getEmail());
+        body.put("CELL_TEL", member.getCelltel());
+        body.put("CLOUD_GRADE", member.getLicensegrade());
 
         // Request Message
         HttpEntity<?> request = new HttpEntity<>(body, headers);

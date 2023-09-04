@@ -61,15 +61,32 @@ public class MemberController {
         logger.info("call insertMemberGet ----------------");
     }
 
-    @Transactional
     @PostMapping(value = "insertMember")
+    @Transactional(rollbackFor = Throwable.class)
     public String insertMemberPost(Member member, TaxInformation taxInformation, Authentication authentication, Model model) throws UnsupportedEncodingException, JsonProcessingException {
         logger.info("call insertMemberPost ----------------");
         logger.info(member.toString());
 
-        memberService.insertMember(member);
-        memberService.insertTaxInfomation(taxInformation);
-        memberService.insertAuthentication(authentication);
+        try {
+            memberService.insertMember(member);
+            memberService.insertTaxInfomation(taxInformation);
+            memberService.insertAuthentication(authentication);
+
+            ResultDto resultDto = restApiService.addUser(member);
+            if (resultDto.getTRAN_STATUS() == 1) {
+                model.addAttribute("result", "success");
+            } else {
+                model.addAttribute("result", "fail");
+                model.addAttribute("reason", resultDto.getREASON());
+
+                return "/member/insertMember";
+            }
+        } catch (Exception ex) {
+            model.addAttribute("result", "fail");
+            model.addAttribute("reason", "이미 등록된 가입자입니다.");
+
+            return "/member/insertMember";
+        }
 
         String membername = URLEncoder.encode(member.getMembername(), "UTF-8");
 

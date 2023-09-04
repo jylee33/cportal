@@ -76,3 +76,5 @@ alter table tbmember add column administratoryn varchar(1) DEFAULT 'N' COMMENT '
 
 
 implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
+alter table tbmember add column grpname varchar(50) not null DEFAULT '' COMMENT '그룹명' AFTER membername;

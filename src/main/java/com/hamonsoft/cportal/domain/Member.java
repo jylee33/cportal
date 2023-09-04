@@ -20,8 +20,8 @@ public class Member {
     private String joindate;
     private Date createdAt;
     private String updatedBy;
+    private String serverdomainname;
     private Date updatedAt;
-
     private MemberLicense memberLicenseVO;
     private MemberUseTax memberUseTaxVO;
 
@@ -152,6 +152,12 @@ public class Member {
         this.updatedAt = updatedAt;
     }
 
+    public String getServerdomainname() {
+        return serverdomainname;
+    }
+
+    public void setServerdomainname(String serverdomainname) { this.serverdomainname = serverdomainname; }
+
     public MemberLicense getMemberLicenseVO() {
         return memberLicenseVO;
     }
@@ -195,6 +201,7 @@ public class Member {
                 ", createdAt=" + createdAt +
                 ", updatedBy='" + updatedBy + '\'' +
                 ", updatedAt=" + updatedAt +
+                ", serverdomainname=" + serverdomainname +
                 ", memberLicenseVO=" + memberLicenseVO +
                 ", memberUseTaxVO=" + memberUseTaxVO +
                 '}';

@@ -76,3 +76,6 @@ alter table tbmember add column administratoryn varchar(1) DEFAULT 'N' COMMENT '
 
 
 implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
+/* 2023.09.4 추가 */
+alter table tbmember add column serverdomainname varchar(100) null default '' COMMENT '회원접속도메인';

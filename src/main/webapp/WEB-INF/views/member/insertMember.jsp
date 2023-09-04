@@ -53,6 +53,12 @@
             </div>
         </div>
         <div class="inp-area">
+            <div class="label">그룹명 *</div>
+            <div class="inp-box">
+                <input type="text" class="inp2" name="grpname" placeholder="그룹명" required>
+            </div>
+        </div>
+        <div class="inp-area">
             <div class="label">휴대전화 *</div>
             <div class="inp-box">
                 <div class="hp-box">
@@ -176,6 +182,15 @@
     }
 
     $(document).ready(function () {
+
+        console.log("result = ${result}");
+        console.log("resaon = ${reason}");
+
+        if ("${result}" == "fail") {
+            alert("${reason}");
+            return;
+        }
+
         var formObj = $("form[role='form']");
 
         $("#licensegrade").change(function (e) {
@@ -262,6 +277,11 @@
 
             if ($("input[name='membername']").val() == "") {
                 alert("성명을 입력해 주세요.");
+                return;
+            }
+
+            if ($("input[name='grpname']").val() == "") {
+                alert("그룹명을 입력해 주세요.");
                 return;
             }
 

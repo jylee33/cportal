@@ -71,6 +71,16 @@ public class MemberController {
         memberService.insertTaxInfomation(taxInformation);
         memberService.insertAuthentication(authentication);
 
+        ResultDto resultDto = restApiService.addUser(member);
+        if (resultDto.getTRAN_STATUS() == 1) {
+            model.addAttribute("result", "success");
+        } else {
+            model.addAttribute("result", "fail");
+            model.addAttribute("reason", resultDto.getREASON());
+
+            return "/member/insertMember";
+        }
+
         String membername = URLEncoder.encode(member.getMembername(), "UTF-8");
 
         return "redirect:/member/sendmail_emailcertification?email=" + member.getEmail() + "&membername=" + membername + "&licensegrade=" + member.getLicensegrade();

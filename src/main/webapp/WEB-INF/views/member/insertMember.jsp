@@ -116,11 +116,11 @@
                 <div class="inp-box">
                     <div class="hp-box">
                         <input type="hidden" name="companyphone" value="">
-                        <input type="text" class="inp2" id="companyphone1" placeholder="" maxlength="3" required value="02">
+                        <input type="text" class="inp2" id="companyphone1" placeholder="" maxlength="3" required>
                         <span>-</span>
-                        <input type="text" class="inp2" id="companyphone2" placeholder="" maxlength="4" required value="1234">
+                        <input type="text" class="inp2" id="companyphone2" placeholder="" maxlength="4" required>
                         <span>-</span>
-                        <input type="text" class="inp2" id="companyphone3" placeholder="" maxlength="4" required value="5678">
+                        <input type="text" class="inp2" id="companyphone3" placeholder="" maxlength="4" required>
                     </div>
                 </div>
             </div>

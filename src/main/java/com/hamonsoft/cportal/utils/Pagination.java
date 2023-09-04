@@ -27,23 +27,26 @@ public class Pagination {
     private boolean hasPreviousPage;
     // 다음 페이지 존재 여부
     private boolean hasNextPage;
+    // 검색 조건
+    private String searchName;
 
-    public Pagination(int currentPage, int cntPerPage, int pageSize) {
+    public Pagination(int currentPage, int cntPerPage, int pageSize, String searchName) {
         //강제입력방지
         if (currentPage < 1) {
             currentPage = 1;
         }
         //10,20,30개 단위 이외 처리 방지
-        if (cntPerPage != 10 && cntPerPage != 20 && cntPerPage != 30) {
-            cntPerPage = 10;
+        if (cntPerPage != 5 && cntPerPage != 10 && cntPerPage != 20) {
+            cntPerPage = 5;
         }
         // 하단 페이지 갯수 10개로 제한
-        if (pageSize != 10) {
-            pageSize = 10;
+        if (pageSize != 5) {
+            pageSize = 5;
         }
         this.currentPage = currentPage;
         this.cntPerPage = cntPerPage;
         this.pageSize = pageSize;
+        this.searchName = searchName;
 
     }
 
@@ -185,7 +188,11 @@ public class Pagination {
         return totalRecordCount;
     }
 
+    public String getSearchName() {
+        return searchName;
+    }
 
+// searchname
 }
 
 

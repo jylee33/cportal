@@ -7,6 +7,7 @@ public class Member {
 
     private String email;
     private String membername;
+    private String grpname;
     private String celltel;
     private String password;
     private String businessname;
@@ -39,6 +40,14 @@ public class Member {
 
     public void setMembername(String membername) {
         this.membername = membername;
+    }
+
+    public String getGrpname() {
+        return grpname;
+    }
+
+    public void setGrpname(String grpname) {
+        this.grpname = grpname;
     }
 
     public String getCelltel() {
@@ -187,6 +196,7 @@ public class Member {
         return "Member{" +
                 "email='" + email + '\'' +
                 ", membername='" + membername + '\'' +
+                ", grpname='" + grpname + '\'' +
                 ", celltel='" + celltel + '\'' +
                 ", password='" + password + '\'' +
                 ", businessname='" + businessname + '\'' +

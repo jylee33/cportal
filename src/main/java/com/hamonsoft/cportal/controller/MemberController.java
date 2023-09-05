@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.WebUtils;
@@ -62,28 +61,16 @@ public class MemberController {
     }
 
     @PostMapping(value = "insertMember")
-    @Transactional(rollbackFor = Throwable.class)
     public String insertMemberPost(Member member, TaxInformation taxInformation, Authentication authentication, Model model) throws UnsupportedEncodingException, JsonProcessingException {
         logger.info("call insertMemberPost ----------------");
         logger.info(member.toString());
 
-        try {
-            memberService.insertMember(member);
-            memberService.insertTaxInfomation(taxInformation);
-            memberService.insertAuthentication(authentication);
-
-            ResultDto resultDto = restApiService.addUser(member);
-            if (resultDto.getTRAN_STATUS() == 1) {
-                model.addAttribute("result", "success");
-            } else {
-                model.addAttribute("result", "fail");
-                model.addAttribute("reason", resultDto.getREASON());
-
-                return "/member/insertMember";
-            }
-        } catch (Exception ex) {
+        ResultDto resultDto = memberService.insertMember(member, taxInformation, authentication);
+        if (resultDto.getTRAN_STATUS() == 1) {
+            model.addAttribute("result", "success");
+        } else {
             model.addAttribute("result", "fail");
-            model.addAttribute("reason", "이미 등록된 가입자입니다.");
+            model.addAttribute("reason", resultDto.getREASON());
 
             return "/member/insertMember";
         }

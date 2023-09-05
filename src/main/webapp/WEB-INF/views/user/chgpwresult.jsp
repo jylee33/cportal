@@ -12,7 +12,7 @@
 <script>
 
     $(document).ready(function () {
-        if ("${result}" == 1) {
+        if ("${result}" == "success") {
             alert("비밀번호 변경 완료");
         }
         self.location = "${path}/user/chgpw";

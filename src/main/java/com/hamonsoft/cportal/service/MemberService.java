@@ -29,7 +29,7 @@ import java.util.Map;
 public class MemberService {
 
     @Value("${rest.url}")
-    String url;
+    String restURL;
 
     MemberRepository memberRepository;
     private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
@@ -71,7 +71,8 @@ public class MemberService {
 
     private ResultDto addUser(Member member) throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
-        url += "/user_manager/add_user";
+        String url = restURL + "/user_manager/add_user";
+        logger.info("url - " + url);
 
         // Header set
         HttpHeaders headers = new HttpHeaders();

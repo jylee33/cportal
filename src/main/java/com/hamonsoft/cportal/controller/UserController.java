@@ -3,6 +3,7 @@ package com.hamonsoft.cportal.controller;
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.domain.MemberTaxInformation;
 import com.hamonsoft.cportal.dto.LoginDTO;
+import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,13 +80,20 @@ public class UserController {
     }
 
     @PostMapping("chgpwresult")
-    public void chgpwresult(Member member, Model model) {
+    public String chgpwresult(Member member, Model model) {
         logger.info("call chgpwresult ......................");
         logger.info(member.toString());
 
-        int result = userService.chgpw(member);
-        logger.info("result ...................... " + result);
-        model.addAttribute("result", result);
+        ResultDto resultDto = userService.chgpw(member);
+        if (resultDto.getTRAN_STATUS() == 1) {
+            model.addAttribute("result", "success");
+        } else {
+            model.addAttribute("result", "fail");
+            model.addAttribute("reason", resultDto.getREASON());
+
+            return "/user/chgpw";
+        }
+        return "/user/chgpwresult";
     }
 
     @GetMapping(value = "withdrawal")

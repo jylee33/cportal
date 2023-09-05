@@ -27,6 +27,12 @@
             <div class="inp-box"><input type="text" class="inp2" placeholder="성명" name="membername" value="${info.membername}" required></div>
         </div>
         <div class="inp-area">
+            <div class="label">그룹명 *</div>
+            <div class="inp-box">
+                <input type="text" class="inp2" name="grpname" placeholder="그룹명" value="${info.grpname}" required>
+            </div>
+        </div>
+        <div class="inp-area">
             <div class="label">휴대전화 *</div>
             <div class="inp-box">
                 <input type="text" class="inp2" placeholder="휴대전화" name="celltel" value="${info.celltel}" required>

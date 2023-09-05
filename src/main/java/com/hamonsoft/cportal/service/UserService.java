@@ -43,12 +43,25 @@ public class UserService {
         return userRepository.info(member);
     }
 
-    public int  chgmember(MemberTaxInformation info) {
-        return userRepository.chgmember(info);
-    }
+    @Transactional(rollbackFor = {Exception.class})
+    public ResultDto chgmember(MemberTaxInformation info) {
+        ResultDto resultDto = new ResultDto();
+        try {
+            resultDto = chgMemberInfo(info);
+            if (resultDto.getTRAN_STATUS() != 1) {
+                throw new RuntimeException();
+            }
 
-    public int  chgtaxinformation(MemberTaxInformation info) {
-        return userRepository.chgtaxinformation(info);
+            userRepository.chgmember(info);
+            userRepository.chgtaxinformation(info);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+        }
+
+        return resultDto;
     }
 
     @Transactional(rollbackFor = {Exception.class})
@@ -70,6 +83,39 @@ public class UserService {
 
         return resultDto;
 
+    }
+
+    private ResultDto chgMemberInfo(MemberTaxInformation info) throws JsonProcessingException {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = restURL + "/user_manager/change_info";
+        logger.info("url - " + url);
+
+        // Header set
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        // Body set
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("USER_ID", info.getEmail());
+        body.put("USER_NAME", info.getMembername());
+        body.put("GRP_NAME", info.getGrpname());
+        body.put("EMAIL", info.getEmail());
+        body.put("CELL_TEL", info.getCelltel());
+//        body.put("CLOUD_GRADE", info.getLicensegrade());
+
+        // Request Message
+        HttpEntity<?> request = new HttpEntity<>(body, headers);
+
+        // Request
+        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+
+        // Response 파싱
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        ResultDto dto = objectMapper.readValue(response.getBody(), ResultDto.class);
+
+        return dto;
     }
 
     private ResultDto chgPassword(Member member) throws JsonProcessingException {

@@ -56,15 +56,13 @@ public class UserController {
         logger.info("call chginforesult ......................");
         logger.info(info.toString());
 
-        int result1 = userService.chgmember(info);
-        logger.info("userService.chgmember result ...................... " + result1);
-        int result2 = userService.chgtaxinformation(info);
-        logger.info("userService.chgtaxinformation result ...................... " + result2);
-
-        int result = result1 & result2;
-        logger.info("result ...................... " + result2);
-
-        model.addAttribute("result", result);
+        ResultDto resultDto = userService.chgmember(info);
+        if (resultDto.getTRAN_STATUS() == 1) {
+            model.addAttribute("result", "success");
+        } else {
+            model.addAttribute("result", "fail");
+            model.addAttribute("reason", resultDto.getREASON());
+        }
     }
 
     @GetMapping(value = "chgpw")
@@ -80,7 +78,7 @@ public class UserController {
     }
 
     @PostMapping("chgpwresult")
-    public String chgpwresult(Member member, Model model) {
+    public void chgpwresult(Member member, Model model) {
         logger.info("call chgpwresult ......................");
         logger.info(member.toString());
 
@@ -90,10 +88,7 @@ public class UserController {
         } else {
             model.addAttribute("result", "fail");
             model.addAttribute("reason", resultDto.getREASON());
-
-            return "/user/chgpw";
         }
-        return "/user/chgpwresult";
     }
 
     @GetMapping(value = "withdrawal")

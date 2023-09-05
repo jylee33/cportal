@@ -7,7 +7,6 @@ import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.LoginDTO;
 import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.service.MemberService;
-import com.hamonsoft.cportal.service.RestApiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +33,10 @@ public class MemberController {
     private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
     MemberService memberService;
-    RestApiService restApiService;
 
     @Autowired
-    public MemberController(MemberService memberService, RestApiService restApiService) {
+    public MemberController(MemberService memberService) {
         this.memberService = memberService;
-        this.restApiService = restApiService;
     }
 
     @GetMapping(value = "")

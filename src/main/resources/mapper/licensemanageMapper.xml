@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hamonsoft.cportal.repository.LicenseManageRepository">
+    <!--  사용자 전체 건수  -->
+   <select id="licensePolicyList" resultType="hashmap">
+       select a01.licensepolicyid ,      --   라이센스정책관리번호(uuid)
+               a01.solutioncode    ,      --   솔루션코드
+               a01.policycode      ,      --   라이센스정책코드(등급)
+               a01.solutionname    ,      --   라이센스정책솔루션명
+               a01.policyname      ,      --   라이센스정책명
+               a01.licensecontent  ,      --   라이센스정책내용
+               a01.licenseamount   ,      --   라이센스기본요금
+               a01.licenseint      ,      --   라이센스가용장비수
+               a01.aidcode         ,      --   지원기능구분(003)
+               a01.stdate          ,      --   시작일자
+               a01.eddate          ,      --   종료일자
+               str_to_date(a01.stdate,'%Y%m%d') strstdate,
+               str_to_date(a01.eddate,'%Y%m%d') streddate,
+               a01.useyn           ,      --   사용여부
+               a01.sortno          ,      --   정렬기준
+               a01.createdAt       ,      --   등록일시
+               a01.updatedAt       ,       --   수정일시
+               row_number() over (order by a01.solutioncode ,a01.createdAt desc) numrow
+       from tblicensepolicy a01
+       where 1 = 1
+       <choose>
+           <when test="solutioncode != null and solutioncode neq ''">
+               AND a01.solutioncode = #{solutioncode}
+           </when>
+       </choose>
+   </select>
+
+    <select id="aidfunctionList" resultType="hashmap">
+        select a01.functionno ,      --   라이센스정책관리번호(uuid)
+               a01.functionname    ,      --   지원기능명
+               a01.freeaid      ,      --   free 지원기능
+               a01.basicaid    ,      --   basic 지원기능
+               a01.proaid      ,      --   pro 지원기능
+               a01.entaid          ,      --   ent 지원기능
+               a01.functioncode    ,      --   기능구분
+               a01.useyn      ,      --   사용여부
+               a01.stdate          ,      --   시작일자
+                a01.eddate          ,      --   종료일자
+                a01.sortno          ,      --   종료일자
+               str_to_date(a01.stdate,'%Y%m%d') strstdate,
+               str_to_date(a01.eddate,'%Y%m%d') streddate,
+               a01.createdAt       ,      --   등록일시
+               a01.updatedAt       ,       --   수정일시
+               j01.codename        ,       --   수정일시
+               row_number() over (order by a01.functioncode ,a01.createdAt desc) numrow
+        from tbaidfunction a01
+                 inner join tbcommoncode j01
+                            on j01.groupcode    = '003'
+                                and a01.functioncode = j01.commoncode
+        where 1 = 1
+        <choose>
+            <when test="solutioncode != null and solutioncode neq ''">
+                AND a01.functioncode = #{functioncode}
+            </when>
+        </choose>
+        order by j01.sortno, a01.functionno
+    </select>
+
+    <select id="creditList" resultType="hashmap">
+        select a01.groupcode  ,      --   group code
+               a01.commoncode    ,      --   공통코드
+               a01.codename      ,      --   코드명
+               a01.applyvolume    ,      --   적용수량(Credit 적용,라이센스정책)
+               a01.useyn      ,      --   사용여부
+               a01.stdate          ,      --   시작일자
+               a01.eddate          ,      --   종료일자
+               str_to_date(a01.stdate,'%Y%m%d') strstdate,
+               str_to_date(a01.eddate,'%Y%m%d') streddate,       --   수정일시
+               row_number() over (order by a01.commoncode ,a01.stdate desc) numrow
+        from tbcommoncode a01
+        where 1 = 1
+          and a01.groupcode = '006'
+        order by a01.sortno
+    </select>
+</mapper>

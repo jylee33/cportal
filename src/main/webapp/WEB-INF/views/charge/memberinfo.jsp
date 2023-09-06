@@ -11,7 +11,7 @@
 <div id="wrap">
     <div class="container">
         <div class="h3-head">
-            <h3 class="h3">사용자 현황 <span class="hit">사용자 건수 <strong>3건</strong></span></h3>
+            <h3 class="h3">사용자 현황 <span class="hit">사용자 건수 (<strong>${pagination.totalRecordCount}</strong> 건)</span></h3>
             <div class="right">
                 <div class="srch-box">
                     <form name="memberNm" autocomplete="on" action="/portal/charge/memberinfo" method="post">
@@ -60,17 +60,17 @@
                                 </td>
                                 <td class="text-center">${list.celltel}</td>
                                 <td class="text-center">${list.businessname}</td>
-                                <td class="text-center">${list.businessnumber}</td>
-                                <td class="text-center">${list.joindate}</td>
+                                <td class="text-center">${list.strbusinessnumber}</td>
+                                <td class="text-center">${list.strjoindate}</td>
                                 <td class="text-center">${list.zipaddress}</td>
                                 <td class="text-center">${list.totalsoluble}</td>
                                 <td class="text-center">${list.totalvolume}</td>
                                 <td class="text-center">${list.userate}</td>
-                                <td class="text-center">${list.totalcharge}</td>
+                                <td class="text-center"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${list.totalcharge}" /></td>
                                 <td class="text-center">0</td>
                                 <td class="text-center">0</td>
                                 <td class="text-center">${list.statusnm}</td>
-                                <td class="text-center">${list.stdate}</td>
+                                <td class="text-center">${list.strstdate}</td>
                                 <td class="text-center"></td>
                             </tr>
                         </c:forEach>
@@ -172,7 +172,7 @@
                                     </tr>
                                     <tr>
                                         <th>가입일자</th>
-                                        <td id=joindate class="text-center">${userInfo.joindate}</td>
+                                        <td id=joindate class="text-center">${userInfo.strjoindate}</td>
                                     </tr>
                                     <tr>
                                         <th>대표자명</th>
@@ -221,15 +221,13 @@
                                     <tr>
                                         <th>추가</th>
                                         <td colspan="2" class="text-center" id="addvolume">
-                                            <div class="inp-area">
-                                                <div class="inp-box"><input type="number" class="inp2" style="text-align:center;" value=${userInfo.addvolume} name="addvolume" required></div>
-                                            </div>
+                                            <input type="number" class="inp small" style="text-align:center; width:100%" value=${userInfo.addvolume} name="addvolume" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>서비스</th>
                                         <td colspan="2" class="text-center" id=servicevolume>
-                                            <input type="number" class="inp2" style="text-align:center;" value=${userInfo.servicevolume} name="servicevolume" required>
+                                            <input type="number" class="inp small" style="text-align:center; width:100%" value=${userInfo.servicevolume} name="servicevolume" required>
                                         </td>
                                     </tr>
                                     <tr>
@@ -240,19 +238,19 @@
                                     <tr>
                                         <th>기본</th>
                                         <td colspan="2" id=basecharge class="text-center">
-                                            <input type="number" class="inp2" style="text-align:center;" value=${userInfo.basecharge} name="basecharge" required>
+                                            <input type="number" class="inp small" style="text-align:center;width:100%;" value=${userInfo.basecharge} name="basecharge" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>추가</th>
                                         <td colspan="2" id=addcharge class="text-center">
-                                                <input type="number" class="inp2" style="text-align:center;" value=${userInfo.addcharge} name="addcharge" required>
+                                                <input type="number" class="inp small" style="text-align:center;width:100%" value=${userInfo.addcharge} name="addcharge" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th colspan="2">데이터 보관기간</th>
                                         <td id=datakeepterm class="text-center">
-                                            <div class="inp-box"><input type="number" class="inp2" style="text-align:center;" value=${userInfo.datakeepterm} name="datakeepterm" required></div>
+                                            <div class="inp-box"><input type="number" class="inp small" style="text-align:center; width:100%" value=${userInfo.datakeepterm} name="datakeepterm" required></div>
                                         </td>
                                         <td id=datakeepunit  class="text-center">
                                             <div class="inp-box">
@@ -264,8 +262,17 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <th colspan="3">회원접속도메인</th>
+                                        <td colspan="2" id=serverdomainname class="text-center">
+                                            <input type="text" class="inp small" style="text-align:center; width:100%" value=${userInfo.serverdomainname} name="serverdomainname">
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="bottom-btns">
+                            <button class="btn">저장</button>
                         </div>
                     </div>
                     <div class="col4">
@@ -361,9 +368,9 @@
                                         </td>
                                         <td id=c_totalsoluble class="text-center">${charge.totalsoluble}</td>
                                         <td id=c_basevolume class="text-center">${charge.basevolume}</td>
-                                        <td id=c_basecharge class="text-center">${charge.basecharge}</td>
+                                        <td id=c_basecharge class="text-center"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${charge.basecharge}" /></td>
                                         <td id=c_addvolume class="text-center">${charge.addvolume}</td>
-                                        <td id=c_addcharge class="text-center">${charge.addcharge}</td>
+                                        <td id=c_addcharge class="text-center"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${charge.addcharge}" /></td>
                                         <td id=c_servicevolume class="text-center">${charge.servicevolume}</td>
                                         <td id=c_datakeepnm class="text-center">${charge.datakeepnm}</td>
                                         <td id=c_totalvolume class="text-center">${charge.totalvolume}</td>
@@ -372,7 +379,7 @@
                                         <td id=c_apvolume class="text-center">${charge.apvolume}</td>
                                         <td id=c_dbmsvolume class="text-center">${charge.dbmsvolume}</td>
                                         <td id=c_fmsvolume class="text-center">${charge.fmsvolume}</td>
-                                        <td id=c_totalcharge class="text-center">${charge.totalcharge}</td>
+                                        <td id=c_totalcharge class="text-center"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${charge.totalcharge}" /></td>
                                         <td id=c_userate class="text-center">${charge.userate}</td>
                                         <td class="text-center"></td>
                                     </tr>
@@ -414,7 +421,7 @@
                                         <td class="text-center">${tax.businesskind}</td>
                                         <td class="text-center">${tax.businesscondition}</td>
                                         <td class="text-center">${tax.issuedate}</td>
-                                        <td class="text-center">${tax.issueamount}</td>
+                                        <td class="text-center"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${tax.issueamount}" /></td>
                                         <td class="text-center">N</td>
                                         <td class="text-center"></td>
                                     </tr>
@@ -488,18 +495,19 @@
         })
     })
     //날자 포맷
-    function dateFormatter(num){
-        if(!num){
+    function dateFormatter(stringDate){
+        if(!stringDate){
             return "";
         }
         var formatNum = '';
-        num=num.replace(/\s/gi, "");
-        if(num.length == 8){
-            formatNum = num.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
+        stringDate=stringDate.replace(/\s/gi, "");
+        if(stringDate.length == 8){
+            formatNum = stringDate.replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3');
         }else{
-            formatNum = num;
+            formatNum = stringDate;
         }
-        console.log("dateFormatter formatNum -->"+formatNum+" ..... num ->"+num);
+       // document.getElementById(id).innerHTML = formatNum;
+        //console.log("dateFormatter formatNum -->"+formatNum+" ..... num ->"+num);
         return formatNum;
     }
 
@@ -573,6 +581,7 @@
             console.log("배열에 담긴 값 : "+tdArr);
             console.log("배열에 담긴 값 : "+td.eq(1).text());
 
+//            var url = '${pageContext.request.contextPath}/charge/@{td.eq(1).text()}';
             var url = '${pageContext.request.contextPath}/charge/'+td.eq(1).text();
             $.ajax({
                 type: 'get',

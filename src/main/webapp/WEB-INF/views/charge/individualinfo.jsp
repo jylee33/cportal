@@ -68,20 +68,20 @@
                     </tr>
                     <tr>
                         <th>서비스</th>
-                        <td id=addvolume class="text-center">${userInfo.servicevolume}</td>
+                        <td id=servicevolume class="text-center">${userInfo.servicevolume}</td>
                     </tr>
                     <tr>
                         <th rowspan="3">요금</th>
                         <th>합계</th>
-                        <td id=totcharge class="text-center">${userInfo.totcharge}</td>
+                        <td id=totcharge class="text-center"><fmt:formatNumber type="number" maxIntegerDigits="3" value="${userInfo.totcharge}" />></td>
                     </tr>
                     <tr>
                         <th>기본</th>
-                        <td id=totcharge class="text-center">${userInfo.basecharge}</td>
+                        <td id=basecharge class="text-center"><fmt:formatNumber type="number" maxIntegerDigits="3" value="${userInfo.addcharge}" />></td>
                     </tr>
                     <tr>
                         <th>추가</th>
-                        <td id=totcharge class="text-center">${userInfo.addcharge}</td>
+                        <td id=addcharge class="text-center"><fmt:formatNumber type="number" maxIntegerDigits="3" value="${userInfo.addcharge}" />></td>
                     </tr>
                     <tr>
                         <th rowspan="7">등록장비</th>
@@ -115,8 +115,8 @@
         </div>
         <div class="col9">
             <div class="tabs">
-                <a href="#" class="active">과금안내내역(3)</a>
-                <a href="#">세금계산서 발행내역(3)</a>
+                <a href="#" class="active">과금안내내역(<strong>${pagination1.totalRecordCount}</strong> 건)</a>
+                <a href="#">세금계산서 발행내역(<strong>${pagination2.totalRecordCount}</strong> 건)</a>
             </div>
             <div class="tab-cont">
                 <div class="cont">
@@ -169,7 +169,7 @@
                                             <td id=c_servervolume class="text-center">${charge.servervolume}</td>
                                             <td id=c_apvolume class="text-center">${charge.apvolume}</td>
                                             <td id=c_dbmsvolume class="text-center">${charge.dbmsvolume}</td>
-                                            <td id=c_fmsvolume class="text-center">${charge.fmsvolume}</td>
+                                            <td id=c_fmsvolume class="text-center"><fmt:formatNumber type="number" maxIntegerDigits="3" value="${charge.fmsvolume}" />></td>
                                             <td id=c_totalcharge class="text-center">${charge.totalcharge}</td>
                                             <td id=c_userate class="text-center">${charge.userate}</td>
                                             <td class="text-center"></td>
@@ -224,7 +224,7 @@
                                             <td class="text-center">${tax.businesskind}</td>
                                             <td class="text-center">${tax.businesscondition}</td>
                                             <td class="text-center">${tax.issuedate}</td>
-                                            <td class="text-center">${tax.issueamount}</td>
+                                            <td class="text-center"><fmt:formatNumber type="number" maxIntegerDigits="3" value="${tax.issueamount}" />></td>
                                             <td class="text-center">N</td>
                                             <td class="text-center"></td>
                                         </tr>

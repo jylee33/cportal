@@ -1,7 +1,9 @@
 package com.hamonsoft.cportal.utils;
 
 import lombok.Data;
+import lombok.Getter;
 
+@Getter
 @Data
 public class Pagination {
 
@@ -104,95 +106,47 @@ public class Pagination {
     }
 
 
-    public int getCurrentPage() {
-        return currentPage;
-    }
-
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
-    }
-
-    public int getCntPerPage() {
-        return cntPerPage;
     }
 
     public void setCntPerPage(int cntPerPage) {
         this.cntPerPage = cntPerPage;
     }
 
-    public int getPageSize() {
-        return pageSize;
-    }
-
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
-    }
-
-    public int getTotalPageCount() {
-        return totalPageCount;
     }
 
     public void setTotalPageCount(int totalPageCount) {
         this.totalPageCount = totalPageCount;
     }
 
-    public int getFirstPage() {
-        return firstPage;
-    }
-
     public void setFirstPage(int firstPage) {
         this.firstPage = firstPage;
-    }
-
-    public int getLastPage() {
-        return lastPage;
     }
 
     public void setLastPage(int lastPage) {
         this.lastPage = lastPage;
     }
 
-    public int getFirstRecordIndex() {
-        return firstRecordIndex;
-    }
-
     public void setFirstRecordIndex(int firstRecordIndex) {
         this.firstRecordIndex = firstRecordIndex;
-    }
-
-    public int getLastRecordIndex() {
-        return lastRecordIndex;
     }
 
     public void setLastRecordIndex(int lastRecordIndex) {
         this.lastRecordIndex = lastRecordIndex;
     }
 
-    public boolean isHasPreviousPage() {
-        return hasPreviousPage;
-    }
-
     public void setHasPreviousPage(boolean hasPreviousPage) {
         this.hasPreviousPage = hasPreviousPage;
-    }
-
-    public boolean isHasNextPage() {
-        return hasNextPage;
     }
 
     public void setHasNextPage(boolean hasNextPage) {
         this.hasNextPage = hasNextPage;
     }
 
-    public int getTotalRecordCount() {
-        return totalRecordCount;
-    }
-
-    public String getSearchName() {
-        return searchName;
-    }
-
-// searchname
+    // searchname
 }
 
 

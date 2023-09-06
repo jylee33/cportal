@@ -12,10 +12,10 @@
 <script>
 
     $(document).ready(function () {
-        if ("${result}" == 1) {
+        if ("${result}" == "success") {
             alert("회원정보 변경 완료");
         } else {
-            alert("회원정보 변경 실패");
+            alert("회원정보 변경 실패\nreason - ${reason}");
         }
         self.location = "${path}/user/info";
     });

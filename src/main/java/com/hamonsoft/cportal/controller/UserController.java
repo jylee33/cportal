@@ -2,7 +2,9 @@ package com.hamonsoft.cportal.controller;
 
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.domain.MemberTaxInformation;
+import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.LoginDTO;
+import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,19 +53,18 @@ public class UserController {
 
     @Transactional
     @PostMapping("chginforesult")
-    public void chginforesult(MemberTaxInformation info, Model model) {
+    public void chginforesult(Member member, TaxInformation taxInformation, Model model) {
         logger.info("call chginforesult ......................");
-        logger.info(info.toString());
+        logger.info(member.toString());
+        logger.info(taxInformation.toString());
 
-        int result1 = userService.chgmember(info);
-        logger.info("userService.chgmember result ...................... " + result1);
-        int result2 = userService.chgtaxinformation(info);
-        logger.info("userService.chgtaxinformation result ...................... " + result2);
-
-        int result = result1 & result2;
-        logger.info("result ...................... " + result2);
-
-        model.addAttribute("result", result);
+        ResultDto resultDto = userService.chgmember(member, taxInformation);
+        if (resultDto.getTRAN_STATUS() == 1) {
+            model.addAttribute("result", "success");
+        } else {
+            model.addAttribute("result", "fail");
+            model.addAttribute("reason", resultDto.getREASON());
+        }
     }
 
     @GetMapping(value = "chgpw")
@@ -83,9 +84,13 @@ public class UserController {
         logger.info("call chgpwresult ......................");
         logger.info(member.toString());
 
-        int result = userService.chgpw(member);
-        logger.info("result ...................... " + result);
-        model.addAttribute("result", result);
+        ResultDto resultDto = userService.chgpw(member);
+        if (resultDto.getTRAN_STATUS() == 1) {
+            model.addAttribute("result", "success");
+        } else {
+            model.addAttribute("result", "fail");
+            model.addAttribute("reason", resultDto.getREASON());
+        }
     }
 
     @GetMapping(value = "withdrawal")

@@ -1,24 +1,35 @@
 package com.hamonsoft.cportal.service;
 
-import com.hamonsoft.cportal.controller.MemberController;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hamonsoft.cportal.domain.Authentication;
-import com.hamonsoft.cportal.domain.BoardVO;
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.LoginDTO;
+import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.repository.MemberRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
 //@Transactional
 public class MemberService {
+
+    @Value("${rest.url}")
+    String restURL;
 
     MemberRepository memberRepository;
     private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
@@ -36,16 +47,66 @@ public class MemberService {
         return memberRepository.selectMember(email);
     }
 
-    public void insertMember(Member member) {
-        memberRepository.insertMember(member);
+    @Transactional(rollbackFor = {Exception.class})
+    public ResultDto insertMember(Member member, TaxInformation taxInformation, Authentication authentication) {
+        ResultDto resultDto = new ResultDto();
+        try {
+            resultDto = addUser(member);
+            if (resultDto.getTRAN_STATUS() != 1) {
+                throw new RuntimeException();
+            }
+
+            memberRepository.insertMember(member);
+            memberRepository.insertTaxInfomation(taxInformation);
+            memberRepository.insertAuthentication(authentication);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+        }
+
+        return resultDto;
     }
 
-    public void insertTaxInfomation(TaxInformation taxInformation) {
-        memberRepository.insertTaxInfomation(taxInformation);
-    }
+    private ResultDto addUser(Member member) throws JsonProcessingException {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = restURL + "/user_manager/add_user";
+        logger.info("url - " + url);
 
-    public void insertAuthentication(Authentication authentication) {
-        memberRepository.insertAuthentication(authentication);
+        // Header set
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        // Body set
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("USER_ID", member.getEmail());
+        body.put("PASSWORD", member.getPassword());
+        body.put("USER_NAME", member.getMembername());
+        body.put("GRP_NAME", member.getGrpname());
+        body.put("EMAIL", member.getEmail());
+        body.put("CELL_TEL", member.getCelltel());
+        body.put("CLOUD_GRADE", member.getLicensegrade());
+
+        // Request Message
+        HttpEntity<?> request = new HttpEntity<>(body, headers);
+
+        // Request
+        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+
+        // Response 파싱
+        ObjectMapper objectMapper = new ObjectMapper();
+//        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+//        objectMapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
+//        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//        objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
+//        objectMapper.configure(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS, false);
+//        objectMapper.configure(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY, true);
+
+        ResultDto dto = objectMapper.readValue(response.getBody(), ResultDto.class);
+
+        return dto;
     }
 
     public List<Member> listAll() {

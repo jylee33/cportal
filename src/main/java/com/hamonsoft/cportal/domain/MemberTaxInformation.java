@@ -7,6 +7,7 @@ public class MemberTaxInformation {
     private String email;    //세금계산서발송기관메일
     private String companyname;
     private String membername;
+    private String grpname;
     private String celltel;
     private String password;
     private String businessname;
@@ -53,6 +54,14 @@ public class MemberTaxInformation {
 
     public void setMembername(String membername) {
         this.membername = membername;
+    }
+
+    public String getGrpname() {
+        return grpname;
+    }
+
+    public void setGrpname(String grpname) {
+        this.grpname = grpname;
     }
 
     public String getCelltel() {
@@ -244,6 +253,7 @@ public class MemberTaxInformation {
         return "MemberTaxInformation{" +
                 "email='" + email + '\'' +
                 ", membername='" + membername + '\'' +
+                ", grpname='" + grpname + '\'' +
                 ", celltel='" + celltel + '\'' +
                 ", password='" + password + '\'' +
                 ", businessname='" + businessname + '\'' +

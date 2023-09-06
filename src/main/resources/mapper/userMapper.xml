@@ -13,7 +13,12 @@
     </select>
 
     <update id="chgmember">
-        update tbmember set businessname=#{businessname}, membername=#{membername}, grpname=#{grpname}, celltel=#{celltel}, businessname=#{businessname}, businessnumber=#{businessnumber}, licensegrade=#{licensegrade}
+        update tbmember set businessname=#{businessname}, membername=#{membername}, grpname=#{grpname}, celltel=#{celltel}, businessname=#{businessname}, businessnumber=#{businessnumber}
+        where email = #{email}
+    </update>
+
+    <update id="chggrade">
+        update tbmember set licensegrade=#{licensegrade}
         where email = #{email}
     </update>
 

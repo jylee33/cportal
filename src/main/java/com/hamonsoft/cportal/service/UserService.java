@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.domain.MemberTaxInformation;
+import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.LoginDTO;
 import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.repository.UserRepository;
@@ -44,16 +45,23 @@ public class UserService {
     }
 
     @Transactional(rollbackFor = {Exception.class})
-    public ResultDto chgmember(MemberTaxInformation info) {
+    public ResultDto chgmember(Member member, TaxInformation taxInformation) {
         ResultDto resultDto = new ResultDto();
         try {
-            resultDto = chgMemberInfo(info);
+            resultDto = chgMemberInfo(member);
             if (resultDto.getTRAN_STATUS() != 1) {
                 throw new RuntimeException();
             }
 
-            userRepository.chgmember(info);
-            userRepository.chgtaxinformation(info);
+            userRepository.chgmember(member);
+            userRepository.chgtaxinformation(taxInformation);
+
+            resultDto = chgGrade(member);
+            if (resultDto.getTRAN_STATUS() != 1) {
+                throw new RuntimeException();
+            }
+
+            userRepository.chggrade(member);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -85,7 +93,7 @@ public class UserService {
 
     }
 
-    private ResultDto chgMemberInfo(MemberTaxInformation info) throws JsonProcessingException {
+    private ResultDto chgMemberInfo(Member member) throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
         String url = restURL + "/user_manager/change_info";
         logger.info("url - " + url);
@@ -97,12 +105,41 @@ public class UserService {
         // Body set
         Map<String, Object> body = new HashMap<>();
 
-        body.put("USER_ID", info.getEmail());
-        body.put("USER_NAME", info.getMembername());
-        body.put("GRP_NAME", info.getGrpname());
-        body.put("EMAIL", info.getEmail());
-        body.put("CELL_TEL", info.getCelltel());
-//        body.put("CLOUD_GRADE", info.getLicensegrade());
+        body.put("USER_ID", member.getEmail());
+        body.put("USER_NAME", member.getMembername());
+        body.put("GRP_NAME", member.getGrpname());
+        body.put("EMAIL", member.getEmail());
+        body.put("CELL_TEL", member.getCelltel());
+//        body.put("CLOUD_GRADE", member.getLicensegrade());
+
+        // Request Message
+        HttpEntity<?> request = new HttpEntity<>(body, headers);
+
+        // Request
+        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+
+        // Response 파싱
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        ResultDto dto = objectMapper.readValue(response.getBody(), ResultDto.class);
+
+        return dto;
+    }
+
+    private ResultDto chgGrade(Member member) throws JsonProcessingException {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = restURL + "/user_manager/change_grade";
+        logger.info("url - " + url);
+
+        // Header set
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        // Body set
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("USER_ID", member.getEmail());
+        body.put("CLOUD_GRADE", member.getLicensegrade());
 
         // Request Message
         HttpEntity<?> request = new HttpEntity<>(body, headers);

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.domain.MemberTaxInformation;
 import com.hamonsoft.cportal.domain.TaxInformation;
-import com.hamonsoft.cportal.dto.LoginDTO;
 import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.repository.UserRepository;
 import org.slf4j.Logger;
@@ -20,9 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -185,9 +182,52 @@ public class UserService {
     }
 
 
-    public int  withdrawal(Map<String, Object> paramMap) {
-        return userRepository.withdrawal(paramMap);
+    @Transactional(rollbackFor = {Exception.class})
+    public ResultDto withdrawal(Member member) {
+        ResultDto resultDto = new ResultDto();
+        try {
+            resultDto = closeUser(member);
+            if (resultDto.getTRAN_STATUS() != 1) {
+                throw new RuntimeException();
+            }
+
+            userRepository.withdrawal(member);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+        }
+
+        return resultDto;
     }
 
+    private ResultDto closeUser(Member member) throws JsonProcessingException {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = restURL + "/user_manager/close_user";
+        logger.info("url - " + url);
+
+        // Header set
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        // Body set
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("USER_ID", member.getEmail());
+
+        // Request Message
+        HttpEntity<?> request = new HttpEntity<>(body, headers);
+
+        // Request
+        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+
+        // Response 파싱
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        ResultDto dto = objectMapper.readValue(response.getBody(), ResultDto.class);
+
+        return dto;
+    }
 
 }

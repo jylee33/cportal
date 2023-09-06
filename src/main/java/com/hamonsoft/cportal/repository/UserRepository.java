@@ -21,7 +21,7 @@ public interface UserRepository {
     int chggrade(Member member);
     int chgtaxinformation(TaxInformation info);
     int chgpw(Member member);
-    int withdrawal(Map<String, Object> paramMap);
+    int withdrawal(Member member);
 
 
 

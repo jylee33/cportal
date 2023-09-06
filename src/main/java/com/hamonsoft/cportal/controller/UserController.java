@@ -110,17 +110,22 @@ public class UserController {
     public void withdrawalresult(Member member, Model model) {
         logger.info("call withdrawalresult ......................");
         logger.info(member.toString());
-        String email = member.getEmail();
-        String strnow = new SimpleDateFormat("yyyyMMdd").format(new Date());
-        logger.info(strnow);
+//        String email = member.getEmail();
+//        String strnow = new SimpleDateFormat("yyyyMMdd").format(new Date());
+//        logger.info(strnow);
+//
+//        Map<String, Object> paramMap = new HashMap<>();
+//        paramMap.put("email", email);
+//        paramMap.put("strnow", strnow);
 
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("email", email);
-        paramMap.put("strnow", strnow);
+        ResultDto resultDto = userService.withdrawal(member);
+        if (resultDto.getTRAN_STATUS() == 1) {
+            model.addAttribute("result", "success");
+        } else {
+            model.addAttribute("result", "fail");
+            model.addAttribute("reason", resultDto.getREASON());
+        }
 
-        int result = userService.withdrawal(paramMap);
-        logger.info("result ...................... " + result);
-        model.addAttribute("result", result);
     }
 
 }

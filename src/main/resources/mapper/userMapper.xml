@@ -33,7 +33,7 @@
     </update>
 
     <update id="withdrawal">
-        update tbmember set withdrawalyn = '1', withdrawaldate = #{strnow}
+        update tbmember set withdrawalyn = '1', withdrawaldate = DATE_FORMAT(now(),'%Y%m%d')
         where email = #{email}
     </update>
 

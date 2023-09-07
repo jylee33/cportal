@@ -299,14 +299,27 @@
 
 
 /* 모달팝업창 2023.05 */
-function popupOpen(id){
+function popupOpen(id,num){
 	$('#'+id).fadeIn(300);
 	$('body').addClass('popup-on');
+  if(num == 1){
+    $('#'+id).find('.table-type2').addClass('td1');
+  }else if(num == 2){
+    $('#'+id).find('.table-type2').addClass('td2');
+  }else if(num == 3){
+    $('#'+id).find('.table-type2').addClass('td3');
+  }else if(num == 4){
+    $('#'+id).find('.table-type2').addClass('td4');
+  }
 } 
 
 function popupClose(id){
 	$('#'+id).fadeOut(300);
 	$('body').removeClass('popup-on');
+  $('#'+id).find('.table-type2').removeClass('td1');
+  $('#'+id).find('.table-type2').removeClass('td2');
+  $('#'+id).find('.table-type2').removeClass('td3');
+  $('#'+id).find('.table-type2').removeClass('td4');
 } 
 
 // 배경선택시 닫기
@@ -315,6 +328,14 @@ $(document).mousedown(function (e){
 	if(LayerPopup.has(e.target).length === 0){
 		LayerPopup.closest('.popup-wrap').fadeOut(300);
 		$('body').removeClass('popup-on');
+
+    
+  $('.table-type2').removeClass('td1');
+  $('.table-type2').removeClass('td2');
+  $('.table-type2').removeClass('td3');
+  $('.table-type2').removeClass('td4');
+
+
 	};
 });
 

@@ -12,12 +12,12 @@
 <script>
 
     $(document).ready(function () {
-        if ("${result}" == 1) {
+        if ("${result}" == "success") {
             alert("회원 탈퇴 완료");
-            self.location = "${path}/member/logout";
         } else {
-            alert("회원 탈퇴 실패");
+            alert("회원 탈퇴 실패\nreason - ${reason}");
         }
+        self.location = "${path}/member/logout";
     });
 
 </script>

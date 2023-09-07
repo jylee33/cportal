@@ -1,0 +1,288 @@
+@charset "UTF-8";
+/**=======================
+
+	header UI CSS
+
+	1. 작성자: pub1
+	2. 생성일자: 2022-09-22
+
+======================== */
+/* gnb*/
+.gnb{
+	position: relative;
+	height:55px;
+	width: 100%;
+	background: #292929;
+}
+
+/*  logo Light animation */
+.backGradi{
+	background: linear-gradient(132deg, #292929, #292929, rgba(255,255,255,0.4), #292929, #292929);
+	background-size: 400% 400%;
+	animation: BackgroundGradient 10s ease infinite;
+}
+
+@keyframes BackgroundGradient {
+	0% {background-position: 0% 0%;}
+	50% {background-position: 0% 10%;}
+	100% {background-position: 100% 100%;}
+}
+
+
+/** ===========
+
+5.9v  jQuery Mega Menu (메뉴) Start
+
+===================*/
+
+
+ ul.mega-menu li a {
+	float: left;
+	display: block;
+	color: #fff;
+	padding: 29px 25px 3px 25px;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+	text-decoration: none;
+}
+
+ ul.mega-menu li a.dc-mega {
+	position: relative;
+	min-width: 100px;
+	padding: 0;
+	height: 55px;
+	text-align: center;
+	line-height: 79px;
+	opacity: 0.7;
+}
+
+ ul.mega-menu li a span[class*='dc-mega-icon-']{
+	display: block;
+	position: absolute;
+	top: 10px;
+	left: 40%;
+	width: 23px;
+	height: 23px;}
+ ul.mega-menu li a .dc-mega-icon {
+	background: url('../../lib/megamenu/skins/images/icon4.png') no-repeat 0 0;
+}
+
+/* 네트워크관리 */
+ ul.mega-menu li a .dc-mega-icon-nms {
+	background: url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 513px -8px;
+}
+/* 트래픽관리 */
+ ul.mega-menu li a .dc-mega-icon-tms {
+	background: url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 476px -8px;
+}
+/* 서버관리 */
+ ul.mega-menu li a .dc-mega-icon-sms {
+	background: url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 438px -8px;
+}
+/* 시설관리 */
+ ul.mega-menu li a .dc-mega-icon-fms {
+	background: url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 403px -8px;
+}
+/* 보고서 */
+ ul.mega-menu li a .dc-mega-icon-rpt {
+	 background: url('../../lib/megamenu/skins/images/ui-icons-v5-12.png') 465px -8px;
+}
+/* 환경설정 */
+ ul.mega-menu li a .dc-mega-icon-env {
+	background: url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 295px -8px;
+}
+
+/* 종합현황 */
+ ul.mega-menu li a .dc-mega-icon-alarm {
+	background: url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 548px -8px;
+}
+/* 자산관리 */
+ ul.mega-menu li a .dc-mega-icon-asset {
+	 background: url('../../lib/megamenu/skins/images/ui-icons-v5-12.png') 538px -8px;
+}
+/* 선번장 */
+ ul.mega-menu li a .dc-mega-icon-lms {
+	 background: url('../../lib/megamenu/skins/images/ui-icons-v5-12.png') 502px -8px;
+}
+/* 콜센터 */
+ ul.mega-menu li a .dc-mega-icon-ipt {
+	background: url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 331px -8px;
+}
+/* 무선관리 */
+ ul.mega-menu li a .dc-mega-icon-ap {
+	 background: url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 365px -8px;
+}
+
+ ul.mega-menu li.mega-hover a,  ul.mega-menu li a:hover
+{
+	color: #ffffff;
+	text-shadow: none;
+	background: #545454;
+	opacity: 1;
+}
+
+/**
+	level-1 메뉴 선택스타일
+	by jjung
+ */
+ ul.mega-menu li.mega-selected a
+{
+	/*background-position: 100% -40px;*/
+	color: #ffffff;
+	text-shadow: none;
+	background: #545454;
+	opacity: 1;
+}
+
+
+ ul.mega-menu li.mega-hover a [class^="dc-mega-icon"] {
+	/*background-position: 0 100%;*/
+	opacity: 1;
+}
+
+ ul.mega-menu li .sub-container {
+	position: absolute;
+	background-color: #fff;
+	margin-left: -3px;
+}
+
+ ul.mega-menu li .sub {
+	padding: 5px 0px 15px 0px;
+}
+
+ ul.mega-menu li .sub-container.mega .sub {
+	border: 1px solid #bcbaba;
+}
+
+ ul.mega-menu li .sub .row {
+	width: 100%;
+	overflow: hidden;
+	clear: both;
+	/*margin: 5px 0px 0px 0px;*/
+}
+
+ ul.mega-menu li .sub li {
+	list-style: none;
+	float: none;
+	width: 161px;
+	font-size: 1em;
+	font-weight: normal;
+}
+
+ ul.mega-menu li .sub li.mega-hdr {
+	margin: 0px 0px 0px 5px;
+	border-right: 1px solid #cccccc;
+	float: left;
+	background: url(../../lib/megamenu/skins/images/submenuBg.png) no-repeat 0
+	0;
+	font-size: 16px;
+}
+
+ ul.mega-menu li .sub li.mega-hdr.last {
+	margin-right: 0;
+	border: none;
+}
+
+ ul.mega-menu li .sub a {
+	background: none;
+	border: none;
+	text-shadow: none;
+	color: #111;
+	padding: 7px 10px;
+	display: block;
+	float: none;
+	text-decoration: none;
+	font-size: 0.9em;
+}
+
+ ul.mega-menu li .sub li.mega-hdr a.mega-hdr-a {
+	padding: 7px 10px 7px 4px;
+	margin-bottom: 10px;
+	height: 23px!important;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #303030;  /* fff  2023-02-27*/
+	font-size: 14px;
+	text-align: center;
+	cursor: default;
+	 background: #f7faff;/*  gray  2023-02-27 */
+	 width: 142px;
+}
+
+ ul.mega-menu li .sub li.mega-hdr a.mega-hdr-a:hover {
+	color: #303030;  /*  #fff  2023-02-27 */
+	text-shadow: none;
+}
+
+ ul.mega-menu .sub li.mega-hdr li a {
+	padding: 4px 5px 4px 15px;
+	background: url(../../lib/megamenu/skins/images/rec01_off.png) no-repeat 5px 14px;
+	font-weight: normal;
+	width: 135px;
+	font-size: 13px;
+}
+
+ul.mega-menu .sub li.mega-hdr li a:hover {
+	color: #307196;
+	font-weight: bold;
+	/*text-decoration:underline;*/
+	text-decoration:none;
+	background:  url(../../lib/megamenu/skins/images/rec01_on.png) no-repeat 5px 14px;
+	font-size: 13px !important;
+}
+
+ ul.mega-menu .sub ul li {
+	padding-right: 0;
+}
+
+ ul.mega-menu li .sub-container.non-mega .sub {
+	padding: 20px 20px 20px 0;
+}
+
+ ul.mega-menu li .sub-container.non-mega li {
+	padding: 0;
+	width: 190px;
+	margin: 0;
+}
+
+ ul.mega-menu li .sub-container.non-mega li a {
+	padding: 10px 5px 10px 22px;
+	background: url(../../lib/megamenu/skins/images/rec01_off.png) no-repeat 7px 10px;
+}
+
+ ul.mega-menu li .sub-container.non-mega li a:hover {
+	color: #3f7ab3;
+	background: #e9f6ff url(../../lib/megamenu/skins/images/rec01_on.png) no-repeat 7px 10px;
+}
+
+/** ===========
+
+5.9v  jQuery Mega Menu (메뉴) End
+
+===================*/
+
+/** layout - nav */
+/*#nav .favicon_component {float: right; padding:12px 10px 0px 0px; height: 55px; box-sizing:border-box;}*/
+#nav .favicon_component div {margin: 0px 4px;cursor: pointer}
+#nav .favicon_component div[class*='favicon_']{float: left;width: 32px;height: 32px;border-radius: 50%;/*background-color:rgba(255,255,255,0.1)  */}
+#nav .favicon_component div[class*='favicon_']:hover,#nav .favicon_component div[class*='favicon_']:active{float: left; width: 32px; height: 32px; border-radius: 50%;}
+
+#nav .favicon_component .favicon_dash {background:url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 229px -3px;}
+#nav .favicon_component .favicon_dash:hover, #nav .favicon_component .favicon_dash:active {background: rgba(255,255,255,0) url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 229px -87px;}
+
+#nav .favicon_component .favicon_mib {  background:url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 156px -3px;}
+#nav .favicon_component .favicon_mib:hover, #nav .favicon_component .favicon_mib:active {background: rgba(255,255,255,0)  url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 156px -88px;}
+
+#nav .favicon_component .favicon_topo { background: url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 192px -2px;}
+#nav .favicon_component .favicon_topo:hover, #nav .favicon_component .favicon_topo:active {background: rgba(255,255,255,0) url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 192px -88px;}
+
+#nav .favicon_component .favicon_admin {  background: url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 119px -3px;}
+#nav .favicon_component .favicon_admin:hover, #nav .favicon_component .favicon_admin:active {background: rgba(255,255,255,0)  url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 119px -87px;}
+
+#nav .favicon_component .favicon_logout {  background:url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 47px -3px;}
+#nav .favicon_component .favicon_logout:hover, #nav .favicon_component .favicon_logout:active {background: rgba(255,255,255,0)  url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 47px -87px;}
+
+#nav .favicon_component .favicon_sitemap {  background: url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 264px -3px;}
+#nav .favicon_component .favicon_sitemap:hover, #nav .favicon_component .favicon_sitemap:active {  background: rgba(255,255,255,0) url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 264px -88px;}
+
+#nav .favicon_component .favicon_bookmark {  background:url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 83px -3px;}
+#nav .favicon_component .favicon_bookmark:hover, #nav .favicon_component .favicon_bookmark:active {background: rgba(255,255,255,0) url('../../lib/megamenu/skins/images/ui-icons-v5-9.png') 83px -87px;}

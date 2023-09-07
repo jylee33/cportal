@@ -1,0 +1,27 @@
+/**=======================
+	로그인
+	
+	1. 작성자: 신은화
+	2. 생성일자: 2019-12-10
+	3. 수정일자: 2019-12-10
+	   - 신한생명BMT. 네티스5.0기반 신규 로그인 페이지생성
+	   
+======================== */
+#n_login {width: 100%;min-height: 100%;background-color:#f9f9f9;padding-top:0px; box-sizing: border-box;}
+.login_block {position:absolute;top:calc(50% - 300px); left:calc(50% - 500px);width: 1006px;height:600px;margin: 0 auto;background: url('../../img/login/loginBG_eng.png') center left no-repeat;}
+.login_box {position:absolute;top:150px;right:0px;width: 360px;height: 400px;text-align: center;font-family: Malgun Gothic, "맑은고딕;"}
+.login_tit{width:100%;height:50px; line-height:50px;  background-color: #505050; color:#fff; font-size:22px; font-weight:bold; text-align: center;}
+.inputBox2 {width:360px;height:270px;box-sizing: border-box;border-radius:6px;background-color: #fff; border:1px solid #505050;}
+.inputBox2 .login_form {margin: 30px 30px 0 30px;}
+.inputBox2 .login_form > div {position: relative;padding-bottom: 14px;}
+.inputBox2 .login_form > div:last-child {padding-bottom: 0;position:relative;text-align: left;font-size:12px;}
+.login_tit{width:100%;height:50px; line-height:50px;  background-color: #505050; color:#fff; font-size:22px; font-weight:bold; text-align: center;}
+.inputBox2  .login_form > div > img {position:absolute;top:15px;right:15px;}
+.inputBox2  .login_form > div > input {width: 280px;height: 50px;padding-left: 20px;border: 1px solid #c5c5c5;border-radius: 5px;color: #333;font-size: 1.2em;}
+input::-webkit-input-placeholder {color: rgba(193,193,193,1);font-style: normal;}
+input:-ms-input-placeholder {color: rgba(193,193,193,1);font-style: normal;}
+.login_btn {width:300px; height:50px; margin:20px 30px 20px 30px;}
+.login_btn button{width:300px; height:50px; border-radius:25px; background-color: #e9e9e9; text-align: center; font-size:18px; color:#000; }
+.login_btn button:hover{background-color: #d6d6d6;}
+.login_sub {width:300px; height:50px;}
+.copy_txt{line-hegiht:20px; text-align:center;font-size:12px; color:#909090;}

@@ -1,0 +1,17 @@
+﻿
+.jqx-fill-state-normal-ui-hamon-new {
+    outline: none;
+    margin: 0 0 0 0;
+    padding: 0px;
+    overflow: hidden;
+    background: transparent;
+    border: 1px solid transparent;
+}
+
+.jqxGrpTreeTab .jqx-tabs-title-ui-hamon-new, .jqx-ribbon-item-ui-hamon-new {
+    /*color: rgba(51, 51, 51, 1);*/
+    background:#fff;
+}
+
+/*applied to containers to set a background and border color. Tabs, NavigationBar, Calendar content.*/
+

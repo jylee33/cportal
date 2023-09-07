@@ -1,0 +1,281 @@
+﻿/*====
+
+좌측 탭
+
+====*/
+.jqxGrpTreeTab .jqx-tabs-header-ui-hamon-v1 {
+    height: 34px !important;
+    padding-top: 9px;
+    padding-bottom: 0;
+    box-sizing: border-box;
+}
+
+.jqxGrpTreeTab  .jqx-tabs-title-ui-hamon-v1{/* 선택되지않은 탭버튼 */
+    border:1px solid #d0d0d0;
+    background: #f8f8f8;
+    height: 13px!important;
+    border-radius: 2px 2px 0 0 ;
+    color:#424242;
+    border-bottom:#d1d1d1;
+    margin-right: 3px;
+    margin-left:3px
+}
+
+.jqxGrpTreeTab .jqx-widget-header-ui-hamon-v1{ /* 탭 배경 색상 */
+    background:#fff;
+}
+
+.jqxGrpTreeTab  .jqx-tabs-title-selected-top-ui-hamon-v1 { /* 선택된 탭버튼*/
+    color: #333;
+    background: #fff !important;
+    border-bottom: 0 !important;
+    height: 16px !important;
+    line-height:18px;
+    border-color: #d1d1d1;
+    margin-top: -2px;
+    font-weight:bold
+}
+
+.jqx-tabs-title-container-ui-hamon-v1{
+    left: 2px!important;
+}
+
+
+/*.jqx-rc-t-ui-hamon-v1 {padding-left:3px} !* 탭간 여백*!*/
+
+
+/*====
+좌측 트리
+====*/
+
+.jqxGrpTreeGrid .jqx-dropdownlist-state-hover-ui-hamon-v1{
+    border-radius:0px!important
+}
+.jqxGrpTreeGrid .jqx-dropdownlist-state-normal-ui-hamon-v1{
+    border-radius: 2px!important;
+    border-color: #c0c3d0;
+}
+
+
+.jqxGrpTreeGrid .jqx-fill-state-pressed-ui-hamon-v1 { /* 선택했을 때 */
+    /*border:1px solid rgba(182,208,242,1)!important;*/
+    background-color: #d8eaff !important;
+    /*height: 11px!important;*/
+    padding-left:-1px!important;
+    font-weight: bold;
+}
+
+.jqxGrpTreeGrid  .jqx-item-ui-hamon-v1{/* 선택되지않은 탭버튼 */
+    border:1px solid #fff;
+    background: #fff;
+    /*height: 13px;*/
+    color:#000;
+    border-radius: 0;
+    cursor: pointer;
+    font-size:12px;
+}
+.jqxGrpTreeGrid .jqx-grid-cell-hover-ui-hamon-v1{ /* mouse hover */
+    background:rgba(247,250,255,1);
+}
+
+/* 명칭/ip combo Box , 검색 input, 검색 button */
+.jqx-listitem-state-normal{border-radius:0;margin:0;border:0}
+.jqx-listbox-ui-hamon-v1{border-radius:0}
+.jqx-listitem-element-ui-hamon-v1{margin: 0px;}
+.jqx-dropdownlist-ui-hamon-v1{font-size:12px}
+.jqx-item-ui-hamon-v1{font-size:12px;cursor: pointer;}
+.jqx-input-ui-hamon-v1{border-color: #c0c3d0;}
+.jqx-rc-all-ui-hamon-v1{border-radius:2px}
+.jqx-input-group-addon-ui-hamon-v1:first-child{border-radius: 2px;}
+.jqx-rc-r-ui-hamon-v1{border-color:#c0c3d0;margin-left:-1px;border-radius:0 2px 2px 0;;border-left:0;}
+.jqx-input-group-addon-ui-hamon-v1:not(:last-child):not(:first-child) {border-bottom-left-radius: 0 !important;border-top-left-radius: 0 !important;border-bottom-right-radius: 2px !important;border-top-right-radius: 2px !important;border-left-width: 0px;}
+.jqx-listitem-state-hover-ui-hamon-v1{background:rgba(247,250,255,1);}
+.jqx-fill-state-pressed-ui-hamon-v1{background-color: rgba(231, 241, 254, 1)}
+.jqx-grid-toolbar-ui-hamon-v1{border-bottom:0}
+.jqx-fill-state-focus-ui-hamon-v1{border-color:#c0c3d0;}
+
+
+
+/*====
+최 상단 탭
+====*/
+
+.jqx-tabs .jqx-tabs-title-container-ui-hamon-v1-tab-top{
+    /*border-bottom: 1px solid #c1c4d0!important;*/
+    padding: 0;
+    margin: 0px;
+    top: 2px!important;
+}
+
+
+.jqx-tabs .jqx-tabs-header-ui-hamon-v1-tab-top {
+    margin-top: 0px;
+    background:#fff;
+}
+
+.jqx-tabs  .jqx-tabs-title-selected-top-ui-hamon-v1-tab-top { /* 선택된 탭*/
+    background: #fff !important;
+    /*border-top: 3px solid #234980!important;*/
+    border-bottom: 0 !important;
+    padding: 0px 12px 1px 12px !important;
+    margin: 0px 5px 0 0px !important;
+    color: #234980 !important;
+    font-weight: bold;
+    height: 33px !important;
+    line-height: 25px !important;
+    margin-top: 0px !important;
+    position: relative!important;
+    font-weight: bold!important;
+}
+.jqx-tabs .jqx-tabs-title-ui-hamon-v1-tab-top{
+    border-right: 1px solid #d0d0d0;
+    border-left: 1px solid #d0d0d0;
+    border-top: 1px solid #d0d0d0;
+    border-bottom:0;
+    height: 25px !important;
+    line-height: 25px;
+    padding: 0px 12px;
+    margin: 2px 5px 0px 0px;
+    background:#f8f8f8;
+    border-bottom:1px solid #d6d8e0;
+    margin-top: 0px;
+    font-size:12px;
+    color: #767981;
+    font-weight: normal;
+    display: inline-block;
+    left: 0;
+}
+
+.jqx-tabs .jqx-tabs-title-selected-top-ui-hamon-v1-tab-top:before{
+    content: "";
+    height: 3px;
+    background-image:linear-gradient(90deg, #234980, #234980, #234980);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.jqx-tabs  .jqx-tabs-title-hover-top-ui-hamon-v1-tab-top{
+    border-color: #d2e5fc;
+    background-color: #f7faff;
+} /* hover */
+
+.jqx-widget-content-ui-hamon-v1-tab-top{border:0} /* 하단요약 전체 border 삭제 */
+.jqx-tabs-content-element-ui-hamon-v1-tab-top{border: 1px solid #d0d0d0;border-top:0} /* 하단요약 content 영약 border 추가 */
+
+/*====
+중단 탭
+====*/
+
+.jqx-tabs .jqx-widget-header-ui-hamon-v1-tab-mid{
+    height:30px;
+    background:#fff;
+}
+.jqx-tabs .jqx-tabs-title-container-ui-hamon-v1-tab-mid{
+    /*height:30px*/
+    padding-top: 1px!important;
+    margin-top: 5px!important;
+}
+
+
+
+
+.jqx-tabs .jqx-tabs-header-ui-hamon-v1-tab-mid {
+    border-bottom: 1px solid #d0d0d0!important;
+    padding: 0;
+    margin: 0px;
+    top: 0px!important;
+}
+
+.jqx-tabs  .jqx-tabs-title-selected-top-ui-hamon-v1-tab-mid{ /* 선택된 탭*/
+    background:#fff!important;
+    border-bottom: 0!important;
+    padding: 0px 12px 2px 12px!important;
+    margin: 0px 0 0 5px!important;
+    color: #0b69e9!important;
+    position: relative!important;
+    line-height: 27px!important;
+    font-weight:bold!important;
+}
+
+.jqx-tabs .jqx-tabs-title-selected-top-ui-hamon-v1-tab-mid:before{
+    content: "";
+    height: 3px;
+    background-image: linear-gradient(90deg, #0b69e9, #0b69e9, #0b69e9);
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+}
+
+.jqx-tabs .jqx-tabs-title-ui-hamon-v1-tab-mid{
+    border: 0;
+    height: 24px !important;
+    line-height: 25px;
+    padding: 0px 12px;
+    margin: 1px 0px 0px 5px;
+    background: #fff;
+    border-bottom: 1px solid #d0d0d0;
+    color: #767981;
+    font-size:12px;
+    display: inline-block;
+    left: 0;
+    font-weight:normal;
+}
+
+.jqx-tabs  .jqx-tabs-title-hover-top-ui-hamon-v1-tab-mid{
+    border-color: #d2e5fc;
+    background-color: #f7faff;
+} /* hover */
+
+
+
+.jqx-tabs-arrow-left
+{
+    display: none;
+    outline: none;
+    position: relative;
+    z-index: 15;
+    float: left;
+    cursor: pointer;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    background-image: url('../lib/jqwidgets/styles/images/icon-left.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/*applied to the tab's right scroll arrow.*/
+.jqx-tabs-arrow-right
+{
+    display: none;
+}
+
+.jqx-tabs-arrow-left
+{
+    display: none;
+}
+
+
+.jqx-tabs-arrow-background
+{
+    display: none;
+    background: #eeeeee;
+}
+
+
+/*====
+하단 탭
+====*/
+
+.jqx-tabs .jqx-tabs-header-ui-hamon-v1-tab-bottom {margin-top: 0px;}
+
+
+
+/*====
+좌측 그룹 트리 그리드
+====*/
+
+
+.jqx-cell-ui-hamon-v1{height:27px;padding:0 4px} /*높이 여백 조정*/

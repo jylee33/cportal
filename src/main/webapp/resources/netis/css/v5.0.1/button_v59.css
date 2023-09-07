@@ -1,0 +1,39 @@
+@charset "utf-8";
+/**=======================
+
+	5.9v  Button
+
+	WHITE Background, ICON DELETE & FLAT design
+
+	DATE : 2022.10.05
+
+======================== */
+
+/*=== btn_A icon + text : icon delete === */
+button[class*="btn_A"]{background:#fff!important;padding:0 10px!important}
+button[class*="btn_A"]:hover{background:#EE9043!important;}
+button[class*="btn_A"]:before{background-image:none}
+
+/*==  only icon button class ==*/
+.whiteBtn{
+    position: relative;
+    display: inline-block;
+    border: 1px solid #acacac;
+    color:#2e2e2e;
+    font-size:12px;
+    width:24px;
+    height:23px;
+    line-height:23px;
+    text-align: center;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    vertical-align: top;
+    cursor: pointer;
+    background:#fff;
+    padding:0;
+}
+.whiteBtn:hover{background:#ee9043;}
+
+
+

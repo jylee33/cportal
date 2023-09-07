@@ -1,0 +1,579 @@
+﻿.jqx-rc-tl-ui-hamon
+{
+    -moz-border-radius-topleft: 0px;
+    -webkit-border-top-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+.jqx-rc-tr-ui-hamon
+{
+    -moz-border-radius-topright: 0px;
+    -webkit-border-top-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+.jqx-rc-bl-ui-hamon
+{
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+.jqx-rc-br-ui-hamon
+{
+    -moz-border-radius-bottomright: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+/*top rounded Corners*/
+.jqx-rc-t-ui-hamon
+{
+    -moz-border-radius-topleft: 0px;
+    -webkit-border-top-left-radius: 0px;
+    border-top-left-radius: 0px;
+    -moz-border-radius-topright: 0px;
+    -webkit-border-top-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+/*bottom rounded Corners*/
+.jqx-rc-b-ui-hamon
+{
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    -moz-border-radius-bottomright: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+/*right rounded Corners*/
+.jqx-rc-r-ui-hamon
+{
+    -moz-border-radius-topright: 0px;
+    -webkit-border-top-right-radius: 0px;
+    border-top-right-radius: 0px;
+    -moz-border-radius-bottomright: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+/*left rounded Corners*/
+.jqx-rc-l-ui-hamon
+{
+    -moz-border-radius-topleft: 0px;
+    -webkit-border-top-left-radius: 0px;
+    border-top-left-radius: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+/*all rounded Corners*/
+.jqx-rc-all-ui-hamon
+{
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+}
+.jqx-widget-ui-hamon {
+    font-size: 12px; line-height: 17px;
+    font-family: 'segoe ui', arial, sans-serif;
+    color: inherit;
+}
+.jqx-widget-content-ui-hamon{font-size: 12px; /*line-height: 17px;*/ font-family: 'segoe ui', arial, sans-serif; border-color: #35353A; color: #ffffff; background-color: #252526;}
+.jqx-widget-header-ui-hamon{font-size: 12px; line-height: 17px; font-family: 'segoe ui', arial, sans-serif; color: #ffffff; border-color:#35353A; background-color:#3E3E42;}
+.jqx-fill-state-normal-ui-hamon{font-size: 12px; line-height: 17px; font-family: 'segoe ui', arial, sans-serif; border-color: #35353A; color: #ffffff; background: #3E3E42;}
+.jqx-fill-state-hover-ui-hamon{font-size: 12px; line-height: 17px; font-family: 'segoe ui', arial, sans-serif; border-color:#1C97EA; color: #fff; background-color:#1C97EA;
+
+}
+.jqx-fill-state-focus-ui-hamon { border-color: #000; }
+.jqx-fill-state-pressed-ui-hamon{border-color:#007ACC; color: #fff; background-color:#007ACC;
+
+}
+.jqx-fill-state-disabled-ui-hamon {
+    color: #898989;
+}
+.jqx-input-ui-hamon {
+    border-color: #35353A;
+}
+.jqx-scrollbar-state-normal-ui-hamon, .jqx-grid-bottomright-ui-hamon, .jqx-panel-bottomright-ui-hamon, .jqx-listbox-bottomright-ui-hamon{background-color:#3E3E42;}
+.jqx-widget-ui-hamon .jqx-grid-column-header-ui-hamon, .jqx-grid-cell-ui-hamon, .jqx-widget-ui-hamon .jqx-grid-cell-ui-hamon, .jqx-widget-ui-hamon .jqx-grid-group-cell-ui-hamon, .jqx-grid-group-cell-ui-hamon{font-size: 12px; line-height: 17px; font-family: 'segoe ui', arial, sans-serif; border-color: #1C1C1E; background-color: #2A2A2C; color: #fff;}
+.jqx-tabs-title-selected-bottom-ui-hamon, .jqx-tabs-selection-tracker-bottom-ui-hamon, .jqx-tabs-title-selected-top-ui-hamon, .jqx-tabs-selection-tracker-top-ui-hamon{color: #ffffff; border-color:#35353A; border-bottom:1px solid #252526; background:#007ACC}
+.jqx-widget-ui-hamon .jqx-grid-cell-alt-ui-hamon, .jqx-widget-ui-hamon .jqx-grid-cell-sort-ui-hamon, .jqx-widget-ui-hamon .jqx-grid-cell-pinned-ui-hamon, .jqx-widget-ui-hamon .jqx-grid-cell-filter-ui-hamon, .jqx-grid-cell-sort-alt-ui-hamon, .jqx-grid-cell-filter-alt-ui-hamon, .jqx-grid-cell-pinned-ui-hamon, .jqx-grid-cell-alt-ui-hamon, .jqx-grid-cell-sort-ui-hamon{ background-color:#3E3E42; color: #fff;}
+.jqx-menu-vertical-ui-hamon{background: #3E3E42; border-color: #3E3E42;}
+.jqx-widget-ui-hamon .jqx-grid-cell-ui-hamon, .jqx-widget-ui-hamon .jqx-grid-column-header-ui-hamon, .jqx-widget-ui-hamon .jqx-grid-group-cell-ui-hamon { border-color: #35353A;}
+
+.jqx-widget-ui-hamon .jqx-grid-column-menubutton-ui-hamon, .jqx-widget-ui-hamon .jqx-grid-column-sortascbutton-ui-hamon, .jqx-widget-ui-hamon .jqx-grid-column-sortdescbutton-ui-hamon, .jqx-widget-ui-hamon .jqx-grid-column-filterbutton-ui-hamon {
+    background-color: transparent;
+    border-color: #35353A;
+}
+.jqx-window-header-ui-hamon, .jqx-input-button-header-ui-hamon, .jqx-calendar-title-header-ui-hamon, .jqx-grid-ui-hamon .jqx-widget-header-ui-hamon, .jqx-grid-header-ui-hamon, .jqx-grid-column-header-ui-hamon {font-size: 12px; line-height: 17px; font-family: 'segoe ui', arial, sans-serif; border-color: #35353A; color: #ffffff; background: #3E3E42;}
+.jqx-grid-column-menubutton-ui-hamon {
+    background-image: url('../lib/jqwidgets/styles/images/metro-icon-down-white.png');
+ }
+.jqx-calendar-cell-today-ui-hamon {
+    color: #35353A;
+}
+
+.jqx-widget-ui-hamon .jqx-grid-cell-selected-ui-hamon, .jqx-grid-cell-selected-ui-hamon{ background-color:#007ACC; border-color: #007ACC; font-size: 12px;  color:#fff;}
+.jqx-widget-ui-hamon .jqx-grid-cell-hover-ui-hamon, .jqx-grid-cell-hover-ui-hamon{ background-color:#1C97EA; border-color: #1C97EA;}
+ /*applied to the column's sort button when the sort order is ascending.*/
+ .jqx-grid-column-sortascbutton-ui-hamon {
+    background-image: url('../lib/jqwidgets/styles/images/metro-icon-up-white.png');
+ }
+.jqx-grid-column-sortdescbutton-ui-hamon {
+    background-image: url('../lib/jqwidgets/styles/images/metro-icon-down-white.png');
+}
+.jqx-checkbox-check-checked-ui-hamon{background:transparent url(../lib/jqwidgets/styles/images/check_white.png) center center no-repeat}
+.jqx-checkbox-check-indeterminate-ui-hamon{background:transparent url(../lib/jqwidgets/styles/images/check_indeterminate_white.png) center center no-repeat}
+.jqx-checkbox-hover-ui-hamon, .jqx-radiobutton-hover-ui-hamon {
+    background-color: #3E3E42;
+    border-color: #3E3E42;
+}
+.jqx-radiobutton-check-checked-ui-hamon {
+    background: #fff;
+    border-color: #fff;
+}
+ .jqx-grid-column-menubutton-ui-hamon {
+    border-style: solid;
+    border-width: 0px 0px 0px 1px;
+    border-color: transparent;
+    background-image: url('../lib/jqwidgets/styles/images/icon-menu-small-white.png') !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+ }
+.jqx-item-ui-hamon .jqx-grid-sortasc-icon
+ {
+    background-image: url('../lib/jqwidgets/styles/images/icon-sort-asc-white.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    width: 16px;
+    height: 16px;
+    float: left;
+    margin-left: -4px;
+    margin-right: 4px;
+ }
+  /*applied to the sort ascending menu item in the Grid's Context Menu*/
+.jqx-item-ui-hamon .jqx-grid-sortdesc-icon
+ {
+    background-image: url('../lib/jqwidgets/styles/images/icon-sort-desc-white.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    width: 16px;
+    height: 16px;
+    float: left;
+    margin-left: -4px;
+    margin-right: 4px;
+ }
+  /*applied to the grid menu's sort remove item/*/
+.jqx-item-ui-hamon .jqx-grid-sortremove-icon
+ {
+    background-image: url('../lib/jqwidgets/styles/images/icon-sort-remove-white.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    width: 16px;
+    height: 16px;
+    float: left;
+    margin-left: -4px;
+    margin-right: 4px;
+ }
+
+.jqx-scrollbar-thumb-state-normal-horizontal-ui-hamon, .jqx-scrollbar-thumb-state-normal-ui-hamon {
+    background: #686868; border-color: #686868;
+}
+.jqx-scrollbar-thumb-state-hover-horizontal-ui-hamon, .jqx-scrollbar-thumb-state-hover-ui-hamon {
+    background: #9E9E9E; border-color: #9E9E9E;
+}
+.jqx-scrollbar-thumb-state-pressed-horizontal-ui-hamon, .jqx-scrollbar-thumb-state-pressed-ui-hamon {
+    background: #ffffff; border-color: #ffffff;
+}
+.jqx-scrollbar-button-state-normal-ui-hamon
+{
+    border: 1px solid #3E3E42; 
+    background: #3E3E42;
+}
+/*applied to the scrollbar buttons in hovered state.*/
+.jqx-scrollbar-button-state-hover-ui-hamon
+{
+    border: 1px solid #3E3E42;
+    background: #3E3E42;
+}
+/*applied to the scrollbar buttons in pressed state.*/
+.jqx-scrollbar-button-state-pressed-ui-hamon
+{
+    border: 1px solid #3E3E42;
+    background: #3E3E42;
+}
+
+/*icons*/
+.jqx-window-collapse-button-ui-hamon
+{
+    background-image: url(../lib/jqwidgets/styles/images/metro-icon-up-white.png);
+}
+.jqx-window-collapse-button-collapsed-ui-hamon {
+  background-image: url(../lib/jqwidgets/styles/images/metro-icon-down-white.png);
+}
+.jqx-icon-arrow-up-ui-hamon, .jqx-expander-arrow-bottom-ui-hamon, .jqx-menu-item-arrow-up-ui-hamon
+{
+    background-image: url('../lib/jqwidgets/styles/images/metro-icon-up-white.png');
+}
+.jqx-icon-arrow-down-ui-hamon, .jqx-expander-arrow-top-ui-hamon, .jqx-tree-item-arrow-expand-ui-hamon, .jqx-tree-item-arrow-expand-hover-ui-hamon, .jqx-menu-item-arrow-down-ui-hamon
+{
+    background-image: url('../lib/jqwidgets/styles/images/metro-icon-down-white.png');
+}
+.jqx-icon-arrow-left-ui-hamon, .jqx-menu-item-arrow-left-ui-hamon
+{
+    background-image: url('../lib/jqwidgets/styles/images/metro-icon-left-white.png');
+}
+.jqx-icon-arrow-right-ui-hamon, .jqx-menu-item-arrow-right-ui-hamon, .jqx-tree-item-arrow-collapse-ui-hamon, .jqx-tree-item-arrow-collapse-hover-ui-hamon
+{
+    background-image: url('../lib/jqwidgets/styles/images/metro-icon-right-white.png');
+}
+.jqx-tabs-arrow-left-ui-hamon, .jqx-tree-item-arrow-collapse-rtl-ui-hamon, .jqx-tree-item-arrow-collapse-hover-rtl-ui-hamon
+{
+    background-image: url('../lib/jqwidgets/styles/images/metro-icon-left-white.png');
+}
+
+.jqx-tabs-arrow-right-ui-hamon
+{
+    background-image: url('../lib/jqwidgets/styles/images/metro-icon-right-white.png');
+}
+
+.jqx-menu-item-arrow-up-selected-ui-hamon, .jqx-icon-arrow-up-selected-ui-hamon{background-image:url('../lib/jqwidgets/styles/images/metro-icon-up-white.png');background-repeat:no-repeat;background-position:center;}
+.jqx-menu-item-arrow-down-selected-ui-hamon, .jqx-icon-arrow-down-selected-ui-hamon{background-image:url('../lib/jqwidgets/styles/images/metro-icon-down-white.png');background-repeat:no-repeat;background-position:center;}
+.jqx-menu-item-arrow-left-selected-ui-hamon, .jqx-icon-arrow-left-selected-ui-hamon{background-image:url('../lib/jqwidgets/styles/images/metro-icon-left-white.png');background-repeat:no-repeat;background-position:center;}
+.jqx-menu-item-arrow-right-selected-ui-hamon, .jqx-icon-arrow-right-selected-ui-hamon{background-image:url('../lib/jqwidgets/styles/images/metro-icon-right-white.png');background-repeat:no-repeat;background-position:center;}
+.jqx-window-close-button-ui-hamon, .jqx-icon-close-ui-hamon, .jqx-tabs-close-button-ui-hamon, .jqx-tabs-close-button-hover-ui-hamon, .jqx-tabs-close-button-selected-ui-hamon{background-image:url(../lib/jqwidgets/styles/images/close_white.png);  background-repeat:no-repeat;  background-position:center}
+.jqx-listbox-feedback-ui-hamon {
+    border-top: 1px dashed #fff;
+}
+
+.jqx-scrollbar-ui-hamon .jqx-icon-arrow-up-selected-ui-hamon{background-image:url('../lib/jqwidgets/styles/images/metro-icon-up-white.png'); background-repeat:no-repeat; background-position:center;}
+.jqx-scrollbar-ui-hamon .jqx-icon-arrow-down-selected-ui-hamon{background-image:url('../lib/jqwidgets/styles/images/metro-icon-down-white.png'); background-repeat:no-repeat; background-position:center;}
+.jqx-scrollbar-ui-hamon .jqx-icon-arrow-left-selected-ui-hamon{background-image:url('../lib/jqwidgets/styles/images/metro-icon-left-white.png'); background-repeat:no-repeat; background-position:center;}
+.jqx-scrollbar-ui-hamon .jqx-icon-arrow-right-selected-ui-hamon{background-image:url('../lib/jqwidgets/styles/images/metro-icon-right-white.png');background-repeat:no-repeat; background-position:center;}
+.jqx-slider-button-ui-hamon
+{
+    border-radius: 100%;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+}
+.jqx-input-button-content-ui-hamon
+{  
+    font-size: 10px;
+}
+.jqx-dropdownlist-state-normal-ui-hamon, .jqx-dropdownlist-state-hover-ui-hamon, .jqx-dropdownlist-state-selected-ui-hamon,
+.jqx-scrollbar-button-state-hover-ui-hamon, .jqx-scrollbar-button-state-normal-ui-hamon, .jqx-scrollbar-button-state-pressed-ui-hamon,
+.jqx-scrollbar-thumb-state-normal-horizontal-ui-hamon, .jqx-scrollbar-thumb-state-hover-horizontal-ui-hamon, .jqx-scrollbar-thumb-state-pressed-horizontal-ui-hamon,
+.jqx-scrollbar-thumb-state-normal-ui-hamon, .jqx-scrollbar-thumb-state-pressed-ui-hamon, .jqx-button-ui-hamon, .jqx-tree-item-hover-ui-hamon, .jqx-tree-item-selected-ui-hamon,
+.jqx-tree-item-ui-hamon, .jqx-menu-item-ui-hamon, .jqx-menu-item-hover-ui-hamon, .jqx-menu-item-selected-ui-hamon, .jqx-menu-item-top-ui-hamon, .jqx-menu-item-top-hover-ui-hamon, 
+.jqx-menu-item-top-selected-ui-hamon, .jqx-slider-button-ui-hamon, .jqx-slider-slider-ui-hamon
+ {
+    -webkit-transition: background-color 100ms linear;
+     -moz-transition: background-color 100ms linear;
+     -o-transition: background-color 100ms linear;
+     -ms-transition: background-color 100ms linear;
+     transition: background-color 100ms linear;
+}
+.jqx-switchbutton-ui-hamon {
+    -moz-border-radius: 0px; 
+    -webkit-border-radius: 0px; 
+    border-radius: 0px;
+    border: 2px solid #35353A;
+}
+.jqx-switchbutton-thumb-ui-hamon {
+    width: 12px;
+    background: #000;
+    border: 1px solid #000;
+}
+.jqx-switchbutton-label-on-ui-hamon {
+    background: #007ACC;
+    color: #007ACC;
+}
+.jqx-switchbutton-label-off-ui-hamon {
+    background: #a6a6a6;
+    color: #a6a6a6;
+}
+
+.jqx-switchbutton-wrapper-ui-hamon {
+}
+.jqx-grid-group-collapse-ui-hamon {
+    background-image: url(../lib/jqwidgets/styles/images/metro-icon-right-white.png);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+.jqx-grid-group-collapse-rtl-ui-hamon
+{
+    padding-right: 0px;
+    background-image: url(../lib/jqwidgets/styles/images/metro-icon-left-white.png);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+.jqx-grid-group-expand-ui-hamon, .jqx-grid-group-expand-rtl-ui-hamon
+{
+    padding-right: 0px;
+    background-image: url(../lib/jqwidgets/styles/images/metro-icon-down-white.png);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+.jqx-icon-arrow-first-ui-hamon, .jqx-icon-arrow-first-hover-ui-hamon, .jqx-icon-arrow-first-selected-ui-hamon
+{
+    background-image: url('../lib/jqwidgets/styles/images/metro-icon-first-white.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jqx-icon-arrow-last-ui-hamon, .jqx-icon-arrow-last-hover-ui-hamon, .jqx-icon-arrow-last-selected-ui-hamon
+{
+    background-image: url('../lib/jqwidgets/styles/images/metro-icon-last-white.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jqx-grid-cell-ui-hamon.jqx-grid-cell-selected-ui-hamon>.jqx-grid-group-expand-ui-hamon,
+.jqx-grid-cell-ui-hamon.jqx-grid-cell-hover-ui-hamon>.jqx-grid-group-expand-ui-hamon {
+    background-image: url('../lib/jqwidgets/styles/images/metro-icon-down-white.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jqx-grid-cell-ui-hamon.jqx-grid-cell-selected-ui-hamon>.jqx-grid-group-collapse-ui-hamon,
+.jqx-grid-cell-ui-hamon.jqx-grid-cell-hover-ui-hamon>.jqx-grid-group-collapse-ui-hamon {
+    background-image: url('../lib/jqwidgets/styles/images/metro-icon-right-white.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jqx-grid-cell-ui-hamon.jqx-grid-cell-selected-ui-hamon>.jqx-grid-group-collapse-rtl-ui-hamon,
+.jqx-grid-cell-ui-hamon.jqx-grid-cell-hover-ui-hamon>.jqx-grid-group-collapse-rtl-ui-hamon {
+    background-image: url('../lib/jqwidgets/styles/images/metro-icon-left-white.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jqx-grid-cell-ui-hamon.jqx-grid-cell-selected-ui-hamon>.jqx-grid-group-expand-rtl-ui-hamon,
+.jqx-grid-cell-ui-hamon.jqx-grid-cell-hover-ui-hamon>.jqx-grid-group-expand-rtl-ui-hamon {
+    background-image: url('../lib/jqwidgets/styles/images/metro-icon-down-white.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jqx-tree-grid-expand-button-ui-hamon {
+    margin-top: 3px;
+}
+.jqx-icon-search-ui-hamon
+{
+    background-image: url(../lib/jqwidgets/styles/images/search_white.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.jqx-passwordinput-password-icon-ui-hamon, .jqx-passwordinput-password-icon-rtl-ui-hamon
+{
+    background-image: url(../lib/jqwidgets/styles/images/icon-showpassword-white.png) !important;
+    background-repeat: no-repeat !important;
+}
+.jqx-icon-calendar-ui-hamon, .jqx-icon-calendar-hover-ui-hamon, .jqx-icon-calendar-pressed-ui-hamon {
+    background-image: url('../lib/jqwidgets/styles/images/icon-calendar-white.png');
+}
+.jqx-icon-time-ui-hamon, .jqx-icon-time-hover-ui-hamon, .jqx-icon-time-pressed-ui-hamon {
+    background-image: url('../lib/jqwidgets/styles/images/icon-time-white.png');
+}
+.jqx-icon-delete-ui-hamon
+{
+    background-image: url('../lib/jqwidgets/styles/images/icon-delete-white.png');
+}
+.jqx-icon-edit-ui-hamon
+{
+    background-image: url('../lib/jqwidgets/styles/images/icon-edit-white.png');
+}
+.jqx-icon-save-ui-hamon
+{
+    background-image: url('../lib/jqwidgets/styles/images/icon-save-white.png');
+}
+.jqx-icon-cancel-ui-hamon
+{
+    background-image: url('../lib/jqwidgets/styles/images/icon-cancel-white.png');
+}
+.jqx-icon-search-ui-hamon
+{
+    background-image: url(../lib/jqwidgets/styles/images/search_white.png);
+}
+.jqx-icon-plus-ui-hamon
+{
+    background-image: url(../lib/jqwidgets/styles/images/plus_white.png);
+}
+.jqx-menu-minimized-button-ui-hamon {
+   background-image: url('../lib/jqwidgets/styles/images/icon-menu-minimized-white.png');
+}
+.jqx-editor-toolbar-icon-ui-hamon {
+    background: url('../lib/jqwidgets/styles/images/html_editor_white.png') no-repeat;
+}
+.jqx-layout-ui-hamon
+{
+    background-color: #35353A;
+}
+.jqx-layout-pseudo-window-pin-icon-ui-hamon
+{
+    background-image: url("../lib/jqwidgets/styles/images/pin-white.png");
+}
+.jqx-layout-pseudo-window-pinned-icon-ui-hamon
+{
+    background-image: url("../lib/jqwidgets/styles/images/pinned-white.png");
+}
+.jqx-scheduler-month-cell-ui-hamon, .jqx-scheduler-time-column-ui-hamon, .jqx-scheduler-toolbar-ui-hamon
+{
+    background: #35353A !important;
+    color: #fff  !important;
+}
+.jqx-widget-ui-hamon .jqx-scheduler-middle-cell-ui-hamon, .jqx-scheduler-middle-cell-ui-hamon {
+    border-bottom-color: #35353A !important;
+}
+.jqx-kanban-item-ui-hamon {
+    box-shadow:none;
+}
+
+.jqx-input-ui-hamon {
+    color: #fff;
+}
+
+/**=======================
+	2018-09-13
+	작성자 : 신은화
+======================== */
+
+/* netis.css
+   추가 및 수정 */
+
+/* 전체 배경 색상 */
+#section {background-color:#232324;}
+
+/* 메인 타이틀 */
+.titleArea {/*background: transparent;*/ color:#fff;}
+.mainTitle {color:inherit;}
+
+/* 좌측 타이틀 */
+.leftTitle {border:1px solid #353535;}
+
+/* 배너 타이틀 */
+.dashTitleBox {background:transparent;}
+.ctrlTitle {color:inherit; opacity:1;}
+
+/* Search Box */
+.searchBox {background:transparent; border:1px solid #4e4e4e;}
+.searchBtn {top:2px;}
+
+/* 디폴트 화면 배경 색상 */
+.ctrlContent {background-color:#232324;}
+
+/* button.css
+   추가 및 수정 */
+
+/**=======================
+ 배너 아이콘 - 작은 사이즈
+======================== */
+
+.p_btnRefIcon{float:left; width:24px; height:24px; background: url(../img/Btn/IconBtn-Refresh-white.svg) no-repeat center center; opacity: 0.54; cursor: pointer; background-size:90%;}
+.p_btnRefIcon:hover,
+.p_btnRefIcon:active {opacity: 0.87;}
+.p_btnRefIcon:visited {opacity: 0.24;}
+
+.p_btnExcelIcon{float:left; width:24px; height:24px; background: url(../img/Btn/IconBtn-Excel-white.svg) no-repeat center center; opacity: 0.54; cursor: pointer; background-size:90%;}
+.p_btnExcelIcon:hover,
+.p_btnExcelIcon:active {opacity: 0.87;}
+.p_btnExcelIcon:visited {opacity: 0.24;}
+
+.p_btnSetIcon{width:24px; height:24px; background: url(../img/Btn/IconBtn-WidgetSetting-white.svg) no-repeat center center; opacity: 0.54; cursor: pointer; background-size:90%;}
+.p_btnSetIcon:hover,
+.p_btnSetIcon:active {opacity: 0.87;}
+.p_btnSetIcon:visited {opacity: 0.24;}
+
+
+/**=======================
+ 타이틀 아이콘 - 큰 사이즈
+======================== */
+
+.p_btnRefIcon_L{width:30px; height:30px; background: url(../img/Btn/IconBtn-Refresh-white.svg) no-repeat center center; opacity: 0.54;}
+.p_btnRefIcon_L:hover,
+.p_btnRefIcon_L:active {opacity: 0.87;}
+.p_btnRefIcon_L:visited {opacity: 0.24;}
+
+.p_btnExport_L{width:30px; height:30px; background: url(../img/Btn/IconBtn-Excel-white.svg) no-repeat center center; opacity: 0.54;}
+.p_btnExport_L:hover,
+.p_btnExport_L:active {opacity: 0.87;}
+.p_btnExport_L:visited {opacity: 0.24;}
+
+.p_btnMaxMin{width:30px; height:30px; background: url(../img/Btn/IconBtn-Maxmize-white.svg) no-repeat center center; opacity: 0.54; cursor: pointer;}
+.p_btnMaxMin:hover,
+.p_btnMaxMin:active {opacity: 0.87;}
+.p_btnMaxMin:visited {opacity: 0.24;}
+
+.p_btnSetting{width:30px; height:30px; background: url(../img/Btn/IconBtn-WidgetSetting-white.svg) no-repeat center center; opacity: 0.54; cursor: pointer;}
+.p_btnSetting:hover,
+.p_btnSetting:active {opacity: 0.87;}
+.p_btnSetting:visited {opacity: 0.24;}
+
+/* 최소화 버튼 추가 */
+.p_btnMin_L { width:30px; height:30px; background:url(../img/Btn/IconBtn-Minimize-white.svg) no-repeat center center; opacity:0.54; cursor:pointer;}
+.p_btnMin_L:hover,
+.p_btnMin_L:active {opacity: 0.87;}
+.p_btnMin_L:visited {opacity: 0.24;}
+
+/* highcharts-dark.css
+   추가 및 수정 */
+
+/* 하이차트 그래프 및 텍스트 색상 */
+
+.jqx-widget-content, .jqx-fill-state-normal { border-color:#606060!important;} /* 전체 배경 보더 색상 */
+
+.highcharts-axis-labels, .highcharts-xaxis-labels tspan {fill:#f1f1f1;}
+.highcharts-legend-item, .highcharts-bar-series, .highcharts-color-0, .highcharts-series-0  tspan{fill:#fff; color:#fff;}
+.highcharts-legend-item, .highcharts-bar-series, .highcharts-color-1, .highcharts-series-1 tspan {fill:#fff; color:#fff;}
+
+.highcharts-axis-labels, .highcharts-yaxis-labels tspan {fill:#fff; color:#fff;}
+.highcharts-axis-labels, .highcharts-yaxis-labels text {fill:#fff!important; color:#fff!important;}
+
+.highcharts-tooltip tspan {fill:#e3e3e3; color:#e3e3e3;}
+
+/**=======================
+	2018-09-19
+	FMS CSS 추가 및 수정
+	작성자 : 신은화
+======================== */
+
+/* netis.css
+   추가 및 수정 */
+
+div[id^=fms].fmsWidget .allStatus {width:100%; height:100%;}
+
+div[id^=fms].fmsWidget .fmsGrp {
+    /*div[id^=fms].fmsWidget .fmsGrp {*/
+    box-sizing:border-box;
+    margin:auto;
+    width:60%;
+    height:75%;
+    display:flex;
+    -webkit-display:flex;
+    align-items: center;
+    -webkit-align-items: center;
+}
+
+div[id^=fms].fmsWidget .fmsIcon {width:50%;}
+div[id^=fms].fmsWidget .alarmStatus {width:25%; margin-left: 20%;}
+
+div[id^=fms].fmsWidget .fmsIcon img {max-width:100%; height:100%;}
+div[id^=fms].fmsWidget .alarmStatus img {max-width:100%; height:100%;}
+
+div[id^=fms].fmsWidget .fmsNotes {width:200px; height:25%; margin:auto; padding-top:2.5%; box-sizing:border-box;}
+div[id^=fms].fmsWidget .fmsNotes li {font-weight: bold; float: left; margin-right:12px;}
+div[id^=fms].fmsWidget .fmsNotes li:last-child {margin-right: 0;}
+div[id^=fms].fmsWidget .fmsNotes span { display: inline-block; box-sizing: border-box; width:12px; height:12px; margin-right: 2px;}
+div[id^=fms].fmsWidget .fmsNotes li:nth-child(1) span {background:#f64431; border:1px solid #d83625;}
+div[id^=fms].fmsWidget .fmsNotes li:nth-child(2) span {background:#44ad44; border:1px solid #359435;}
+div[id^=fms].fmsWidget .fmsNotes li:nth-child(3) span {background:#b5b5b5; border:1px solid #9f9f9f;}
+div[id^=fms].fmsWidget .fmsNotes li:nth-child(4) span {background:#feee24; border:1px solid #e8d80f;}
+
+
+/* highcharts-dark.css
+   추가 및 수정 */
+
+.highcharts-background {fill:#232324!important;}
+
+.highcharts-grid-line {
+    stroke:none!important;
+}
+
+.highcharts-data-labels, .highcharts-series-0, .highcharts-solidgauge-series, .highcharts-tracker span {color:#fff!important;}
+
+.grid-stack>.grid-stack-item>.grid-stack-item-content {
+    border: 1px solid #606060!important;
+}

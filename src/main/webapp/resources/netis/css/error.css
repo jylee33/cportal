@@ -1,0 +1,89 @@
+@charset "utf-8";
+
+html,body{
+    font-family: "맑은 고딕", "sans-serif";
+    width: 100%;
+    height: 100%;
+    background-color:#f9f9f9;
+    overflow: hidden;
+    margin:0;
+    padding:0;
+}
+
+/*로그인 - 홈페이지 관리자*/
+.message_area{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.message_box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 340px;
+    height: auto;
+    text-align: center;
+    background-color:#ffffff;
+    border: 1px solid  #d0d0d0;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-left: -170px;
+    margin-top:-200px;
+}
+
+.message_box h1, .message_box h2, .message_box p {margin: 0; padding:0;}
+
+.message_box h1{
+    position:initial;
+    margin:0;
+    padding:0;
+    display: inline-block;
+    width:338px;
+    height: 50px;
+    font-size:20px;
+    line-height: 50px;
+    background-color:#133b52;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color:#ffffff;
+}
+
+.message_box h2{
+    margin:0;
+    padding:0;
+    font-size:100px;
+    line-height: 100px;
+    font-weight:bold;
+    color:#3f8ece;
+}
+
+.message_box h2+p{
+    margin:0px 0px 20px 0px;
+    padding:0;
+    font-size:18px;
+    font-weight:bold;
+    color:#808080;
+    text-transform:uppercase ;
+}
+
+.message_box img {margin-bottom: 5px;}
+
+.message_box div.message_div{ padding:30px 0 30px; font-size:15px; }
+
+.message_btn {
+    margin: auto;
+    width:140px;
+    height:40px;
+    line-height: 40px;
+    margin-bottom:40px;
+    background-color:#a0a0a0;
+    border-radius:5px;
+}
+
+.message_btn:hover {background-color:#808080;}
+
+.message_btn a {
+    font-size:15px;
+    color:#ffffff;
+    text-decoration: none;
+}

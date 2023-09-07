@@ -5,7 +5,6 @@ import com.hamonsoft.cportal.dto.MemberLicenseDto;
 import com.hamonsoft.cportal.service.LicenseManageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -63,10 +62,10 @@ public class LicenseManageController {
 //        return mav;
 //    }
 
-    @RequestMapping(value = "/credit") // memberinfo
+    @RequestMapping(value = "/creditinfo") // memberinfo
     public ModelAndView creditList(Map<String, Object> map, HttpServletRequest request) throws Exception {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("license/credit");
+        mav.setViewName("/license/creditinfo");
 
         HttpSession session = request.getSession();
         Member member = (Member) session.getAttribute("login");
@@ -110,7 +109,7 @@ public class LicenseManageController {
             functioncode = "10";
         }
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("license/aidcode");
+        mav.setViewName("/license/aidcodeinfo");
         mav.addObject("aidInfo",licensemanageService.aidfunctionList(functioncode));
         //logger.info("LicenseManageController licensemanageService ---->"+licensemanageService.aidfunctionList(functioncode));
         return mav;
@@ -148,10 +147,10 @@ public class LicenseManageController {
 //        return "/license/aidcode";
 //    }
 
-    @RequestMapping(value="/aidcode")
+    @RequestMapping(value="/aidcodeinfo")
     public ModelAndView aidfunctionList(Map<String, Object> map, HttpServletRequest request) throws Exception {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("license/aidcode");
+        mav.setViewName("/license/aidcodeinfo");
         logger.info("LicenseManageController aidfunctionList           DDDDDDDDD---->");
         return mav;
     }

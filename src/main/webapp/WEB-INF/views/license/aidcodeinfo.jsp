@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@include file="../include/header_2.jsp" %>
+<%@include file="../include/header_3.jsp" %>
 <div class="container">
     <div class="h3-head">
         <h3 class="h3">라이선스 정책 관리</h3>
@@ -13,7 +13,7 @@
         <div class="tabs">
             <a href="${path}/license/licensemanage" >라이선스 정책 관리</a>
             <a href="#" class="active">라이선스 제공 기능</a>
-            <a href="${path}/license/credit">Credit 제공</a>
+            <a href="${path}/license/creditinfo">Credit 제공</a>
         </div>
         <div class="right">
             <form autocomplete="on" action="/portal/license/aidcode" method="post">
@@ -44,7 +44,7 @@
     $(document).ready(function($){
         alert("...........................");
         jQuery(function () {
-            $("#aidInfo").jqGrid({
+            $("#aidInfo").jqxGrid({
                 url : "${path}/license/aidview",
                 dataType:'json',
                 colNames:['지원관리번호','지원기능','FREE','BASIC','PRO','ENTERPRISE','기능구분','사용여부','시작일자','종료일자','정렬기준'],

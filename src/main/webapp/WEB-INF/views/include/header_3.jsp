@@ -17,9 +17,11 @@
     <link rel="stylesheet" type="text/css" href="${path}/resources/css/sumoselect.css" />
     <link rel="stylesheet" type="text/css" href="${path}/resources/css/front.css" />
     <link rel="stylesheet" type="text/css" href="${path}/resources/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="${path}/resources/css/ui.jqgrid.css">
+    <!-- <script type="text/javascript" src="${path}/resources/js/jquery-1.11.3.min.js"></script> -->
 
     <%@include file="portalinc.jsp" %>
-    <script type="text/javascript" src="${path}/resources/js/jquery.sumoselect.js"></script>
+
     <script type="text/javascript" src="${path}/resources/js/front.js"></script>
     <script>
         jQuery.browser = {};

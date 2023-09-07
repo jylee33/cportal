@@ -1,17 +1,19 @@
-<%@page import="com.hm.netis.common.AppGlobal" %>
-<%@ page import="com.hm.netis.common.SiteEnum" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!-- %@page import="com.hm.netis.common.AppGlobal" % -->
+<!--%@ page import="com.hm.netis.common.SiteEnum" % -->
+<!--%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" % -->
+<!--
 <meta http-equiv='X-UA-Compatible' content='IE=edge'>
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="no-cache">
 <meta http-equiv="Expires" content="-1">
 <meta http-equiv="Cache-Control" content="no-cache">
 <%--<meta http-equiv="set-cookie" content="SameSite=Strict" /> <!-- 강도: Lax < Strict < None -->--%>
-
-<!-- v5.0.1 css-->
+-->
+<!-- v5.0.1 css
 <link rel="stylesheet" type="text/css" href="${path}/netis/css/v5.0.1/jqx.hamon.css"/>
 <link rel="stylesheet" type="text/css" href="${path}/netis/css/v5.0.1/jqx.hamon.v1.css">
 <link rel="stylesheet" type="text/css" href="${path}/netis/css/v5.0.1/jqx.ui-hamon-gray.css"/>
+-->
 <%--<link rel="stylesheet" type="text/css" href="${path}/netis/css/v5.0.1/netis.css"/>--%>
 
 <%--<link rel="stylesheet" type="text/css"--%>
@@ -53,7 +55,7 @@
 <script src="${path}/netis/webjars/highcharts/8.0.4/highcharts-3d.js"></script>
 <script src="${path}/netis/webjars/highcharts/8.0.4/modules/exporting.js"></script>
 
-<script src="${path}/netis/js/hm/highchartscustomEvents.js"></script>
+<!--script src="${path}/netis/js/hm/highchartscustomEvents.js"></script -->
 <script src="${path}/netis/webjars/highcharts/8.0.4/modules/solid-gauge.js"></script>
 
 <script src="${path}/netis/lib/megamenu/jquery.hoverIntent.minified.js"></script>
@@ -67,7 +69,7 @@
 <!-- elastic search 2023.03.21 사용하지 않음으로 주석 처리 -->
 <%--<script src="${path}/netis/lib/elasticsearch/elasticsearch.min.js"></script> --%>
 
-<!-- hamon -->
+<!-- hamon
 <script src="${path}/netis/js/hm/master.js"></script>
 <script src="${path}/netis/js/hm/hm.prototype.js"></script>
 <script src="${path}/netis/js/hm/hm.resource.js"></script>
@@ -150,6 +152,7 @@
 <script src="${path}/netis/js/hm/hm.jqx.dataadapter.v2.js"></script>
 <script src="${path}/netis/js/hm/hm.jqx.grid.v2.js"></script>
 <script src="${path}/netis/js/hm/hm.boxcondition.js"></script>
+-->
 <script src="${path}/netis/lib/jquery.i18n.properties.min.js"></script>
 
 <link rel="stylesheet" href="${path}/netis/lib/colorpicker/spectrum.css"/>

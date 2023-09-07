@@ -16,16 +16,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" type="text/css" href="${path}/resources/css/sumoselect.css" />
     <link rel="stylesheet" type="text/css" href="${path}/resources/css/front.css" />
-    <link rel="stylesheet" type="text/css" href="${path}/resources/css/jquery-1.11.3-ui.css" />
-    <%--    <link rel="stylesheet" type="text/css" href="${path}/resources/js/jqwidgets/styles/jqx.base.css" />--%>
-    <link rel="stylesheet" type="text/css" href="${path}/resources/css/themes/redmond/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="${path}/resources/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="${path}/resources/css/ui.jqgrid.css">
-    <!-- <script type="text/javascript" src="${path}/resources/js/jquery-1.11.3.min.js"></script> -->
 
-    <script type="text/javascript" src="${path}/resources/jqGrid-4.7.1/jquery.js"></script>
-    <script type="text/javascript" src="${path}/resources/js/jquery.jqGrid.min.js"></script>
-    <script type="text/javascript" src="${path}/resources/js/i18n/grid.locale-en.js"></script>
+    <%@include file="portalinc.jsp" %>
     <script type="text/javascript" src="${path}/resources/js/jquery.sumoselect.js"></script>
     <script type="text/javascript" src="${path}/resources/js/front.js"></script>
     <script>

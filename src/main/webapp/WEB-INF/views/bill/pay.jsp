@@ -100,28 +100,34 @@
 					//
 					// alert(msg);
 					$.ajax({
-						url: "${path}/bill/complete",	//서버의 결제 정보를 받는 endpoint
+						url: "${path}/verifyIamport/" + rsp.imp_uid,	//서버의 결제 정보를 받는 endpoint
+						// beforeSend: function (xhr) {
+						// 	xhr.setRequestHeader(header, token);
+						// },
 						type: 'POST',
 						datatype: 'json',
 						data: {
-							imp_uid: rsp.imp_uid,
-							merchant_uid: rsp.merchant_uid
+							// imp_uid: rsp.imp_uid,
+							// merchant_uid: rsp.merchant_uid
 						}
-					}).done(function (data) {
+					}).done(function (result) {
 						// if (everything_fine) {
-						var msg = '결제가 완료되었습니다.';
-						msg += '\n고유ID : ' + rsp.imp_uid;
-						msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-						msg += '\n결제 금액 : ' + rsp.paid_amount;
-						msg += '\n카드 승인번호 : ' + rsp.apply_num;
+						if(rsp.paid_amount === result.response.amount){
+							var msg = '결제가 완료되었습니다.';
+							msg += '\n고유ID : ' + rsp.imp_uid;
+							msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+							msg += '\n결제 금액 : ' + rsp.paid_amount;
+							msg += '\n카드 승인번호 : ' + rsp.apply_num;
 
-						alert(msg);
-						// } else {
-						//
-						// }
+							alert(msg);
+						} else {
+							alert("결제에 실패했습니다."+"\n에러코드 : " + rsp.error_code + "\n에러 메시지 : " + rsp.error_message);
+						}
+					}).fail(function(error){
+						alert(JSON.stringify(error));
 					});
 				} else {
-					var msg = "결제에 실패하였습니다.\n에러 내용: " + rsp.error_msg;
+					var msg = "결제에 실패했습니다.\n에러 내용: " + rsp.error_msg;
 					alert(msg);
 				}
 			});

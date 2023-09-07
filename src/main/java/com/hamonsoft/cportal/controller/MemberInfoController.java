@@ -1,21 +1,17 @@
 package com.hamonsoft.cportal.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.dto.MemberLicenseDto;
 import com.hamonsoft.cportal.service.MemberInfoService;
 import com.hamonsoft.cportal.utils.Pagination;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
@@ -193,7 +189,7 @@ public class MemberInfoController {
             Map<String, Object> map, HttpServletRequest request) throws Exception {
 
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("/charge/individualinfo");
+        mav.setViewName("charge/individualinfo");
         HttpSession session = request.getSession();
         Member member = (Member) session.getAttribute("login");
         logger.info("MemberInfoController individualinfo member ---->"+member.getEmail()+"  getAdministratoryn--> "+member.getAdministratoryn());

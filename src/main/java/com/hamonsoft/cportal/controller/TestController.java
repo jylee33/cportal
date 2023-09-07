@@ -25,6 +25,9 @@ public class TestController {
     public void jqgrid(Model model) {
 
     }
+    @GetMapping(value = "jqgrid_002")
+    public void jqgrid_002(Model model) {
 
+    }
 
 }

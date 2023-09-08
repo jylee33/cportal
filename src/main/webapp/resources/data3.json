@@ -1,0 +1,35 @@
+{
+    "resultCode": "S0001",
+    "res": [
+        {
+            "uid": "user00",
+            "uname": "IRON MAN",
+            "upw": "user00",
+            "upoint": 0
+        },
+        {
+            "uid": "user01",
+            "uname": "CAPTAIN",
+            "upw": "user01",
+            "upoint": 0
+        },
+        {
+            "uid": "user02",
+            "uname": "HULK",
+            "upw": "user02",
+            "upoint": 70
+        },
+        {
+            "uid": "user03",
+            "uname": "Thor",
+            "upw": "user03",
+            "upoint": 10
+        },
+        {
+            "uid": "user10",
+            "uname": "Quick Silver",
+            "upw": "user10",
+            "upoint": 0
+        }
+    ]
+}

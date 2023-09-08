@@ -21,6 +21,7 @@
 
 <div class="container">
     <div id="grid"></div>
+    <div id="grid2"></div>
 </div>
 
 
@@ -56,6 +57,35 @@
                     { text: 'Calories', datafield: 'calories', width: 180 },
                     { text: 'Total Fat', datafield: 'totalfat', width: 120 },
                     { text: 'Protein', datafield: 'protein', minwidth: 120 }
+                ]
+            });
+
+        url = "http://localhost:8090/portal/user/findAll";
+        // prepare the data
+        source =
+            {
+                datatype: "json",
+                datafields: [
+                    { name: 'uid', type: 'string' },
+                    { name: 'uname', type: 'string' },
+                    { name: 'upw', type: 'string' },
+                    { name: 'upoint', type: 'int' }
+                ],
+                id: 'id',
+                url: url,
+                type: "POST"
+            };
+        dataAdapter = new $.jqx.dataAdapter(source);
+        $("#grid2").jqxGrid(
+            {
+                width: 1000,
+                source: dataAdapter,
+                // columnsresize: true,
+                columns: [
+                    { text: 'uid', datafield: 'uid', width: 250 },
+                    { text: 'uname', datafield: 'uname', width: 250 },
+                    { text: 'upw', datafield: 'upw', width: 180 },
+                    { text: 'upoint', datafield: 'upoint', width: 120 }
                 ]
             });
     });

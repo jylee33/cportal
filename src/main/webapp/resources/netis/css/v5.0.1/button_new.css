@@ -1,0 +1,369 @@
+@charset "utf-8";
+/**=======================
+	버튼
+
+	1. 작성자:
+	2. 생성일자:
+
+======================== */
+
+/*2019버튼 - 전체적인 스타일*/
+.btn_A{display: inline-block; position: relative;border: 1px solid #acacac; color:#2e2e2e; font-size:12px;letter-spacing: -1px;padding:0 10px;
+    height:23px;
+    line-height:22px;
+    text-align: center;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background:url('img/bg_A.png') repeat-x; vertical-align: top;
+    cursor: pointer;
+}
+.btn_A:hover{border: 1px solid #a7652f; color:#fff;
+    text-align: center;
+    background:url('img/bg_A_over.png') repeat-x;
+}
+.btn_B{display: inline-block;position: relative;border: 1px solid #acacac; color:#2e2e2e; font-size:12px;letter-spacing: -1px;padding:0 10px;
+    height:23px;
+    line-height:22px;
+    text-align: center;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background:url('img/bg_B.png') repeat-x;vertical-align: top;
+    cursor: pointer;
+}
+.btn_B:hover{border: 1px solid #86361a; color:#fff;
+    text-align: center;
+    background:url('img/bg_B_over.png') repeat-x;
+}
+.btn_C{display: inline-block;position: relative;border: 1px solid #0a527a; color:#fff; font-size:12px;letter-spacing: -1px;padding:0 10px;
+    min-width:28px;
+    height:23px;
+    line-height:22px;
+    text-align: center;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background:#0e76af url('img/bg_C.png') repeat-x;vertical-align: top;
+    cursor: pointer;
+}
+.btn_C:hover{display: inline-block;border: 1px solid #073e5c; color:#fff;
+    text-align: center;
+    background:url('img/bg_C_over.png') repeat-x;
+}
+.btn_D{display: inline-block;border: solid 1px #106c9d;color:#fff; font-size:11px; letter-spacing: -1px;padding:0 10px;
+    min-width: 55px;
+    height: 18px;
+    background:url('img/bg_D.png') repeat-x;vertical-align: top;
+    cursor: pointer;
+}
+.btn_E{display: inline-block;border: solid 1px #106c9d;color:#fff; font-size:11px; letter-spacing: -1px;padding:0 10px;
+    min-width: 55px;
+    height: 18px;
+    background:url('img/bg_E.png') repeat-x;vertical-align: top;
+    cursor: pointer;
+}
+.txt_no{padding-right:0 !important;}
+/*2019버튼 - 아이콘 st 1.*/
+.btn_ico_01{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_01::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico01.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_01:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_02{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_02::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico02.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_02:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_03{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_03::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico03.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_03:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_04{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_04::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico04.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_04:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_05{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_05::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico05.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_05:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_06{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_06::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico06.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_06:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_07{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_07::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico07.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_07:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_08{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_08::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico08.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_08:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_09{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_09::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico09.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_09:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_10{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_10::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico10.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_10:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_11{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_11::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico11.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_11:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_12{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_12::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico12.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_12:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_13{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_13::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico13.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_13:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_14{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_14::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico14.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_14:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_15{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_15::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico15.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_15:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_16{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_16::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico16.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_16:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_17{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_17::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico17.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_17:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_18{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_18::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico18.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_18:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_19{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_19::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico19.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_19:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_20{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_20::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico20.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_20:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+
+
+/* 20200306 - ico 21번부터 75번까지 생성*/
+.btn_ico_21{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_21::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico21.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_21:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_22{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_22::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico22.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_22:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_23{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_23::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico23.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_23:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_24{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_24::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico24.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_24:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_25{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_25::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico25.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_25:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_26{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_26::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico26.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_26:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_27{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_27::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico27.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_27:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_28{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_28::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico28.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_28:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_29{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_29::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico29.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_29:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_30{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_30::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico30.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_30:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_31{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_31::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico31.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_31:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_32{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_32::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico32.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_32:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_33{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_33::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico33.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_33:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_34{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_34::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico34.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_34:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_35{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_35::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico35.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_35:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_36{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_36::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico36.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_36:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_37{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_37::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico37.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_37:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_38{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_38::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico38.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_38:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_39{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_39::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico39.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_39:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_40{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_40::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico40.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_40:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_41{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_41::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico41.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_41:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_42{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_42::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico42.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_42:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_43{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_43::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico43.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_43:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_44{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_44::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico44.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_44:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_45{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_45::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico45.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_45:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_46{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_46::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico46.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_46:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_47{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_47::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico47.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_47:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_48{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_48::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico48.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_48:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_49{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_49::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico49.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_49:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_50{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_50::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico50.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_50:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_51{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_51::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico51.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_51:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_52{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_52::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico52.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_52:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_53{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_53::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico53.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_53:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_54{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_54::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico54.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_54:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_55{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_55::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico55.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_55:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_56{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_56::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico56.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_56:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_57{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_57::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico57.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_57:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_58{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_58::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico58.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_58:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_59{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_59::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico59.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_59:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_60{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_60::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico60.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_60:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_61{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_61::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico61.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_61:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_62{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_62::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico62.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_62:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_63{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_63::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico63.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_63:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_64{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_64::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico64.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_64:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_65{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_65::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico65.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_65:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_66{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_66::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico66.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_66:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_67{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_67::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico67.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_67:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_68{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_68::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico68.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_68:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_69{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_69::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico69.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_69:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_70{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_70::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico70.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_70:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_71{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_71::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico71.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_71:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_72{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_72::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico72.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_72:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_73{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_73::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico73.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_73:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_74::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico74.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_74:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_75::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico75.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_75:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_76{display: inline-block; position: relative;padding-left:24px;}/*HTML ICON*/
+.btn_ico_76::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico76.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_76:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_77{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_77::before{position: absolute; top:3px; left: 3px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico77.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_77:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+
+/*북마크 별 표시*/
+.btn_ico_bookmark{content:'';display: inline-block; width:10px; height:12px; background-image: url('img/ico_bookmark.png');background-repeat:no-repeat;background-position:0 0; vertical-align: middle;}
+
+
+/* 20200306 글자 없는 아이콘 버튼 사용할때 추가할 클래스 */
+.non_txt{padding-left:12px}
+
+/*2019버튼 - 아이콘 st 2. 포지션제어 임시삭제
+.btn_ico_01{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_01::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:0 0;}
+.btn_ico_01:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: 0 -16px ;}
+.btn_ico_02{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_02::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-20px 0;}
+.btn_ico_02:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -20px -16px ;}
+.btn_ico_03{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_03::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-40px 0;}
+.btn_ico_03:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -40px -16px ;}
+.btn_ico_04{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_04::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-60px 0;}
+.btn_ico_04:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -60px -16px ;}
+.btn_ico_05{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_05::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-80px 0;}
+.btn_ico_05:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -80px -16px ;}
+.btn_ico_06{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_06::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-100px 0;}
+.btn_ico_06:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -100px -16px ;}
+.btn_ico_07{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_07::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-120px 0;}
+.btn_ico_07:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -120px -16px ;}
+.btn_ico_08{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_08::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-140px 0;}
+.btn_ico_08:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -140px -16px ;}
+.btn_ico_09{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_09::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-160px 0;}
+.btn_ico_09:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -160px -16px ;}
+.btn_ico_10{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_10::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-180px 0;}
+.btn_ico_10:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -180px -16px ;}
+.btn_ico_11{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_11::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-200px 0;}
+.btn_ico_11:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -200px -16px ;}
+.btn_ico_12{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_12::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-220px 0;}
+.btn_ico_12:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -220px -16px ;}
+.btn_ico_13{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_13::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-240px 0;}
+.btn_ico_13:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -240px -16px ;}
+.btn_ico_14{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_14::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-260px 0;}
+.btn_ico_14:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -260px -16px ;}
+.btn_ico_15{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_15::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-280px 0;}
+.btn_ico_15:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -280px -16px ;}
+.btn_ico_16{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_16::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-300px 0;}
+.btn_ico_16:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -300px -16px ;}
+.btn_ico_17{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_17::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-320px 0;}
+.btn_ico_17:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -320px -16px ;}
+.btn_ico_18{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_18::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-340px 0;}
+.btn_ico_18:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -340px -16px ;}
+.btn_ico_19{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_19::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-360px 0;}
+.btn_ico_19:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -360px -16px ;}
+.btn_ico_20{display: inline-block; position: relative;padding-left:24px;}
+.btn_ico_20::before{position: absolute; top:3px; left: 5px; content: '';display: inline-block; width:16px; height:16px; background-image: url('img/ico_all.png');background-repeat:no-repeat;background-position:-380px 0;}
+.btn_ico_20:hover::before{content: '';display: inline-block; width:16px; height:16px; background-position: -380px -16px ;}
+*/

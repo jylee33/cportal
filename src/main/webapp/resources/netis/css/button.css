@@ -1,0 +1,666 @@
+@charset "UTF-8";
+
+/* �옉�꽦�씪: 2016-03-30
+   �옉�꽦�옄: 媛뺤뿰�븘
+   �닔�젙�씪: 2016
+ */
+
+
+
+
+/*�쟾泥댁“�쉶*/
+.p_btnAll{width: 82px; height:23px; background: url(../img/Btn/btnAll.png) no-repeat 0px 0px; }
+.p_btnAll:hover,.p_btnAll:active{width: 82px; height:23px; background: url(../img/Btn/btnAll.png) no-repeat 0px -23px; }
+
+/*而щ읆蹂�寃�*/
+.p_btnColEdit{width: 82px; height:23px; background: url(../img/Btn/btnColEdit.png) no-repeat 0px 0px; }
+.p_btnColEdit:hover,.p_btn:active{width: 82px; height:23px; background: url(../img/Btn/btnColEdit.png) no-repeat 0px -23px; }
+
+/*蹂댁씠湲�*/
+.p_btnShow{width: 73px; height:23px; background: url(../img/Btn/btnShow.png) no-repeat 0px 0px; }
+.p_btnShow:hover,.p_btn:active{width: 73px; height:23px; background: url(../img/Btn/btnShow.png) no-repeat 0px -23px; }
+
+/*�닲湲곌린*/
+.p_btnHide{width: 73px; height:23px; background: url(../img/Btn/btnHide.png) no-repeat 0px 0px; }
+.p_btnHide:hover,.p_btn:active{width: 73px; height:23px; background: url(../img/Btn/btnHide.png) no-repeat 0px -23px; }
+
+/*議고쉶*/
+.p_btn{width: 72px; height:23px; background: url(../img/Btn/btnSearch.png) no-repeat 0px 0px; }
+.p_btn:hover,.p_btn:active{width: 72px; height:23px; background: url(../img/Btn/btnSearch.png) no-repeat 0px -23px; }
+
+/*�솗�씤*/
+.p_btnConfirm{width: 72px; height:23px; background: url(../img/Btn/btnConfirm.png) no-repeat 0px 0px; }
+.p_btnConfirm:hover,.p_btnConfirm:active{width: 72px; height:23px; background: url(../img/Btn/btnConfirm.png) no-repeat 0px -23px; }
+
+/*�씠�룞*/
+.p_btnMove{width: 72px; height:23px; background: url(../img/Btn/btnMove.png) no-repeat 0px 0px; }
+.p_btnMove:hover,.p_btnMove:active{width: 72px; height:23px; background: url(../img/Btn/btnMove.png) no-repeat 0px -23px; }
+
+/*�떕湲�*/
+.p_btnClose{width: 72px; height:23px; background: url(../img/Btn/btnClosed.png) no-repeat 0px 0px; }
+.p_btnClose:hover,.p_btnClose:active{width: 72px; height:23px; background: url(../img/Btn/btnClosed.png) no-repeat 0px -23px; }
+
+/*異붽�*/
+.p_btnPlus{width: 72px; height:23px; background: url(../img/Btn/btnPlus.png) no-repeat 0px 0px; }
+.p_btnPlus:hover,.p_btnPlus:active{width: 72px; height:23px; background: url(../img/Btn/btnPlus.png) no-repeat 0px -23px; }
+
+/*異붽�2*/
+.p_btnPlus2{width: 53px; height:23px; background: url(../img/Btn/btnPlus2.png) no-repeat 0px 0px; }
+.p_btnPlus2:hover,.p_btnPlus2:active{width: 53px; height:23px; background: url(../img/Btn/btnPlus2.png) no-repeat 0px -23px; }
+
+/*異붽�(臾멸뎄�젣嫄�)*/
+.p_btnPlus3{width: 25px; height:23px; background: url(../img/Btn/btnPlus3.png) no-repeat 0px 0px; }
+.p_btnPlus3:hover,.p_btnPlus3:active{width: 25px; height:23px; background: url(../img/Btn/btnPlus3.png) no-repeat 0px -23px; }
+
+/*�떎以묒텛媛�*/
+.p_btnMPlus{width: 82px; height:23px; background: url(../img/Btn/btnMPlus.png) no-repeat 0px 0px; }
+.p_btnMPlus:hover,.p_btnMPlus:active{width: 82px; height:23px; background: url(../img/Btn/btnMPlus.png) no-repeat 0px -23px; }
+
+/*怨꾩냽異붽�*/
+.p_btnAdd{width: 82px; height:23px; background: url(../img/Btn/btnAdd.png) no-repeat 0px 0px; }
+.p_btnAdd:hover,.p_btnAdd:active{width: 82px; height:23px; background: url(../img/Btn/btnAdd.png) no-repeat 0px -23px; }
+
+/* 다중추가 */
+.p_btnMultiAdd{width: 82px; height:23px; background: url(../img/Btn/btnMPlus.png) no-repeat 0px 0px; }
+.p_btnMultiAdd:hover,.p_btnGet:active{width: 82px; height:23px; background: url(../img/Btn/btnMPlus.png) no-repeat 0px -23px; }
+
+/*�옄�룞異붽�*/
+.p_btnAutoAdd{width: 82px; height:23px; background: url(../img/Btn/btnAutoAdd.png) no-repeat 0px 0px; }
+.p_btnAutoAdd:hover,.p_btnAutoAdd:active{width: 82px; height:23px; background: url(../img/Btn/btnAutoAdd.png) no-repeat 0px -23px; }
+
+/*�닔�젙*/
+.p_btnAdj{width: 72px; height:23px; background: url(../img/Btn/btnAdj.png) no-repeat 0px 0px; }
+.p_btnAdj:hover,.p_btnAdj:active{width: 72px; height:23px; background: url(../img/Btn/btnAdj.png) no-repeat 0px -23px; }
+
+/*�닔�젙2*/
+.p_btnAdj2{width: 53px; height:23px; background: url(../img/Btn/btnAdj2.png) no-repeat 0px 0px; }
+.p_btnAdj2:hover,.p_btnAdj2:active{width: 53px; height:23px; background: url(../img/Btn/btnAdj2.png) no-repeat 0px -23px; }
+
+/*�궘�젣*/
+.p_btnDel{width: 72px; height:23px; background: url(../img/Btn/btnDel.png) no-repeat 0px 0px; }
+.p_btnDel:hover,.p_btnDel:active{width: 72px; height:23px; background: url(../img/Btn/btnDel.png) no-repeat 0px -23px; }
+
+/*�궘�젣2*/
+.p_btnDel2{width: 53px; height:23px; background: url(../img/Btn/btnDel2.png) no-repeat 0px 0px; }
+.p_btnDel2:hover,.p_btnDel2:active{width: 53px; height:23px; background: url(../img/Btn/btnDel2.png) no-repeat 0px -23px; }
+
+.p_btnDelAll{width: 82px; height:23px; background: url(../img/Btn/btnDelAll.png) no-repeat 0px 0px; }
+.p_btnDelAll:hover,.p_btnDelAll:active{width: 82px; height:23px; background: url(../img/Btn/btnDelAll.png) no-repeat 0px -23px; }
+/*�궘�젣(臾멸뎄�젣嫄�)*/
+.p_btnMinus{width: 25px; height:23px; background: url(../img/Btn/btnMinus.png) no-repeat 0px 0px; }
+.p_btnMinus:hover,.p_btnMinus:active{width: 25px; height:23px; background: url(../img/Btn/btnMinus.png) no-repeat 0px -23px; }
+
+/*���옣*/
+.p_btnSave{width: 72px; height:23px; background: url(../img/Btn/btnSave.png) no-repeat 0px 0px; }
+.p_btnSave:hover,.p_btnSave:active{width: 72px; height:23px; background: url(../img/Btn/btnSave.png) no-repeat 0px -23px; }
+
+/*���옣2*/
+.p_btnSave2{width: 53px; height:23px; background: url(../img/Btn/btnSave2.png) no-repeat 0px 0px; }
+.p_btnSave2:hover,.p_btnSave2:active{width: 53px; height:23px; background: url(../img/Btn/btnSave2.png) no-repeat 0px -23px; }
+
+/*�꽕�젙*/
+.p_btnSet{width: 72px; height:23px; background: url(../img/Btn/btnSetup.png) no-repeat 0px 0px; }
+.p_btnSet:hover,.p_btnSet:active{width: 72px; height:23px; background: url(../img/Btn/btnSetup.png) no-repeat 0px -23px; }
+
+/*�꽕�젙_2*/
+.p_btnSet2{width: 72px; height:23px; background: url(../img/Btn/btnSet.png) no-repeat 0px 0px; }
+.p_btnSet2:hover,.p_btnSet:active{width: 72px; height:23px; background: url(../img/Btn/btnSet.png) no-repeat 0px -23px; }
+
+/*�벑濡�*/
+.p_btnReg{width: 72px; height:23px; background: url(../img/Btn/btnReg.png) no-repeat 0px 0px; }
+.p_btnReg:hover,.p_btnReg:active{width: 72px; height:23px; background: url(../img/Btn/btnReg.png) no-repeat 0px -23px; }
+
+/*�옉�뾽�벑濡�*/
+.p_btnWorkreg{width: 82px; height:23px; background: url(../img/Btn/btnWorkreg.png) no-repeat 0px 0px; }
+.p_btnWorkreg:hover,.p_btnWorkreg:active{width: 82px; height:23px; background: url(../img/Btn/btnWorkreg.png) no-repeat 0px -23px; }
+
+
+/*�옉�뾽�닔�젙*/
+.p_btnWorkadj{width: 82px; height:23px; background: url(../img/Btn/btnWorkadj.png) no-repeat 0px 0px; }
+.p_btnWorkadj:hover,.p_btnWorkadj:active{width: 82px; height:23px; background: url(../img/Btn/btnWorkadj.png) no-repeat 0px -23px; }
+
+/*�옉�뾽�듅�씤*/
+.p_btnWorkapp{width: 82px; height:23px; background: url(../img/Btn/btnWorkapp.png) no-repeat 0px 0px; }
+.p_btnWorkapp:hover,.p_btnWorkapp:active{width: 82px; height:23px; background: url(../img/Btn/btnWorkapp.png) no-repeat 0px -23px; }
+
+/*泥섎━�셿猷�*/
+.p_btnAppr{width: 82px; height:23px; background: url(../img/Btn/btnAppr.png) no-repeat 0px 0px; }
+.p_btnAppr:hover,.p_btnAppr:active{width: 82px; height:23px; background: url(../img/Btn/btnAppr.png) no-repeat 0px -23px; }
+
+/*�깉濡쒓퀬移�*/
+.p_btnRef{width: 82px; height:23px; background: url(../img/Btn/btnRefresh.png) no-repeat 0px 0px; }
+.p_btnRef:hover,.p_btnRef:active{width: 82px; height:23px; background: url(../img/Btn/btnRefresh.png) no-repeat 0px -23px; }
+
+/*�뒳濡�異붽�*/
+.p_btnSlotplus{width: 82px; height:23px; background: url(../img/Btn/btnSlotplus.png) no-repeat 0px 0px; }
+.p_btnSlotPlus:hover,.p_btnSlotPlus:active{width: 82px; height:23px; background: url(../img/Btn/btnSlotplus.png) no-repeat 0px -23px; }
+
+/*�뒳濡��궘�젣*/
+.p_btnSlotdel{width: 82px; height:23px; background: url(../img/Btn/btnSlotdel.png) no-repeat 0px 0px; }
+.p_btnSlotdel:hover,.p_btnslotdel:active{width: 82px; height:23px; background: url(../img/Btn/btnSlotdel.png) no-repeat 0px -23px; }
+
+/*���뿭�룺蹂� PPS �씪愿꾩꽕�젙*/
+.p_btnSetPps{width: 172px; height:23px; background: url(../img/Btn/btnSetPps.png) no-repeat 0px 0px; }
+.p_btnSetPps:hover,.p_btnSetPps:active{width: 172px; height:23px; background: url(../img/Btn/btnSetPps.png) no-repeat 0px -23px; }
+
+/*�넗�뤃濡쒖� �옣�븷議곗튂 �씪愿꾩꽕�젙*/
+.p_btnSetAll{width: 82px; height:23px; background: url(../img/Btn/btnSetAll.png) no-repeat 0px 0px; }
+.p_btnSetAll:hover,.p_btnSetAll:active{width: 82px; height:23px; background: url(../img/Btn/btnSetAll.png) no-repeat 0px -23px; }
+
+/*鍮꾨�踰덊샇蹂�寃�*/
+.p_btnPw{width: 111px; height:23px; background: url(../img/Btn/btnPw.png) no-repeat 0px 0px; }
+.p_btnPw:hover,.p_btnPw:active{width: 111px; height:23px; background: url(../img/Btn/btnPw.png) no-repeat 0px -23px; }
+
+/*�궗�슜�옄�벑湲됰�寃�*/
+.p_btnAuth{width: 123px; height:23px; background: url(../img/Btn/btnAuth.png) no-repeat 0px 0px; }
+.p_btnAuth:hover,.p_btnAuth:active{width: 123px; height:23px; background: url(../img/Btn/btnAuth.png) no-repeat 0px -23px; }
+
+/*�떖�젰蹂닿린*/
+.p_btnCal{width: 82px; height:23px; background: url(../img/Btn/btnCal.png) no-repeat 0px 0px; }
+.p_btnCal:hover,.p_btnCal:active{width: 82px; height:23px; background: url(../img/Btn/btnCal.png) no-repeat 0px -23px; }
+
+/*�씠踰ㅽ듃�꽕�젙*/
+.p_btnEvt{width: 102px; height:23px; background: url(../img/Btn/btnEvt.png) no-repeat 0px 0px; }
+.p_btnEvt:hover,.p_btnEvt:active{width: 102px; height:23px; background: url(../img/Btn/btnEvt.png) no-repeat 0px -23px; }
+
+/*而ㅻ�ㅻ땲�떚*/
+.p_btnCom{width: 82px; height:23px; background: url(../img/Btn/btnCom.png) no-repeat 0px 0px; }
+.p_btnCom:hover,.p_btnCom:active{width: 82px; height:23px; background: url(../img/Btn/btnCom.png) no-repeat 0px -23px; }
+
+/*�뿏吏꾧뎄�룞*/
+.p_btnEng{width: 82px; height:23px; background: url(../img/Btn/btnEng.png) no-repeat 0px 0px; }
+.p_btnEng:hover,.p_btnEng:active{width: 82px; height:23px; background: url(../img/Btn/btnEng.png) no-repeat 0px -23px; }
+
+/*�옣鍮꾨벑濡�*/
+.p_btnDev{width: 82px; height:23px; background: url(../img/Btn/btnDev.png) no-repeat 0px 0px; }
+.p_btnDev:hover,.p_btnDev:active{width: 82px; height:23px; background: url(../img/Btn/btnDev.png) no-repeat 0px -23px; }
+
+/*�옣鍮껹ID�꽕�젙*/
+.p_btnOID{width: 111px; height:23px; background: url(../img/Btn/btnOID.png) no-repeat 0px 0px; }
+.p_btnOID:hover,.p_btnOID:active{width: 111px; height:23px; background: url(../img/Btn/btnOID.png) no-repeat 0px -23px; }
+
+/*Row異붽�*/
+.p_btnRow{width: 82px; height:23px; background: url(../img/Btn/btnRow.png) no-repeat 0px 0px; }
+.p_btnRow:hover,.p_btnRow:active{width: 82px; height:23px; background: url(../img/Btn/btnRow.png) no-repeat 0px -23px; }
+
+/*up*/
+.p_btnUp{width: 25px; height:23px; background: url(../img/Btn/btnUp.png) no-repeat 0px 0px; }
+.p_btnUp:hover,.p_btnUp:active{width: 25px; height:23px; background: url(../img/Btn/btnUp.png) no-repeat 0px -23px; }
+
+/*down*/
+.p_btnDown{width: 25px; height:23px; background: url(../img/Btn/btnDown.png) no-repeat 0px 0px; }
+.p_btnDown:hover,.p_btnDown:active{width: 25px; height:23px; background: url(../img/Btn/btnDown.png) no-repeat 0px -23px; }
+
+/*play*/
+.p_btnPlay{width: 23px; height:23px; background: url(../img/Btn/btnPlay.png) no-repeat 0px 0px; }
+.p_btnPlay:hover,.p_btnPlay:active{width: 23px; height:23px; background: url(../img/Btn/btnPlay.png) no-repeat 0px -23px; }
+
+/*stop*/
+.p_btnStop{width: 25px; height:23px; background: url(../img/Btn/btnStop.png) no-repeat 0px 0px; }
+.p_btnStop:hover,.p_btnStop:active{width: 25px; height:23px; background: url(../img/Btn/btnStop.png) no-repeat 0px -23px; }
+
+/*湲��벐湲�*/
+.p_btnWirte{width: 72px; height:23px; background: url(../img/Btn/btnWrite.png) no-repeat 0px 0px; }
+.p_btnWrite:hover,.p_btnWrite:active{width: 72px; height:23px; background: url(../img/Btn/btnWrite.png) no-repeat 0px -23px; }
+
+/*�뙎湲��떖湲�*/
+.p_btnComment{width: 82px; height:23px; background: url(../img/Btn/btnComment.png) no-repeat 0px 0px; }
+.p_btnComment:hover,.p_btnComment:active{width: 82px; height:23px; background: url(../img/Btn/btnComment.png) no-repeat 0px -23px; }
+
+/*臾몄옄鍮꾧탳*/
+.p_btnMes{width: 82px; height:23px; background: url(../img/Btn/btnMes.png) no-repeat 0px 0px; }
+.p_btnMes:hover,.p_btnMes:active{width: 82px; height:23px; background: url(../img/Btn/btnMes.png) no-repeat 0px -23px; }
+
+/*�떆�옉*/
+.p_btnStart{width: 72px; height:23px; background: url(../img/Btn/btnStart.png) no-repeat 0px 0px; }
+.p_btnStart:hover,.p_btnStart:active{width: 72px; height:23px; background: url(../img/Btn/btnStart.png) no-repeat 0px -23px; }
+
+/*以묒�*/
+.p_btnPause{width: 72px; height:23px; background: url(../img/Btn/btnPause.png) no-repeat 0px 0px; }
+.p_btnPause:hover,.p_btnPause:active{width: 72px; height:23px; background: url(../img/Btn/btnPause.png) no-repeat 0px -23px; }
+
+/*�빐�젣*/
+.p_btnClear{width: 72px; height:23px; background: url(../img/Btn/btnClear.png) no-repeat 0px 0px; }
+.p_btnClear:hover,.p_btnClear:active{width: 72px; height:23px; background: url(../img/Btn/btnClear.png) no-repeat 0px -23px; }
+
+/*蹂�寃�*/
+.p_btnChange{width: 72px; height:23px; background: url(../img/Btn/btnChange.png) no-repeat 0px 0px; }
+.p_btnChange:hover,.p_btnChange:active{width: 72px; height:23px; background: url(../img/Btn/btnChange.png) no-repeat 0px -23px; }
+
+/*李⑦듃由ъ뒪�듃蹂닿린 */
+.p_btnCList{width: 102px; height:23px; background: url(../img/Btn/btnCList.png) no-repeat 0px 0px; }
+.p_btnCList:hover,.p_btnCList:active{width: 102px; height:23px; background: url(../img/Btn/btnCList.png) no-repeat 0px -23px; }
+
+/*李⑦듃�떎�슫濡쒕뱶 */
+.p_btnCDown{width: 82px; height:23px; background: url(../img/Btn/btnCDown.png) no-repeat 0px 0px; }
+.p_btnCDown:hover,.p_btnCDown:active{width: 82px; height:23px; background: url(../img/Btn/btnCDown.png) no-repeat 0px -23px; }
+
+/*���뿭�룺�꽕�젙 */
+.p_btnLineWidthSet{width: 102px; height:23px; background: url(../img/Btn/btnLineWidthSet.png) no-repeat 0px 0px; }
+.p_btnLineWidthSet:hover,.p_btnLineWidthSet:active{width: 102px; height:23px; background: url(../img/Btn/btnLineWidthSet.png) no-repeat 0px -23px; }
+
+/*蹂닿퀬�꽌 */
+.p_btnReport{width: 72px; height:23px; background: url(../img/Btn/btnReport.png) no-repeat 0px 0px; }
+.p_btnReport:hover,.p_btnReport:active{width: 72px; height:23px; background: url(../img/Btn/btnReport.png) no-repeat 0px -23px; }
+
+/*�옄�룞蹂닿퀬�꽌 */
+.p_btnAutoReport{width: 102px; height:23px; background: url(../img/Btn/btnAutoReport.png) no-repeat 0px 0px; }
+.p_btnAutoReport:hover,.p_btnAutoReport:active{width: 102px; height:23px; background: url(../img/Btn/btnAutoReport.png) no-repeat 0px -23px; }
+
+/*�뿊��*/
+.p_btnExcel{width: 72px; height:23px; background: url(../img/Btn/btnExcel.png) no-repeat 0px 0px; }
+.p_btnExcel:hover,.p_btnExcel:active{width: 72px; height:23px; background: url(../img/Btn/btnExcel.png) no-repeat 0px -23px; }
+
+
+/*�뿊���뾽濡쒕뱶 */
+.p_btnExcelUpload{width: 102px; height:23px; background: url(../img/Btn/btnExcelUpload.png) no-repeat 0px 0px; }
+.p_btnExcelUpload:hover,.p_btnExcelUpload:active{width: 102px; height:23px; background: url(../img/Btn/btnExcelUpload.png) no-repeat 0px -23px; }
+
+/*�옄�궛蹂�寃� */
+.p_btnAssetChg{width: 82px; height:23px; background: url(../img/Btn/btnAssetChg.png) no-repeat 0px 0px; }
+.p_btnAssetChg:hover,.p_btnAssetChg:active{width: 82px; height:23px; background: url(../img/Btn/btnAssetChg.png) no-repeat 0px -23px; }
+
+/*洹몃９異붽� */
+.p_btnGrpAdd{width: 71px; height:23px; background: url(../img/Btn/btnGrpAdd.png) no-repeat 0px 0px; }
+.p_btnGrpAdd:hover,.p_btnGrpAdd:active{width: 71px; height:23px; background: url(../img/Btn/btnGrpAdd.png) no-repeat 0px -23px; }
+
+/*洹몃９�닔�젙 */
+.p_btnGrpEdit{width: 71px; height:23px; background: url(../img/Btn/btnGrpEdit.png) no-repeat 0px 0px; }
+.p_btnGrpEdit:hover,.p_btnGrpEdit:active{width: 71px; height:23px; background: url(../img/Btn/btnGrpEdit.png) no-repeat 0px -23px; }
+
+/*洹몃９�궘�젣 */
+.p_btnGrpDel{width: 71px; height:23px; background: url(../img/Btn/btnGrpDel.png) no-repeat 0px 0px; }
+.p_btnGrpDel:hover,.p_btnGrpDel:active{width: 71px; height:23px; background: url(../img/Btn/btnGrpDel.png) no-repeat 0px -23px; }
+
+/*�떊洹� */
+.p_btnNew{width: 72px; height:23px; background: url(../img/Btn/btnNew.png) no-repeat 0px 0px; }
+.p_btnNew:hover,.p_btnNew:active{width: 72px; height:23px; background: url(../img/Btn/btnNew.png) no-repeat 0px -23px; }
+
+/*誘몃벑濡앹옣鍮� */
+.p_btnNoneDev{width: 102px; height:23px; background: url(../img/Btn/btnNoneDev.png) no-repeat 0px 0px; }
+.p_btnNoneDev:hover,.p_btnNoneDev:active{width: 102px; height:23px; background: url(../img/Btn/btnNoneDev.png) no-repeat 0px -23px; }
+
+/*而щ읆愿�由� */
+.p_btnColConf{width: 82px; height:23px; background: url(../img/Btn/btnColumn.png) no-repeat 0px 0px; }
+.p_btnColConf:hover,.p_btnColConf:active{width: 82px; height:23px; background: url(../img/Btn/btnColumn.png) no-repeat 0px -23px; }
+
+/*�닔�뻾�떒怨�*/
+.p_btnJobStep{width: 82px; height:23px; background: url(../img/Btn/btnJobStep.png) no-repeat 0px 0px; }
+.p_btnJobStep:hover,.p_btnJobStep:active{width: 82px; height:23px; background: url(../img/Btn/btnJobStep.png) no-repeat 0px -23px; }
+
+/*SYSLOG �쟾泥댁궘�젣*/
+.p_btnSyslogAllDel{width: 126px; height:23px; background: url(../img/Btn/btnSyslogAllDel.png) no-repeat 0px 0px; }
+.p_btnSyslogAllDel:hover,.btnSyslogAllDel:active{width: 126px; height:23px; background: url(../img/Btn/btnSyslogAllDel.png) no-repeat 0px -23px; }
+
+/*�씠踰ㅽ듃醫낅즺*/
+.p_btnEvtClose{width: 104px; height:23px; background: url(../img/Btn/btnEvtClose.png) no-repeat 0px 0px; }
+.p_btnEvtClose:hover,.btnEvtClose:active{width: 104px; height:23px; background: url(../img/Btn/btnEvtClose.png) no-repeat 0px -23px; }
+
+/*醫낅즺*/
+.p_btnQuit{width: 72px; height:23px; background: url(../img/Btn/btnQuit.png) no-repeat 0px 0px; }
+.p_btnQuit:hover,.btnEvtClose:active{width: 72px; height:23px; background: url(../img/Btn/btnQuit.png) no-repeat 0px -23px; }
+
+/*Layout愿�由�*/
+.p_btnLayoutManage{width: 92px; height:23px; background: url(../img/Btn/btnLayoutManage.png) no-repeat 0px 0px; }
+.p_btnLayoutManage:hover,.btnEvtClose:active{width: 92px; height:23px; background: url(../img/Btn/btnLayoutManage.png) no-repeat 0px -23px; }
+
+/*痍⑥냼*/
+.p_btnCancel{width: 72px; height:23px; background: url(../img/Btn/btnCancel.png) no-repeat 0px 0px; }
+.p_btnCancel:hover,.btnEvtClose:active{width: 72px; height:23px; background: url(../img/Btn/btnCancel.png) no-repeat 0px -23px; }
+
+/*�쟻�슜*/
+.p_btnApply{width: 72px; height:23px; background: url(../img/Btn/apply.png) no-repeat 0px 0px; }
+.p_btnApply:hover,.p_btnApply:active{width: 72px; height:23px; background: url(../img/Btn/apply.png) no-repeat 0px -23px; }
+
+/*媛��졇�삤湲�*/
+.p_btnGet{width: 82px; height:23px; background: url(../img/Btn/bring.png) no-repeat 0px 0px; }
+.p_btnGet:hover,.p_btnGet:active{width: 82px; height:23px; background: url(../img/Btn/bring.png) no-repeat 0px -23px; }
+
+/* 紐⑸줉蹂닿린 */
+.p_btnList2 {
+    width: 82px;
+    height: 23px;
+    background: url(../img/Btn/btnList2.png) no-repeat 0px 0px;}
+.p_btnList2:hover, .p_btnList2:active {
+    width: 82px;
+    height: 23px;
+    background: url(../img/Btn/btnList2.png) no-repeat 0px -23px;}   
+
+/*�떟湲��떖湲�*/
+.p_btnReply{width: 82px; height:23px; background: url(../img/Btn/btnReply.png) no-repeat 0px 0px; }
+.p_btnReply:hover,.p_btnReply:active{width: 82px; height:23px; background: url(../img/Btn/btnReply.png) no-repeat 0px -23px; }
+
+/*議고쉶�젣�쇅�쉶�꽑*/
+.p_btnExceptSearchIf{width: 107px; height:23px; background: url(../img/Btn/btnExceptSearchIf.png) no-repeat 0px 0px; }
+.p_btnExceptSearchIf:hover,.p_btnExceptSearchIf:active{width: 107px; height:23px; background: url(../img/Btn/btnExceptSearchIf.png) no-repeat 0px -23px; }
+
+/*�꽦�뒫�닔吏�*/
+.p_btnPerfCollect{width: 82px; height:23px; background: url(../img/Btn/btnPerfCollect.png) no-repeat 0px 0px; }
+.p_btnPerfCollect:hover,.p_btnPerfCollect:active{width: 82px; height:23px; background: url(../img/Btn/btnPerfCollect.png) no-repeat 0px -23px; }
+
+/*�깉濡쒓퀬移� �븘�씠肄�*/
+
+.p_btnRefreshIcon{width: 23px; height:23px; background: url(../img/Btn/btnRefreshIcon.png) no-repeat 0px 0px; }
+.p_btnRefreshIcon:hover,.p_btnRefreshIcon:active{width: 23px; height:23px; background: url(../img/Btn/btnRefreshIcon.png) no-repeat 0px -23px; }
+
+/*諛붾줈�씠�쟾 �븘�씠肄�*/
+
+.p_btnBackIcon{width: 23px; height:23px; background: url(../img/Btn/btnPrevious.png) no-repeat 0px 0px; }
+.p_btnBackIcon:hover,.p_btnBackIcon:active{width: 23px; height:23px; background: url(../img/Btn/btnPrevious.png) no-repeat 0px -23px; }
+
+/*�꽕�젙 �븘�씠肄�*/
+/*
+.p_btnSetIcon{width: 23px; height:23px; background: url(../img/Btn/btnSetupIcon.png) no-repeat 0px 0px; }
+.p_btnSetIcon:hover,.p_btnSetIcon:active{width: 23px; height:23px; background: url(../img/Btn/btnSetupIcon.png) no-repeat 0px -23px; }
+*/
+
+/*�뿊�� �븘�씠肄�*/
+/*
+.p_btnExcelIcon{width: 23px; height:23px; background: url(../img/Btn/btnExcelIcon.png) no-repeat 0px 0px; }
+.p_btnExcelIcon:hover,.p_btnExcelIcon:active{width: 23px; height:23px; background: url(../img/Btn/btnExcelIcon.png) no-repeat 0px -23px; }
+*/
+
+/*�룍蹂닿린 �븘�씠肄�*/
+.p_btnViewIcon{width: 23px; height:23px; background: url(../img/Btn/btnView.png) no-repeat 0px 0px; }
+.p_btnViewIcon:hover,.p_btnViewIcon:active{width: 23px; height:23px; background: url(../img/Btn/btnView.png) no-repeat 0px -23px; }
+
+/*�긽�꽭蹂닿린 �븘�씠肄�*/
+.p_btnDetailIcon{width: 82px; height:23px; background: url(../img/Btn/btnDetail.png) no-repeat 0px 0px; }
+.p_btnDetailIcon:hover,.p_btnDetailIcon:active{width: 82px; height:23px; background: url(../img/Btn/btnDetail.png) no-repeat 0px -23px; }
+
+button {
+	cursor: pointer;	
+	border:none;
+}
+
+
+/*===== �듃由ъ뿉 �벐�씠�뒗 踰꾪듉 =====*/
+
+/*遺꾨쪟洹몃９異붽�*/
+.btnGroupAddGrp{width: 24px; height:23px; background: url(../img/Btn/btnGroupAddGrp.png) no-repeat 0px 0px; }
+.btnGroupAddGrp:hover,.btnGroupAddGrp:active{width: 24px; height:23px; background: url(../img/Btn/btnGroupAddGrp.png) no-repeat 0px -23px; }
+
+/*異붽�(�듃由�)*/
+.btnAddTree{width: 24px; height:23px; background: url(../img/Btn/btnAddTree.png) no-repeat 0px 0px; }
+.btnAddTree:hover,.btnAddTree:active{width: 24px; height:23px; background: url(../img/Btn/btnAddTree.png) no-repeat 0px -23px; }
+
+/*�닔�젙(�듃由�)*/
+.btnEditTree{width: 24px; height:23px; background: url(../img/Btn/btnEditTree.png) no-repeat 0px 0px; }
+.btnEditTree:hover,.btnEditTree:active{width: 24px; height:23px; background: url(../img/Btn/btnEditTree.png) no-repeat 0px -23px; }
+
+/*�궘�젣(�듃由�)*/
+.btnDelTree{width: 24px; height:23px; background: url(../img/Btn/btnDelTree.png) no-repeat 0px 0px; }
+.btnDelTree:hover,.btnDelTree:active{width: 24px; height:23px; background: url(../img/Btn/btnDelTree.png) no-repeat 0px -23px; }
+
+.btnList{width: 25px; height:23px; background: url(../img/Btn/btnList.png) no-repeat 0px 0px; }
+.btnList:hover,.btnList:active{width: 25px; height:23px; background: url(../img/Btn/btnList.png) no-repeat 0px -23px; }
+
+/** Mib Browser */
+.p_btnMib{width: 91px; height:23px; background: url(../img/Btn/btnMib.png) no-repeat 0px 0px; }
+.p_btnMib:hover,.p_btnMib:active{width: 91px; height:23px; background: url(../img/Btn/btnMib.png) no-repeat 0px -23px; }
+
+.p_btnLink{width: 72px; height:23px; background: url(../img/Btn/btnLink.png) no-repeat 0px 0px; }
+.p_btnLink:hover,.p_btnLink:active{width: 72px; height:23px; background: url(../img/Btn/btnLink.png) no-repeat 0px -23px; }
+/*======================================
+
+	���떆蹂대뱶 踰꾪듉 - �렪吏묓삎�뿉�꽌 �궗�슜
+
+========================================*/
+
+.ctrlButton{position: absolute; float: right; right: 10px; top:10px;}
+.ctrlButton>button{border:none;}
+
+
+
+/*�깉濡쒓퀬移� �븘�씠肄�*/
+.p_btnRefIcon{float:left; width:24px; height:24px; background: url(../img/Btn/IconBtn-Refresh.svg) no-repeat center center; opacity: 0.54; cursor: pointer; background-size:90%;}
+.p_btnRefIcon:hover,
+.p_btnRefIcon:active {opacity: 0.87;}
+.p_btnRefIcon:visited {opacity: 0.24;}
+
+/*�뿊�� �븘�씠肄�*/
+.p_btnExcelIcon{float:left; width:24px; height:24px; background: url(../img/Btn/IconBtn-Excel.svg) no-repeat center center; opacity: 0.54; cursor: pointer; background-size:90%;}
+.p_btnExcelIcon:hover,
+.p_btnExcelIcon:active {opacity: 0.87;}
+.p_btnExcelIcon:visited {opacity: 0.24;}
+
+/*�꽕�젙 �븘�씠肄�(�쐞�젽 �븞履쎌뿉 諛곗튂)*/
+.p_btnSetIcon{width:24px; height:24px; background: url(../img/Btn/IconBtn-WidgetSetting.svg) no-repeat center center; opacity: 0.54; cursor: pointer; background-size:90%;}
+.p_btnSetIcon:hover,
+.p_btnSetIcon:active {opacity: 0.87;}
+.p_btnSetIcon:visited {opacity: 0.24;}
+
+/*理쒕��솕 �븘�씠肄�*/
+.p_btnMaxMin{width:30px; height:30px; background: url(../img/Btn/IconBtn-Maxmize.svg) no-repeat center center; opacity: 0.54; cursor: pointer;}
+.p_btnMaxMin:hover,
+.p_btnMaxMin:active {opacity: 0.87;}
+.p_btnMaxMin:visited {opacity: 0.24;}
+
+/*�젅�씠�븘�썐 �븘�씠肄�*/
+.p_btnLayout{width:30px; height:30px; background: url(../img/Btn/IconBtn-Layout.svg) no-repeat center center; opacity: 0.54; cursor: pointer;}
+.p_btnLayout:hover,
+.p_btnLayout:active {opacity: 0.87;}
+.p_btnLayout:visited {opacity: 0.24;}
+
+/*�꽕�젙 �븘�씠肄�*/
+.p_btnSetting{width:30px; height:30px; background: url(../img/Btn/IconBtn-WidgetSetting.svg) no-repeat center center; opacity: 0.54; cursor: pointer;}
+.p_btnSetting:hover,
+.p_btnSetting:active {opacity: 0.87;}
+.p_btnSetting:visited {opacity: 0.24;}
+
+
+.p_btnStart_L{width:30px; height:30px; background: url(../img/Btn/IconBtn_Play.svg) no-repeat center center; opacity: 0.54; cursor: pointer}
+.p_btnStart_L:hover,
+.p_btnStart_L:active {opacity: 0.87;}
+.p_btnStart_L:visited {opacity: 0.24;}
+
+.p_btnPause_L{width:30px; height:30px; background: url(../img/Btn/IconBtn_Stop.svg) no-repeat center center; opacity: 0.54; cursor: pointer}
+.p_btnPause_L:hover,
+.p_btnPause_L:active {opacity: 0.87;}
+.p_btnPause_L:visited {opacity: 0.24;}
+
+
+.p_btnRefIcon_L{width:30px; height:30px; background: url(../img/Btn/IconBtn-Refresh.svg) no-repeat center center; opacity: 0.54; cursor: pointer}
+.p_btnRefIcon_L:hover,
+.p_btnRefIcon_L:active {opacity: 0.87;}
+.p_btnRefIcon_L:visited {opacity: 0.24;}
+
+.p_btnExport_L{width:30px; height:30px; background: url(../img/Btn/IconBtn-Excel.svg) no-repeat center center; opacity: 0.54; cursor: pointer;}
+.p_btnExport_L:hover,
+.p_btnExport_L:active {opacity: 0.87;}
+.p_btnExport_L:visited {opacity: 0.24;}
+
+/*�뤃留곹쉶�꽑�벑濡� �븘�씠肄�*/
+.p_btnPollingAddIcon{width: 102px; height:23px; background: url(../img/Btn/btnPollingAdd.png) no-repeat 0px 0px; }
+.p_btnPollingAddIcon:hover,.p_btnPollingAddIcon:active{width: 102px; height:23px; background: url(../img/Btn/btnPollingAdd.png) no-repeat 0px -23px; }
+
+/*�뤃留곹쉶�꽑�궘�젣 �븘�씠肄�*/
+.p_btnPollingDelIcon{width: 102px; height:23px; background: url(../img/Btn/btnPollingDel.png) no-repeat 0px 0px; }
+.p_btnPollingDelIcon:hover,.p_btnPollingDelIcon:active{width: 102px; height:23px; background: url(../img/Btn/btnPollingDel.png) no-repeat 0px -23px; }
+
+
+/*�뀥�뵆由용궡�젮諛쏄린 �븘�씠肄�*/
+.p_btnTempDown{width: 123px; height:23px; background: url(../img/Btn/btnTempDown.png) no-repeat 0px 0px; }
+.p_btnTempDown:hover,.p_btnTempDown:active{width: 123px; height:23px; background: url(../img/Btn/btnTempDown.png) no-repeat 0px -23px; }
+
+/* 최소화 버튼 추가 */
+.p_btnMin_L { width:30px; height:30px; background:url(../img/Btn/IconBtn-Minimize.svg) no-repeat center center; opacity:0.54; cursor:pointer;}
+.p_btnMin_L:hover,
+.p_btnMin_L:active {opacity: 0.87;}
+.p_btnMin_L:visited {opacity: 0.24;}
+
+/*배포 버튼*/
+.p_btnDistribute{width: 72px; height:23px; background: url(../img/Btn/btnDistribute.png) no-repeat 0px 0px; }
+.p_btnDistribute:hover,.p_btnDistribute:active{width: 72px; height:23px; background: url(../img/Btn/btnDistribute.png) no-repeat 0px -23px; }
+
+/*실행 버튼*/
+.p_btnRun{width: 72px; height:23px; background: url(../img/Btn/btnRun.png) no-repeat 0px 0px; }
+.p_btnRun:hover,.p_btnRun:active{width: 72px; height:23px; background: url(../img/Btn/btnRun.png) no-repeat 0px -23px; }
+
+/*엑셀, pdf 내보내기 버튼 - 팝업 레이어 추가 */
+.p_btnexportExcel{width: 76px; height:76px; background: url(../img/Btn/exportExcel.png) no-repeat 0px 0px; }
+.p_btnexportPdf{width: 75px; height:75px; background: url(../img/Btn/exportPdf.png) no-repeat 0px 0px; }
+
+.p_btnExportExcelGrid{width: 18px; height:18px; background: url(../img/Btn/exportExcelGrid.png) no-repeat 0px 0px; }
+
+
+.btn-green,
+.btn-white,
+.btn-blue {
+    padding: .1em 1em .4em 1em;
+}
+
+.btn-green {color:#fff !important; background-color:#0a9479; border-color:#23910e;}
+.btn-green:hover
+.btn-green:active,
+.btn-green.active {color:#fff !important;}
+.btn-green:hover,
+.btn-green:active,
+.btn-green.active,
+.btn-green {background-image:none;}
+.btn-green {
+    background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#1fb56d), color-stop(60%, #1aa060), to(#1aa060));
+    background-image:-webkit-linear-gradient(#1fb56d, #1aa060 60%, #1aa060);
+    background-image:-moz-linear-gradient(top, #1fb56d, #1aa060 60%, #1aa060);
+    background-image:linear-gradient(#1fb56d, #1aa060 60%, #1aa060);
+    background-repeat:no-repeat;
+	border: 1px solid #0c7845;
+	cursor: pointer;
+	font-weight: bold;
+}
+.btn-green:hover {background-image:none; background-color:#32c17d; border-color:#006434;}
+.btn-green:active {background-image:none; background-color:#00856a; border-color:#00856a;}
+
+
+.btn-blue {color:#fff !important; background-color:#35578a; border-color:#284b7e;}
+.btn-blue:hover
+.btn-blue:active,
+.btn-blue.active {color:#fff !important;}
+.btn-blue:hover,
+.btn-blue:active,
+.btn-blue.active,
+.btn-blue {background-image:none;}
+.btn-blue {
+    background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#466696), color-stop(60%, #35578a), to(#35578a));
+    background-image:-webkit-linear-gradient(#466696, #35578a 60%, #35578a);
+    background-image:-moz-linear-gradient(top, #466696, #35578a 60%, #35578a);
+    background-image:linear-gradient(#466696, #35578a 60%, #35578a);
+    background-repeat:no-repeat;
+	border: 1px solid #284b7e;
+	cursor: pointer;
+	font-weight: bold;
+}
+.btn-blue:hover {background-image:none; background-color:#5374a6; border-color:#19355f;}
+.btn-blue:active {background-image:none; background-color:#2a4876; border-color:#2a4876;}
+
+.btn-white{
+			cursor:pointer;
+			border:1px solid #b8b8b8; font-size:12px; padding: 4px;
+			text-decoration:none; display:inline-block; color: #000;
+			 background-color: #f4f5f5; background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f4f4f4));
+			 background-image: -webkit-linear-gradient(top, #fff, #f4f4f4);
+			 background-image: -moz-linear-gradient(top, #fff, #f4f4f4);
+			 background-image: -ms-linear-gradient(top, #fff, #f4f4f4);
+			 background-image: -o-linear-gradient(top, #fff, #f4f4f4);}
+			 
+
+		.btn-white:hover{
+		cursor:pointer;
+		 border:1px solid #afafaf;
+		 background-color: #d9dddd; background-image: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#e8e8e8));
+		 background-image: -webkit-linear-gradient(top, #f2f2f2, #e8e8e8);
+		 background-image: -moz-linear-gradient(top, #f2f2f2, #e8e8e8);
+		 background-image: -ms-linear-gradient(top, #f2f2f2, #e8e8e8);
+		 background-image: -o-linear-gradient(top, #f2f2f2, #e8e8e8);
+		}
+		.btn-white img{ vertical-align: middle;}
+
+.btn-disabled {background: #E3E3E3; cursor: default}
+.btn-disabled:hover{background: #E3E3E3; cursor: default}
+
+/* 영흥 포트제어이력*/
+.p_btnPortHis{width: 114px; height:23px; background: url(../img/Btn/btnPortHis.png) no-repeat 0px 0px; }
+.p_btnPortHis:hover,.p_btnPortHis:active{width: 114px; height:23px; background: url(../img/Btn/btnPortHis.png) no-repeat 0px -23px; }
+/* 영흥 카메라제어이력*/
+.p_btnCCTVHis{width: 122px; height:23px; background: url(../img/Btn/btnCCTVHis.png) no-repeat 0px 0px; }
+.p_btnCCTVHis:hover,.p_btnCCTVHis:active{width: 122px; height:23px; background: url(../img/Btn/btnCCTVHis.png) no-repeat 0px -23px; }
+
+
+
+.p_btnCodeConf{width: 82px; height:23px; background: url(../img/Btn/btnCodeConf.png) no-repeat 0px 0px; }
+.p_btnCodeConf:hover,.p_btnCodeConf:active{width: 82px; height:23px; background: url(../img/Btn/btnCodeConf.png) no-repeat 0px -23px; }
+
+
+.p_btnAuthGrp{width: 82px; height:23px; background: url(../img/Btn/btnAuthGrp.png) no-repeat 0px 0px; }
+.p_btnAuthGrp:hover,.p_btnAuthGrp:active{width: 82px; height:23px; background: url(../img/Btn/btnAuthGrp.png) no-repeat 0px -23px; }
+
+/* nms data 비교*/
+.p_btnNmsCmp{width: 130px; height:23px; background: url(../img/Btn/btnNmsCmp.png) no-repeat 0px 0px; }
+.p_btnNmsCmp:hover,.p_btnNmsCmp:active{width: 130px; height:23px; background: url(../img/Btn/btnNmsCmp.png) no-repeat 0px -23px; }
+
+/* 이력관리 */
+.p_btnHisMng{width: 82px; height:23px; background: url(../img/Btn/btnHisMng.png) no-repeat 0px 0px; }
+.p_btnHisMng:hover,.p_btnHistMng:active{width: 82px; height:23px; background: url(../img/Btn/btnHisMng.png) no-repeat 0px -23px; }
+
+/* 일괄입력 */
+.p_btnAllWrite{width: 82px; height:23px; background: url(../img/Btn/btnAllWrite.png) no-repeat 0px 0px; }
+.p_btnAllWrite:hover,.p_btnAllWrite:active{width: 82px; height:23px; background: url(../img/Btn/btnAllWrite.png) no-repeat 0px -23px; }
+
+/* 계정신청 동의 */
+
+.p_btnAgree{width: 66px; height:23px; background: url(../img/Btn/btnAgree.png) no-repeat 0px 0px; }
+.p_btnAgree:hover,.p_btnAgree:active{width: 66px; height:23px; background: url(../img/Btn/btnAgree.png) no-repeat 0px -23px; }
+.p_btnDisAgree{width: 101px; height:23px; background: url(../img/Btn/btnDisAgree.png) no-repeat 0px 0px; }
+.p_btnDisAgree:hover,.p_btnDisAgree:active{width: 101px; height:23px; background: url(../img/Btn/btnDisAgree.png) no-repeat 0px -23px; }
+
+.p_btnPersonInfo{width: 120px; height:30px; background: url(../img/Btn/btnPersonInfo.png) no-repeat 0px 0px; }
+.p_btnPersonInfo:hover,.p_btnPersonInfo:active{width: 120px; height:30px; background: url(../img/Btn/btnPersonInfo.png) no-repeat 0px -30px; }
+
+/* 메뉴 권한 팝업 */
+.p_btnMenuAuth{width: 82px; height:23px; background: url(../img/Btn/btnMenuAuth.png) no-repeat 0px 0px; }
+.p_btnMenuAuth:hover,.p_btnMenuAuth:active{width: 82px; height:23px; background: url(../img/Btn/btnMenuAuth.png) no-repeat 0px -23px; }
+
+/* 토폴로지 권한 팝업 */
+.p_btnTopoAuth{width: 114px; height:23px; background: url(../img/Btn/btnTopoAuth.png) no-repeat 0px 0px; }
+.p_btnTopoAuth:hover,.p_btnTopoAuth:active{width: 114px; height:23px; background: url(../img/Btn/btnTopoAuth.png) no-repeat 0px -23px; }
+
+/* ITSM 팝업 */
+.p_btnItsmLink{width: 92px; height:23px; background: url(../img/Btn/btnItsmLink.png) no-repeat 0px 0px; }
+.p_btnItsmLink:hover,.p_btnItsmLink:active{width: 92px; height:23px; background: url(../img/Btn/btnItsmLink.png) no-repeat 0px -23px; }
+
+.p_btnYes{width: 36px; height:16px; background: url(../img/Grid/TmsFlow/yes.png) no-repeat 0px 0px; }
+.p_btnNo{width: 36px; height:16px; background: url(../img/Grid/TmsFlow/no.png) no-repeat 0px 0px; }
+
+.p_btnMemo{width: 82px; height:23px; background: url(../img/Btn/btnAddMemo.png) no-repeat 0px 0px; }
+.p_btnMemo:hover,.p_btnMemo:active{width: 82px; height:23px; background: url(../img/Btn/btnAddMemo.png) no-repeat 0px -23px; }
+
+.p_btnTag{width: 82px; height:23px; background: url(../img/Btn/btnAddTag.png) no-repeat 0px 0px; }
+.p_btnTag:hover,.p_btnTag:active{width: 82px; height:23px; background: url(../img/Btn/btnAddTag.png) no-repeat 0px -23px; }
+
+.p_btnScan{width: 82px; height:23px; background: url(../img/Btn/btnScan.png) no-repeat 0px 0px; }
+.p_btnScan:hover,.p_btnScan:active{width: 82px; height:23px; background: url(../img/Btn/btnScan.png) no-repeat 0px -23px; }
+
+.p_btnOmHis{width: 82px; height:23px; background: url(../img/Btn/btnOmHis.png) no-repeat 0px 0px; }
+.p_btnOmHis:hover,.p_btnOmHis:active{width: 82px; height:23px; background: url(../img/Btn/btnOmHis.png) no-repeat 0px -23px; }
+
+/* 통보서 */
+.p_btnNoti{width: 72px; height:23px; background: url(../img/Btn/btnNoti.png) no-repeat 0px 0px; }
+.p_btnNoti:hover,.p_btnNoti:active{width: 72px; height:23px; background: url(../img/Btn/btnNoti.png) no-repeat 0px -23px; }
+/* 소명서*/
+.p_btnVoca{width: 72px; height:23px; background: url(../img/Btn/btnVoca.png) no-repeat 0px 0px; }
+.p_btnVoca:hover,.p_btnVoca:active{width: 72px; height:23px; background: url(../img/Btn/btnVoca.png) no-repeat 0px -23px; }
+
+/*upload*/
+.p_btnUpload{width: 72px; height:23px; background: url(../img/Btn/btnUpload.png) no-repeat 0px 0px; }
+.p_btnUpload:hover,.p_btnUp:active{width: 72px; height:23px; background: url(../img/Btn/btnUpload.png) no-repeat 0px -23px; }
+
+/*download*/
+.p_btnDownload{width: 82px; height:23px; background: url(../img/Btn/btnDownload.png) no-repeat 0px 0px; }
+.p_btnDownload:hover,.p_btnDown:active{width: 82px; height:23px; background: url(../img/Btn/btnDownload.png) no-repeat 0px -23px; }
+
+/* 도움말*/
+.p_btnHelp{width: 72px; height:23px; background: url(../img/Btn/btnHelp.png) no-repeat 0px 0px; }
+.p_btnHelp:hover,.p_btnHelp:active{width: 72px; height:23px; background: url(../img/Btn/btnHelp.png) no-repeat 0px -23px; }
+/* 범례*/
+.p_btnLegend{width: 72px; height:23px; background: url(../img/Btn/btnLegend.png) no-repeat 0px 0px; }
+.p_btnLegend:hover,.p_btnLegend:active{width: 72px; height:23px; background: url(../img/Btn/btnLegend.png) no-repeat 0px -23px; }

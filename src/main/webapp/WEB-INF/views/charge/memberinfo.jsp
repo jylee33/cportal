@@ -45,7 +45,7 @@
                     <th>비고</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody onload='transExam();'>
                 <c:choose>
                     <c:when test="${fn:length(list) > 0}">
                         <c:forEach items="${list}" var="list">
@@ -741,5 +741,15 @@ console.log("data--->"+data);
         })
 
     })
+
+    function transExam(){
+        const tableRows = document.querySelectorAll(".gold");
+
+        for ( var i = 0; i < tableRows.length ; i ++ )
+        {
+            tableRows[i].textContent =  parseInt(tableRows[i].textContent).toLocaleString() ;
+        }
+
+    }
 </script>
 <%@include file="../include/footer.jsp" %>

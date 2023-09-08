@@ -1,0 +1,209 @@
+div.svg-container {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	padding-bottom: 50%;
+	vertical-align: top;
+	overflow: hidden;
+}
+
+svg.svg-content-responsive {
+	display: inline-block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	/*background-image: url(/img/d3/bg/BG_Default.png);*/
+	/*background-size: 100% 100%;*/
+}
+
+div.tooltip {
+	position: absolute;
+	text-align: left;
+	/*width: 120px;*/
+	/*height: 60px;*/
+	/*padding: 2px;*/
+	font: 12px sans-serif;
+	background: lightsteelblue;
+	border: 0px;
+	padding:10px;
+	border-radius: 8px;
+	pointer-events: none;
+	z-index: 9999999999;
+}
+
+rect.selection {
+	stroke: red;
+	stroke-width: 1px;
+	stroke-dasharray: 4px;
+	stroke-opacity: .5;
+	fill: transparent;
+	/*background : transparent;*/
+}
+
+/* 노드 선택 명  */
+g.node rect.state {
+	fill: transparent;
+}
+
+/* 선택영역 */
+g.node rect.nodeactive {
+	stroke: #FF0000;
+	stroke-dasharray: 4px;
+	stroke-opacity: 1;
+	stroke-width: 3px;
+	fill: transparent;
+}
+
+line.link {
+	stroke-width: 3px;
+}
+
+text.nodetext {
+	font-size: 12px;
+	font-family: Sans-Serif;
+	user-select: none;
+	/*fill : #000;*/ /* 사용자색상*/
+}
+
+text.linkLabel, .linkLabel {
+	font-family: Arial, Helvetica, Sans-Serif;
+	fill: #a3a3a3;
+	font-size: 11px;
+	/*font-weight: bold;*/
+	letter-spacing: 0;
+	cursor: default;
+}
+
+
+.shapeactive text {
+	/*stroke: none !important;*/
+	font-family: Sans-Serif;
+	/*font-weight: bold !important;*/
+	filter: drop-shadow(1px 1px 3px rgba(0,0,1,0.5));
+}
+
+.shapeactive .shape {
+	/*stroke-opacity: 1 !important;*/
+	/*fill-opacity: 1 !important;*/
+	filter: drop-shadow(1px 1px 3px rgba(0,0,1,0.7));
+	/*filter: blur(1px);*/
+	/*filter: brightness(150%);*/
+	/*filter: saturate(150%);*/
+}
+
+.nodeHighlighted {
+	fill-opacity: 1 !important;
+	filter: drop-shadow(1px 1px 3px rgba(0, 30, 108,0.8));
+}
+
+.linkHighlighted {
+	fill-opacity: 1 !important;
+	filter: drop-shadow(1px 1px 3px rgba(0, 30, 108,0.8));
+}
+
+path.spline {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 2px;
+}
+
+circle.splinePoints {
+    fill: #fff;
+    /*fill-opacity: .2;*/
+    stroke: steelblue;
+    stroke-width: 1.5px;
+    /*cursor: move;*/
+}
+.splinePointSelected {
+    /*fill-opacity: .7 !important;*/
+    fill: steelblue !important;
+    stroke: steelblue !important;
+}
+circle.flow {
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -ms-filter: blur(1px);
+    -o-filter: blur(1px);
+    filter: blur(1.5px);
+}
+.ellipse_flow {
+	-webkit-filter: blur(1px);
+	-moz-filter: blur(1px);
+	-ms-filter: blur(1px);
+	-o-filter: blur(1px);
+	filter: blur(1.5px);
+}
+
+.helpline {
+    fill: none;
+    fill-opacity: .5;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+    /*cursor: move;*/
+}
+
+.linkTextSelected {
+	/*stroke: none !important;*/
+	font-family: Sans-Serif;
+	font-weight: bold !important;
+	filter: drop-shadow(1px 1px 3px rgba(0,0,1,0.5));
+}
+
+
+.dialogBG{position:absolute; left:50%; top:50%; width:250px; margin-top: -150px; margin-left:-125px; z-index: 999;}
+.dialogShow{display: block;}
+.dialogNone{display: none;}
+
+/* flow icon color */
+/*
+.filter-red{
+	filter: invert(36%) sepia(97%) saturate(7455%) hue-rotate(355deg) brightness(105%) contrast(121%) opacity(85%) blur(1px);
+}
+*/
+
+/* digital clock style */
+#underlay {
+	-webkit-filter: blur(0px);
+	-moz-filter: blur(0px);
+	-ms-filter: blur(0px);
+	-o-filter: blur(0px);
+	filter: blur(0px);
+}
+
+#underlay path,
+#underlay circle {
+	fill: none;
+}
+
+#underlay .lit {
+	fill: #111;
+	stroke: #111;
+}
+
+/*#overlay path,*/
+/*#overlay circle {*/
+	/*fill: #222;*/
+	/*stroke: #5f0;*/
+	/*stroke-opacity: 0;*/
+/*}*/
+
+/*#overlay .lit {*/
+	/*fill: #0e0;*/
+	/*stroke-opacity: 1;*/
+/*}*/
+
+/* 환경설정 mp3파일 업로드 버튼 숨김 */
+.jqx-file-upload-file-row
+{
+	display: none;
+}
+.jqx-file-upload-button-browse
+{
+	margin-bottom: 0 !important;
+}
+
+.axis-grid line {
+	stroke: #ddd;
+}

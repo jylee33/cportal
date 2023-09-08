@@ -1,0 +1,208 @@
+/**=======================
+	메인 css
+======================== */
+
+body{margin:0; padding:0;  font-family: "맑은고딕", dotum, "Trebuchet MS", Verdana, Helvetica, Sans-Serif; font-size: 12px; overflow:auto;}
+li,ul{list-style:none;}
+img{border: none;}
+a{text-decoration: none; color:#000;}
+a:hover{text-decoration: underline;}
+.boxStyle{border: 1px solid #9a9a9a;} /*background:#fff*/
+.main{margin: 0 auto; width: 1360px;}
+.more_2{cursor: pointer;}
+table thead tr th{background: #ebebeb; height: 31px; border-right:1px solid #d7d7d7;}
+table thead tr th:last-child{border-right:none;}
+/*.poligon{position: absolute; top:0; left:0;}*/
+.Icons{text-align: center; width:100%; position: absolute; top:30px;}
+.boxtitle{text-align: center; width:100%; position:absolute; bottom:20px;  font-weight: bold; font-size: 14px;}
+#nBoardTbody tr td{line-height: 25px;}
+#nBoardTbody tr td:first-child{padding-left:10px;}
+#jobGrid tr td{line-height: 25px;}
+#sBoardTbody tr td{line-height: 25px;}
+#sBoardTbody tr td:first-child{padding-left:10px;}
+#eBoardTbody tr td{line-height: 25px;}
+#eBoardTbody tr td:first-child{padding-left:10px;}
+.time{text-align: center;}
+
+/*------ leftBlock  -------*/
+
+.leftBlock{float: left; margin-top: 50px; width:230px;}
+
+/* 유저정보 */
+.userInfo{width:229px; height: 220px; float:left; content: ''; position: relative;}
+.userInfo .loginIcon{text-align: center; margin-top:20px;}
+.userInfo .loginIcon img{transform: translatey(0px);
+    animation: float 6s ease-in-out infinite;}
+.userInfo .text{text-align: center; font-weight: bold; text-decoration: underline;font-size: 15px;}
+.userInfo .userInfoBox{margin:20px; border:1px solid #cccccc;}
+.userInfo .userInfoBox table tr:last-child td{border-top:1px solid #cccccc; }
+.userInfo .userInfoBox table .tdBg{background: #f8f8f8; text-align: center; font-weight: bold; line-height: 20px;}
+.userInfo .userInfoBox table .tdCnt{text-indent: 5px;font-size: 14px;}
+
+/* 달력
+.calendarBox{width: 229px; height: 220px; float:left;  content: ''; margin-top:10px;}
+#calendar{border:none; margin:10px; width: 210px; height: 200px;}
+*/
+/* 대시보드 */
+.dashboard{width: 229px; height: 160px; float:left;  content: ''; margin-top:10px; position: relative; cursor: pointer;}
+
+/* 메뉴얼 */
+.menual{width: 229px; height: 160px; float:left;  content: ''; margin-top:10px; position: relative; cursor: pointer;}
+
+/* 배너
+.banner{width: 230px; height: 60px; float:left;  content: ''; margin-top:10px; cursor: pointer; text-align: center;}
+.banner a{padding-top:7px; padding-bottom:7px; display:inline-block;}
+*/
+
+/*------ centerBlock  -------*/
+.centerBlock{ float: left; margin-left: 10px; margin-top: 50px;  width:550px;}
+
+/* 공지사항, 작업이력 */
+.board1{height: 220px; width: 550px; float:left;  content: ''; cursor: pointer;}
+.blockTitle{background:#ffffff; border-right:1px solid #cccccc; height:40px; width: 130px; font-size: 14px; text-align: center; line-height: 40px;}
+.blockText{color: #383838;}
+.title_on{color: #fff; background:#70b906; font-weight: bold; }
+.borderLine1{border:1px solid #70b906; width:99.8%; position: absolute; top:40px;}
+
+/* 기술지원게시판, 장애처리게시판  */
+.board2{height: 220px; width: 550px; float:left;  content: ''; margin-top:10px; cursor: pointer;}
+.blockTitle_2{background:#ffffff; border-right:1px solid #cccccc; height:41px; width: 130px; font-size: 14px; text-align: center; line-height: 40px;}
+.blockText_2{color: #383838;}
+.title_on_2{color: #fff; background:#58aed7; font-weight: bold; }
+.borderLine2{ border: 1px solid #58aed7; width:99.8%; position: absolute; top:40px;}
+
+/* 이벤트현황 */
+.board3{height: 390px; width: 1110px; float:left;  content: ''; margin-top:10px; position: relative; cursor: pointer;}
+.blockTitle_3{background:#ffffff; border-right:1px solid #cccccc; height:41px; width: 130px; font-size: 14px; text-align: center; line-height: 40px;}
+.blockText_3{color: #383838;}
+.title_on_3{color: #fff; background:#83829e; font-weight: bold; }
+.borderLine3{ border: 1px solid #83829e; width:99.8%; position: absolute; top:40px;}
+.joinTable{height: 347px;}
+.joinTable table{text-align: center; height: 100%;}
+.joinTable table tbody tr td{/* border-right:1px solid #cccccc; */ border-bottom: 1px solid #cccccc; line-height:30px;}
+.joinTable table tbody tr:last-child td{border-bottom: none;}
+
+
+/*------ rightBlock  -------*/
+.rightBlock{float: left; margin-left: 10px; margin-top: 50px; width:550px;}
+
+/**=======================
+	메인 변경 css : 레이아웃 변경
+	수정일자 : 2018-04-24
+======================== */
+
+.boxStyle {border:none;}
+.main {width:1400px;}
+.Icons {float:left;text-align:justify;width:auto;position: absolute;top: calc(50% - 35px);left: 15px;}
+.boxtitle{text-indent: 5px; line-height: 70px; text-align: justify; width:auto; position:static; bottom:0;}
+.board1 .more_2 {float:right;}
+.noticeBlock {background:#fff; border-top:1px solid #eaeaea;}
+.supportBlock {background:#fff; border-top:1px solid #eaeaea;}
+#jobTbody tr td{font-size:12px; line-height: 34px; text-align: center; border-right:1px solid #eaeaea; border-bottom:1px solid #eaeaea;}
+#jobTbody tr td:last-child {border-right:none;}
+#nBoardTbody tr td{line-height: 34px;text-align: center; border-right:1px solid #eaeaea; border-bottom:1px solid #eaeaea;}
+#nBoardTbody tr td.left {text-align:left; text-indent:15px;}
+#nBoardTbody tr td:first-child{padding-left:0;}
+#nBoardTbody tr td:last-child {border-right:0;}
+#sBoardTbody tr td {line-height: 34px;text-align: center; border-right:1px solid #eaeaea; border-bottom:1px solid #eaeaea;}
+#sBoardTbody tr td:first-child {padding-left:0;}
+#sBoardTbody tr td:last-child {border-right:0;}
+#sBoardTbody tr td.left {text-align:left; text-indent:15px;}
+
+table thead tr th{background: #f2f2f2; height: 32px; border-right:1px solid #d7d7d7; font-size:12px;}
+table thead tr th:last-child{border-right:none;}
+div.s_tit {font-size:16px; font-weight:bold; color:#222; margin-bottom:13px; display:inline-block;}
+
+/*------ leftBlock  -------*/
+.leftBlock {margin-top: 40px; width:240px;}
+
+/* 유저정보 */
+.userInfo {width:240px; height:250px;}
+.userInfo .loginIcon{margin-top:0;}
+.userInfo .text{padding:18px;}
+.userInfo .userInfoBox {margin:0; border:none; border-top:1px solid #e7e7e7; border-bottom:1px solid #e7e7e7; background: #fff;}
+.userInfo .userInfoBox table tr:last-child td{border-top:1px solid #e7e7e7;}
+.userInfo .userInfoBox table .tdBg{background: #f2f2f2; line-height: 35px;  font-size: 13px;}
+
+/*왼쪽 하단 배너 2개*/
+.l_bottom_bn {margin-top:316px;}
+
+/* 대시보드 */
+/*.dashboard{width: 240px;height: auto;border:1px solid #e7e7e7;background: #fff;padding: 14px 0 14px 100px;margin-top:0;position: relative;overflow: hidden;box-sizing: border-box;min-height: 100px;}*/
+.dashboard{width: 240px;height: auto;border:1px solid #e7e7e7;background: #fff;padding: 30px 0 30px 100px;margin-top:0;position: relative;overflow: hidden;box-sizing: border-box;}
+
+/* 메뉴얼 */
+.menual{width: 240px;height: auto;border:1px solid #e7e7e7;background: #fff;padding: 14px 0 14px 100px;margin-top:0;position: relative;overflow: hidden;box-sizing: border-box;min-height: 100px; margin-top:20px;}
+
+/*------ centerBlock  -------*/
+.centerBlock{margin-left: 40px; width:540px; margin-top:40px;}
+.board1{width: 540px; height:250px; margin-bottom:66px;}
+
+/* 이벤트 티켓 + 작업이력 */
+.evtProcess {width:476px; height:186px;border:1px solid #eaeaea; background:#fff; padding:32px 30px 0 30px;}
+.evtProcess div {float:left; padding-right:24px; background:url("../img/MainImg/evtArrowIcon.svg") no-repeat 105px 62px;} /*완료후 배경색 삭제*/
+.evtProcess div:last-child{padding-right:0; background:none;}
+.evtProcess figure {text-align: center; margin:0;font-size:15px;font-weight:bold}
+.evtProcess figcaption {margin-bottom:8px;}
+
+.evtProcess p {font-size:30px; color:#b7b7b7; font-weight:bold; margin:0;}
+.evtProcess p.activeColor {color:#222;}
+
+/*------ rightBlock  -------*/
+.rightBlock{float:right; margin-left: 40px; margin-top: 40px; width:540px;}
+
+/**=======================
+	메인 변경 css : 레이아웃 변경
+	수정일자 : 2018-10-22
+	수정자 : 신은화
+======================== */
+#bnContent {width:240px; height:110px;}
+.bnCon3 {cursor:pointer; width:74px; height:110px; border:1px solid #e7e7e7; padding:20px 10px 12px; background:#fff; float:left; margin-right:9px; box-sizing:border-box; text-align: center; font-weight:bold;}
+.bnCon3:last-child {margin-right:0;}
+.bnCon3 img {width:90%; height: 90%; margin-bottom: 10px;}
+.menual {margin-top:10px;}
+
+
+/**=======================
+	메인 변경 css : 애니메이션
+	수정일자 : 2020-04-22
+	수정자 : 최지영
+======================== */
+
+.main-circle {
+    -webkit-animation: main-circle 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite alternate;
+    animation: main-circle 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite alternate;
+}
+
+@-webkit-keyframes main-circle {
+    0% {
+        -webkit-transform: scale(0.8);
+        transform: scale(0.8);
+    }
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+@keyframes main-circle {
+    0% {
+        -webkit-transform: scale(0.8);
+        transform: scale(0.8);
+    }
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translatey(0px);
+    }
+    50% {
+        transform: translatey(-10px);
+    }
+    100% {
+        transform: translatey(0px);
+    }
+}

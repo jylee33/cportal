@@ -26,5 +26,10 @@ public class TestController {
 
     }
 
+    @GetMapping(value = "jqxgrid")
+    public void jqxgrid(Model model) {
+
+    }
+
 
 }

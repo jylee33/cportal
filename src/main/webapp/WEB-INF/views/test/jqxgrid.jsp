@@ -10,18 +10,13 @@
 <link rel="stylesheet" href="${path}/resources/js/jqwidgets/styles/jqx.base.css" type="text/css" />
 
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcore.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdata.js"></script>
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxbuttons.js"></script>
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxscrollbar.js"></script>
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxmenu.js"></script>
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.sort.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.filter.js"></script>
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.selection.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxpanel.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcheckbox.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxlistbox.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdropdownlist.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.columnsresize.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdata.js"></script>
 <%--<script type="text/javascript" src="${path}/resources/js/scripts/demos.js"></script>--%>
 
 <div class="container">

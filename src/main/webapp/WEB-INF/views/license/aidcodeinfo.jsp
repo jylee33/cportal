@@ -54,14 +54,14 @@
 
 <script>
 
-    if (typeof jQuery == 'undefined') {
-        var script = document.createElement('script');
-        script.type = "text/javascript";
-        script.src = "https://code.jquery.com/jquery-3.5.1.min.js";
-        document.getElementsByTagName('head')[0].appendChild(script);
-    } else {
-        console.log("jQuery Ready");
-    }
+    // if (typeof jQuery == 'undefined') {
+    //     var script = document.createElement('script');
+    //     script.type = "text/javascript";
+    //     script.src = "https://code.jquery.com/jquery-3.5.1.min.js";
+    //     document.getElementsByTagName('head')[0].appendChild(script);
+    // } else {
+    //     console.log("jQuery Ready");
+    // }
     $(document).ready(function(){
         alert(".......................................................................");
         var url = "${path}/license/aidcodeinfo";

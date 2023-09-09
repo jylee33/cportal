@@ -17,11 +17,11 @@
 
     <link rel="stylesheet" type="text/css" href="${path}/resources/css/sumoselect.css" />
     <link rel="stylesheet" type="text/css" href="${path}/resources/css/front.css" />
-    <script type="text/javascript" src="${path}/resources/js/jquery-1.11.3.min.js"></script>
+
+    <link rel="stylesheet" href="${path}/resources/js/jqwidgets/styles/jqx.base.css" type="text/css" />
     <script type="text/javascript" src="${path}/resources/js/jquery.sumoselect.js"></script>
     <script type="text/javascript" src="${path}/resources/js/front.js"></script>
 
-    <link rel="stylesheet" href="${path}/resources/js/jqwidgets/styles/jqx.base.css" type="text/css" />
     <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxbuttons.js"></script>
     <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxscrollbar.js"></script>
@@ -31,9 +31,12 @@
     <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.columnsresize.js"></script>
     <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdata.js"></script>
 
+    <!--  <script type="text/javascript" src="${path}/resources/jqgrid_4.4.3/js/jquery-3.4.1.min.js"></script  -->
+
 </head>
 
 <body>
+// jQuery에서 제공하는 3.5.1 버전의 jQuery CDN 호스트
 <div id="wrap">
     <div class="header">
         <div class="inner">
@@ -78,3 +81,5 @@
         </div>
     </div>
     <!-- // header -->
+
+

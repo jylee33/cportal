@@ -15,7 +15,7 @@
     </div>
     <div class="tabs-box">
         <div class="tabs">
-            <a href="${path}/license/licensemanage" class="active">라이선스 정책 관리</a>
+            <a href="#" class="active">라이선스 정책 관리</a>
             <a href="${path}/license/aidcodeinfo">라이선스 제공 기능</a>
             <a href="${path}/license/creditinfo">Credit 제공</a>
         </div>
@@ -209,7 +209,16 @@
         modal.style.display = 'block';
        // popupOpen('Modal1');
     }
-// 팝업 함수 호출
+
+    <%--function aidcodeinfo(){--%>
+    <%--    let f = document.createElement('form');--%>
+    <%--    f.setAttribute('method', 'get');--%>
+    <%--    f.setAttribute('action', '${path}/license/aidcodeinfo');--%>
+    <%--    document.body.appendChild(f);--%>
+    <%--    f.submit();--%>
+    <%--}--%>
+
+    // 팝업 함수 호출
 // popupOpen('Modal1');
 </script>
 <%@include file="../include/footer.jsp" %>

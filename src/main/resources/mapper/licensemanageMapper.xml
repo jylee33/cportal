@@ -43,10 +43,6 @@
                a01.stdate          ,      --   시작일자
                 a01.eddate          ,      --   종료일자
                 a01.sortno          ,      --   종료일자
-               str_to_date(a01.stdate,'%Y%m%d') strstdate,
-               str_to_date(a01.eddate,'%Y%m%d') streddate,
-               a01.createdAt       ,      --   등록일시
-               a01.updatedAt       ,       --   수정일시
                j01.codename        ,       --   수정일시
                row_number() over (order by a01.functioncode ,a01.createdAt desc) numrow
         from tbaidfunction a01

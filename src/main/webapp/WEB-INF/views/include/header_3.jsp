@@ -85,3 +85,26 @@
     <!-- // header -->
 
 
+    <!-- jQuery -->
+    <script type="text/javascript" src="${path}/resources/jquery-3.4.1.min.js"></script>
+    <script>
+        // jQuery import 바로아래에 넣어 주면 됩니다.
+        // Cannot read property 'msie' of undefined 에러 나올때
+        jQuery.browser = {};
+        (function () {
+            jQuery.browser.msie = false;
+            jQuery.browser.version = 0;
+            if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+                jQuery.browser.msie = true;
+                jQuery.browser.version = RegExp.$1;
+            }
+        })();
+    </script>
+    <!--  <script type="text/javascript" src="${path}/resources/jqgrid_4.4.3/js/jquery-3.4.1.min.js"></script  -->
+    <!-- jQgrid -->
+    <link rel="stylesheet" type="text/css" media="screen" href="${path}/resources/css/jquery-1.13.2-ui.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="${path}/resources/jqGrid-4.4.3/css/ui.jqgrid.css" />
+    <!--   <script type="text/javascript" src="${path}/resources/jqgrid_4.4.3/js/jquery-1.7.2.min.js"></script> -->
+    <!--<script type="text/javascript" src="./jqGrid_4.4.3/js/jquery.jqGrid.src.js" ></script> -->
+    <script type="text/javascript" src="${path}/resources/jqGrid-4.4.3/js/i18n/grid.locale-kr.js" ></script>
+    <script type="text/javascript" src="${path}/resources/jqGrid-4.4.3/js/jquery.jqGrid.min.js" ></script>

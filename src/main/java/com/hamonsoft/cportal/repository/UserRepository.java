@@ -7,9 +7,7 @@ import com.hamonsoft.cportal.dto.LoginDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Mapper
 @Repository
@@ -24,7 +22,7 @@ public interface UserRepository {
     int withdrawal(Member member);
 
 
-
+    ArrayList<HashMap<String, Object>> findAll();
 //    Member info(Map<String, Object> paramMap);
 
 }

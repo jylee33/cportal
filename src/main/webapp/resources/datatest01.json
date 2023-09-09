@@ -1,0 +1,10 @@
+{
+ "resultCode": "S0001",
+ "res":[
+  {"stdate": "20230801", "eddate": "21991231", "entaid": "별도 협의", "basicaid": "30일",…},
+  {"stdate": "20230801", "eddate": "21991231", "entaid": "O", "basicaid": "O",…},
+  {"stdate": "20230801", "eddate": "21991231", "entaid": "O", "basicaid": "O",…},
+  {"stdate": "20230801", "eddate": "21991231", "entaid": "O", "basicaid": "O",…},
+  {"stdate": "20230801", "eddate": "21991231", "entaid": "O", "basicaid": "O",…}
+ ]
+}

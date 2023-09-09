@@ -4,6 +4,7 @@ import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.domain.MemberTaxInformation;
 import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.LoginDTO;
+import com.hamonsoft.cportal.dto.ResponseDTO;
 import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.service.UserService;
 import org.slf4j.Logger;
@@ -19,6 +20,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -127,5 +131,15 @@ public class UserController {
         }
 
     }
+
+    @PostMapping(value = "findAll")
+    public ResponseEntity<?> findAll() {
+        ResponseDTO responseDTO = new ResponseDTO();
+        responseDTO.setResultCode("S0001");
+        responseDTO.setRes(userService.findAll());
+        logger.info(" ResponseDTO---->"+responseDTO);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+
 
 }

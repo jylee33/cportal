@@ -3,15 +3,18 @@ package com.hamonsoft.cportal.repository;
 import com.hamonsoft.cportal.dto.LicensePolicyDto;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Mapper
 public interface LicenseManageRepository {
 
-    public List<Map<String, Object>> licensePolicyList(String solution) throws Exception;
+    ArrayList<HashMap<String, Object>> licensePolicyList(String solution);
 
-    public List<Map<String, Object>> aidfunctionList(String functioncode) throws Exception;
+    ArrayList<HashMap<String, Object>> licensePolicyList1(String solution);
+    ArrayList<HashMap<String, Object>> aidfunctionList(String solution);
 
-    public List<Map<String, Object>> creditList() throws Exception;
+    ArrayList<HashMap<String, Object>> creditList();
 }

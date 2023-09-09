@@ -4,7 +4,21 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@include file="../include/header_3.jsp" %>
+<%@include file="../include/header.jsp" %>
+
+<link rel="stylesheet" href="${path}/resources/js/jqwidgets/styles/jqx.base.css" type="text/css" />
+
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.selection.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.columnsresize.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdata.js"></script>
+<%--<script type="text/javascript" src="${path}/resources/js/scripts/demos.js"></script>--%>
+
+
 <div class="container">
     <div class="h3-head">
         <h3 class="h3">라이선스 정책 관리</h3>
@@ -38,123 +52,64 @@
 </div>
 </div>
 
-<script type="text/javascript">
+<script>
 
-    <%--    // 가로(수평) 탭 초기화<script type="text/javascript">--%>
-    $(document).ready(function($){
-        alert("...........................");
-        jQuery(function () {
-            $("#aidInfo").jqxGrid({
-                url : "${path}/license/aidview",
-                dataType:'json',
-                colNames:['지원관리번호','지원기능','FREE','BASIC','PRO','ENTERPRISE','기능구분','사용여부','시작일자','종료일자','정렬기준'],
-                colModel:[
-                    {name:'functionno',label:'functionno',width:100,aligh:'center',editable:false,edittype:'true'},
-                    {name:'functionname',label:'functionname',width:200,aligh:'center',editable:true,edittype:'text'},
-                    {name:'freeaid',label:'free',width:100,formatter:radio,aligh:'center',editable:true,edittype:'custom', editoptions:{custom_element: radioColumn, custom_value:radioValue}},
-                    {name:'basicaid',label:'basic',width:100,formatter:radio,aligh:'center',editable:true,edittype:'custom', editoptions:{custom_element: radioColumn, custom_value:radioValue}},
-                    {name:'proaid',label:'pro',width:100,formatter:radio,aligh:'center',editable:true,edittype:'custom', editoptions:{custom_element: radioColumn, custom_value:radioValue}},
-                    {name:'entaid',label:'ent',width:100,formatter:radio,aligh:'center',editable:true,edittype:'custom', editoptions:{custom_element: radioColumn, custom_value:radioValue}},
-                    {name:'functioncode',label:'functioncode',aligh:'center',editable:true,edittype:'select',editoptions:{value:{10:'기본기능',20:'부가기능', 30:'고급기능'}}},
-                    {name:'useyn',label:'useyn',width:100,aligh:'center',editable:true,edittype:'select',editoptions:{value:{'Y':'사용','N':'미사용'}}},
-                    {name:'stdate',label:'stdate',aligh:'center',sortable: true, width: 100, formatter: dateFormatter },
-                    {name:'eddate',label:'eddate',aligh:'center',sortable: true, width: 100, formatter: dateFormatter},
-                    {name:'sortno',label:'sortno',width:100,aligh:'center',editable:false,edittype:'text'},
+    if (typeof jQuery == 'undefined') {
+        var script = document.createElement('script');
+        script.type = "text/javascript";
+        script.src = "https://code.jquery.com/jquery-3.5.1.min.js";
+        document.getElementsByTagName('head')[0].appendChild(script);
+    } else {
+        console.log("jQuery Ready");
+    }
+    $(document).ready(function(){
+        alert(".......................................................................");
+        var url = "${path}/license/aidcodeinfo";
+        // prepare the data
+        var source =
+            {
+                datatype: "json",
+                datafields: [
+                    { name: 'functionno',type:'int'},
+                    { name:'functionname',type:'string'},
+                    { name: 'freeaid', type: 'string' },
+                    { name: 'basicaid', type: 'string' },
+                    { name: 'proaid', type: 'string' },
+                    { name: 'entaid', type: 'string' },
+                    { name:'functioncode',type:'string'},
+                    { name:'useyn',type:'string'},
+                    { name: 'stdate', type: 'string' },
+                    { name: 'eddate', type: 'string' },
+                    { name:'sortno',type:'int'}
                 ],
-                // rowNum:10,
-                // rowList:[10,20,30],
-                pager:'#pager',
-                cellsubmit : 'remote',
-                viewrecords : true,
-                caption:'라이센스제공',
-                loadonce:false,
-                loadComplete:function(data){   //서버요청직후 실핼
-                    alert(${"aidInfo"});
-                    if(data == null || data == '' || data.length == 0){
-                        console.log(${"aidInfo"});
-                        // $("#aid > tbody").append("<tr class='ui-widget-content jqgrow ui-row-ltr'>
-                        //     <td colspan='7' class='text-center'>조회된 결과가 없습니다.</td></tr>");
-                    }
-                    $('.jqgrow').mouseover(function(e) {
-                        return false;
-                    });
-                }
-                // onCellSelect: function(rowId , index, contents, action){
-                //
-                // },
-                // loadError : function(xhr,st,err) {      //server load error message 뿌리기
-                //     $("#aidInfo").html("Type: " + st + "; Response: " + xhr.status + " " + xhr.statusText);
-                // }
-            });
-            jQuery("#aidInfo").jqGrid('navGrid', '#pager', { edit: false, add: false, del: false });
+                id: 'id',
+                url: url,
+                type: "GET"
+        };
+
+        var dataAdapter = new $.jqx.dataAdapter(source);
+        $("#grid2").jqxGrid(
+            {
+                width: 1000,
+                source: dataAdapter,
+                // columnsresize: true,
+                columns: [
+                    { text: '지원관리번호', datafield: 'functionno', width: 250 },
+                    { text: '지원기능', datafield: 'functionname', width: 250},
+                    { text: 'freeaid',datafield: 'freeaid', width: 250 },
+                    { text: 'basicaid', datafield: 'basicaid', width: 250 },
+                    { text: 'proaid', datafield: 'proaid', width: 250 },
+                    { text: 'entaid',datafield: 'entaid',  width: 250 },
+                    { text: '기능구분', datafield: 'functioncode', width: 250},
+                    { text: '사용여부', datafield: 'useyn', width: 250},
+                    { text: 'stdate',datafield: 'stdate',  width: 250 },
+                    { text: 'eddate',datafield: 'eddate',  width: 250 },
+                    { text: '정렬기준', datafield: 'sortno', width: 250}
+                ]
         });
-        $("#btn_add_row").click(function(){
-            const selected = $('#sltcode option:selected').val();
-            var data = {functioncode:selected, useyn:"Y"};
-            rowId = $("#aidInfo").getGridParam("reccount"); // 페이징 처리 시 현 페이지의 Max RowId 값
-            $("#aidInfo").jqGrid("addRowData", rowId+1, data, 'last'); // 첫행에 Row 추가
-            //$("#list").jqGrid("addRowData", rowId+1, data, 'last'); // 마지막 행에 Row 추가
-
-        });
-
-
-        //날자 포맷
-        function dateFormatter(stringDate){
-            if(!stringDate){
-                return "";
-            }
-            var formatNum = '';
-            stringDate=stringDate.replace(/\s/gi, "");
-            if(stringDate.length == 8){
-                formatNum = stringDate.replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3');
-            }else{
-                formatNum = stringDate;
-            }
-            // document.getElementById(id).innerHTML = formatNum;
-            //console.log("dateFormatter formatNum -->"+formatNum+" ..... num ->"+num);
-            return formatNum;
-        }
-        function radio(value, options, rowObject){
-            var radioHtml = '<input type="radio" value=' + value + ' name="radioid" />';
-            return radioHtml;
-        }
-
-        function radioColumn(value, editOptions) {
-            var span   = $("<span />");
-            var label  = $("<span />",{ html: "제공" });
-            var radio  = $("<input>", { type: "radio", value: "O", name: "freight", id: "zero", checked: (value == "O")});
-            var label1 = $("<span />",{ html: "미제공"});
-            var radio1 = $("<input>", { type: "radio", value: "X", name: "freight", id: "fifty", checked: value == "X" });
-            span.append(label).append(radio).append(label1).append(radio1);
-            return span;
-        }
-
-        function radioValue(elem, oper, value) {
-            if (oper === "set") {
-                var radioButton = $(elem).find("input:radio[value='" + value + "']");
-                if (radioButton.length > 0) {
-                    radioButton.prop("checked", true);
-                }
-            }
-
-            if (oper === "get") {
-                return $(elem).find("input:radio:checked").val();
-            }
-        }
-
-
 
     });
 
-    jQuery.browser = {};
-    (function () {
-        jQuery.browser.msie = false;
-        jQuery.browser.version = 0;
-        if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
-            jQuery.browser.msie = true;
-            jQuery.browser.version = RegExp.$1;
-        }
-    })();
 </script>
 </body>
 <%@include file="../include/footer.jsp" %>

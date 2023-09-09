@@ -14,7 +14,7 @@
     <div class="tabs-box">
         <div class="tabs">
             <a href="${path}/license/licensemanage" >라이선스 정책 관리</a>
-            <a href="${path}/license/aidcode">라이선스 제공 기능</a>
+            <a href="${path}/license/aidcodeinfo">라이선스 제공 기능</a>
             <a href="#" class="active">Credit 제공</a>
         </div>
     </div>

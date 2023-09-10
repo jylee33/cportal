@@ -8,20 +8,23 @@ import com.hamonsoft.cportal.service.LicenseManageService;
 //import com.hamonsoft.cportal.utils.GridUtil;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 //import java.util.*;
 
-@RestController
+@Controller
 @RequestMapping(value = "/license")
 public class LicenseManageController {
 
@@ -99,18 +102,32 @@ public class LicenseManageController {
     }
 
 
-    @ResponseBody
     @PostMapping(value = "/aidInfoSave")
-    public String MemberInfoPostSave(@RequestBody MemberLicenseDto memberLicenseDto) throws Exception {
-        logger.info("memberLicenseDto --> "+memberLicenseDto);
+    @ResponseBody
+    public String AidFunctionSave(@RequestBody String aidData) throws Exception {
 
+        JSONParser jsonParser = new JSONParser();
+        JSONArray insertParam = null;
+        try {
+            insertParam = (JSONArray) jsonParser.parse(aidData);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
+        logger.info("insertParam.size-->"+insertParam.size());
+        for(int i=0; i<insertParam.size(); i++){
+            //배열 안에 있는것도 JSON형식 이기 때문에 JSON Object 로 추출
+            JSONObject insertData = (JSONObject) insertParam.get(i);
+            logger.info("insertParam-->"+insertData);
+            Map<String, Object> saveData = new HashMap<>();
+            if (null == insertData.get("functionno") || insertData.get("functionno").equals("")) {
+                licensemanageService.aidfunctionInsert(insertData);
+            }else{
+                licensemanageService.aidfunctionUpdate(insertData);
+            }
+        }
 
-//        List<<Map<String, Object>> map, HttpServletRequest request) throws Exception {
-//
-//
-//            licensemanageService.aidfunctionUpdate(memberLicenseDto);
-//        // licenseUpdate
         return null;
     }
 
@@ -127,48 +144,79 @@ public class LicenseManageController {
         if(functioncode == null || "".equals(functioncode)) {
             functioncode = "10";
         }
-        ModelAndView mav = new ModelAndView();
+        ModelAndView mav = new ModelAndView("jsonView");
         mav.setViewName("redirect:/license/aidcodeinfo");
         mav.addObject("aidInfo",licensemanageService.aidfunctionList(functioncode));
         //logger.info("LicenseManageController licensemanageService ---->"+licensemanageService.aidfunctionList(functioncode));
         return mav;
     }
 
-
-
-    @PostMapping(value="/aidcodeinfo111111")
-    public ModelAndView aidcodeinfolist(Map<String, Object> map, HttpServletRequest request) throws Exception {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("/license/aidcodeinfo");
-
+    @RequestMapping(value="/aidcodeview")
+    @ResponseBody
+    public List<HashMap<String, Object>> responseBodyTest(@RequestParam Map<String, Object> params, HttpServletRequest request){
+        List<HashMap<String, Object>> result = new ArrayList<>();
         HttpSession session = request.getSession();
-        Member member = (Member) session.getAttribute("login");
         String functioncode = request.getParameter("sltcode");
         if(functioncode == null || "".equals(functioncode)) {
             functioncode = "10";
         }
-        ArrayList<HashMap<String, Object>> aidFunctionDtos = licensemanageService.aidfunctionList(functioncode);
-        mav.addObject("aidInfo",aidFunctionDtos);
-        //logger.info("LicenseManageController licensemanageService ---->"+licensemanageService.aidfunctionList(functioncode));
-        logger.info("LicenseManageController aidfunctionList           ModelAndView---->"+mav);
-        return mav;
+        result = licensemanageService.aidfunctionList2(functioncode);
+        logger.info("LicenseManageController List<HashMap<String, Object> ---->"+result);
+        return result;
     }
 
-    @GetMapping(value="/aidcodeinfo")
-    public ResponseEntity<?> aidcodeinfolist(HttpServletResponse response) throws IOException {
-        String sltcode = "";
 
-        if (sltcode == null || sltcode.isEmpty()) {
-            sltcode = "10";
-        }
+//    @GetMapping(value="/aidcodeinfo")
+//    public ModelAndView aidcodeinfolist(Map<String, Object> map, HttpServletRequest request) throws Exception {
+//       // ModelAndView mav = new ModelAndView();
+//        ModelAndView mav = new ModelAndView("jsonView");
+//        mav.setViewName("license/aidcodeinfo");
+//
+//        HttpSession session = request.getSession();
+//       // Member member = (Member) session.getAttribute("login");
+//        String functioncode = request.getParameter("sltcode");
+//        if(functioncode == null || "".equals(functioncode)) {
+//            functioncode = "10";
+//        }
+//        ArrayList<HashMap<String, Object>> aidFunctionDtos = licensemanageService.aidfunctionList(functioncode);
+//        mav.addObject("aidInfo",aidFunctionDtos);
+//        //logger.info("LicenseManageController licensemanageService ---->"+licensemanageService.aidfunctionList(functioncode));
+//        logger.info("LicenseManageController aidfunctionList           ModelAndView---->"+mav);
+//        return mav;
+//    }
+//    @PostMapping(value="/aidcodeinfo")
+//    public ModelAndView aidcodeinfolist(Map<String, Object> map, HttpServletRequest request) throws Exception {
+//        ModelAndView mav = new ModelAndView();
+//        mav.setViewName("aidcodeinfo");
+//
+//        HttpSession session = request.getSession();
+//        Member member = (Member) session.getAttribute("login");
+//        String functioncode = request.getParameter("sltcode");
+//        if(functioncode == null || "".equals(functioncode)) {
+//            functioncode = "10";
+//        }
+//        ArrayList<HashMap<String, Object>> aidFunctionDtos = licensemanageService.aidfunctionList(functioncode);
+//        mav.addObject("aidInfo",aidFunctionDtos);
+//        //logger.info("LicenseManageController licensemanageService ---->"+licensemanageService.aidfunctionList(functioncode));
+//        logger.info("LicenseManageController aidfunctionList           ModelAndView---->"+mav);
+//        return mav;
+//    }
 
-        ResponseDTO responseDTO = new ResponseDTO();
-        responseDTO.setResultCode("S0001");
-        responseDTO.setRes(licensemanageService.aidfunctionList(sltcode));
-        logger.info("LicenseManageController aidfunctionList ResponseDTO---->"+responseDTO);
-        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
-
-    }
+//    @GetMapping(value="/aidcodeinfo")
+//    public ResponseEntity<?> aidcodeinfolist(HttpServletResponse response) throws IOException {
+//        String sltcode = "";
+//
+//        if (sltcode == null || sltcode.isEmpty()) {
+//            sltcode = "10";
+//        }
+//
+//        ResponseDTO responseDTO = new ResponseDTO();
+//        responseDTO.setResultCode("S0001");
+//        responseDTO.setRes(licensemanageService.aidfunctionList(sltcode));
+//        logger.info("LicenseManageController aidfunctionList ResponseDTO---->"+responseDTO);
+//        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+//
+//    }
     @PostMapping(value = "/aidcodeinfo11111")
     public ArrayList<HashMap<String, Object>> aidcodeinfo (Map < String, Object > map, HttpServletRequest request) throws
     Exception {
@@ -221,10 +269,10 @@ public class LicenseManageController {
         return mav;
     }
 
-//    @GetMapping(value = "/aidcodeinfo")
-//    public void get_aidcodeinfo(Model model) {
-//
-//    }
+    @GetMapping(value = "/aidcodeinfo")
+    public void get_aidcodeinfo(Model model) {
+
+    }
     /* Map, List Map으로 작업하다가 json array 로 변환이 필요할때 */
     @SuppressWarnings({"unchecked"})
     public static JSONArray convertListToJson (List < Map < String, Object >> listMap){

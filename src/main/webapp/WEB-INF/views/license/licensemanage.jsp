@@ -16,7 +16,7 @@
     <div class="tabs-box">
         <div class="tabs">
             <a href="#" class="active">라이선스 정책 관리</a>
-            <a href="${path}/license/aidcodeinfo">라이선스 제공 기능</a>
+            <a href="javascript:void(0)" onClick="javascript:aidcodeinfo()">라이선스 제공 기능</a>
             <a href="${path}/license/creditinfo">Credit 제공</a>
         </div>
         <div class="right">
@@ -210,13 +210,13 @@
        // popupOpen('Modal1');
     }
 
-    <%--function aidcodeinfo(){--%>
-    <%--    let f = document.createElement('form');--%>
-    <%--    f.setAttribute('method', 'get');--%>
-    <%--    f.setAttribute('action', '${path}/license/aidcodeinfo');--%>
-    <%--    document.body.appendChild(f);--%>
-    <%--    f.submit();--%>
-    <%--}--%>
+    function aidcodeinfo(){
+        let f = document.createElement('form');
+        f.setAttribute('method', 'post');
+        f.setAttribute('action', '${path}/license/aidcodeinfo');
+        document.body.appendChild(f);
+        f.submit();
+    }
 
     // 팝업 함수 호출
 // popupOpen('Modal1');

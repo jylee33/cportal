@@ -1,6 +1,5 @@
 package com.hamonsoft.cportal.repository;
 
-import com.hamonsoft.cportal.dto.LicensePolicyDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
@@ -15,6 +14,12 @@ public interface LicenseManageRepository {
 
     ArrayList<HashMap<String, Object>> licensePolicyList1(String solution);
     ArrayList<HashMap<String, Object>> aidfunctionList(String solution);
+    List<HashMap<String, Object>> aidfunctionList2(String solution);
 
     ArrayList<HashMap<String, Object>> creditList();
+
+    void aidfunctionInsert(Map<String, Object> insertData);
+
+    void aidfunctionUpdate(Map<String, Object> insertData);
+
 }

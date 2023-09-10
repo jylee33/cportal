@@ -1,11 +1,10 @@
-package com.hamonsoft.cportal.dto;
+package com.hamonsoft.cportal.domain;
 
 import lombok.Data;
 
 import java.util.Date;
-
 @Data
-public class AidFunctionDto {
+public class AidFunction {
     private int functionno;
     private String functionname;
     private String freeaid;

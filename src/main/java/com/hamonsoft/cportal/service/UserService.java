@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -229,5 +230,10 @@ public class UserService {
 
         return dto;
     }
+    public ArrayList<HashMap<String, Object>> findAll() {
+        return userRepository.findAll();
+    }
+
+
 
 }

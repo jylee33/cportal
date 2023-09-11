@@ -18,10 +18,6 @@ public class JsonUseVloumeService {
         return jsonUseVolumeRepository.jsonUseVolumeCount(email);
     }
 
-    public void jsonUseVolumeInsert(JsonUseVolume jsonUseVolume) throws Exception {
-        jsonUseVolumeRepository.JsonUseVolumeInsert(jsonUseVolume);
-    }
-
     public void jsonUseDeviceInsert(JsonUseVolume jsonUseVolume) throws Exception {
         jsonUseVolumeRepository.jsonUseDeviceInsert(jsonUseVolume);
     }

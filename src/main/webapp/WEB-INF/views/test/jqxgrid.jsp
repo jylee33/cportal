@@ -20,8 +20,9 @@
 <%--<script type="text/javascript" src="${path}/resources/js/scripts/demos.js"></script>--%>
 
 <div class="container">
-    <div id="grid"></div>
+    <div id="grid1"></div>
     <div id="grid2"></div>
+    <div id="grid3"></div>
 </div>
 
 
@@ -29,7 +30,6 @@
 <script>
 
     $(document).ready(function() {
-
         var url = "${path}/resources/data.json";
         // prepare the data
         var source =
@@ -46,7 +46,7 @@
                 url: url
             };
         var dataAdapter = new $.jqx.dataAdapter(source);
-        $("#grid").jqxGrid(
+        $("#grid1").jqxGrid(
             {
                 width: 1000,
                 source: dataAdapter,
@@ -60,34 +60,80 @@
                 ]
             });
 
-        url = "http://localhost:8080/portal/api/findAll";
+
+        var url = "${path}/license/aidcodeview";
         // prepare the data
-        source =
+        var source =
             {
                 datatype: "json",
                 datafields: [
-                    { name: 'email', type: 'string' },
-                    { name: 'membername', type: 'string' },
-                    { name: 'celltel', type: 'string' },
-                    { name: 'businessname', type: 'string' },
-                    { name: 'licensegrade', type: 'int' }
+                    { name: 'functionno',type:'int'},
+                    { name: 'functionname',type:'string'},
+                    { name: 'freeaid', type: 'string' },
+                    { name: 'basicaid', type: 'string' },
+                    { name: 'proaid', type: 'string' },
+                    { name: 'entaid', type: 'string' },
+                    { name: 'functioncode',type:'string'},
+                    { name: 'useyn',type:'string'},
+                    { name: 'stdate', type: 'string' },
+                    { name: 'eddate', type: 'string' },
+                    { name: 'sortno',type:'int'}
                 ],
                 id: 'id',
                 url: url,
                 type: "POST"
             };
-        dataAdapter = new $.jqx.dataAdapter(source);
+
+        var dataAdapter = new $.jqx.dataAdapter(source);
         $("#grid2").jqxGrid(
             {
                 width: 1000,
                 source: dataAdapter,
                 // columnsresize: true,
                 columns: [
-                    { text: 'email', datafield: 'email', width: 250 },
-                    { text: 'membername', datafield: 'membername', width: 250 },
-                    { text: 'celltel', datafield: 'celltel', width: 180 },
-                    { text: 'businessname', datafield: 'businessname', width: 180 },
-                    { text: 'licensegrade', datafield: 'licensegrade', width: 120 }
+                    { text: '지원관리번호', datafield: 'functionno', width: 250 },
+                    { text: '지원기능', datafield: 'functionname', width: 250},
+                    { text: 'freeaid',datafield: 'freeaid', width: 250 },
+                    { text: 'basicaid', datafield: 'basicaid', width: 250 },
+                    { text: 'proaid', datafield: 'proaid', width: 250 },
+                    { text: 'entaid',datafield: 'entaid',  width: 250 },
+                    { text: '기능구분', datafield: 'functioncode', width: 250},
+                    { text: '사용여부', datafield: 'useyn', width: 250},
+                    { text: 'stdate',datafield: 'stdate',  width: 250 },
+                    { text: 'eddate',datafield: 'eddate',  width: 250 },
+                    { text: '정렬기준', datafield: 'sortno', width: 250}
+                ]
+            });
+
+        url = "http://localhost:8080/portal/api/findAll";
+        // prepare the data
+        source =
+            {
+                datatype: "json",
+                datafields: [
+                    { name: 'email',type:'string'},
+                    { name: 'membername',type:'string'},
+                    { name: 'celltel', type: 'string' },
+                    { name: 'businessname', type: 'string' },
+                    { name: 'licensegrade',type:'int'}
+                ],
+                id: 'id',
+                url: url,
+                type: "POST"
+            };
+
+        dataAdapter = new $.jqx.dataAdapter(source);
+        $("#grid3").jqxGrid(
+            {
+                width: 1000,
+                source: dataAdapter,
+                // columnsresize: true,
+                columns: [
+                    { text: 'email', datafield: 'email', width: 250},
+                    { text: 'membername', datafield: 'membername', width: 250},
+                    { text: 'celltel',datafield: 'celltel',  width: 250 },
+                    { text: 'businessname',datafield: 'businessname',  width: 250 },
+                    { text: 'licensegrade', datafield: 'licensegrade', width: 250}
                 ]
             });
     });

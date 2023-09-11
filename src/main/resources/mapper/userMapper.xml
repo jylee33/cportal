@@ -37,5 +37,7 @@
         where email = #{email}
     </update>
 
-
+    <select id="findAll" resultType="HashMap">
+        select * from tbmember
+    </select>
 </mapper>

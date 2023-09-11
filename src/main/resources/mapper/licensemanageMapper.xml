@@ -33,26 +33,49 @@
 
     <select id="aidfunctionList" resultType="hashmap">
         select a01.functionno ,      --   라이센스정책관리번호(uuid)
-               a01.functionname    ,      --   지원기능명
-               a01.freeaid      ,      --   free 지원기능
-               a01.basicaid    ,      --   basic 지원기능
-               a01.proaid      ,      --   pro 지원기능
-               a01.entaid          ,      --   ent 지원기능
-               a01.functioncode    ,      --   기능구분
-               a01.useyn      ,      --   사용여부
-               a01.stdate          ,      --   시작일자
-                a01.eddate          ,      --   종료일자
-                a01.sortno          ,      --   종료일자
-               str_to_date(a01.stdate,'%Y%m%d') strstdate,
-               str_to_date(a01.eddate,'%Y%m%d') streddate,
-               a01.createdAt       ,      --   등록일시
-               a01.updatedAt       ,       --   수정일시
-               j01.codename        ,       --   수정일시
-               row_number() over (order by a01.functioncode ,a01.createdAt desc) numrow
+        a01.functionname    ,      --   지원기능명
+        a01.freeaid      ,      --   free 지원기능
+        a01.basicaid    ,      --   basic 지원기능
+        a01.proaid      ,      --   pro 지원기능
+        a01.entaid          ,      --   ent 지원기능
+        a01.functioncode    ,      --   기능구분
+        a01.useyn      ,      --   사용여부
+        a01.stdate          ,      --   시작일자
+        a01.eddate          ,      --   종료일자
+        a01.sortno          ,      --   종료일자
+        j01.codename        ,       --   수정일시
+        row_number() over (order by a01.functioncode ,a01.createdAt desc) numrow
         from tbaidfunction a01
-                 inner join tbcommoncode j01
-                            on j01.groupcode    = '003'
-                                and a01.functioncode = j01.commoncode
+        inner join tbcommoncode j01
+        on j01.groupcode    = '003'
+        and a01.functioncode = j01.commoncode
+        where 1 = 1
+        <choose>
+            <when test="solutioncode != null and solutioncode neq ''">
+                AND a01.functioncode = #{functioncode}
+            </when>
+        </choose>
+        order by j01.sortno, a01.functionno
+    </select>
+
+    <select id="aidfunctionList2" resultType="hashmap">
+        select a01.functionno ,      --   라이센스정책관리번호(uuid)
+        a01.functionname    ,      --   지원기능명
+        a01.freeaid      ,      --   free 지원기능
+        a01.basicaid    ,      --   basic 지원기능
+        a01.proaid      ,      --   pro 지원기능
+        a01.entaid          ,      --   ent 지원기능
+        a01.functioncode    ,      --   기능구분
+        a01.useyn      ,      --   사용여부
+        a01.stdate          ,      --   시작일자
+        a01.eddate          ,      --   종료일자
+        a01.sortno          ,      --   종료일자
+        j01.codename        ,       --   수정일시
+        row_number() over (order by a01.functioncode ,a01.createdAt desc) numrow
+        from tbaidfunction a01
+        inner join tbcommoncode j01
+        on j01.groupcode    = '003'
+        and a01.functioncode = j01.commoncode
         where 1 = 1
         <choose>
             <when test="solutioncode != null and solutioncode neq ''">
@@ -78,4 +101,27 @@
           and a01.groupcode = '006'
         order by a01.sortno
     </select>
+
+    <!--  가격정책별 지원기능  -->
+    <insert id="aidfunctionInsert">
+        INSERT INTO tbaidfunction(
+                                  functionname   , freeaid       ,basicaid   ,proaid
+                                 ,entaid         , functioncode  ,useyn      ,sortno      )
+        values(#{functionname}, #{freeaid}    ,#{basicaid},#{proaid}
+             ,#{entaid}      , #{functioncode} ,#{useyn} ,#{sortno})
+    </insert>
+
+    <!--  가격정책별 지원기능  -->
+    <update id="aidfunctionUpdate">
+        UPDATE tbaidfunction
+           SET functionname =#{functionname}
+             ,freeaid =#{freeaid}
+             ,basicaid =#{basicaid}
+             ,proaid =#{proaid}
+             ,entaid =#{entaid}
+             ,functioncode =#{functioncode}
+             ,useyn=#{useyn}
+             ,sortno=#{sortno}
+        WHERE functionno = ${functionno}
+    </update>
 </mapper>

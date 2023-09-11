@@ -4,7 +4,30 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@include file="../include/header_3.jsp" %>
+<%@include file="../include/header.jsp" %>
+
+<link rel="stylesheet" href="${path}/resources/js/jqwidgets/styles/jqx.base.css" type="text/css" />
+
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.selection.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.columnsresize.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcombobox.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxradiobutton.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdropdownlist.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxlistbox.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.filter.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.edit.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.sort.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdatetimeinput.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcalendar.js"></script>
+<%--<script type="text/javascript" src="${path}/resources/js/scripts/demos.js"></script>--%>
+
+
 <div class="container">
     <div class="h3-head">
         <h3 class="h3">라이선스 정책 관리</h3>
@@ -16,7 +39,7 @@
             <a href="${path}/license/creditinfo">Credit 제공</a>
         </div>
         <div class="right">
-            <form autocomplete="on" action="/portal/license/aidcode" method="post">
+            <form autocomplete="on" action="/portal/license/aidcodeview" method="get">
                 <span class="tit">기능구분 선택</span>
                 <select class="select" name="sltcode" id="sltcode">
                     <option value="10">기본기능</option>
@@ -29,133 +52,228 @@
     </div>
     <div class="flex align-items-center gap10 align-end mb10">
         <button class="btn btn3" id="btn_add_row">행추가</button>
-        <button class="btn" id="btn-rowsave">저장</button>
+        <button class="btn" id="btn-save">저장</button>
     </div>
-    <div class="table-type1 text-center cursor">
-        <table id="aidInfo"></table>
-        <div id="pager"></div>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left; width:100%">
+        <div id="aidInfo"></div>
+        <div style="margin-top: 30px;"></div>
     </div>
 </div>
 </div>
 
-<script type="text/javascript">
 
-    <%--    // 가로(수평) 탭 초기화<script type="text/javascript">--%>
-    $(document).ready(function($){
-        alert("...........................");
-        jQuery(function () {
-            $("#aidInfo").jqxGrid({
-                url : "${path}/license/aidview",
-                dataType:'json',
-                colNames:['지원관리번호','지원기능','FREE','BASIC','PRO','ENTERPRISE','기능구분','사용여부','시작일자','종료일자','정렬기준'],
-                colModel:[
-                    {name:'functionno',label:'functionno',width:100,aligh:'center',editable:false,edittype:'true'},
-                    {name:'functionname',label:'functionname',width:200,aligh:'center',editable:true,edittype:'text'},
-                    {name:'freeaid',label:'free',width:100,formatter:radio,aligh:'center',editable:true,edittype:'custom', editoptions:{custom_element: radioColumn, custom_value:radioValue}},
-                    {name:'basicaid',label:'basic',width:100,formatter:radio,aligh:'center',editable:true,edittype:'custom', editoptions:{custom_element: radioColumn, custom_value:radioValue}},
-                    {name:'proaid',label:'pro',width:100,formatter:radio,aligh:'center',editable:true,edittype:'custom', editoptions:{custom_element: radioColumn, custom_value:radioValue}},
-                    {name:'entaid',label:'ent',width:100,formatter:radio,aligh:'center',editable:true,edittype:'custom', editoptions:{custom_element: radioColumn, custom_value:radioValue}},
-                    {name:'functioncode',label:'functioncode',aligh:'center',editable:true,edittype:'select',editoptions:{value:{10:'기본기능',20:'부가기능', 30:'고급기능'}}},
-                    {name:'useyn',label:'useyn',width:100,aligh:'center',editable:true,edittype:'select',editoptions:{value:{'Y':'사용','N':'미사용'}}},
-                    {name:'stdate',label:'stdate',aligh:'center',sortable: true, width: 100, formatter: dateFormatter },
-                    {name:'eddate',label:'eddate',aligh:'center',sortable: true, width: 100, formatter: dateFormatter},
-                    {name:'sortno',label:'sortno',width:100,aligh:'center',editable:false,edittype:'text'},
-                ],
-                // rowNum:10,
-                // rowList:[10,20,30],
-                pager:'#pager',
-                cellsubmit : 'remote',
-                viewrecords : true,
-                caption:'라이센스제공',
-                loadonce:false,
-                loadComplete:function(data){   //서버요청직후 실핼
-                    alert(${"aidInfo"});
-                    if(data == null || data == '' || data.length == 0){
-                        console.log(${"aidInfo"});
-                        // $("#aid > tbody").append("<tr class='ui-widget-content jqgrow ui-row-ltr'>
-                        //     <td colspan='7' class='text-center'>조회된 결과가 없습니다.</td></tr>");
-                    }
-                    $('.jqgrow').mouseover(function(e) {
-                        return false;
-                    });
-                }
-                // onCellSelect: function(rowId , index, contents, action){
-                //
-                // },
-                // loadError : function(xhr,st,err) {      //server load error message 뿌리기
-                //     $("#aidInfo").html("Type: " + st + "; Response: " + xhr.status + " " + xhr.statusText);
-                // }
-            });
-            jQuery("#aidInfo").jqGrid('navGrid', '#pager', { edit: false, add: false, del: false });
-        });
-        $("#btn_add_row").click(function(){
-            const selected = $('#sltcode option:selected').val();
-            var data = {functioncode:selected, useyn:"Y"};
-            rowId = $("#aidInfo").getGridParam("reccount"); // 페이징 처리 시 현 페이지의 Max RowId 값
-            $("#aidInfo").jqGrid("addRowData", rowId+1, data, 'last'); // 첫행에 Row 추가
-            //$("#list").jqGrid("addRowData", rowId+1, data, 'last'); // 마지막 행에 Row 추가
+<%--<body class='default'>--%>
+<%--<div id='jqxradiobutton1'>--%>
+<%--    Radio Button 1</div>--%>
+<%--<div id='jqxradiobutton2'>--%>
+<%--    Radio Button 2</div>--%>
+<%--</body>--%>
+<script>
 
-        });
+    // if (typeof jQuery == 'undefined') {
+    //     var script = document.createElement('script');
+    //     script.type = "text/javascript";
+    //     script.src = "https://code.jquery.com/jquery-3.5.1.min.js";
+    //     document.getElementsByTagName('head')[0].appendChild(script);
+    // } else {
+    //     console.log("jQuery Ready");
+    // }
+    $(document).ready(function(){
 
-
-        //날자 포맷
-        function dateFormatter(stringDate){
-            if(!stringDate){
-                return "";
-            }
-            var formatNum = '';
-            stringDate=stringDate.replace(/\s/gi, "");
-            if(stringDate.length == 8){
-                formatNum = stringDate.replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3');
-            }else{
-                formatNum = stringDate;
-            }
-            // document.getElementById(id).innerHTML = formatNum;
-            //console.log("dateFormatter formatNum -->"+formatNum+" ..... num ->"+num);
-            return formatNum;
-        }
-        function radio(value, options, rowObject){
-            var radioHtml = '<input type="radio" value=' + value + ' name="radioid" />';
-            return radioHtml;
-        }
-
-        function radioColumn(value, editOptions) {
-            var span   = $("<span />");
-            var label  = $("<span />",{ html: "제공" });
-            var radio  = $("<input>", { type: "radio", value: "O", name: "freight", id: "zero", checked: (value == "O")});
-            var label1 = $("<span />",{ html: "미제공"});
-            var radio1 = $("<input>", { type: "radio", value: "X", name: "freight", id: "fifty", checked: value == "X" });
-            span.append(label).append(radio).append(label1).append(radio1);
-            return span;
-        }
-
-        function radioValue(elem, oper, value) {
-            if (oper === "set") {
-                var radioButton = $(elem).find("input:radio[value='" + value + "']");
-                if (radioButton.length > 0) {
-                    radioButton.prop("checked", true);
-                }
-            }
-
-            if (oper === "get") {
-                return $(elem).find("input:radio:checked").val();
-            }
-        }
-
-
-
+        tableSelect("10");
     });
 
-    jQuery.browser = {};
-    (function () {
-        jQuery.browser.msie = false;
-        jQuery.browser.version = 0;
-        if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
-            jQuery.browser.msie = true;
-            jQuery.browser.version = RegExp.$1;
+    function tableSelect(sltcode){
+
+        var theme = "";
+        var url = "${path}/resources/setcode/functioncodelist.json";
+        // prepare the data
+        var dropDownListSource =
+            {
+                datatype: "json",
+                datafields: [
+                    { name: 'code', type: 'string' },
+                    { name: 'name', type: 'string' },
+                ],
+                id: 'id',
+                url: url
+            };
+        var dropdownListAdapter = new $.jqx.dataAdapter(dropDownListSource, { autoBind: true, async: false });
+        var dropdownListSource = [];
+        for (var i = 0; i < dropdownListAdapter.records.length; i++) {
+            dropdownListSource[i] = dropdownListAdapter.records[i]['name'];
         }
-    })();
+
+
+        var url = "${path}/license/aidcodeview";
+        var source =
+            {
+                datatype: "json",
+                datafields: [
+                    { name: 'functionno', type:'int', align: 'center'},
+                    { name: 'functionname', type:'string', align: 'center'},
+                    { name: 'freeaid', type: 'string', align: 'center' },
+                    { name: 'basicaid', type: 'string' , align: 'center'},
+                    { name: 'proaid', type: 'string' , align: 'center'},
+                    { name: 'entaid', type: 'string' , align: 'center'},
+                    { name: 'codename', type:'string', align: 'center'},
+                    { name: 'useyn', type:'string', align: 'center'},
+                    { name: 'stdate', type: 'date' , align: 'center'},
+                    { name: 'eddate', type: 'date' , align: 'center'},
+                    { name:'sortno', type:'int', align: 'center'},
+                    { name:'functioncode', type:'string', align: 'center'}
+                ],
+                id: 'id',
+                url: url,
+                type: "GET"
+            };
+
+        var dataAdapter = new $.jqx.dataAdapter(source, {
+            downloadComplete: function (data, status, xhr) { },
+            loadComplete: function (data) { },
+            loadError: function (xhr, status, error) { }
+        });
+
+        $("#aidInfo").jqxGrid(
+            {
+                width: 1500,
+                source: dataAdapter,
+                sortable: true,
+                filterable: true,
+                editable: true,
+                showstatusbar: true,
+                columnsresize: true,
+                theme: theme,
+                // theme: 'energyblue',
+                columnsresize: true,
+                columns: [
+                    { text: '지원관리번호', datafield: 'functionno', width: 100, align:"center", editable: false},
+                    { text: '지원기능', datafield: 'functionname', width: 250, align:"center" },
+                    { text: 'free',datafield: 'freeaid', width: 80, align:"center" },
+                    { text: 'basic', datafield: 'basicaid', width: 80, align:"center"},
+                    { text: 'pro', datafield: 'proaid', width: 80, align:"center"},
+                    { text: 'ent.',datafield: 'entaid',  width: 100, align:"center"},
+                    {
+                        text: '기능구분',
+                        datafield: 'codename',
+                        width: 100,
+                        align: "center",
+                        columntype: 'dropdownlist',
+                        initeditor: function (row, cellvalue, editor) {
+                            editor.jqxDropDownList({source: dropdownListSource});
+                        }
+                    },
+                    { text: '사용여부', datafield: 'useyn', width: 100, align:"center" },
+                    { text: '시작일자' ,datafield: 'stdate', width: 100, align:"center", cellsformat: "yyyy-MM-dd",columntype: 'datetimeinput', editable: false},
+                    { text: '종료일자' ,datafield: 'eddate',  width: 100, align:"center", cellsformat: "yyyy-MM-dd",columntype: 'datetimeinput', editable: false},
+                    { text: '정렬순서', datafield: 'sortno', width: 100,align:"center", editable: false },
+                    { text: '제공코드', datafield: 'functioncode', type:'string', align: 'center'}
+                ]
+            });
+        //$("#btn_add_row").jqxButton({ theme: theme });
+        $("#btn_add_row").click(function () {
+            var date = new Date();
+            var fncName = "";
+            const sltcode = $('#sltcode option:selected').val();
+            const sltname = $('#sltcode option:selected').text();
+            $("#aidInfo").jqxGrid("addrow", null,
+                {functionno:"", functionname:"", freeaid:"O", basicaid:"O",
+                    proaid:"O",entaid: "O",stdate: date, eddate: "2019-12-31", useyn: "Y",
+                    codename:sltname, useyn: "Y", sortno: 99, functioncode: sltcode
+                }, "last");
+            $("#aidInfo").jqxGrid('endupdate');
+        });
+    }
+
+
+
+
+
+
+    var state = null;
+    $("#btn-save").click(function () {
+        // save the current state of jqxGrid.
+        //state = $("#aidInfo").jqxGrid('savestate'); parse   stringify
+        var aidInfoData = $("#aidInfo").jqxGrid("getrows");   //1
+        console.log("rows------>"+aidInfoData.length);
+        console.log("rows------>"+JSON.stringify(aidInfoData));
+
+        var url = "${pageContext.request.contextPath}/license/aidInfoSave";
+        $.ajax({
+            type: 'post',
+            url: url,
+            async : true, // 비동기화 동작 여부
+            data: JSON.stringify(aidInfoData),
+            contentType: "application/json",
+            success: function(aidInfoData) {
+                alert("정상적으로 자료가 수정 되었습니다.");
+            },
+            error: function(err){
+                alert("자료 수정에 실패했습니다.");
+            }
+        })
+
+
+        $("#aidInfo").on('cellvaluechanged', function (event)
+        {
+            var rows = $("#aidInfo").jqxGrid("getrows");   //1
+            console.log("rows------>"+rows);
+            newrows = calculatejson(rows);    //3
+            console.log("newrows----->"+newrows);
+            redrawgrid(newrows);    //4
+        });
+    });
+
+
+
+
+
+    // $("#btn_add_row").click(function(){
+    //     const selected = $('#sltcode option:selected').val();
+    //     var data = {functioncode:selected, useyn:"Y"};
+    //   //  rowId = $("#aidInfo").getGridParam("reccount"); // 페이징 처리 시 현 페이지의 Max RowId 값
+    //     $("#aidInfo").jqxGrid("addRowData", rowId+1, data, 'last'); // 첫행에 Row 추가
+    //     //$("#list").jqGrid("addRowData", rowId+1, data, 'last'); // 마지막 행에 Row 추가
+    // });
 </script>
-</body>
 <%@include file="../include/footer.jsp" %>
 
+<!--
+
+
+$('#jqxgrid').jqxGrid('setcolumnindex', 'lastname', 3);
+
+$("#jqxbutton").jqxButton({
+theme: 'energyblue',
+width: 300,
+height: 30
+});
+$('#jqxbutton').click(function () {
+var column = $('#jqxgrid').jqxGrid('getcolumn', 'lastname');
+alert("Column Text: " + column.text + ", Data Field: " + column.datafield);
+});
+
+{ text: '추가', datafield: 'add_btn',width: '5%',align: 'center',columntype:'button',
+buttonclick: function (row) {
+// var row_val = $("#jqxgrid2").jqxGrid('getrowdata', row);
+var selectedrowindex = $("#jqxgrid").jqxGrid('getselectedrowindex');
+var id = $("#jqxgrid").jqxGrid('getrowid', selectedrowindex);
+var rows = {
+add_btn : "+",
+del_btn : "-"
+}
+$("#jqxgrid").jqxGrid("addrow", null, rows,id+1);
+$("#jqxgrid").jqxGrid('endupdate');
+
+}
+},
+{ text: '삭제', datafield: 'del_btn',width: '5%',align: 'center',columntype:'button',
+buttonclick: function (row) {
+// var row_val = $("#jqxgrid2").jqxGrid('getrowdata', row);
+var selectedrowindex = $("#jqxgrid").jqxGrid('getselectedrowindex');
+var id = $("#jqxgrid").jqxGrid('getrowid', selectedrowindex);
+$("#jqxgrid").jqxGrid('deleterow', id);
+$("#jqxgrid").jqxGrid('endupdate');
+
+}}
+-->

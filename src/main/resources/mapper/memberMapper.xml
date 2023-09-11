@@ -35,12 +35,10 @@
 		]]>
     </select>
 
-	<select id="findAll" resultType="Member">
-        <![CDATA[
+	<select id="findAll" resultType="HashMap">
 		select
 			email,membername,celltel,businessname,licensegrade
 		from tbmember
-		]]>
     </select>
 
 	<select id="login" resultType="Member">

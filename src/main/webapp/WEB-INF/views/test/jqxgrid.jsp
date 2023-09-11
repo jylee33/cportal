@@ -60,16 +60,17 @@
                 ]
             });
 
-        url = "http://localhost:8090/portal/user/findAll";
+        url = "http://localhost:8080/portal/api/findAll";
         // prepare the data
         source =
             {
                 datatype: "json",
                 datafields: [
-                    { name: 'uid', type: 'string' },
-                    { name: 'uname', type: 'string' },
-                    { name: 'upw', type: 'string' },
-                    { name: 'upoint', type: 'int' }
+                    { name: 'email', type: 'string' },
+                    { name: 'membername', type: 'string' },
+                    { name: 'celltel', type: 'string' },
+                    { name: 'businessname', type: 'string' },
+                    { name: 'licensegrade', type: 'int' }
                 ],
                 id: 'id',
                 url: url,
@@ -82,10 +83,11 @@
                 source: dataAdapter,
                 // columnsresize: true,
                 columns: [
-                    { text: 'uid', datafield: 'uid', width: 250 },
-                    { text: 'uname', datafield: 'uname', width: 250 },
-                    { text: 'upw', datafield: 'upw', width: 180 },
-                    { text: 'upoint', datafield: 'upoint', width: 120 }
+                    { text: 'email', datafield: 'email', width: 250 },
+                    { text: 'membername', datafield: 'membername', width: 250 },
+                    { text: 'celltel', datafield: 'celltel', width: 180 },
+                    { text: 'businessname', datafield: 'businessname', width: 180 },
+                    { text: 'licensegrade', datafield: 'licensegrade', width: 120 }
                 ]
             });
     });

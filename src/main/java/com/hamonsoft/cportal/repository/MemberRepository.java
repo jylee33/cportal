@@ -8,6 +8,8 @@ import com.hamonsoft.cportal.dto.LoginDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +29,8 @@ public interface MemberRepository {
     void insertAuthentication(Authentication authentication);
 
     List<Member> listAll();
+
+    ArrayList<HashMap<String, Object>> findAll();
 
     Member login(LoginDTO dto);
 

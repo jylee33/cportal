@@ -123,8 +123,7 @@
             };
 
         dataAdapter = new $.jqx.dataAdapter(source);
-        $("#grid3").jqxGrid(
-            {
+        $("#grid3").jqxGrid({
                 width: 1000,
                 source: dataAdapter,
                 // columnsresize: true,

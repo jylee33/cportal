@@ -110,7 +110,6 @@
 
 			IMP.request_pay({
 				pg: "html5_inicis.INIBillTst",//"kcp.INIBillTst",
-				// customer_uid: "RldZHse07tEdv7luguc4oh6bJdcWvLluhsbo8Jg3dIL94Azrw3BhDuFKDjLTavBHxeBNjgOgKdKwfqTy", // 카드(빌링키)와 1:1로 대응하는 값
 				pay_method: $('#pay_method').val(),
 				// merchant_uid: orderId,   // 주문번호
 				merchant_uid: "merchant_" + new Date().getTime(),   // 주문번호
@@ -119,13 +118,36 @@
 				// customer_uid 파라미터가 있어야 빌링키 발급을 시도함.
 				customer_uid: $('#username').val() + new Date().getTime(),
 				// buyer_email: $('#email').val(),
-				// buyer_name: $('#username').val(),
+				buyer_name: $('#username').val(),
 				// buyer_tel: $('#mobile').val(),
 				// buyer_addr: $('#address').val(),
 				// buyer_postcode: "08512"
 			}, function (rsp) { // callback
-				//rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+				console.log("rsp.imp_uid - ", rsp.imp_uid);
+				console.log("rsp -", rsp);
 				if (rsp.success) {
+					console.log("customer_uid", rsp.customer_uid);
+					console.log("merchant_uid", rsp.merchant_uid);
+					// $.ajax({
+					// 	url: 'https://api.iamport.kr/subscribe/customers/'+rsp.customer_uid,
+					// 	type: 'POST'
+					// 	// dataType: "json",
+					// 	// contentType: "application/json"
+					// }).done(function(result){
+					// 	console.log("rsesult", result);
+					// });
+				}
+				<%--$.ajax({--%>
+				<%--	type: 'POST',--%>
+				<%--	url: '${path}/verifyIamport/'+rsp.imp_uid,--%>
+				<%--	beforeSend: function(xhr){--%>
+				<%--		// xhr.setRequestHeader(header, token);--%>
+				<%--	}--%>
+				<%--}).done(function(result){--%>
+				<%--	console.log("rsesult", result);--%>
+				<%--});--%>
+				//rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+				/*if (rsp.success) {
 					console.log("빌링키 발급 성공", rsp);
 					console.log("customer_uid", rsp.customer_uid);
 					console.log("merchant_uid", rsp.merchant_uid);
@@ -144,7 +166,7 @@
 				} else {
 					var msg = "빌링키 발급 실패했습니다.\n에러 내용: " + rsp.error_msg;
 					alert(msg);
-				}
+				}*/
 				// $("form[role='form']").submit();
 			});
 

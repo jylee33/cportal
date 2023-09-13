@@ -551,9 +551,9 @@
         return formatNum;
     }
 
-    $(document).ready(function(){
-        changeColor();
-    })
+    // $(document).ready(function(){
+    //     changeColor();
+    // })
 
 
     function changeColor(){
@@ -567,6 +567,9 @@
     }
 
     $(document).ready(function() {
+
+        changeColor();
+
         $('#memberinfo-table tr').on('dblclick', function () {
             console.log('1');
             var tdArr = new Array();	// 배열 선언

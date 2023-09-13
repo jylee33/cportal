@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -25,7 +25,6 @@
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.sort.js"></script>
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdatetimeinput.js"></script>
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcalendar.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcheckbox.js"></script>
 <%--<script type="text/javascript" src="${path}/resources/js/scripts/demos.js"></script>--%>
 
 
@@ -89,47 +88,60 @@
         console.log("jqxGridCreate-->");
         proc_jqxGridSelect();
 
-    });
+    })
 
     function proc_jqxGridSelect() {
         var theme = "";
         var sltcode = $('#sltdeviceid option:selected').val();
         // prepare the data
+        var comboFncListSource = {
+            url : "${path}/resources/setcode/functioncodelist.json",
+            datatype: "json",
+            datafields: [
+                { name: 'fnc_code', type: 'string' },
+                { name: 'fnc_name', type: 'string' },
+            ]
+        }
+        var comboFncAdapter = new $.jqx.dataAdapter(comboFncListSource, {
+            contentType: 'application/json; charset=utf-8',
+            downloadComplete: function(data, textStatus, jqXHR) {
+                return data; //JSON.parse(data.d);
+            }
+        });
         // searchcode
+        var url = "${path}/license/aidcodeview";
         var source =
             {
                 url : "${path}/license/aidcodeview",
                 datatype: "json",
                 // postData: {"searchcode": $('#sltcode option:selected').val()},
                 datafields: [
-                    { name: 'solutioncode', type:'string', cellsalign: 'center'},
-                    { name: 'solutionname', type:'string', cellsalign: 'center'},
-                    { name: 'functioncode', type:'string', cellsalign: 'center'},
-                    { name: 'fnccodename', type:'string', cellsalign: 'center'},
-                    { name: 'functionno', type:'int', cellsalign: 'center'},
-                    { name: 'functionname', type:'string', cellsalign: 'center'},
-                    { name: 'freenm', type: 'string', cellsalign: 'center' },
-                    { name: 'freeaid', type: 'string', cellsalign: 'center' },
-                    { name: 'basicnm', type: 'string', cellsalign: 'center' },
-                    { name: 'basicaid', type: 'string' , cellsalign: 'center'},
-                    { name: 'pronm', type: 'string', cellsalign: 'center' },
-                    { name: 'proaid', type: 'string' , cellsalign: 'center'},
-                    { name: 'entnm', type: 'string', cellsalign: 'center' },
-                    { name: 'entaid', type: 'string' , cellsalign: 'center'},
-                    { name: 'useyn', type:'string', cellsalign: 'center'},
-                    { name: 'stdate', type: 'date' , cellsalign: 'center'},
-                    { name: 'eddate', type: 'date' , cellsalign: 'center'},
-                    { name: 'sortno', type:'int', cellsalign: 'right'},
-                    { name: 'numrow', type:'int', cellsalign: 'right'}
+                    { name: 'solutioncode', type:'string', align: 'center'},
+                    { name: 'functionno', type:'int', align: 'center'},
+                    { name: 'functionname', type:'string', align: 'center'},
+                    { name: 'functioncode', type:'string', align: 'center'},
+                    { name: 'freeaid', type: 'string', align: 'center' },
+                    { name: 'basicaid', type: 'string' , align: 'center'},
+                    { name: 'proaid', type: 'string' , align: 'center'},
+                    { name: 'entaid', type: 'string' , align: 'center'},
+                    { name: 'useyn', type:'string', align: 'center'},
+                    { name: 'stdate', type: 'date' , align: 'center'},
+                    { name: 'eddate', type: 'date' , align: 'center'},
+                    { name: 'sortno', type:'int', align: 'center'}
                 ]
             };
 
-        var dataAdapter = new $.jqx.dataAdapter(source);
+        var dataAdapter = new $.jqx.dataAdapter(source, {
+            downloadComplete: function (data, status, xhr) { },
+            loadComplete: function (data) {
+                alert(data); },
+            loadError: function (xhr, status, error) { }
+        });
         $("#aidInfo").jqxGrid(
             {
+
                 source: dataAdapter,
                 columnsresize: true,
-                //  showfilterrow: true,
                 filterable: true,
                 sortable: true,
                 altrows: true,
@@ -141,89 +153,52 @@
                 selectionmode: 'singlecell',
                 editmode: 'click',
                 columns: [
-                    { text: '솔루션명', datafield: 'solutioncode', displayField: 'solutionname', align: "center" , cellsalign: "center" , width: 100, columntype: 'dropdownlist',
+                    { text: '솔루션명', datafield: 'solutioncode', width: 100, align:"center", editable: false},
+                    { text: '지원관리번호', datafield: 'functionno', width: 100, align:"center", editable: false, hidden:true},
+                    { text: '지원기능', datafield: 'functionname', width: 100, align:"center", editable: true},
+                    {
+                        text: '기능구분',
+                        datafield: 'functioncode',
+                        displayField: 'fnc_name',
+                        valueMember: 'functioncode',
+                        filtertype: 'list',
+                        filteritems : comboFncAdapter,
+                        width: '20%',
+                        columntype: 'combobox',
                         createeditor: function (row, column, editor) {
-                            editor.jqxDropDownList({
-                                source: [
-                                    {solId: "10", solValue1: "Network"},
-                                    {solId: "20", solValue1: "Server"},
-                                    {solId: "30", solValue1: "Ap"},
-                                    {solId: "40", solValue1: "Database"},
-                                    {solId: "50", solValue1: "FMS"}
-                                ],
-                                displayMember: 'solValue1', valueMember: 'solId', autoDropDownHeight: true
-                            })
+                            editor.jqxComboBox({
+                                selectedIndex: 0,
+                                source: comboFncAdapter,
+                                searchMode: 'containsignorecase',
+                                autoComplete: true,
+                                remoteAutoComplete: false,
+                                dropDownHeight: 100,
+                                displayMember: 'fnc_name',
+                                valueMember: 'fnc_code',
+                                promptText: "Please Choose:"
+                            });
                         },
-                    },
-                    { text: '기능구분', datafield: 'functioncode', displayField: 'fnccodename', align: "center" , width: 100, columntype: 'dropdownlist',
-                        createeditor: function (row, column, editor) {
-                            editor.jqxDropDownList({
-                                source: [
-                                    {fncId: "10", fncValue1: "기본기능"},
-                                    {fncId: "20", fncValue1: "부가기능"},
-                                    {fncId: "30", fncValue1: "고급기능"}
-                                ],
-                                displayMember: 'fncValue1', valueMember: 'fncId', autoDropDownHeight: true
-                            })
+                        geteditorvalue: function (row, cellvalue, editor) {
+                            var item = editor.jqxComboBox('getSelectedItem');
+                            return item;
                         },
-                    },
-                    { text: '지원기능', datafield: 'functionname', width: 200, align:"left", editable: true},
-                    { text: '지원관리번호', datafield: 'functionno', width: 100, salign:"left", editable: false, hidden:true},
-                    { text: 'Free등급', datafield: 'freeaid', displayField: 'freenm', align: "center" , width: 100, columntype: 'dropdownlist',
-                        createeditor: function (row, column, editor) {
-                            editor.jqxDropDownList({
-                                source: [
-                                    {freeId: "O", freeValue1: "지원"},
-                                    {freeId: "X", freeValue1: "지원안함"},
-                                    {freeId: "1일", freeValue1: "1일"}
-                                ],
-                                displayMember: 'freeValue1', valueMember: 'freeId', autoDropDownHeight: true
-                            })
+                        initeditor: function (row, column, editor) {
+                            editor.jqxComboBox('selectIndex', 0);
                         },
+                        // cellvaluechanging: function (row, column, columntype, oldvalue, newvalue) {
+                        //     if (newvalue == "") return oldvalue;
+                        // }
                     },
-                    { text: 'Basic등급', datafield: 'basicaid', displayField: 'basicnm', align: "center" , width: 100, columntype: 'dropdownlist',
-                        createeditor: function (row, column, editor) {
-                            editor.jqxDropDownList({
-                                source: [
-                                    {basicId: "O", basicValue1: "지원"},
-                                    {basicId: "X", basicValue1: "지원안함"},
-                                    {basicId: "30일", basicValue1: "30일"}
-                                ],
-                                displayMember: 'basicValue1', valueMember: 'basicId', autoDropDownHeight: true
-                            })
-                        },
-                    },
-                    { text: 'Pro 등급', datafield: 'proaid', displayField: 'pronm', align: "center" , width: 100, columntype: 'dropdownlist',
-                        createeditor: function (row, column, editor) {
-                            editor.jqxDropDownList({
-                                source: [
-                                    {proId: "O", proValue1: "지원"},
-                                    {proId: "X", proValue1: "지원안함"},
-                                    {proId: "30일", proalue1: "30일"}
-                                ],
-                                displayMember: 'proValue1', valueMember: 'proId', autoDropDownHeight: true
-                            })
-                        },
-                    },
-                    { text: 'Ent 등급', datafield: 'entaid', displayField: 'entnm', align: "center" , width: 100, columntype: 'dropdownlist',
-                        createeditor: function (row, column, editor) {
-                            editor.jqxDropDownList({
-                                source: [
-                                    {entId: "O", entValue1: "지원"},
-                                    {entId: "X", entValue1: "지원안함"},
-                                    {entId: "별도협의", entValue1: "별도협의"}
-                                ],
-                                displayMember: 'entValue1', valueMember: 'entId', autoDropDownHeight: true
-                            })
-                        },
-                    },
-                    { text: '사용여부', datafield: 'useyn', width: 100, align:"center" ,columntype: 'checkbox' },
+                    { text: 'free', datafield: 'freeaid', width: 100, align:"center"},
+                    { text: 'basiccd', datafield: 'basicaid', width: 100, align:"center"},
+                    { text: 'procd', datafield: 'proaid', width: 100, align:"center"},
+                    { text: 'entcd', datafield: 'entaid', width: 100, align:"center"},
+                    { text: '사용여부', datafield: 'useyn', width: 100, align:"center" },
                     { text: '시작일자' ,datafield: 'stdate', width: 100, align:"center", cellsformat: "yyyy-MM-dd",columntype: 'datetimeinput', editable: false},
                     { text: '종료일자' ,datafield: 'eddate',  width: 100, align:"center", cellsformat: "yyyy-MM-dd",columntype: 'datetimeinput', editable: false},
-                    { text: '정렬순서', datafield: 'sortno', width: 100, align:"center", editable: false },
-                    { text: '연번', datafield: 'numrow', width: 100, align:"center", editable: false , hidden:true}
+                    { text: '정렬순서', datafield: 'sortno', width: 100,align:"center", editable: false }
                 ]
-            });
+        });
         //$("#btn_add_row").jqxButton({ theme: theme });
         $("#btn_add_row").click(function () {
             var date = new Date();

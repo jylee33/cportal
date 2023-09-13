@@ -1,7 +1,7 @@
 {
   "rows" : [
-    {"code": "10", "name": "기본기능"},
-    {"code": "20", "name": "부가기능"},
-    {"code": "30", "name": "고급기능"}
+    {"fnc_code": "10", "fnc_name": "기본기능"},
+    {"fnc_code": "20", "fnc_name": "부가기능"},
+    {"fnc_code": "30", "fnc_name": "고급기능"}
   ]
 }

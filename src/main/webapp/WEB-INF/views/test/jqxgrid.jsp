@@ -46,7 +46,7 @@
                 url: url
             };
         var dataAdapter = new $.jqx.dataAdapter(source);
-        $("#grid").jqxGrid(
+        $("#grid1").jqxGrid(
             {
                 width: 1000,
                 source: dataAdapter,
@@ -102,6 +102,37 @@
                     { text: 'stdate',datafield: 'stdate',  width: 250 },
                     { text: 'eddate',datafield: 'eddate',  width: 250 },
                     { text: '정렬기준', datafield: 'sortno', width: 250}
+                ]
+            });
+
+        url = "http://localhost:8080/portal/api/findAll";
+        // prepare the data
+        source =
+            {
+                datatype: "json",
+                datafields: [
+                    { name: 'email',type:'string'},
+                    { name: 'membername',type:'string'},
+                    { name: 'celltel', type: 'string' },
+                    { name: 'businessname', type: 'string' },
+                    { name: 'licensegrade',type:'int'}
+                ],
+                id: 'id',
+                url: url,
+                type: "POST"
+            };
+
+        dataAdapter = new $.jqx.dataAdapter(source);
+        $("#grid3").jqxGrid({
+                width: 1000,
+                source: dataAdapter,
+                // columnsresize: true,
+                columns: [
+                    { text: 'email', datafield: 'email', width: 250},
+                    { text: 'membername', datafield: 'membername', width: 250},
+                    { text: 'celltel',datafield: 'celltel',  width: 250 },
+                    { text: 'businessname',datafield: 'businessname',  width: 250 },
+                    { text: 'licensegrade', datafield: 'licensegrade', width: 250}
                 ]
             });
     });

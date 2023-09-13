@@ -35,6 +35,12 @@
 		]]>
     </select>
 
+	<select id="findAll" resultType="HashMap">
+		select
+			email,membername,celltel,businessname,licensegrade
+		from tbmember
+    </select>
+
 	<select id="login" resultType="Member">
 		select * from tbmember
 		where email=#{uid} and password=sha2(#{upw}, 256) and emailcertificationyn = 1 and withdrawalyn != '1'

@@ -16,19 +16,24 @@
     <div class="tabs-box">
         <div class="tabs">
             <a href="#" class="active">라이선스 정책 관리</a>
-            <a href="javascript:void(0)" onClick="javascript:aidcodeinfo()">라이선스 제공 기능</a>
+            <a href="${path}/license/aidcodeinfo" >라이선스 제공 기능</a>
             <a href="${path}/license/creditinfo">Credit 제공</a>
         </div>
         <div class="right">
             <span class="tit">솔루션 선택</span>
-            <select class="select">
-                <option>네트워크</option>
-                <option>서버</option>
-                <option>AP</option>
-                <option>데이터베이스</option>
-                <option>환경센서</option>
+            <select class="select" id="sltdeviceid" onchange="selectDeviceChange(this.value)">
+                <option value="10">네트워크</option>
+                <option value="20">서버</option>
+                <option value="30">AP</option>
+                <option value="40">데이터베이스</option>
+                <option value="50">환경센서</option>
             </select>
-            <button class="btn">조회</button>
+            <button class="btn" type="button" onclick="selectDevice()">조회</button>
+
+<%--            <form name="diviceform" autocomplete="on" action="/portal/license/licensemanage" method="post">--%>
+<%--                <input type="hidden" class="inp" id="diviceid" value="30">--%>
+<%--                <button class="btn" id="finddevice">조회</button>--%>
+<%--            </form>--%>
         </div>
     </div>
     <div class="flex align-items-center gap10 align-end mb10">
@@ -157,6 +162,45 @@
 </div>
 
 <script>
+
+    function selectDevice(){
+        const sltcode = $('#sltdeviceid option:selected').val();
+        var url = "${pageContext.request.contextPath}/license/licensemanage";
+        url = url + "?deviceid="+sltcode;
+
+        location.href=url;
+<%--alert("...");--%>
+
+<%--        var form = document.createElement('form'); // 폼객체 생성--%>
+<%--        var objs;--%>
+<%--        objs = document.createElement('input'); // 값이 들어있는 녀석의 형식--%>
+<%--        objs.setAttribute('type', 'text'); // 값이 들어있는 녀석의 type--%>
+<%--        objs.setAttribute('name', 'deviceid'); // 객체이름--%>
+<%--        objs.setAttribute('value', deviceid); //객체값--%>
+<%--        form.appendChild(objs);--%>
+<%--        form.setAttribute('method', 'post'); //get,post 가능--%>
+<%--        form.setAttribute('action', "${pageContext.request.contextPath}/license/licensemanage"); //보내는 url--%>
+<%--        document.body.appendChild(form);--%>
+<%--        form.submit();--%>
+    }
+
+    var selectDeviceChange = function (value){
+        console.log("value --------------->"+value);
+        $("#diviceid").val(value);
+        console.log("value --------------->"+value);
+    }
+
+    $(document).ready(function() {
+        var formObj = $("form[role='form']");
+
+        $("#finddevice").on("click", function (e) {
+            e.preventDefault();
+
+            formObj.submit();
+        });
+    });
+
+
 
     // $(function() {
     //     $('#license-tbody tr').on('dllclick', function () {

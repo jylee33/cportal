@@ -123,3 +123,10 @@ set applyvolume = case when commoncode = '1' then 5 when commoncode = '2' then 2
 where groupcode = '001';
 
 commit;
+
+alter table tbmemberlicense modify basevolume int(4) unsigned DEFAULT 0 ;
+alter table tbmemberlicense modify servicevolume int(4) unsigned DEFAULT 0 ;
+alter table tbmemberlicense modify addvolume  int(4) unsigned DEFAULT 0 ;
+alter table tbmemberlicense modify updatedBy varchar(50)  DEFAULT NULL ;
+
+

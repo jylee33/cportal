@@ -107,6 +107,14 @@ CREATE TABLE `tbaidfunction` (
 
 
 
+-- 2023.09.13 카드 결제를 위한 필드 추가
+ALTER TABLE tbtaxinformation ADD COLUMN customer_uid VARCHAR(50) null COMMENT '카드결제용 customer_uid';
+ALTER TABLE tbtaxinformation ADD COLUMN paidyn VARCHAR(1) not null default 'N' COMMENT '이번달 결제여부';
+ALTER TABLE tbtaxinformation ADD COLUMN next_pay_date datetime not null default current_timestamp() COMMENT '다음 결제일자';
+ALTER TABLE tbtaxinformation ADD COLUMN paid_amount BIGINT not null default 0 COMMENT '결제금액';
+
+
+
 
 alter table tbcommoncode modify applyvolume decimal(7,2);
 
@@ -115,9 +123,3 @@ set applyvolume = case when commoncode = '1' then 5 when commoncode = '2' then 2
 where groupcode = '001';
 
 commit;
-
--- 2023.09.13 카드 결제를 위한 필드 추가
-ALTER TABLE tbtaxinformation ADD COLUMN customer_uid VARCHAR(50) null COMMENT '카드결제용 customer_uid';
-ALTER TABLE tbtaxinformation ADD COLUMN paidyn VARCHAR(1) not null default 'N' COMMENT '이번달 결제여부';
-ALTER TABLE tbtaxinformation ADD COLUMN next_pay_date datetime not null default current_timestamp() COMMENT '다음 결제일자';
-ALTER TABLE tbtaxinformation ADD COLUMN paid_amount BIGINT not null default 0 COMMENT '결제금액';

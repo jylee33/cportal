@@ -82,7 +82,7 @@ implementation group: 'com.googlecode.json-simple', name: 'json-simple', version
 alter table tbmember add column serverdomainname varchar(100) null default '' COMMENT '회원접속도메인';
 
 
-
+-- 2023.09.13일 변경 내역
 drop table `tbaidfunction`;
 
 
@@ -104,3 +104,14 @@ CREATE TABLE `tbaidfunction` (
      PRIMARY KEY (`functionno`),
      KEY `IDX_tbaidfunction_001` (`solutioncode`,`functionno`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='가격정책별 지원기능';
+
+
+
+
+alter table tbcommoncode modify applyvolume decimal(7,2);
+
+update tbcommoncode
+set applyvolume = case when commoncode = '1' then 5 when commoncode = '2' then 25 when commoncode = '3' then 50 else 100 end
+where groupcode = '001';
+
+commit;

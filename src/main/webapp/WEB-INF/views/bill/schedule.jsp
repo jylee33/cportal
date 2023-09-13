@@ -24,7 +24,7 @@
 			<div class="inp-box"><input type="text" class="inp2" id="mobile" name="mobile" placeholder="전화번호" required value="010-2801-3349"></div>
 		</div>
 
-		<div class="inp-area">
+		<div class="inp-area" style="display: none">
 			<div class="label">결제수단</div>
 			<div class="inp-box">
 				<select class="select large" name="pay_method" id="pay_method">
@@ -70,104 +70,54 @@
 			let IMP = window.IMP;
 			IMP.init("imp42261033");
 
-			console.log("email : " + $('#email').val());
-			console.log("username : " + $('#username').val());
-			console.log("address : " + $('#address').val());
-			var now = new Date();
-			console.log("현재 : ", now);
-
-			var orderId = "ORD" + now.getFullYear() + "" + now.getMonth() + "" + now.getDate() + "_" + now.getHours() + "" + now.getMinutes() + "" + now.getSeconds();
-			// orderId = "57008833-33004";
-			console.log("ORD : " + orderId);
-			console.log(location.origin);
-
-			/*$.ajax({
-				url: "https://api.iamport.kr/users/getToken",
-				//url: "${path}/bill/complete",
-				contentSecurityPolicy: false,
-				crossOriginEmbedderPolicy: false,
-				crossOriginOpenerPolicy: {
-					policy: "same-origin-allow-popups"
-				},
+			$.ajax({
+				url: "${path}/iamport/gettoken",
 				type: 'POST',
 				datatype: 'json',
-				contentType: "application/json",
-				headers: { "Content-Type": "application/json" },
 				data: {
-					// REST API키
-					imp_key: "0534302583438521",
-					// REST API Secret
-					imp_secret: "RldZHse07tEdv7luguc4oh6bJdcWvLluhsbo8Jg3dIL94Azrw3BhDuFKDjLTavBHxeBNjgOgKdKwfqTy"
 				}
-			}).done(function (result) {
-				console.log("result");
-				console.log(result);
-			}).fail(function(error){
-				console.log("error");
-				console.log(JSON.stringify(error));
-				// alert(JSON.stringify(error));
-			});*/
+			}).done(function (auth) {
+				console.log("getauth result ---------------");
+				console.log(auth);
 
-			IMP.request_pay({
-				pg: "html5_inicis.INIBillTst",//"kcp.INIBillTst",
-				pay_method: $('#pay_method').val(),
-				// merchant_uid: orderId,   // 주문번호
-				merchant_uid: "merchant_" + new Date().getTime(),   // 주문번호
-				name: $('#productname').val(),
-				amount: $('#price').val(),                         // 숫자 타입
-				// customer_uid 파라미터가 있어야 빌링키 발급을 시도함.
-				customer_uid: $('#username').val() + new Date().getTime(),
-				// buyer_email: $('#email').val(),
-				buyer_name: $('#username').val(),
-				// buyer_tel: $('#mobile').val(),
-				// buyer_addr: $('#address').val(),
-				// buyer_postcode: "08512"
-			}, function (rsp) { // callback
-				console.log("rsp.imp_uid - ", rsp.imp_uid);
-				console.log("rsp -", rsp);
-				if (rsp.success) {
-					console.log("customer_uid", rsp.customer_uid);
-					console.log("merchant_uid", rsp.merchant_uid);
-					// $.ajax({
-					// 	url: 'https://api.iamport.kr/subscribe/customers/'+rsp.customer_uid,
-					// 	type: 'POST'
-					// 	// dataType: "json",
-					// 	// contentType: "application/json"
-					// }).done(function(result){
-					// 	console.log("rsesult", result);
-					// });
-				}
-				<%--$.ajax({--%>
-				<%--	type: 'POST',--%>
-				<%--	url: '${path}/verifyIamport/'+rsp.imp_uid,--%>
-				<%--	beforeSend: function(xhr){--%>
-				<%--		// xhr.setRequestHeader(header, token);--%>
-				<%--	}--%>
-				<%--}).done(function(result){--%>
-				<%--	console.log("rsesult", result);--%>
-				<%--});--%>
-				//rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
-				/*if (rsp.success) {
-					console.log("빌링키 발급 성공", rsp);
-					console.log("customer_uid", rsp.customer_uid);
-					console.log("merchant_uid", rsp.merchant_uid);
-					$("#customeruid").val(rsp.customer_uid);
-					$("#merchantuid").val(rsp.merchant_uid);
-					alert("빌링키 발급 성공");
-					$.ajax({
-						url: "${path}/bill/complete",
-						type: "POST",
-						dataType: "json",
-						contentType: "application/json",
-						data: JSON.stringify({
-							customer_uid: rsp.customer_uid
-						})
-					});
-				} else {
-					var msg = "빌링키 발급 실패했습니다.\n에러 내용: " + rsp.error_msg;
-					alert(msg);
-				}*/
-				// $("form[role='form']").submit();
+				IMP.request_pay({
+					pg: "html5_inicis.INIBillTst",//"kcp.INIBillTst",
+					pay_method: $('#pay_method').val(),
+					merchant_uid: "merchant_" + new Date().getTime(),   // 주문번호
+					name: $('#productname').val(),
+					amount: $('#price').val(),                         // 숫자 타입
+					// customer_uid 파라미터가 있어야 빌링키 발급을 시도함.
+					customer_uid: $('#username').val() + "_" + new Date().getTime(),
+					buyer_name: $('#username').val(),
+					// buyer_email: $('#email').val(),
+					// buyer_tel: $('#mobile').val(),
+					// buyer_addr: $('#address').val(),
+					// buyer_postcode: "08512"
+				}, function (rsp) { // callback
+					console.log("rsp.imp_uid - ", rsp.imp_uid);
+					console.log("rsp -", rsp);
+					if (rsp.success) {
+						console.log("customer_uid", rsp.customer_uid);
+						console.log("merchant_uid", rsp.merchant_uid);
+
+						$.ajax({
+							url: "${path}/iamport/again",
+							type: 'POST',
+							datatype: 'json',
+							data: {
+								customer_uid: rsp.customer_uid,
+								paid_amount: rsp.paid_amount
+							}
+						}).done(function(result){
+							console.log("rsesult", result);
+						}).fail(function(error){
+							alert(JSON.stringify(error));
+						});
+					}
+					// $("form[role='form']").submit();
+				});
+			}).fail(function(error){
+				alert(JSON.stringify(error));
 			});
 
 		});

@@ -36,7 +36,7 @@
 
 		<div class="inp-area">
 			<div class="label">가격</div>
-			<div class="inp-box"><input type="text" class="inp2" id="price" name="price" placeholder="가격" required value="10"></div>
+			<div class="inp-box"><input type="text" class="inp2" id="price" name="price" placeholder="가격" required value="1"></div>
 		</div>
 
 		<div class="inp-area">
@@ -100,7 +100,7 @@
 					//
 					// alert(msg);
 					$.ajax({
-						url: "${path}/verifyIamport/" + rsp.imp_uid,	//서버의 결제 정보를 받는 endpoint
+						url: "${path}/iamport/" + rsp.imp_uid,	//서버의 결제 정보를 받는 endpoint
 						// beforeSend: function (xhr) {
 						// 	xhr.setRequestHeader(header, token);
 						// },

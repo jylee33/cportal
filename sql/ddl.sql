@@ -42,6 +42,7 @@ ALTER TABLE tbmember CHANGE cloudgrade licensegrade VARCHAR(06);
 ALTER TABLE tbmember ADD COLUMN administratoryn VARCHAR(1) AFTER emailcertificationyn;
 
 
+
 CREATE TABLE `tbusedevice` (
   `tbusedeviceid` varchar(36) NOT NULL COMMENT '사용자아이디',
   `user_id` varchar(50) NOT NULL COMMENT '사용자아이디',
@@ -79,3 +80,27 @@ implementation group: 'com.googlecode.json-simple', name: 'json-simple', version
 
 /* 2023.09.4 추가 */
 alter table tbmember add column serverdomainname varchar(100) null default '' COMMENT '회원접속도메인';
+
+
+
+drop table `tbaidfunction`;
+
+
+CREATE TABLE `tbaidfunction` (
+     `solutioncode` varchar(6) NOT  NULL COMMENT '솔루션코드',
+     `functionno` int(4) NOT NULL AUTO_INCREMENT COMMENT '지원기능관리번호',
+     `functionname` varchar(50) NOT NULL COMMENT '지원기능명',
+     `freeaid` tinytext NOT NULL COMMENT 'free 지원기능',
+     `basicaid` tinytext NOT NULL COMMENT 'basic 지원기능',
+     `proaid` tinytext NOT NULL COMMENT 'pro 지원기능',
+     `entaid` tinytext NOT NULL COMMENT 'enterprise 지원기능',
+     `functioncode` varchar(6) NOT NULL COMMENT '기능구분(003)',
+     `useyn` varchar(1) NOT NULL DEFAULT 'Y' COMMENT '사용여부',
+     `stdate` varchar(8) NOT NULL DEFAULT date_format(curdate(),'%Y%m%d') COMMENT '시작일자',
+     `eddate` varchar(8) NOT NULL DEFAULT '21991231' COMMENT '종료일자',
+     `sortno` int(1) NOT NULL COMMENT '정렬기준',
+     `createdAt` datetime NOT NULL DEFAULT current_timestamp() COMMENT '등록일시',
+     `updatedAt` datetime NOT NULL DEFAULT current_timestamp() COMMENT '수정일시',
+     PRIMARY KEY (`functionno`),
+     KEY `IDX_tbaidfunction_001` (`solutioncode`,`functionno`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='가격정책별 지원기능';

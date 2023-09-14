@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 
 <%@include file="../include/header.jsp" %>
 
@@ -163,7 +164,7 @@
                 <div class="label">업태</div>
                 <div class="inp-box"><input type="text" class="inp2" placeholder="업태를 입력하세요" name="businesscondition"></div>
             </div>
-            <div class="inp-area">
+            <div class="inp-area" style="display: none">
                 <div class="label">결재수단</div>
                 <div class="inp-box"><input type="text" class="inp2" placeholder="결재수단을 입력하세요" name="settlementmeans"></div>
             </div>
@@ -183,6 +184,12 @@
         <input type="hidden" name="updatedBy" value="administrator">
 
         <input type="hidden" name="baseamount" value="0">
+        <input type="hidden" name="basecharge" value="0">
+        <input type="hidden" name="addcharge" value="0">
+        <input type="hidden" name="datakeepterm" value="30">
+        <input type="hidden" name="datakeepunit" value="D">
+        <input type="hidden" name="customer_uid" value="">
+        <input type="hidden" name="paid_amount" value="0">
     </form>
 </div>
 
@@ -210,8 +217,21 @@
 
             if (grade == "1") {
                 $("#billinfo").hide();
+                $("input[name='basecharge']").val('0');
             } else {
                 $("#billinfo").show();
+                switch (grade) {
+                    // TODO : DB 에서 읽어와서 설정하도록 수정 필요. 일단 결제 개발을 위해서 하드 코딩
+                    case "2":
+                        $("input[name='basecharge']").val('1');
+                        break;
+                    case "3":
+                        $("input[name='basecharge']").val('2');
+                        break;
+                    case "4":
+                        $("input[name='basecharge']").val('3');
+                        break;
+                }
             }
         });
 
@@ -338,7 +358,73 @@
                 $("#agreeyn").val("N");
             }
 
-            formObj.submit();
+            var grade = $("#licensegrade").val();
+
+            if (grade != "1") {
+                let IMP = window.IMP;
+                IMP.init("imp42261033");
+
+                $.ajax({
+                    url: "${path}/iamport/gettoken",
+                    type: 'POST',
+                    datatype: 'json',
+                    data: {
+                    }
+                }).done(function (auth) {
+                    console.log("getauth result ---------------");
+                    console.log(auth);
+
+                    var membername = "hamonsoft";   // 영어로 해야지만 이니시스 창이 뜸..
+                    var basecharge = $("input[name='basecharge']").val();
+                    var addcharge = $("input[name='addcharge']").val();
+                    var paid_amount = Number(basecharge) + Number(addcharge);
+                    $("input[name='paid_amount']").val(paid_amount);
+                    console.log("paid_amount", paid_amount);
+
+                    IMP.request_pay({
+                        pg: "html5_inicis.INIBillTst",
+                        pay_method: "card",
+                        merchant_uid: "merchant_" + new Date().getTime(),   // 주문번호
+                        name: "NETIS CLOUD",
+                        amount: paid_amount,                         // 숫자 타입
+                        // customer_uid 파라미터가 있어야 빌링키 발급을 시도함.
+                        customer_uid: membername + "_" + new Date().getTime(),
+                        buyer_name: membername
+                        // buyer_email: $('#email').val(),
+                        // buyer_tel: $('#mobile').val(),
+                        // buyer_addr: $('#address').val(),
+                        // buyer_postcode: "08512"
+                    }, function (rsp) { // callback
+                        console.log("rsp.imp_uid - ", rsp.imp_uid);
+                        console.log("rsp -", rsp);
+                        if (rsp.success) {
+                            console.log("customer_uid", rsp.customer_uid);
+                            console.log("merchant_uid", rsp.merchant_uid);
+
+                            $("input[name='customer_uid']").val(rsp.customer_uid);
+
+                            $.ajax({
+                                url: "${path}/iamport/again",
+                                type: 'POST',
+                                datatype: 'json',
+                                data: {
+                                    customer_uid: rsp.customer_uid,
+                                    paid_amount: rsp.paid_amount
+                                }
+                            }).done(function(result){
+                                console.log("rsesult", result);
+                                $("form[role='form']").submit();
+                            }).fail(function(error){
+                                alert(JSON.stringify(error));
+                            });
+                        }
+                    });
+                }).fail(function(error){
+                    alert(JSON.stringify(error));
+                });
+            }
+
+            //formObj.submit();
         });
 
         $("#searchPostNum").on("click", function (e) {

@@ -13,13 +13,18 @@
 	</insert>
 
 	<insert id="insertTaxInfomation" >
-		insert into tbtaxinformation (taxid, email, Representationname, taxcompanynumber, taxemail, postnumber, address, detailaddress, businesscondition, businesskind, settlementmeans, baseamount, createdAt, updatedBy, updatedAt) values
-			(uuid(), #{email}, #{representationname}, #{taxcompanynumber}, #{taxemail}, #{postnumber}, #{address}, #{detailaddress}, #{businesscondition}, #{businesskind}, #{settlementmeans}, #{baseamount}, now(), #{updatedBy}, now())
+		insert into tbtaxinformation (taxid, email, Representationname, taxcompanynumber, taxemail, postnumber, address, detailaddress, businesscondition, businesskind, settlementmeans, baseamount, paid_amount, createdAt, updatedBy, updatedAt) values
+			(uuid(), #{email}, #{representationname}, #{taxcompanynumber}, #{taxemail}, #{postnumber}, #{address}, #{detailaddress}, #{businesscondition}, #{businesskind}, #{settlementmeans}, #{baseamount}, ${paid_amount}, now(), #{updatedBy}, now())
 	</insert>
 
 	<insert id="insertAuthentication" >
 		insert into tbauthentication (authenticationid, email, agreeyn, createdAt) values
 			(uuid(), #{email}, #{agreeyn}, now())
+	</insert>
+
+	<insert id="insertMemberLicense" >
+		insert into tbmemberlicense (email, licensegrade, datakeepterm, datakeepunit, basecharge, addcharge) values
+			(#{email}, #{licensegrade}, #{datakeepterm}, #{datakeepunit}, #{basecharge}, #{addcharge})
 	</insert>
 
 	<select id="selectMember" resultType="com.hamonsoft.cportal.domain.Member">

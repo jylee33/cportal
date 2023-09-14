@@ -16,6 +16,7 @@ public class TaxInformation {
     private String businesskind;    //업종
     private String settlementmeans; //결제방법
     private int baseamount; //기본금액
+    private long paid_amount;
     private Date createdAt; //등록일시
     private String updatedBy;   //수정자
     private Date updatedAt; //수정일시
@@ -114,6 +115,14 @@ public class TaxInformation {
 
     public void setBaseamount(int baseamount) {
         this.baseamount = baseamount;
+    }
+
+    public long getPaid_amount() {
+        return paid_amount;
+    }
+
+    public void setPaid_amount(int paid_amount) {
+        this.paid_amount = paid_amount;
     }
 
     public Date getCreatedAt() {

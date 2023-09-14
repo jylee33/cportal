@@ -3,6 +3,7 @@ package com.hamonsoft.cportal.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hamonsoft.cportal.domain.Authentication;
 import com.hamonsoft.cportal.domain.Member;
+import com.hamonsoft.cportal.domain.MemberLicense;
 import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.LoginDTO;
 import com.hamonsoft.cportal.dto.ResultDto;
@@ -58,11 +59,11 @@ public class MemberController {
     }
 
     @PostMapping(value = "insertMember")
-    public String insertMemberPost(Member member, TaxInformation taxInformation, Authentication authentication, Model model) throws UnsupportedEncodingException, JsonProcessingException {
+    public String insertMemberPost(Member member, TaxInformation taxInformation, Authentication authentication, MemberLicense license, Model model) throws UnsupportedEncodingException, JsonProcessingException {
         logger.info("call insertMemberPost ----------------");
         logger.info(member.toString());
 
-        ResultDto resultDto = memberService.insertMember(member, taxInformation, authentication);
+        ResultDto resultDto = memberService.insertMember(member, taxInformation, authentication, license);
         if (resultDto.getTRAN_STATUS() == 1) {
             model.addAttribute("result", "success");
         } else {

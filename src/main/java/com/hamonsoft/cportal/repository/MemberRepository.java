@@ -1,9 +1,6 @@
 package com.hamonsoft.cportal.repository;
 
-import com.hamonsoft.cportal.domain.Authentication;
-import com.hamonsoft.cportal.domain.BoardVO;
-import com.hamonsoft.cportal.domain.Member;
-import com.hamonsoft.cportal.domain.TaxInformation;
+import com.hamonsoft.cportal.domain.*;
 import com.hamonsoft.cportal.dto.LoginDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -27,6 +24,8 @@ public interface MemberRepository {
     void insertTaxInfomation(TaxInformation taxInformation);
 
     void insertAuthentication(Authentication authentication);
+
+    void insertMemberLicense(MemberLicense license);
 
     List<Member> listAll();
 

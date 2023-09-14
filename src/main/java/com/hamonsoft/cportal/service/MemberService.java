@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hamonsoft.cportal.domain.Authentication;
 import com.hamonsoft.cportal.domain.Member;
+import com.hamonsoft.cportal.domain.MemberLicense;
 import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.LoginDTO;
 import com.hamonsoft.cportal.dto.ResultDto;
@@ -49,7 +50,7 @@ public class MemberService {
     }
 
     @Transactional(rollbackFor = {Exception.class})
-    public ResultDto insertMember(Member member, TaxInformation taxInformation, Authentication authentication) {
+    public ResultDto insertMember(Member member, TaxInformation taxInformation, Authentication authentication, MemberLicense license) {
         ResultDto resultDto = new ResultDto();
         try {
             resultDto = addUser(member);
@@ -60,6 +61,7 @@ public class MemberService {
             memberRepository.insertMember(member);
             memberRepository.insertTaxInfomation(taxInformation);
             memberRepository.insertAuthentication(authentication);
+            memberRepository.insertMemberLicense(license);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             throw new RuntimeException(e);

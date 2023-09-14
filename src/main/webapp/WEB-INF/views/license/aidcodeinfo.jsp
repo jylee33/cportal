@@ -40,7 +40,7 @@
             <a href="${path}/license/creditinfo">Credit 제공</a>
         </div>
         <div class="right">
-            <form autocomplete="on" action="/portal/license/aidcodeview" method="get">
+            <form autocomplete="on">   <%--action="/portal/license/aidcodeview" method="get">--%>
                 <span class="tit">기능구분 선택</span>
                 <select class="select" name="sltcode" id="sltcode">
                     <option value="10">네트워크</option>
@@ -49,7 +49,7 @@
                     <option value="40">데이터베이스</option>
                     <option value="50">환경센서</option>
                 </select>
-                <button class="btn" type="submit">조회</button>
+                <button class="btn" type="button" onclick="selectReload()">조회</button>
             </form>
         </div>
     </div>
@@ -94,17 +94,18 @@
     function proc_jqxGridSelect() {
         var theme = "";
         var sltcode = $('#sltdeviceid option:selected').val();
+        var slttext = $('#sltdeviceid option:selected').text();
         // prepare the data
         // searchcode
         var source =
             {
-                url : "${path}/license/aidcodeview",
+                url : "${path}/license/aidcodeview?sltcode="+sltcode,
                 datatype: "json",
                 // postData: {"searchcode": $('#sltcode option:selected').val()},
                 datafields: [
                     { name: 'solutioncode', type:'string', cellsalign: 'center'},
                     { name: 'solutionname', type:'string', cellsalign: 'center'},
-                    { name: 'functioncode', type:'string', cellsalign: 'center'},
+                    { name: 'aidcode', type:'string', cellsalign: 'center'},
                     { name: 'fnccodename', type:'string', cellsalign: 'center'},
                     { name: 'functionno', type:'int', cellsalign: 'center'},
                     { name: 'functionname', type:'string', cellsalign: 'center'},
@@ -137,11 +138,11 @@
                 showtoolbar: false,
                 editable: true,
                 height: 700,
-                width: '90%',
+                width: '100%',
                 selectionmode: 'singlecell',
                 editmode: 'click',
                 columns: [
-                    { text: '솔루션명', datafield: 'solutioncode', displayField: 'solutionname', align: "center" , cellsalign: "center" , width: 100, columntype: 'dropdownlist',
+                    { text: '솔루션명', datafield: 'solutioncode', displayField: 'solutionname', align: "center" , cellsalign: "center" , width: '10%', editable: false, columntype: 'dropdownlist',
                         createeditor: function (row, column, editor) {
                             editor.jqxDropDownList({
                                 source: [
@@ -155,7 +156,7 @@
                             })
                         },
                     },
-                    { text: '기능구분', datafield: 'functioncode', displayField: 'fnccodename', align: "center" , width: 100, columntype: 'dropdownlist',
+                    { text: '기능구분', datafield: 'aidcode', displayField: 'fnccodename', align: "center" ,cellsalign: "center" , width: 100, columntype: 'dropdownlist',
                         createeditor: function (row, column, editor) {
                             editor.jqxDropDownList({
                                 source: [
@@ -169,19 +170,20 @@
                     },
                     { text: '지원기능', datafield: 'functionname', width: 200, align:"left", editable: true},
                     { text: '지원관리번호', datafield: 'functionno', width: 100, salign:"left", editable: false, hidden:true},
-                    { text: 'Free등급', datafield: 'freeaid', displayField: 'freenm', align: "center" , width: 100, columntype: 'dropdownlist',
+                    { text: 'Free등급', datafield: 'freeaid', displayField: 'freenm', align: "center" , cellsalign: "center" ,width: 100, columntype: 'dropdownlist',
                         createeditor: function (row, column, editor) {
                             editor.jqxDropDownList({
                                 source: [
                                     {freeId: "O", freeValue1: "지원"},
                                     {freeId: "X", freeValue1: "지원안함"},
-                                    {freeId: "1일", freeValue1: "1일"}
+                                    {freeId: "1일", freeValue1: "1일"},
+                                    {basicId: "30일", basicValue1: "30일"}
                                 ],
                                 displayMember: 'freeValue1', valueMember: 'freeId', autoDropDownHeight: true
                             })
                         },
                     },
-                    { text: 'Basic등급', datafield: 'basicaid', displayField: 'basicnm', align: "center" , width: 100, columntype: 'dropdownlist',
+                    { text: 'Basic등급', datafield: 'basicaid', displayField: 'basicnm', align: "center" ,cellsalign: "center" , width: 100, columntype: 'dropdownlist',
                         createeditor: function (row, column, editor) {
                             editor.jqxDropDownList({
                                 source: [
@@ -193,19 +195,19 @@
                             })
                         },
                     },
-                    { text: 'Pro 등급', datafield: 'proaid', displayField: 'pronm', align: "center" , width: 100, columntype: 'dropdownlist',
+                    { text: 'Pro 등급', datafield: 'proaid', displayField: 'pronm', align: "center" ,cellsalign: "center" , width: 100, columntype: 'dropdownlist',
                         createeditor: function (row, column, editor) {
                             editor.jqxDropDownList({
                                 source: [
                                     {proId: "O", proValue1: "지원"},
                                     {proId: "X", proValue1: "지원안함"},
-                                    {proId: "30일", proalue1: "30일"}
+                                    {proId: "30일", proValue1: "30일"}
                                 ],
                                 displayMember: 'proValue1', valueMember: 'proId', autoDropDownHeight: true
                             })
                         },
                     },
-                    { text: 'Ent 등급', datafield: 'entaid', displayField: 'entnm', align: "center" , width: 100, columntype: 'dropdownlist',
+                    { text: 'Ent 등급', datafield: 'entaid', displayField: 'entnm', align: "center" ,cellsalign: "center" , width: 100, columntype: 'dropdownlist',
                         createeditor: function (row, column, editor) {
                             editor.jqxDropDownList({
                                 source: [
@@ -231,15 +233,13 @@
             const sltcode = $('#sltcode option:selected').val();
             const sltname = $('#sltcode option:selected').text();
             $("#aidInfo").jqxGrid("addrow", null,
-                {functionno:"", functionname:"", freeaid:"O", basicaid:"O",
+                {solutioncode:sltcode, solutionname:sltname, functionno:"", functionname:"", freeaid:"O", basicaid:"O",
                     proaid:"O",entaid: "O",stdate: date, eddate: "2019-12-31", useyn: "Y",
-                    codename:sltname, useyn: "Y", sortno: 99, functioncode: sltcode
-                }, "last");
+                    codename:sltname, useyn: "Y", sortno: 99, aidcode: ""
+                }, "first");
             $("#aidInfo").jqxGrid('endupdate');
         });
     }
-
-
 
 
 
@@ -278,7 +278,24 @@
         });
     });
 
-
+    function selectReload(){
+        alert("ffffffffffffffffff");
+        proc_jqxGridSelect();
+    }
 </script>
 <%@include file="../include/footer.jsp" %>
 
+/*
+
+$("#deleterowbutton").on("click", function () {
+var selectedrowindex = $("#jqxgrid").jqxGrid("getselectedrowindex");
+var rowscount = $("#jqxgrid").jqxGrid("getdatainformation").rowscount;
+console.log(1001, $("#jqxgrid").jqxGrid("getdatainformation"));
+if (selectedrowindex >= 0 && selectedrowindex < rowscount) {
+var id = $("#jqxgrid").jqxGrid("getrowid", selectedrowindex);
+var commit = $("#jqxgrid").jqxGrid("deleterow", id);
+}
+});
+
+
+*/

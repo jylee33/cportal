@@ -29,7 +29,11 @@ public class LicenseManageService {
     @Autowired
     LicenseManageRepository licensemanageRepository;
 
-    @Autowired
+    public ArrayList<HashMap<String, Object>> licensemanageview(String groupcode) {
+        return licensemanageRepository.licensemanageview(groupcode);
+    }
+
+
     public LicenseManageService(LicenseManageRepository licensemanageMapper) {
         this.licensemanageRepository = licensemanageMapper;
     }
@@ -49,20 +53,31 @@ public class LicenseManageService {
         return licensemanageRepository.aidfunctionList2(functioncode);
     }
 
-    public ArrayList<HashMap<String, Object>> creditList() {
-        return licensemanageRepository.creditList();
+    public ArrayList<HashMap<String, Object>> creditView(String groupcode) {
+        return licensemanageRepository.creditView(groupcode);
     }
 
-
+    /* 지원기능 추가 저장 */
     public String aidfunctionInsert(Map<String, Object> insertData) {
         licensemanageRepository.aidfunctionInsert(insertData);
-        return "저장완료";
+        return "입력완료";
     }
 
+    /* 지원기능 수정 저장 */
     public String aidfunctionUpdate(Map<String, Object> insertData) {
         licensemanageRepository.aidfunctionUpdate(insertData);
-        return "저장완료";
+        return "수정완료";
     }
 
+    /* credit 추가 저장 */
+    public String creditInsert(Map<String, Object> insertData) {
+        licensemanageRepository.creditInsert(insertData);
+        return "입력완료";
+    }
+    /* credit 수정 저장 */
+    public String creditUpdate(Map<String, Object> insertData) {
+        licensemanageRepository.creditUpdate(insertData);
+        return "수정완료";
+    }
 
 }

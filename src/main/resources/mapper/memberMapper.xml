@@ -13,8 +13,8 @@
 	</insert>
 
 	<insert id="insertTaxInfomation" >
-		insert into tbtaxinformation (taxid, email, Representationname, taxcompanynumber, taxemail, postnumber, address, detailaddress, businesscondition, businesskind, settlementmeans, baseamount, paid_amount, createdAt, updatedBy, updatedAt) values
-			(uuid(), #{email}, #{representationname}, #{taxcompanynumber}, #{taxemail}, #{postnumber}, #{address}, #{detailaddress}, #{businesscondition}, #{businesskind}, #{settlementmeans}, #{baseamount}, ${paid_amount}, now(), #{updatedBy}, now())
+		insert into tbtaxinformation (taxid, email, Representationname, taxcompanynumber, taxemail, postnumber, address, detailaddress, businesscondition, businesskind, settlementmeans, baseamount, customer_uid, next_pay_date, paid_amount, createdAt, updatedBy, updatedAt) values
+			(uuid(), #{email}, #{representationname}, #{taxcompanynumber}, #{taxemail}, #{postnumber}, #{address}, #{detailaddress}, #{businesscondition}, #{businesskind}, #{settlementmeans}, #{baseamount}, #{customer_uid}, #{next_pay_date}, #{paid_amount}, now(), #{updatedBy}, now())
 	</insert>
 
 	<insert id="insertAuthentication" >
@@ -31,6 +31,16 @@
 		select * from tbmember
 		where email=#{email}
 	</select>
+
+	<select id="selectNextPayDate" resultType="Date">
+		select next_pay_date from tbtaxinformation
+		where email=#{email}
+	</select>
+
+	<update id="updateNextPayDate">
+		update tbtaxinformation set next_pay_date = #{dtNext}, last_pay_date = now()
+		where email=#{email}
+	</update>
 
 	<select id="listAll" resultType="Member">
         <![CDATA[

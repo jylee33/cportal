@@ -105,6 +105,7 @@
 							type: 'POST',
 							datatype: 'json',
 							data: {
+								email:"",
 								customer_uid: rsp.customer_uid,
 								paid_amount: rsp.paid_amount
 							}

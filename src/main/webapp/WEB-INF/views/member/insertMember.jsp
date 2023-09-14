@@ -403,11 +403,15 @@
 
                             $("input[name='customer_uid']").val(rsp.customer_uid);
 
+                            $("form[role='form']").submit();
+
+                            /* 회원 가입시는 실제 결제를 하지 않아야 하므로 이 부분 막음.
                             $.ajax({
                                 url: "${path}/iamport/again",
                                 type: 'POST',
                                 datatype: 'json',
                                 data: {
+                                    email: $('#email').val(),
                                     customer_uid: rsp.customer_uid,
                                     paid_amount: rsp.paid_amount
                                 }
@@ -417,14 +421,15 @@
                             }).fail(function(error){
                                 alert(JSON.stringify(error));
                             });
+                            */
                         }
                     });
                 }).fail(function(error){
                     alert(JSON.stringify(error));
                 });
+            } else {
+                formObj.submit();
             }
-
-            //formObj.submit();
         });
 
         $("#searchPostNum").on("click", function (e) {

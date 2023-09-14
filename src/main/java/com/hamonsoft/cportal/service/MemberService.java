@@ -21,10 +21,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 //@Transactional
@@ -49,6 +48,14 @@ public class MemberService {
         return memberRepository.selectMember(email);
     }
 
+    public Date selectNextPayDate(String email) {
+        return memberRepository.selectNextPayDate(email);
+    }
+
+    public void updateNextPayDate(Map<String, Object> paramMap) {
+        memberRepository.updateNextPayDate(paramMap);
+    }
+
     @Transactional(rollbackFor = {Exception.class})
     public ResultDto insertMember(Member member, TaxInformation taxInformation, Authentication authentication, MemberLicense license) {
         ResultDto resultDto = new ResultDto();
@@ -57,6 +64,15 @@ public class MemberService {
             if (resultDto.getTRAN_STATUS() != 1) {
                 throw new RuntimeException();
             }
+
+            DateFormat df = new SimpleDateFormat("yyyyMMdd");
+
+            Calendar cal=Calendar.getInstance();
+            cal.add(cal.MONTH, 1);
+            String sDate = df.format(cal.getTime());
+            Date dtNext = new Date(Integer.parseInt(sDate.substring(0, 4)) - 1900, Integer.parseInt(sDate.substring(4, 6)) - 1, 1);
+
+            taxInformation.setNext_pay_date(dtNext);
 
             memberRepository.insertMember(member);
             memberRepository.insertTaxInfomation(taxInformation);

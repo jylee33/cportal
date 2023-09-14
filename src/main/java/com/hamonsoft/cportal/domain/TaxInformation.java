@@ -16,6 +16,8 @@ public class TaxInformation {
     private String businesskind;    //업종
     private String settlementmeans; //결제방법
     private int baseamount; //기본금액
+    private String customer_uid; //결제방법
+    private Date next_pay_date; //다음 결제일자
     private long paid_amount;
     private Date createdAt; //등록일시
     private String updatedBy;   //수정자
@@ -117,12 +119,28 @@ public class TaxInformation {
         this.baseamount = baseamount;
     }
 
-    public long getPaid_amount() {
-        return paid_amount;
+    public String getCustomer_uid() {
+        return customer_uid;
     }
 
-    public void setPaid_amount(int paid_amount) {
+    public void setCustomer_uid(String customer_uid) {
+        this.customer_uid = customer_uid;
+    }
+
+    public Date getNext_pay_date() {
+        return next_pay_date;
+    }
+
+    public void setNext_pay_date(Date next_pay_date) {
+        this.next_pay_date = next_pay_date;
+    }
+
+    public void setPaid_amount(long paid_amount) {
         this.paid_amount = paid_amount;
+    }
+
+    public long getPaid_amount() {
+        return paid_amount;
     }
 
     public Date getCreatedAt() {

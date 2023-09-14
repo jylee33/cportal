@@ -5,10 +5,7 @@ import com.hamonsoft.cportal.dto.LoginDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Mapper
 @Repository
@@ -18,6 +15,10 @@ public interface MemberRepository {
     String getTime();
 
     Member selectMember(String email);
+
+    Date selectNextPayDate(String email);
+
+    void updateNextPayDate(Map<String, Object> paramMap);
 
     void insertMember(Member member);
 

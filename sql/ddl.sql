@@ -114,6 +114,12 @@ ALTER TABLE tbtaxinformation ADD COLUMN next_pay_date datetime not null default 
 ALTER TABLE tbtaxinformation ADD COLUMN paid_amount BIGINT not null default 0 COMMENT '결제금액';
 
 
+ALTER TABLE tbtaxinformation ADD COLUMN last_pay_date datetime null COMMENT '마지막 결제일자' after paidyn ;
+ALTER TABLE tbtaxinformation DROP COLUMN paidyn;
+ALTER TABLE tbtaxinformation DROP COLUMN next_pay_date;
+ALTER TABLE tbtaxinformation ADD COLUMN next_pay_date datetime null COMMENT '다음 결제일자' after last_pay_date;
+
+
 
 
 alter table tbcommoncode modify applyvolume decimal(7,2);

@@ -374,7 +374,7 @@
                     console.log("getauth result ---------------");
                     console.log(auth);
 
-                    var membername = "hamonsoft";   // 영어로 해야지만 이니시스 창이 뜸..
+                    var membername = $("input[name='membername']").val();;
                     var basecharge = $("input[name='basecharge']").val();
                     var addcharge = $("input[name='addcharge']").val();
                     var paid_amount = Number(basecharge) + Number(addcharge);
@@ -388,7 +388,7 @@
                         name: "NETIS CLOUD",
                         amount: paid_amount,                         // 숫자 타입
                         // customer_uid 파라미터가 있어야 빌링키 발급을 시도함.
-                        customer_uid: membername + "_" + new Date().getTime(),
+                        customer_uid: "hamonsoft_" + new Date().getTime(),
                         buyer_name: membername
                         // buyer_email: $('#email').val(),
                         // buyer_tel: $('#mobile').val(),

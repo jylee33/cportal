@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
-import javax.servlet.ServletInputStream;
-
+@EnableScheduling
 @PropertySource({"classpath:application.yml"})
 @SpringBootApplication
 public class CportalApplication extends SpringBootServletInitializer {

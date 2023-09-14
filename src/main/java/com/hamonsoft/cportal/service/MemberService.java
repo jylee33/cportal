@@ -56,6 +56,10 @@ public class MemberService {
         memberRepository.updateNextPayDate(paramMap);
     }
 
+    public List<String> selectEmails() {
+        return memberRepository.selectEmails();
+    }
+
     @Transactional(rollbackFor = {Exception.class})
     public ResultDto insertMember(Member member, TaxInformation taxInformation, Authentication authentication, MemberLicense license) {
         ResultDto resultDto = new ResultDto();

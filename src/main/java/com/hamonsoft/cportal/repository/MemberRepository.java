@@ -20,6 +20,8 @@ public interface MemberRepository {
 
     void updateNextPayDate(Map<String, Object> paramMap);
 
+    List<String> selectEmails();
+
     void insertMember(Member member);
 
     void insertTaxInfomation(TaxInformation taxInformation);

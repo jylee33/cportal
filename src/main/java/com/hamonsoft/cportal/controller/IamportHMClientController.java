@@ -21,10 +21,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -133,10 +130,7 @@ public class IamportHMClientController {
         }
     }
 
-    @PostMapping("/payall")
-    public IamportResponse<Payment> payAll() throws IamportResponseException, IOException {
-        logger.info("call IamportHMClientController payAll ......................");
-        String email = "jylee@hamonsoft.co.kr";
+    private IamportResponse<Payment> pay(String email) throws IamportResponseException, IOException {
         String customer_uid = "hamonsoft_1694670432726";
         long paid_amount = 1;
 
@@ -176,6 +170,20 @@ public class IamportHMClientController {
 
             return response;
         }
+    }
+
+    @PostMapping("/payall")
+    public void payAll() throws IamportResponseException, IOException {
+        logger.info("call IamportHMClientController payAll ......................");
+//        String email = "jylee@hamonsoft.co.kr";
+
+        List<String> emailList = memberService.selectEmails();
+        for (String email : emailList) {
+            logger.info("email --- " + email);
+            IamportResponse<Payment> result = pay(email);
+            logger.info("payall result for email[" + email + "] : " + result.getCode());
+        }
+
     }
 
 

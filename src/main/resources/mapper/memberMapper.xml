@@ -37,6 +37,10 @@
 		where email=#{email}
 	</select>
 
+	<select id="selectEmails" resultType="String">
+		select email from tbtaxinformation
+	</select>
+
 	<update id="updateNextPayDate">
 		update tbtaxinformation set next_pay_date = #{dtNext}, last_pay_date = now()
 		where email=#{email}

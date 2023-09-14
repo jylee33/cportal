@@ -37,6 +37,26 @@ public class LicenseManageController {
         @Resource
         private GridUtil gridutin;
     */
+    @GetMapping(value = "/licensemanage") // memberinfo
+    public void licensemanage(HttpServletRequest request) throws Exception {
+        logger.info("LicenseManageController 1111 licensemanage ---->");
+    }
+
+
+    @RequestMapping(value="/licensemanageview", method = RequestMethod.GET)
+    public ResponseEntity<?> licensemanageview(@RequestParam Map<String,Object> param
+            ,HttpServletResponse response) throws IOException {
+        logger.info("LicenseManageController creditview");
+        String groupcode = "006";
+        ResponseDTO responseDTO = new ResponseDTO();
+        responseDTO.setResultCode("S0001");
+        responseDTO.setRes(licensemanageService.licensemanageview(groupcode));
+        logger.info("LicenseManageController licensemanageview ResponseDTO---->"+responseDTO);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);//
+    }
+
+
+
     @PostMapping(value = "/licensemanage") // memberinfo
     public ModelAndView licensemanage(@RequestParam("deviceid") String deviceid, HttpServletRequest request) throws Exception {
         ModelAndView mav = new ModelAndView();
@@ -59,68 +79,94 @@ public class LicenseManageController {
         return mav;
     }
 
-    @GetMapping(value = "/licensemanage") // memberinfo
-    public ModelAndView licensemanageget(HttpServletRequest request) throws Exception {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("/license/licensemanage");
-        HttpSession session = request.getSession();
-//        Member member = (Member) session.getAttribute("login");
-        String solution =  request.getParameter("deviceid");
+//    @GetMapping(value = "/licensemanage") // memberinfo
+//    public ModelAndView licensemanageget(HttpServletRequest request) throws Exception {
+//        ModelAndView mav = new ModelAndView();
+//        mav.setViewName("/license/licensemanage");
+//        HttpSession session = request.getSession();
+////        Member member = (Member) session.getAttribute("login");
+//        String solution =  request.getParameter("deviceid");
+////        }
+////        logger.info("LicenseManageController licensemanage ---->"+member.getEmail());
+////        logger.info("LicenseManageController licensemanage---->"+member.getEmailcertificationyn());
+////        logger.info("LicenseManageController licensemanage ---->"+member.getBusinessname());
+//        logger.info("LicenseManageController 1111 licensemanage ---->"+solution);
+//        if(solution == null || "".equals(solution)) {
+//            solution = "10";
 //        }
-//        logger.info("LicenseManageController licensemanage ---->"+member.getEmail());
-//        logger.info("LicenseManageController licensemanage---->"+member.getEmailcertificationyn());
-//        logger.info("LicenseManageController licensemanage ---->"+member.getBusinessname());
-        logger.info("LicenseManageController 1111 licensemanage ---->"+solution);
-        if(solution == null || "".equals(solution)) {
-            solution = "10";
-        }
+//
+//        mav.addObject("license",licensemanageService.licensePolicyList(solution));
+//
+//
+//        return mav;
+//    }
 
-        mav.addObject("license",licensemanageService.licensePolicyList(solution));
+//    @GetMapping(value = "/creditinfo") // memberinfo
+//    public ModelAndView creditList(Map<String, Object> map, HttpServletRequest request) throws Exception {
+//        ModelAndView mav = new ModelAndView();
+//        mav.setViewName("/license/creditinfo");
+//
+//        HttpSession session = request.getSession();
+////        Member member = (Member) session.getAttribute("login");
+//        // String solution = request.getParameter("solutioncode");
+////        logger.info("LicenseManageController creditList ---->"+member.getEmail());
+////        logger.info("LicenseManageController creditList ---->"+member.getEmailcertificationyn());
+////        logger.info("LicenseManageController creditList ---->"+member.getBusinessname());
+//        logger.info("LicenseManageController creditList ---->");
+//        mav.addObject("credit",licensemanageService.creditList());
+//
+//
+//        return mav;
+//    }
 
-
-        return mav;
-    }
-
-    @GetMapping(value = "/creditinfo") // memberinfo
-    public ModelAndView creditList(Map<String, Object> map, HttpServletRequest request) throws Exception {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("/license/creditinfo");
-
-        HttpSession session = request.getSession();
-//        Member member = (Member) session.getAttribute("login");
-        // String solution = request.getParameter("solutioncode");
-//        logger.info("LicenseManageController creditList ---->"+member.getEmail());
-//        logger.info("LicenseManageController creditList ---->"+member.getEmailcertificationyn());
-//        logger.info("LicenseManageController creditList ---->"+member.getBusinessname());
-        logger.info("LicenseManageController creditList ---->");
-        mav.addObject("credit",licensemanageService.creditList());
-
-
-        return mav;
-    }
-
-
-    @PostMapping(value = "/creditinfo") // memberinfo
-    public ModelAndView creditListPost(Map<String, Object> map, HttpServletRequest request) throws Exception {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("/license/creditinfo");
-
-        HttpSession session = request.getSession();
+    @RequestMapping(value = "/creditinfo") // memberinfo
+    public void creditinfo(Map<String, Object> map, HttpServletRequest request) throws Exception {
+//        ModelAndView mav = new ModelAndView();
+//        mav.setViewName("/license/creditinfo");
+//
+//        HttpSession session = request.getSession();
 //        Member member = (Member) session.getAttribute("login");
 //        String diviceid = request.getParameter("diviceid");
 //        logger.info("LicenseManageController creditList ---->"+member.getEmail());
 //        logger.info("LicenseManageController creditList ---->"+member.getEmailcertificationyn());
 //        logger.info("LicenseManageController creditList ---->"+member.getBusinessname());
-        logger.info("LicenseManageController creditList ---->");
-        mav.addObject("credit",licensemanageService.creditList());
-
-
-        return mav;
+        logger.info("LicenseManageController creditinfo ---->");
+//        mav.addObject("credit",licensemanageService.creditList());
     }
+    @RequestMapping(value="/creditview", method = RequestMethod.GET)
+    public ResponseEntity<?> creditview(@RequestParam Map<String,Object> param
+            ,HttpServletResponse response) throws IOException {
+        logger.info("LicenseManageController creditview");
+        String groupcode = "006";
+        ResponseDTO responseDTO = new ResponseDTO();
+        responseDTO.setResultCode("S0001");
+        responseDTO.setRes(licensemanageService.creditView(groupcode));
+        logger.info("LicenseManageController creditview ResponseDTO---->"+responseDTO);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);//
+    }
+//
+//
+//    @PostMapping(value = "/creditinfo") // memberinfo
+//    public ModelAndView creditListPost(Map<String, Object> map, HttpServletRequest request) throws Exception {
+//        ModelAndView mav = new ModelAndView();
+//        mav.setViewName("/license/creditinfo");
+//
+//        HttpSession session = request.getSession();
+////        Member member = (Member) session.getAttribute("login");
+////        String diviceid = request.getParameter("diviceid");
+////        logger.info("LicenseManageController creditList ---->"+member.getEmail());
+////        logger.info("LicenseManageController creditList ---->"+member.getEmailcertificationyn());
+////        logger.info("LicenseManageController creditList ---->"+member.getBusinessname());
+//        logger.info("LicenseManageController creditList ---->");
+//        mav.addObject("credit",licensemanageService.creditList());
+//
+//
+//        return mav;
+//    }
 
     @PostMapping(value = "/aidInfoSave")
     @ResponseBody
-    public String AidFunctionSave(@RequestBody String aidData) throws Exception {
+    public void AidFunctionSave(@RequestBody String aidData) throws Exception {
 
         JSONParser jsonParser = new JSONParser();
         JSONArray insertParam = null;
@@ -144,7 +190,35 @@ public class LicenseManageController {
             }
         }
 
-        return null;
+    }
+
+
+    @PostMapping(value = "/creditSave")
+    @ResponseBody
+    public void creditSave(@RequestBody String creditData) throws Exception {
+
+        JSONParser jsonParser = new JSONParser();
+        JSONArray insertParam = null;
+        try {
+            insertParam = (JSONArray) jsonParser.parse(creditData);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        logger.info("insertParam.size-->"+insertParam.size());
+        for(int i=0; i<insertParam.size(); i++){
+            //배열 안에 있는것도 JSON형식 이기 때문에 JSON Object 로 추출
+            JSONObject insertData = (JSONObject) insertParam.get(i);
+            logger.info("insertParam-->"+insertData);
+            Map<String, Object> saveData = new HashMap<>();
+            if ("I".equals(insertData.get("crudflg")) || "".equals(insertData.get("crudflg"))) {
+                licensemanageService.creditInsert(insertData);
+            }else{
+                licensemanageService.creditUpdate(insertData);
+            }
+        }
+
     }
 
 

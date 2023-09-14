@@ -5,8 +5,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@include file="../include/header.jsp" %>
-            <!-- // header -->
 
+<%@include file="../include/jQWidgets.jsp" %>
            
 <div class="container">
     <div class="h3-head">
@@ -29,139 +29,148 @@
                 <option value="50">환경센서</option>
             </select>
             <button class="btn" type="button" onclick="selectDevice()">조회</button>
-
-<%--            <form name="diviceform" autocomplete="on" action="/portal/license/licensemanage" method="post">--%>
-<%--                <input type="hidden" class="inp" id="diviceid" value="30">--%>
-<%--                <button class="btn" id="finddevice">조회</button>--%>
-<%--            </form>--%>
         </div>
     </div>
     <div class="flex align-items-center gap10 align-end mb10">
         <button class="btn btn3">행추가</button>
         <button class="btn">저장</button>
     </div>
+    <div class="flex align-items-center gap10 align-end mb10">
+        <button class="btn btn3" id="btn_add_row">행추가</button>
+        <button class="btn" id="btn-save">저장</button>
+    </div>
 
-    <div class="table-type1 cursor">
-        <table id="license-table">
-            <thead>
-                <tr>
-                    <th>솔루션 명</th>
-                    <th>가격정책</th>
-                    <th>기본요금</th>
-                    <th>가용장비</th>
-                    <th>제공기능</th>
-                    <th>정책내용</th>
-                    <th>시작일자</th>
-                    <th>종료일자</th>
-                    <th>비고</th>
-                </tr>
-            </thead>
-            <tbody id="license-tbody">
-            <c:choose>
-                <c:when test="${fn:length(license) > 0}">
-                    <c:forEach items="${license}" var="list">
-                        <tr id="data-area" ondblclick="license_tbody_dblclick(this)">
-                     <!--   <tr onclick="javascript:popupOpen('Modal1');"> -->
-                            <td class="text-center" id="solutioncode">
-                              <c:if test="${list.solutioncode eq '10'}">Network</c:if>
-                              <c:if test="${list.solutioncode eq '20'}">Server</c:if>
-                              <c:if test="${list.solutioncode eq '30'}">Ap</c:if>
-                              <c:if test="${list.solutioncode eq '40'}">DBMS</c:if>
-                              <c:if test="${list.solutioncode eq '40'}">FMS</c:if>
-                          </td>
-                          <td class="text-center" id="policycode">
-                              <c:if test="${list.policycode eq '1'}">Free</c:if>
-                              <c:if test="${list.policycode eq '2'}">Basic</c:if>
-                              <c:if test="${list.policycode eq '3'}">Pro</c:if>
-                              <c:if test="${list.policycode eq '4'}">Ent</c:if>
-                          </td>
-                          <td class="text-center">${list.licenseamount}</td>
-                          <td class="text-center">${list.licenseint}</td>
-                          <td class="text-center" id="aidcode">
-                              <c:if test="${list.aidcode eq '10'}">기본기능</c:if>
-                              <c:if test="${list.aidcode eq '20'}">부가기능</c:if>
-                              <c:if test="${list.aidcode eq '30'}">고급기능</c:if>
-                          </td>
-                          <td class="text-center">${list.licensecontent}</td>
-                          <td class="text-center">${list.strstdate}</td>
-                          <td class="text-center">${list.streddate}</td>
-                          <td class="text-center"></td>
-                        </tr>
-                    </c:forEach>
-                </c:when>
-            </c:choose>
-            </tbody>
-        </table>
-  </div>
-</div>
-<!-- // wrap -->
-
-
-<div class="popup-wrap" id="Modal1">
-<div class="bg-popup"></div>
-<div class="popup-box">
-    <div class="popup-cont">
-        <div class="popup" style="width:770px">
-            <div class="popup-head">
-                <h3 class="h3-popup">수정</h3>
-                <button class="btn-close" onclick="javascript:popupClose('Modal1');"><span class="hidden">닫기</span></button>
-            </div>
-            <div class="popup-body ">
-
-                <div class="table-type2" style="width:700px">
-                    <table>
-                        <colgroup>
-                            <col style="width:20%">
-                            <col style="width:30%">
-                            <col style="width:20%">
-                            <col style="width:30%">
-                        </colgroup>
-                        <tbody>
-                            <tr>
-                                <th>가격정책</th>
-                                <td>
-                                    <select class="select" id="modal_policycode">
-                                        <option value="1">FREE</option>
-                                        <option value="2">Basic</option>
-                                        <option value="3">Pro</option>
-                                        <option value="4">Ent</option>
-                                    </select>
-                                </td>
-                                <th>기본요금</th>
-                                <td ><input type="text" id="modal_licenseamount" class="inp" value="무료" style="width:100%"></td>
-                            </tr>
-                            <tr>
-                                <th>가용장비</th>
-                                <td><input type="number" id="modal_licenseint" class="inp" value="5" style="width:100%"></td>
-                                <th>제공기능</th>
-                                <td>
-                                    <select class="select small" id="modal_aidcode">
-                                        <option value="10">기본기능</option>
-                                        <option value="20">부가기능</option>
-                                        <option value="30">고급기능</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>라이선스 <br>정책 내용</th>
-                                <td colspan="3">
-                                    <textarea id="modal_licensecontent" class="inp" style="height: 90px; width:100%"></textarea>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="popup-btns">
-                <button class="btn">저장</button>
-            </div>
-        </div>
+    <div id='jqxWidget' class="table-type1 text-center cursor">
+        <div id="jaxLicense"></div>
+        <div style="margin-top: 30px;"></div>
     </div>
 </div>
+<!-- // wrap -->
 </div>
 
 <script>
+
+
+    $(document).ready(function(){
+        console.log("jqxGridCreate-->");
+        proc_jqxGridSelect();
+    });
+
+    function proc_jqxGridSelect() {
+        var theme = "";
+        var source =
+            {
+                url : "${path}/license/creditview",
+                datatype: "json",
+                // postData: {"searchcode": $('#sltcode option:selected').val()},
+                datafields: [
+                    { name: 'solutioncode', type:'string'},
+                    { name: 'policycode', type:'string'},
+                    { name: 'licenseamount', type:'string', cellsalign: 'center'},
+                    { name: 'licenseint', type:'string', cellsalign: 'center'},
+                    { name: 'aidcode', type:'string', cellsalign: 'center'},
+                    { name: 'licensecontent', type:'int', cellsalign: 'center'},
+                    { name: 'stdate', type:'string', format: 'yyyy-MM-dd', cellsalign: 'center'},
+                    { name: 'eddate', type:'string', format: 'yyyy-MM-dd', cellsalign: 'center'},
+                    { name: 'crudflg', type:'string', cellsalign: 'center'}
+                ],
+                id: 'license',
+                updaterow: function (rowid, rowdata, commit) {
+                    // synchronize with the server - send update command
+                    commit(true);
+                }
+            };
+
+        var dataAdapter = new $.jqx.dataAdapter(source,{
+            loadComplete: function() {
+            },
+            autoBind: true
+        });
+
+        var createGridEditor = function(row, cellValue, editor, cellText, width, height){
+            console.log(row+"....cellValue->"+cellValue+"....editor->"+editor+"....cellText->"+cellText+"....width->"+width+"....height->"+height)
+        }
+
+        $("#jaxLicense").jqxGrid(
+            {
+                source: dataAdapter,
+                columnsresize: true,
+                sortable: true,
+                altrows: true,
+                showstatusbar: true,
+                showtoolbar: false,
+                editable: true,
+                height: 700,
+                width: '100%',
+                selectionmode: 'singlecell',
+                editmode: 'click',
+                columns: [
+                    { text: '솔루션 명', datafield: 'solutioncode', displayField: 'solutioncode', align: "center" , cellsalign: "center" , editable: false, width: '0%', hidden:true},
+                    { text: '가격정책', datafield: 'policycode', displayField: 'policycode', align: "center" , cellsalign: "center" , editable: true, width: '15%'},
+                    { text: '기본요금', datafield: 'licenseamount', displayField: 'licenseamount', align: "center" ,cellsalign: "center" , width: '25%'},
+                    { text: '가용장비', datafield: 'licenseint',displayField: 'licenseint', align: "center" ,cellsalign: "center" , width: '25%', editable: true},
+                    { text: '정책내용', datafield: 'aidcode', displayField: 'aidcode', width: '5%', align:"center" ,cellsalign: "center" , editable: true},
+                    { text: '제공기능', datafield: 'licensecontent',displayField: 'licensecontent',   width: '6%', align:"center" ,columntype: 'checkbox' },
+                    { text: '시작일자' ,datafield: 'stdate', displayField: 'applyvolume', width: '12%', align:"center", cellsalign: 'center',format: 'yyyy-MM-dd', editable: false},
+                    { text: '종료일자' ,datafield: 'eddate',displayField: 'applyvolume',  width: '12%', align:"center", cellsalign: 'center',format: 'yyyy-MM-dd', editable: false},
+                    { text: 'status', datafield: 'crudflg', displayField: 'applyvolume', width: '0%', align:"center" ,hidden:true}
+                ]
+            });
+        //$("#btn_add_row").jqxButton({ theme: theme });
+        $("#btn_add_row").click(function () {
+            var system_date = "";
+            var year = new Date().getFullYear();
+            var month = new Date().getMonth() + 1;
+            if(month >= 10){
+                month = month;
+            }else{
+                month = '0' + month;
+            };
+            var date = new Date().getDate();
+
+            if(date >= 10){
+                date = date;
+            }else{
+                date = '0' + date;
+            };
+            system_date = year + "-" +month + "-" +date;
+            alert(system_date + ".year->.." +year + "..month->." + ".date ->." +date+"................."+system_date);
+
+            var fncName = "";
+            var sortno  = $("#jaxCredit").jqxGrid("getrows");
+            var maxSortNo = 0;
+            var res = "";
+            for (var j = 0; j < sortno.length; j++) {
+                var r1 = sortno[j];
+                if(r1.sortno > maxSortNo){
+                    maxSortNo = r1.sortno;
+                }
+            }
+            maxSortNo = maxSortNo + 1;
+            // alert(maxSortNo);
+            // $("#log").html(res);
+            $("#jaxCredit").jqxGrid("addrow", null,
+                {groupcode:'006', commoncode:'', codename:"", applyvolume:0, useyn:"Y", stdate: system_date, eddate: "2199-12-31",sortno: maxSortNo, crudflg:'I'}, "first");
+            $("#jaxCredit").jqxGrid('endupdate');
+        });
+
+        $("#jaxCredit").on('cellendedit', function (event) {
+            var args = event.args;
+            $("#cellendeditevent").text("Event Type: cellendedit, Column: " + args.datafield + ", Row: " + (1 + args.rowindex) + ", Value: " + args.value);
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     function selectDevice(){
         const sltcode = $('#sltdeviceid option:selected').val();

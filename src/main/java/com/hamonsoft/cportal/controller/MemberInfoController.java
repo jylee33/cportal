@@ -217,12 +217,11 @@ public class MemberInfoController {
 
     @ResponseBody
     @PostMapping(value = "/userInfoSave")
-    public String MemberInfoPostSave(@RequestBody MemberLicenseDto memberLicenseDto) throws Exception {
+    public void MemberInfoPostSave(@RequestBody MemberLicenseDto memberLicenseDto) throws Exception {
         logger.info("memberLicenseDto --> "+memberLicenseDto);
 
         memberinfoService.licenseUpdate(memberLicenseDto);
        // licenseUpdate
-        return null;
     }
 
 }

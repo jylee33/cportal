@@ -136,3 +136,5 @@ alter table tbmemberlicense modify addvolume  int(4) unsigned DEFAULT 0 ;
 alter table tbmemberlicense modify updatedBy varchar(50)  DEFAULT NULL ;
 
 
+-- 2023.09.14  명칭변경
+alter table tbaidfunction change functioncode aidcode varchar(06);

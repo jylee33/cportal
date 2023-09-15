@@ -139,3 +139,7 @@ alter table tbmemberlicense modify updatedBy varchar(50)  DEFAULT NULL ;
 
 -- 2023.09.14  명칭변경
 alter table tbaidfunction change functioncode aidcode varchar(06);
+
+
+-- 2023.09.15
+ALTER TABLE netiscloud.tblicensepolicy MODIFY COLUMN sortno int(1) NOT NULL COMMENT '정렬기준';

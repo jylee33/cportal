@@ -48,8 +48,8 @@ public class MemberService {
         return memberRepository.selectMember(email);
     }
 
-    public Date selectNextPayDate(String email) {
-        return memberRepository.selectNextPayDate(email);
+    public HashMap<String, Object> selectTaxByEmail(String email) {
+        return memberRepository.selectTaxByEmail(email);
     }
 
     public void updateNextPayDate(Map<String, Object> paramMap) {

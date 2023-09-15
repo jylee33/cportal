@@ -118,6 +118,7 @@ ALTER TABLE tbtaxinformation ADD COLUMN last_pay_date datetime null COMMENT '마
 ALTER TABLE tbtaxinformation DROP COLUMN paidyn;
 ALTER TABLE tbtaxinformation DROP COLUMN next_pay_date;
 ALTER TABLE tbtaxinformation ADD COLUMN next_pay_date datetime null COMMENT '다음 결제일자' after last_pay_date;
+ALTER TABLE tbtaxinformation ADD COLUMN imp_uid VARCHAR(50) null COMMENT '카드결제 결과 imp_uid';
 
 
 

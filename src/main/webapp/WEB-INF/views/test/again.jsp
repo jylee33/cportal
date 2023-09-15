@@ -27,8 +27,8 @@
                 datatype: 'json',
                 data: {
                     email: "${email}",
-                    customer_uid: customer_uid,
-                    paid_amount: paid_amount
+                    // customer_uid: customer_uid,
+                    // paid_amount: paid_amount
                 }
             }).done(function(result){
                 console.log("rsesult", result);

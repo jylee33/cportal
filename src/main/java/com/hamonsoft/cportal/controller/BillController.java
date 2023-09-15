@@ -39,12 +39,15 @@ public class BillController {
         return "bill/pay";
     }
 
-    @GetMapping(value = "forcedpayall")
-    public void forcedPayAll(Model model) {
-        logger.info("call forcedPayAll ---------------");
+    @GetMapping(value = "checkpay")
+    public void checkPay(HttpServletRequest request, Model model) {
+        logger.info("call checkPay ---------------");
 
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8080/portal/iamport/payall";
+        String reqUrl = request.getRequestURL().toString();
+        String contextPath = request.getContextPath();
+        String cpath = reqUrl.substring(0, reqUrl.indexOf(contextPath)) + contextPath;
+        String url = cpath + "/iamport/payall";
         logger.info("url - " + url);
 
         // Header set
@@ -59,21 +62,10 @@ public class BillController {
 //        body.put("paid_amount", paid_amount);
 
         // Request Message
-        HttpEntity<?> request = new HttpEntity<>(body, headers);
+        HttpEntity<?> req = new HttpEntity<>(body, headers);
 
         // Request
-        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(url, req, String.class);
     }
 
-    @GetMapping(value = "schedule")
-    public void schedule(Model model) {
-        logger.info("call schedule ---------------");
-    }
-
-    @PostMapping(value = "complete")
-    public void complete(@RequestBody HashMap<String, Object> list) {
-        logger.info("call complete ---------------");
-        logger.info("customer_uid --- " + list);
-
-    }
 }

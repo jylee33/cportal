@@ -16,7 +16,7 @@ public interface MemberRepository {
 
     Member selectMember(String email);
 
-    Date selectNextPayDate(String email);
+    HashMap<String, Object> selectTaxByEmail(String email);
 
     void updateNextPayDate(Map<String, Object> paramMap);
 

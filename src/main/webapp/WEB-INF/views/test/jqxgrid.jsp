@@ -105,7 +105,7 @@
                 ]
             });
 
-        url = "http://localhost:8080/portal/api/findAll";
+        url = "${path}/api/findAll";
         // prepare the data
         source =
             {

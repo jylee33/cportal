@@ -43,5 +43,10 @@ public class TestController {
 
     }
 
+    @GetMapping(value = "billing")
+    public void billing(Model model) {
+        logger.info("call billing ---------------");
+    }
+
 
 }

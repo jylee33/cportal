@@ -105,9 +105,9 @@
 							type: 'POST',
 							datatype: 'json',
 							data: {
-								email:"",
-								customer_uid: rsp.customer_uid,
-								paid_amount: rsp.paid_amount
+								email:$('#email').val(),
+								// customer_uid: rsp.customer_uid,
+								// paid_amount: rsp.paid_amount
 							}
 						}).done(function(result){
 							console.log("rsesult", result);
@@ -129,7 +129,7 @@
 
 			jQuery.ajax({
 				// 예: http://www.myservice.com/payments/cancel
-				"url": "http://localhost:8080/bill/pay",
+				"url": "${path}/bill/pay",
 				"type": "POST",
 				"contentType": "application/json",
 				"data": JSON.stringify({

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -85,17 +86,39 @@ public class IamportHMClientController {
         return df.format(new Date()) + "_" + n;
     }
 
-    @PostMapping("/again")
-    public IamportResponse<Payment> againPayment(String email, String customer_uid, long paid_amount) throws IamportResponseException, IOException {
-        logger.info("call againPayment ......................");
-        logger.info("email - " + email);
-        logger.info("customer_uid - " + customer_uid);
-        logger.info("paid_amount - " + paid_amount);
+    private IamportResponse<Payment> pay(String email) throws IamportResponseException, IOException {
+        String customer_uid = "";
+        Date dtNextPayDate = null;
+        long paid_amount = 1;
 
-        // tbtaxinformation.next_pay_date 와 현재 시간 비교해서 결제가 필요하지 않으면 그냥 return
-        Date dtNextPayDate = memberService.selectNextPayDate(email);
-        logger.info("dtNextPayDate" + dtNextPayDate);
+        HashMap<String, Object> map = memberService.selectTaxByEmail(email);
+        for( Map.Entry<String, Object> entry : map.entrySet() ){
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            switch (key) {
+                case "customer_uid":
+                    customer_uid = value.toString();
+                    break;
+                case "next_pay_date":
+                    String dateStr = value.toString();
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                    try {
+                        dtNextPayDate = df.parse(dateStr);
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    break;
+                case "paid_amount":
+                    paid_amount = Integer.parseInt(value.toString());
+                    break;
+            }
+        }
+
         Date dtNow = new Date();
+        logger.info("dtNow - " + dtNow);
+        logger.info("dtNextPayDate - " + dtNextPayDate);
         int result = dtNextPayDate.compareTo(dtNow);
 
         if (result > 0) {
@@ -110,6 +133,8 @@ public class IamportHMClientController {
 
             if (response.getCode() == 0) {   // success
                 logger.info("iamportClient.againPayment success -------------");
+                String imp_uid = response.getResponse().getImpUid();
+                logger.info("return imp_uid - " + imp_uid);
 
                 // tbtaxinformation.next_pay_date update
                 DateFormat df = new SimpleDateFormat("yyyyMMdd");
@@ -122,6 +147,7 @@ public class IamportHMClientController {
                 Map<String, Object> paramMap = new HashMap<>();
                 paramMap.put("email", email);
                 paramMap.put("dtNext", dtNext);
+                paramMap.put("imp_uid", imp_uid);
 
                 memberService.updateNextPayDate(paramMap);
             }
@@ -130,58 +156,24 @@ public class IamportHMClientController {
         }
     }
 
-    private IamportResponse<Payment> pay(String email) throws IamportResponseException, IOException {
-        String customer_uid = "hamonsoft_1694670432726";
-        long paid_amount = 1;
+    @PostMapping("/again")
+    // test
+    public IamportResponse<Payment> againPayment(String email) throws IamportResponseException, IOException {
+        logger.info("call againPayment ......................");
+        logger.info("email --- " + email);
+        IamportResponse<Payment> result = pay(email);
 
-        // tbtaxinformation.next_pay_date 와 현재 시간 비교해서 결제가 필요하지 않으면 그냥 return
-        Date dtNextPayDate = memberService.selectNextPayDate(email);
-        logger.info("dtNextPayDate" + dtNextPayDate);
-        Date dtNow = new Date();
-        int result = dtNextPayDate.compareTo(dtNow);
-
-        if (result > 0) {
-            logger.info("tbtaxinformation.next_pay_date 와 현재 시간 비교해서 결제가 필요하지 않아 그냥 return");
-            return null;
-        } else {
-            AccessToken auth = getAuth().getResponse();
-            AgainPaymentData againData = new AgainPaymentData(customer_uid, getRandomMerchantUid(), BigDecimal.valueOf(paid_amount));
-            againData.setName("NETIS CLOUD");
-
-            IamportResponse<Payment> response = iamportClient.againPayment(againData);
-
-            if (response.getCode() == 0) {   // success
-                logger.info("iamportClient.againPayment success -------------");
-
-                // tbtaxinformation.next_pay_date update
-                DateFormat df = new SimpleDateFormat("yyyyMMdd");
-
-                Calendar cal=Calendar.getInstance();
-                cal.add(cal.MONTH, 1);
-                String sDate = df.format(cal.getTime());
-                Date dtNext = new Date(Integer.parseInt(sDate.substring(0, 4)) - 1900, Integer.parseInt(sDate.substring(4, 6)) - 1, 1);
-
-                Map<String, Object> paramMap = new HashMap<>();
-                paramMap.put("email", email);
-                paramMap.put("dtNext", dtNext);
-
-                memberService.updateNextPayDate(paramMap);
-            }
-
-            return response;
-        }
+        return result;
     }
 
     @PostMapping("/payall")
     public void payAll() throws IamportResponseException, IOException {
         logger.info("call IamportHMClientController payAll ......................");
-//        String email = "jylee@hamonsoft.co.kr";
 
         List<String> emailList = memberService.selectEmails();
         for (String email : emailList) {
             logger.info("email --- " + email);
             IamportResponse<Payment> result = pay(email);
-            logger.info("payall result for email[" + email + "] : " + result.getCode());
         }
 
     }

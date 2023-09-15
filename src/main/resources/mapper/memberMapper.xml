@@ -32,8 +32,8 @@
 		where email=#{email}
 	</select>
 
-	<select id="selectNextPayDate" resultType="Date">
-		select next_pay_date from tbtaxinformation
+	<select id="selectTaxByEmail" resultType="Map">
+		select customer_uid, DATE_FORMAT(next_pay_date,'%Y-%m-%d %H:%i:%s') as next_pay_date, paid_amount from tbtaxinformation
 		where email=#{email}
 	</select>
 
@@ -42,7 +42,7 @@
 	</select>
 
 	<update id="updateNextPayDate">
-		update tbtaxinformation set next_pay_date = #{dtNext}, last_pay_date = now()
+		update tbtaxinformation set next_pay_date = #{dtNext}, imp_uid = #{imp_uid}, last_pay_date = now()
 		where email=#{email}
 	</update>
 

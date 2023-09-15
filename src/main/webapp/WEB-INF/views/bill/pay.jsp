@@ -140,7 +140,7 @@
 
 			jQuery.ajax({
 				// 예: http://www.myservice.com/payments/cancel
-				"url": "http://localhost:8080/bill/pay",
+				"url": "${path}/bill/pay",
 				"type": "POST",
 				"contentType": "application/json",
 				"data": JSON.stringify({

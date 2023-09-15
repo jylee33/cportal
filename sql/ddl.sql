@@ -140,6 +140,10 @@ alter table tbmemberlicense modify updatedBy varchar(50)  DEFAULT NULL ;
 -- 2023.09.14  명칭변경
 alter table tbaidfunction change functioncode aidcode varchar(06);
 
+
+-- 2023.09.15
+ALTER TABLE netiscloud.tblicensepolicy MODIFY COLUMN sortno int(1) NOT NULL COMMENT '정렬기준';
+
 -- 2023.09.15 결제히스토리 테이블 추가
 create TABLE tbpayhistory (
     payhistoryid varchar(36) NOT NULL COMMENT '라이센스정책관리번호(uuid)',

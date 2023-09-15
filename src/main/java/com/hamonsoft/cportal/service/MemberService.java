@@ -56,6 +56,10 @@ public class MemberService {
         memberRepository.updateNextPayDate(paramMap);
     }
 
+    public void insertPayHistory(Map<String, Object> paramMap) {
+        memberRepository.insertPayHistory(paramMap);
+    }
+
     public List<String> selectEmails() {
         return memberRepository.selectEmails();
     }

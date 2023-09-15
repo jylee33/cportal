@@ -386,7 +386,7 @@
                         pay_method: "card",
                         merchant_uid: "merchant_" + new Date().getTime(),   // 주문번호
                         name: "NETIS CLOUD",
-                        amount: paid_amount,                         // 숫자 타입
+                        amount: 1, // 카드 등록을 위한 절차이므로 1원만.... paid_amount,                         // 숫자 타입
                         // customer_uid 파라미터가 있어야 빌링키 발급을 시도함.
                         customer_uid: "hamonsoft_" + new Date().getTime(),
                         buyer_name: membername

@@ -46,6 +46,11 @@
 		where email=#{email}
 	</update>
 
+	<insert id="insertPayHistory">
+		insert into tbpayhistory(payhistoryid, email, customer_uid, imp_uid, paid_amount) values
+			(uuid(), #{email}, #{customer_uid}, #{imp_uid}, #{paid_amount})
+	</insert>
+
 	<select id="listAll" resultType="Member">
         <![CDATA[
 		select

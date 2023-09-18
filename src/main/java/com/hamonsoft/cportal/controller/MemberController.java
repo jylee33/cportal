@@ -22,10 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 @RequestMapping("/member")
@@ -56,6 +53,9 @@ public class MemberController {
     @GetMapping(value = "insertMember")
     public void insertMemberGet(Model model) {
         logger.info("call insertMemberGet ----------------");
+
+        ArrayList<HashMap<String, String>> licenseList = memberService.selectBaseLicense();
+        model.addAttribute("licenselist", licenseList);
     }
 
     @PostMapping(value = "insertMember")

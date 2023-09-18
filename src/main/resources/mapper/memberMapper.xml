@@ -37,6 +37,13 @@
 		where email=#{email}
 	</select>
 
+	<select id="selectBaseLicense" resultType="HashMap">
+		select
+			commoncode, baselicense
+		from tbcommoncode
+		where groupcode = '001'
+	</select>
+
 	<select id="selectEmails" resultType="String">
 		select email from tbtaxinformation
 	</select>
@@ -45,6 +52,11 @@
 		update tbtaxinformation set next_pay_date = #{dtNext}, imp_uid = #{imp_uid}, last_pay_date = now()
 		where email=#{email}
 	</update>
+
+	<insert id="insertPayHistory">
+		insert into tbpayhistory(payhistoryid, email, customer_uid, imp_uid, paid_amount) values
+			(uuid(), #{email}, #{customer_uid}, #{imp_uid}, #{paid_amount})
+	</insert>
 
 	<select id="listAll" resultType="Member">
         <![CDATA[

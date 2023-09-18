@@ -143,3 +143,14 @@ alter table tbaidfunction change functioncode aidcode varchar(06);
 
 -- 2023.09.15
 ALTER TABLE netiscloud.tblicensepolicy MODIFY COLUMN sortno int(1) NOT NULL COMMENT '정렬기준';
+
+-- 2023.09.15 결제히스토리 테이블 추가
+create TABLE tbpayhistory (
+    payhistoryid varchar(36) NOT NULL COMMENT '라이센스정책관리번호(uuid)',
+    email varchar(50) NOT NULL COMMENT '이메일',
+    customer_uid varchar(50) NOT NULL COMMENT 'customer_uid',
+    imp_uid varchar(50) NOT NULL COMMENT 'imp_uid',
+    paid_amount BIGINT NOT NULL COMMENT '결제금액',
+    pay_date datetime NOT NULL DEFAULT current_timestamp() COMMENT '결제일시',
+    primary key(payhistoryid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='결제히스토리';

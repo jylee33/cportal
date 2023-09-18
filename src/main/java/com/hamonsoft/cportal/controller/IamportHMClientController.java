@@ -146,10 +146,13 @@ public class IamportHMClientController {
 
                 Map<String, Object> paramMap = new HashMap<>();
                 paramMap.put("email", email);
-                paramMap.put("dtNext", dtNext);
+                paramMap.put("customer_uid", customer_uid);
                 paramMap.put("imp_uid", imp_uid);
+                paramMap.put("paid_amount", paid_amount);
+                paramMap.put("dtNext", dtNext);
 
                 memberService.updateNextPayDate(paramMap);
+                memberService.insertPayHistory(paramMap);
             }
 
             return response;

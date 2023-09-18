@@ -45,13 +45,17 @@ public class LicenseManageController {
 
     @RequestMapping(value="/licensemanageview", method = RequestMethod.GET)
     public ResponseEntity<?> licensemanageview(@RequestParam Map<String,Object> param
-            ,HttpServletResponse response) throws IOException {
-        logger.info("LicenseManageController creditview");
-        String groupcode = "006";
+            ,HttpServletRequest request) throws IOException {
+        String solution =  request.getParameter("solutioncode");
+        logger.info("LicenseManageController creditview---solution----->"+solution);
+        if(solution == null || "".equals(solution)) {
+            solution = "10";
+        }
+
         ResponseDTO responseDTO = new ResponseDTO();
         responseDTO.setResultCode("S0001");
-        responseDTO.setRes(licensemanageService.licensemanageview(groupcode));
-        logger.info("LicenseManageController licensemanageview ResponseDTO---->"+responseDTO);
+        responseDTO.setRes(licensemanageService.licensemanageview(solution));
+        //logger.info("LicenseManageController licensemanageview ResponseDTO---->"+responseDTO);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);//
     }
 
@@ -60,7 +64,7 @@ public class LicenseManageController {
     @PostMapping(value = "/licensemanage") // memberinfo
     public ModelAndView licensemanage(@RequestParam("deviceid") String deviceid, HttpServletRequest request) throws Exception {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("/license/licensemanage");
+        mav.setViewName("licensemanage9_15");
         HttpSession session = request.getSession();
 //        Member member = (Member) session.getAttribute("login");
         String solution =  deviceid; // request.getParameter("deviceid");
@@ -79,6 +83,33 @@ public class LicenseManageController {
         return mav;
     }
 
+    @PostMapping(value = "/licenseSave")
+    @ResponseBody
+    public void licenseSave(@RequestBody String licenseData) throws Exception {
+
+        JSONParser jsonParser = new JSONParser();
+        JSONArray insertParam = null;
+        try {
+            insertParam = (JSONArray) jsonParser.parse(licenseData);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        logger.info("insertParam.size-->"+insertParam.size());
+        for(int i=0; i<insertParam.size(); i++){
+            //배열 안에 있는것도 JSON형식 이기 때문에 JSON Object 로 추출
+            JSONObject insertData = (JSONObject) insertParam.get(i);
+            logger.info("insertParam-->"+insertData);
+            Map<String, Object> saveData = new HashMap<>();
+            if (null == insertData.get("licensepolicyid") || insertData.get("licensepolicyid").equals("")) {
+                licensemanageService.licenseInsert(insertData);
+            }else{
+                licensemanageService.licenseUpdate(insertData);
+            }
+        }
+
+    }
 //    @GetMapping(value = "/licensemanage") // memberinfo
 //    public ModelAndView licensemanageget(HttpServletRequest request) throws Exception {
 //        ModelAndView mav = new ModelAndView();
@@ -133,9 +164,11 @@ public class LicenseManageController {
         logger.info("LicenseManageController creditinfo ---->");
 //        mav.addObject("credit",licensemanageService.creditList());
     }
+
+
     @RequestMapping(value="/creditview", method = RequestMethod.GET)
     public ResponseEntity<?> creditview(@RequestParam Map<String,Object> param
-            ,HttpServletResponse response) throws IOException {
+            ,HttpServletRequest request) throws IOException {
         logger.info("LicenseManageController creditview");
         String groupcode = "006";
         ResponseDTO responseDTO = new ResponseDTO();
@@ -256,16 +289,16 @@ public class LicenseManageController {
 //    @RequestParam("searchcode") String searchcode
     @RequestMapping(value="/aidcodeview", method = RequestMethod.GET)
     public ResponseEntity<?> aidcodeview(@RequestParam Map<String,Object> param
-                                         ,HttpServletResponse response) throws IOException {
-        String sltcode = "";
-logger.info("param----->"+param);
-        if (sltcode == null || sltcode.isEmpty()) {
-            sltcode = "10";
+                                         ,HttpServletRequest request) throws IOException {
+        String solution =  request.getParameter("solutioncode");
+        logger.info("param----->"+param);
+        if (solution == null || solution.isEmpty()) {
+            solution = "10";
         }
 
         ResponseDTO responseDTO = new ResponseDTO();
         responseDTO.setResultCode("S0001");
-        responseDTO.setRes(licensemanageService.aidfunctionList(sltcode));
+        responseDTO.setRes(licensemanageService.aidfunctionList(solution));
         logger.info("LicenseManageController aidfunctionList ResponseDTO---->"+responseDTO);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);//
     }

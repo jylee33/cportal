@@ -16,10 +16,10 @@
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define(['webapp/resources/js/external/jquery'], factory);
+        define(['jquery'], factory);
     } else if (typeof module === 'object' && module.exports) {
         // Node/CommonJS
-        module.exports = factory(require('webapp/resources/js/external/jquery'));
+        module.exports = factory(require('jquery'));
     } else {
         // Browser globals
         factory(jQuery);
@@ -299,9 +299,13 @@
 
 
 /* 모달팝업창 2023.05 */
-function popupOpen(id,num){
+function popupOpen(id,idx,num){
 	$('#'+id).fadeIn(300);
 	$('body').addClass('popup-on');
+  var idx = idx - 1;
+  $('.cont-box > div').hide();
+  $('.cont-box > div').eq(idx).show();
+  $('.tabs a').eq(idx).addClass('active').siblings().removeClass('active');
   if(num == 1){
     $('#'+id).find('.table-type2').addClass('td1');
   }else if(num == 2){
@@ -321,6 +325,8 @@ function popupClose(id){
   $('#'+id).find('.table-type2').removeClass('td3');
   $('#'+id).find('.table-type2').removeClass('td4');
 } 
+
+
 
 // 배경선택시 닫기
 $(document).mousedown(function (e){

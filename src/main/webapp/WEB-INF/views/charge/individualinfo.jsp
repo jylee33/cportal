@@ -4,7 +4,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@include file="../include/header.jsp" %>
+<%@include file="../include/header_2.jsp" %>
+
+<%@include file="../include/jQWidgets.jsp" %>
 
 <div class="container">
     <div class="cols">

@@ -13,7 +13,7 @@
         a01.licenseamount   ,
         a01.licenseint      ,
         a01.aidcode         ,
-        a01.aidcode         ,
+        j01.codename aidname,
         concat(substring(a01.stdate, 1, 4),'-',substring(a01.stdate, 5, 2),'-',substring(a01.stdate, 7, 2)) stdate,
         concat(substring(a01.eddate, 1, 4),'-',substring(a01.eddate, 5, 2),'-',substring(a01.eddate, 7, 2)) eddate,
         a01.useyn           ,
@@ -32,6 +32,29 @@
         </choose>
     </select>
 
+
+
+    <!--  라이센스정책관리 -->
+    <insert id="licenseInsert">
+        INSERT INTO tblicensepolicy(
+            licensepolicyid ,solutioncode    ,solutionname    ,policycode      ,policyname      ,
+            licensecontent  ,licenseamount   ,licenseint      ,aidcode         ,sortno)
+        values(UUID()       ,#{solutioncode}, #{solutionname}, #{policycode}    ,#{policyname},
+               #{licensecontent},#{licenseamount}      , #{licenseint} ,#{aidcode}, #{sortno}  )
+    </insert>
+
+    <!--  라이센스정책관리  -->
+    <update id="licenseUpdate">
+        UPDATE tblicensepolicy
+        SET licensecontent =#{licensecontent}
+          ,licenseamount =#{licenseamount}
+          ,licenseint =#{licenseint}
+          ,aidcode =#{aidcode}
+          ,useyn  = #{useyn}
+          ,sortno = #{sortno}
+          ,eddate = replace(#{eddate},'-','')
+        WHERE licensepolicyid = #{licensepolicyid}
+    </update>
 
     <select id="licensePolicyList" resultType="hashmap">
         select a01.licensepolicyid ,      --   라이센스정책관리번호(uuid)
@@ -65,7 +88,7 @@
         select
             a01.solutioncode ,
             j02.codename solutionname,
-            a01.functioncode ,
+            a01.aidcode ,
             j01.codename  fnccodename,
             a01.functionno ,
             a01.functionname ,
@@ -164,8 +187,8 @@
              ,aidcode =#{aidcode}
              ,useyn=#{useyn}
              ,sortno=#{sortno}
-        WHERE solutioncode = ${solutioncode}
-          and functionno = ${functionno}
+        WHERE solutioncode = #{solutioncode}
+          and functionno = #{functionno}
     </update>
 
     <!--  credit 제공 조회  -->
@@ -205,7 +228,7 @@
           ,useyn  = #{useyn}
           ,sortno = #{sortno}
           ,eddate = replace(#{eddate},'-','')
-        WHERE groupcode = ${groupcode}
-          and commoncode = ${commoncode}
+        WHERE groupcode = #{groupcode}
+          and commoncode = #{commoncode}
     </update>
 </mapper>

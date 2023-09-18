@@ -12,9 +12,9 @@
 (function (factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
-    define(['webapp/resources/js/external/jquery'], factory);
+    define(['jquery'], factory);
   } else if (typeof exports !== 'undefined') {
-    module.exports = factory(require('webapp/resources/js/external/jquery'));
+    module.exports = factory(require('jquery'));
   } else {
     factory(jQuery);
   }

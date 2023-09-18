@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta charset="utf-8" />
     <title>하몬소프트</title>
     <meta
@@ -14,22 +15,11 @@
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
     <link rel="stylesheet" type="text/css" href="${path}/resources/css/sumoselect.css" />
     <link rel="stylesheet" type="text/css" href="${path}/resources/css/front.css" />
     <script type="text/javascript" src="${path}/resources/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="${path}/resources/js/jquery.sumoselect.js"></script>
     <script type="text/javascript" src="${path}/resources/js/front.js"></script>
-
-    <link rel="stylesheet" href="${path}/resources/js/jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcore.js"></script>
-    <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxbuttons.js"></script>
-    <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxscrollbar.js"></script>
-    <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxmenu.js"></script>
-    <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.js"></script>
-    <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.selection.js"></script>
-    <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.columnsresize.js"></script>
-    <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdata.js"></script>
 
 </head>
 

@@ -137,21 +137,21 @@
                         <div class="table-type2">
                             <table id="tbuser1">
                                 <colgroup>
+                                    <col style="width:50px">
                                     <col style="width:150px">
-                                    <col style="">
                                 </colgroup>
                                 <tbody>
                                     <tr>
                                         <th>이메일</th>
-                                        <td id=email class="text-center">${userInfo.email}</td>
+                                        <td id=email class="text-left">${userInfo.email}</td>
                                     </tr>
                                     <tr>
                                         <th>사용자명</th>
-                                        <td id=membername cclass="text-center">${userInfo.membername}</td>
+                                        <td id=membername class="text-left">${userInfo.membername}</td>
                                     </tr>
                                     <tr>
                                         <th>라이센스등급</th>
-                                        <td id=licensegrade class="text-center">
+                                        <td id=licensegrade class="text-left">
                                             <c:if test="${userInfo.licensegrade eq '1'}">Free</c:if>
                                             <c:if test="${userInfo.licensegrade eq '2'}">Basic</c:if>
                                             <c:if test="${userInfo.licensegrade eq '3'}">Pro</c:if>
@@ -160,39 +160,39 @@
                                     </tr>
                                     <tr>
                                         <th>전화번호</th>
-                                        <td id=celltel class="text-center">${userInfo.celltel}</td>
+                                        <td id=celltel class="text-left">${userInfo.celltel}</td>
                                     </tr>
                                     <tr>
                                         <th>사업장명</th>
-                                        <td id=businessname class="text-center">${userInfo.businessname}</td>
+                                        <td id=businessname class="text-left">${userInfo.businessname}</td>
                                     </tr>
                                     <tr>
                                         <th>사업자등록번호</th>
-                                        <td id=businessnumber class="text-center">${userInfo.businessnumber}</td>
+                                        <td id=businessnumber class="text-left">${userInfo.businessnumber}</td>
                                     </tr>
                                     <tr>
                                         <th>가입일자</th>
-                                        <td id=joindate class="text-center">${userInfo.strjoindate}</td>
+                                        <td id=joindate class="text-left">${userInfo.strjoindate}</td>
                                     </tr>
                                     <tr>
                                         <th>대표자명</th>
-                                        <td id=representationname class="text-center">${userInfo.representationname}</td>
+                                        <td id=representationname class="text-left">${userInfo.representationname}</td>
                                     </tr>
                                     <tr>
                                         <th>주소</th>
-                                        <td id=zipaddress class="text-center">${userInfo.zipaddress}</td>
+                                        <td id=zipaddress class="text-left">${userInfo.zipaddress}</td>
                                     </tr>
                                     <tr>
                                         <th>업종</th>
-                                        <td id=businesskind class="text-center">${userInfo.businesskind}</td>
+                                        <td id=businesskind class="text-left">${userInfo.businesskind}</td>
                                     </tr>
                                     <tr>
                                         <th>업태</th>
-                                        <td id=businesscondition class="text-center">${userInfo.businesscondition}</td>
+                                        <td id=businesscondition class="text-left">${userInfo.businesscondition}</td>
                                     </tr>
                                     <tr>
                                         <th>회원상태</th>
-                                        <td id=statusnm class="text-center">${userInfo.statusnm}</td>
+                                        <td id=statusnm class="text-left">${userInfo.statusnm}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -205,7 +205,7 @@
                                     <col style="width:100px">
                                     <col style="width:70px">
                                     <col style="width:75px">
-                                    <col style="">
+                                    <col style="width:75px">
                                 </colgroup>
                                 <tbody>
                                     <tr>
@@ -281,7 +281,7 @@
                                 <colgroup>
                                     <col style="width:100px">
                                     <col style="width:50px">
-                                    <col style="width:75px">
+                                    <col style="width:150px">
                                     <col style="width:20px">
                                 </colgroup>
                                 <tbody>

@@ -1,5 +1,7 @@
 
 <link rel="stylesheet" href="${path}/resources/js/jqwidgets/styles/jqx.base.css" type="text/css" />
+<link rel="stylesheet" href="${path}/resources/js/jqwidgets/styles/demos.css" type="text/css" />
+<link rel="stylesheet" href="${path}/resources/js/jqwidgets/styles/jqx.fluent.css" type="text/css" />
 
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcore.js"></script>
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqx-all.js"></script>
@@ -23,6 +25,10 @@
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcheckbox.js"></script>
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.pager.js"></script>
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.selection.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/scripts/webcomponents-lite.min.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/scripts/demos.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcore.elements.js"></script>
 
 
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/globalization/globalize.js"></script>

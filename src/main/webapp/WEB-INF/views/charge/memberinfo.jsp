@@ -221,13 +221,13 @@
                                     <tr>
                                         <th>추가</th>
                                         <td colspan="2" class="text-center" id="addvolume">
-                                            <input type="number" class="inp small" style="text-align:center; width:100%" value=${userInfo.addvolume} name="addvolume" required>
+                                            <input type="number" class="inp" style="text-align:center; width:100%" value=${userInfo.addvolume} name="addvolume" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>서비스</th>
                                         <td colspan="2" class="text-center" id=servicevolume>
-                                            <input type="number" class="inp small" style="text-align:center; width:100%" value=${userInfo.servicevolume} name="servicevolume" required>
+                                            <input type="number" class="inp" style="text-align:center; width:100%" value=${userInfo.servicevolume} name="servicevolume" required>
                                         </td>
                                     </tr>
                                     <tr>
@@ -264,8 +264,8 @@
                                     </tr>
                                     <tr>
                                         <th colspan="3">회원접속도메인</th>
-                                        <td colspan="2" id=serverdomainname class="text-center">
-                                            <input type="text" class="inp small" style="text-align:center; width:100%" value=${userInfo.serverdomainname} name="serverdomainname">
+                                        <td colspan="2" id=serverdomainname class="text-left">
+                                            <input type="text" class="inp small" style="text-align:center; width:100%" value=${userInfo.serverdomainname}>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -629,6 +629,7 @@
                     document.getElementById('basecharge').innerHTML=list0.basecharge;
                     document.getElementById('datakeepterm').innerHTML=list0.datakeepterm;
                     document.getElementById('datakeepunit').innerHTML=list0.datakeepunit;
+                    document.getElementById('serverdomainname').innerHTML=list0.serverdomainname;
 
                     const list1 = jsonmap[1]['chargeInfo'];
                     var data = "";

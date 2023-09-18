@@ -39,8 +39,8 @@
                                 <c:if test="${login.administratoryn ne 'Y'}">
                                     <a href="${path}/charge/individualinfo">과금안내</a>
                                 </c:if>
-                                <a href="${path}/charge/personinfo">서비스소개</a>
-                                <a href="${path}/charge/personinfo">자료실</a>
+                                <a href="${path}/serviceguide">서비스소개</a>
+                                <a href="${path}/download">자료실</a>
                                 <c:if test="${not empty login}">
                                     <a href="${path}/member/logout">로그아웃</a>
                                 </c:if>

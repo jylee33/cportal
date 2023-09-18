@@ -21,12 +21,12 @@
         </div>
         <div class="right">
             <span class="tit">솔루션 선택</span>
-            <select class="select" id="sltdeviceid">
-                <option value="10">Network</option>
-                <option value="20">Server</option>
+            <select class="select" id="sltdeviceid" onchange="selectDeviceChange(this.value)">
+                <option value="10">네트워크</option>
+                <option value="20">서버</option>
                 <option value="30">AP</option>
-                <option value="40">Database</option>
-                <option value="50">FMS</option>
+                <option value="40">데이터베이스</option>
+                <option value="50">환경센서</option>
             </select>
             <button class="btn" type="button" onclick="selectDevice()">조회</button>
         </div>
@@ -37,50 +37,68 @@
     </div>
     <div id='jqxWidget' class="table-type1 text-center cursor">
         <div id="jaxLicense"></div>
+        <div style="margin-top: 30px;"></div>
+    </div>
 
-<%--        <div style="margin-top: 30px;">--%>
-<%--            <div id="cellbegineditevent"></div>--%>
-<%--            <div style="margin-top: 10px;" id="cellendeditevent"></div>--%>
-<%--        </div>--%>
-
-<%--        <div id="popupWindow">--%>
-<%--            <div>입력 및 수정</div>--%>
-<%--&lt;%&ndash;            <div style="overflow: hidden;">&ndash;%&gt;--%>
-<%--            <div class="table-type2" style="width:700px; height: 180px; ">--%>
-<%--                <table>--%>
-<%--                    <colgroup>--%>
-<%--                        <col style="width:20%">--%>
-<%--                        <col style="width:30%">--%>
-<%--                        <col style="width:20%">--%>
-<%--                        <col style="width:30%">--%>
-<%--                    </colgroup>--%>
-<%--                    <tr>--%>
-<%--                        <td align="right">가격정책</td>--%>
-<%--                        <td align="center"><input id="policycode" /></td>--%>
-<%--                        <td align="right">기본요금</td>--%>
-<%--                        <td align="center"><input id="licenseamount" /></td>--%>
-<%--                    </tr>--%>
-<%--                    <tr>--%>
-<%--                        <td align="right">가용장비</td>--%>
-<%--                        <td><input type="number" id="licenseint" /></td>--%>
-<%--                        <td align="right">제공기능</td>--%>
-<%--                        <td><input type="text" id="aidcode" /></td>--%>
-<%--                        </td>--%>
-<%--                    </tr>--%>
-<%--                        <td>라이선스 <br>정책 내용</td>--%>
-<%--                        <td colspan="3">--%>
-<%--                            <textarea id="licensecontent"></textarea>--%>
-<%--                        </td>--%>
-<%--                    </tr>--%>
-<%--                </table>--%>
-
-<%--                <div class="popup-btns">--%>
-<%--                    <button class="btn" id="btn_psave">저장</button>--%>
-<%--                    <button class="btn" id="btn_pcancel">취소</button>--%>
-<%--                </div>--%>
-
-<%--            </div>--%>
-<%--        </div>--%>
+    <div id="popupWindow">
+    <div>Modify</div>
+    <div style="overflow: hidden;">
+        <table>
+            <colgroup>
+                <col style="width:20%">
+                <col style="width:30%">
+                <col style="width:20%">
+                <col style="width:30%">
+            </colgroup>
+            <tr>
+                <th>가격정책</th>
+                <td class="text-center" id="policycode">
+                    <select class="select">
+                        <option value="10">네트워크</option>
+                        <option value="20">서버</option>
+                        <option value="30">AP</option>
+                        <option value="40">데이터베이스</option>
+                        <option value="50">환경센서</option>
+                    </select>
+                </td>
+                <th>기본요금</th>
+                <td class="text-center" id="licenseamount">
+                    <select class="select">
+                        <option value="10">무료</option>
+                        <option value="20">400000</option>
+                        <option value="30">700000</option>
+                        <option value="40">별도협의</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>가용장비</th>
+                <td><input type="number" id="licenseint" class="inp" value="5" style="width:100%"></td>
+                <th>제공기능</th>
+                <td>
+                    <select class="select small" id="aidcode">
+                        <option value="10">기본기능</option>
+                        <option value="20">부가기능</option>
+                        <option value="30">고급기능</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>라이선스 <br>정책 내용</th>
+                <td colspan="3">
+                    <textarea id="licensecontent" class="inp" style="height: 90px; width:100%"></textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <tr>
+        <div class="popup-btns">
+            <button id="btn_psave" class="btn">저장</button>
+        </div>
+        <div class="popup-btns">
+            <button id="btn_pcancel" class="btn">취소</button>
+        </div>
+    </tr>
     </div>
 </div>
 <!-- // wrap -->
@@ -97,7 +115,6 @@
 
     function proc_jqxGridSelect() {
         var theme = "";
-        //var param =
         var source =
             {
                 url : "${path}/license/licensemanageview",
@@ -117,17 +134,20 @@
                     { name: 'stdate', type:'string', cellsalign: 'center'},
                     { name: 'eddate', type:'string', cellsalign: 'center'},
                     { name: 'sortno', type:'int', cellsalign: 'center'},
-                    { name: 'useyn', type:'string', cellsalign: 'center'},
                     { name: 'crudflg', type:'string', cellsalign: 'center'}
                 ],
                 id: 'license',
-                data: {solutioncode: $('#sltdeviceid option:selected').val()},
                 updaterow: function (rowid, rowdata, commit) {
                     // synchronize with the server - send update command
                     commit(true);
                 }
             };
 
+        $("#policycode").jqxInput({ theme: theme });
+        $("#licenseamount").jqxInput({ theme: theme });
+        $("#licenseint").jqxInput({ theme: theme });
+        $("#aidcode").jqxInput({ theme: theme });
+        $("#licensecontent").jqxInput({ theme: theme });
 
         var dataAdapter = new $.jqx.dataAdapter(source,{
             loadComplete: function() {
@@ -146,9 +166,13 @@
                 columnsresize: true,
                 sortable: true,
                 altrows: true,
+                showstatusbar: true,
+                showtoolbar: false,
                 editable: true,
                 height: 700,
                 width: '100%',
+                selectionmode: 'singlecell',
+                editmode: 'click',
                 columns: [
                     { text: '정책관리번호', datafield: 'licensepolicyid', displayField: 'licensepolicyid', align: "center" ,cellsalign: "center" , width: '0%',hidden:true},
                     { text: '솔루션명', datafield: 'solutioncode', displayField: 'solutionname', align: "center" , cellsalign: "center" , width: '10%', editable: true, columntype: 'dropdownlist',
@@ -179,9 +203,9 @@
                         },
                     },
                     { text: '기본요금', datafield: 'licenseamount', displayField: 'licenseamount', align: "center" ,cellsalign: "center" , width: '10%'},
-                    { text: '가용장비', datafield: 'licenseint',displayField: 'licenseint', align: "center" ,cellsalign: "center" , width: '10%', columntype: 'numberinput', editable: true},
+                    { text: '가용장비', datafield: 'licenseint',displayField: 'licenseint', align: "center" ,cellsalign: "center" , width: '10%', editable: true},
                     { text: '정책내용', datafield: 'licensecontent', displayField: 'licensecontent', width: '20%', align:"center" ,cellsalign: "left" , editable: true},
-                    { text: '제공기능', datafield: 'aidcode',displayField: 'aidname',   width: '15%', align:"center" , cellsalign: "center", columntype: 'dropdownlist',
+                    { text: '제공기능', datafield: 'aidcode',displayField: 'aidname',   width: '10%', align:"center" , cellsalign: "center", columntype: 'dropdownlist',
                         createeditor: function (row, column, editor) {
                             editor.jqxDropDownList({
                                 source: [
@@ -194,57 +218,40 @@
                         },
                     },
                     { text: '시작일자' ,datafield: 'stdate', displayField: 'stdate', width: '10%', align:"center", cellsalign: 'center',editable: false},
-                    { text: '종료일자' ,datafield: 'eddate', displayField: 'eddate', width: '10%', align:"center", cellsalign: 'center',editable: false},
-                    { text: '정렬순서', datafield: 'sortno', displayField: 'sortno', width: '5%', align:"center" ,cellsalign: "center" , editable: true},
-                    { text: 'status', datafield: 'crudflg', displayField: 'crudflg', width: '0%', align:"center" ,hidden:true}
-                    // { text: '자료수정', datafield: 'modify', columntype: 'button', cellsrenderer: function () {
-                    //         return "자료수정";
-                    //     }, buttonclick: function (row) {
-                    //         // open the popup window when the user clicks a button.
-                    //         editrow = row;
-                    //         var offset = $("#jaxLicense").offset();
-                    //         $("#popupWindow").jqxWindow({ position: 'center' });
-                    //         // get the clicked row's data and initialize the input fields.
-                    //         var dataRecord = $("#jaxLicense").jqxGrid('getrowdata', editrow);
-                    //         $("#policycode").val(dataRecord.policycode);
-                    //         $("#licenseamount").val(dataRecord.licenseamount);
-                    //         $("#licenseint").jqxNumberInput({ width: '150px', decimal: dataRecord.licenseint });
-                    //         $("#aidcode").val(dataRecord.aidcode);
-                    //         $("#licensecontent").val(dataRecord.licensecontent);
-                    //         // show the popup window.
-                    //         $("#popupWindow").jqxWindow('open');
-                    //     }
-                    // }
+                    { text: '종료일자' ,datafield: 'eddate',displayField: 'stdate',  width: '10%', align:"center", cellsalign: 'center',editable: false},
+                    { text: '정렬순서', datafield: 'sortno', width: '5%', align:"center" ,cellsalign: "center" , editable: true},
+                    { text: 'status', datafield: 'crudflg', displayField: 'crudflg', width: '0%', align:"center" ,hidden:true},
+                    { text: '자료수정', datafield: 'modify', columntype: 'button', cellsrenderer: function () {
+                            return "Edit";
+                        }, buttonclick: function (row) {
+                            // open the popup window when the user clicks a button.
+                            editrow = row;
+                            var offset = $("#jaxLicense").offset();
+                            $("#popupWindow").jqxWindow({ position: { x: parseInt(offset.left) + 60, y: parseInt(offset.top) + 60 } });
+                            // get the clicked row's data and initialize the input fields.
+                            var dataRecord = $("#jaxLicense").jqxGrid('getrowdata', editrow);
+                            $("#policycode").val(dataRecord.policycode);
+                            $("#licenseamount").val(dataRecord.licenseamount);
+                            $("#licenseint").jqxNumberInput({ decimal: dataRecord.licenseint });
+                            $("#aidcode").val(dataRecord.aidcode);
+                            $("#licensecontent").val(dataRecord.licensecontent);
+                            // show the popup window.
+                            $("#popupWindow").jqxWindow('open');
+                        }
+                    }
                 ]
             });
-
-
-        // $("#popupWindow").jqxWindow({
-        //     width: 700, resizable: false,  isModal: true, autoOpen: false, cancelButton: $("#btn_pcancel"), modalOpacity: 0.01
-        // });
-        // $("#popupWindow").on('open', function () {
-        //     $("#policycode").jqxInput('selectAll');
-        // });
-
-
         //$("#btn_add_row").jqxButton({ theme: theme });
+        $("#addRow").jqxButton({ theme: theme });
         $("#addRow").click(function () {
-            var system_date = "";
-            var year = new Date().getFullYear();
-            var month = new Date().getMonth() + 1;
-            if(month >= 10){
-                month = month;
-            }else{
-                month = '0' + month;
-            };
-            var date = new Date().getDate();
+            $("#jaxLicense").jqxGrid("addrow", null, {}, "first");
+        });
 
-            if(date >= 10){
-                date = date;
-            }else{
-                date = '0' + date;
-            };
-            system_date = year + "-" +month + "-" +date;
+
+        $("#btn_psave").jqxButton({ theme: theme });
+        $("#btn_psave").click(function () {
+            $("#popupWindow").jqxWindow();
+            var fncName = "";
             var sortno  = $("#jaxLicense").jqxGrid("getrows");
             var maxSortNo = 0;
             var res = "";
@@ -254,80 +261,21 @@
                     maxSortNo = r1.sortno;
                 }
             }
-
-            console.log("11111111111111111111111111");
             maxSortNo = maxSortNo + 1;
-            var fncName = "";
-            const sltcode = $('#sltdeviceid option:selected').val();
-            const sltname = $('#sltdeviceid option:selected').text();
+            // alert(maxSortNo);
+            // $("#log").html(res);
             $("#jaxLicense").jqxGrid("addrow", null,
-                {licensepolicyid:"", solutioncode:sltcode, solutionname:sltname, policycode:"", policyname:"", licenseamount:"", licenseint:0,
-                    licensecontent:"",aidcode: "10",aidname:"기본기능", stdate: system_date, eddate: "2199-12-31", useyn: "Y", crudflg: "I",
-                    sortno: maxSortNo
-                }, "first");
+                {licensepolicyid:'', solutioncode:'', solutionname:'', policycode:'', policyname:'', licenseamount:'',
+                    licensepolicyid:'', licenseint:0, licensecontent:'', aidcode:'', aidname:'', stdate: system_date,
+                    eddate: "2199-12-31",sortno: maxSortNo, crudflg:'I'}, "first");
             $("#jaxLicense").jqxGrid('endupdate');
+        });
 
+        $("#jaxLicense").on('cellendedit', function (event) {
+            var args = event.args;
+            $("#cellendeditevent").text("Event Type: cellendedit, Column: " + args.datafield + ", Row: " + (1 + args.rowindex) + ", Value: " + args.value);
         });
     }
-
-        // $("#btn_pcancel").jqxButton({ theme: theme });
-        // $("#btn_psave").jqxButton({ theme: theme });
-        // update the edited row when the user clicks the 'Save' button.
-        $("#addSave").click(function () {
-            var licenseData = $("#jaxLicense").jqxGrid("getrows");   //1
-            console.log("rows------>"+licenseData.length);
-            console.log("rows------>"+JSON.stringify(licenseData));
-
-            var url = "${pageContext.request.contextPath}/license/licenseSave";
-            $.ajax({
-                type: 'post',
-                url: url,
-                async : true, // 비동기화 동작 여부
-                data: JSON.stringify(licenseData),
-                contentType: "application/json",
-                success: function(creditData) {
-                    alert("정상적으로 자료가 수정 되었습니다.");
-                },
-                error: function(err){
-                    alert("자료 수정에 실패했습니다.");
-                }
-            })
-        })
-        //
-        // //$("#btn_add_row").jqxButton({ theme: theme });
-        // $("#addRow").jqxButton({ theme: theme });
-        // $("#addRow").click(function () {
-        //     $("#jaxLicense").jqxGrid("addrow", null, {}, "first");
-        // });
-        //
-        //
-        // $("#btn_psave").jqxButton({ theme: theme });
-        // $("#btn_psave").click(function () {
-        //     $("#popupWindow").jqxWindow();
-        //     var fncName = "";
-        //     var sortno  = $("#jaxLicense").jqxGrid("getrows");
-        //     var maxSortNo = 0;
-        //     var res = "";
-        //     for (var j = 0; j < sortno.length; j++) {
-        //         var r1 = sortno[j];
-        //         if(r1.sortno > maxSortNo){
-        //             maxSortNo = r1.sortno;
-        //         }
-        //     }
-        //     maxSortNo = maxSortNo + 1;
-        //     // alert(maxSortNo);
-        //     // $("#log").html(res);
-        //     $("#jaxLicense").jqxGrid("addrow", null,
-        //         {licensepolicyid:'', solutioncode:'', solutionname:'', policycode:'', policyname:'', licenseamount:'',
-        //             licensepolicyid:'', licenseint:0, licensecontent:'', aidcode:'', aidname:'', stdate: system_date,
-        //             eddate: "2199-12-31",sortno: maxSortNo, crudflg:'I'}, "first");
-        //     $("#jaxLicense").jqxGrid('endupdate');
-        // });
-
-        // $("#jaxLicense").on('cellendedit', function (event) {
-        //     var args = event.args;
-        //     $("#cellendeditevent").text("Event Type: cellendedit, Column: " + args.datafield + ", Row: " + (1 + args.rowindex) + ", Value: " + args.value);
-        // });
 
 
 
@@ -342,11 +290,11 @@
 
 
     function selectDevice(){
-      //  const sltcode = $('#sltdeviceid option:selected').val();
-      //  var url = "${pageContext.request.contextPath}/license/licensemanage";
-       // url = url + "?deviceid="+sltcode;
-        proc_jqxGridSelect();
-        // location.href=url;
+        const sltcode = $('#sltdeviceid option:selected').val();
+        var url = "${pageContext.request.contextPath}/license/licensemanage";
+        url = url + "?deviceid="+sltcode;
+
+        location.href=url;
 <%--alert("...");--%>
 
 <%--        var form = document.createElement('form'); // 폼객체 생성--%>
@@ -444,23 +392,3 @@
 // popupOpen('Modal1');
 </script>
 <%@include file="../include/footer.jsp" %>
-
-
-
-// $("#policycode").jqxInput({ theme: theme });
-// $("#licenseamount").jqxInput({ theme: theme });
-// $("#licenseint").jqxInput({ theme: theme });
-// $("#aidcode").jqxInput({ theme: theme });
-// $("#licensecontent").jqxInput({ theme: theme });
-
-
-// $("#policycode").width(150);
-// $("#policycode").height(23);
-// $("#licenseamount").width(150);
-// $("#licenseamount").height(23);
-// $("#licenseint").width(150);
-// $("#licenseint").height(23);
-// $("#aidcode").width(150);
-// $("#aidcode").height(23);
-// $("#licensecontent").width(500);
-// $("#licensecontent").height(50);

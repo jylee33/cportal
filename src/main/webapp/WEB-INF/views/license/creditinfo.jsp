@@ -82,13 +82,9 @@
                 columnsresize: true,
                 sortable: true,
                 altrows: true,
-                showstatusbar: true,
-                showtoolbar: false,
                 editable: true,
                 height: 700,
                 width: '100%',
-                selectionmode: 'singlecell',
-                editmode: 'click',
                 columns: [
                     { text: '공통코드그룹코두', datafield: 'groupcode', displayField: 'groupcode', align: "center" , cellsalign: "center" , editable: false, width: '0%', hidden:true},
                     { text: 'Credit 관리코드', datafield: 'commoncode', displayField: 'commoncode', align: "center" , cellsalign: "center" , editable: true, width: '15%'},

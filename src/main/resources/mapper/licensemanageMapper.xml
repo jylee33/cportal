@@ -74,6 +74,7 @@
         a01.sortno          ,      --   정렬기준
         a01.createdAt       ,      --   등록일시
         a01.updatedAt       ,       --   수정일시
+        'R'   as crudflg   ,
         row_number() over (order by a01.solutioncode ,a01.createdAt desc) numrow
         from tblicensepolicy a01
         where 1 = 1
@@ -101,6 +102,7 @@
             STR_TO_DATE(a01.eddate, '%Y%m%d') eddate,
             a01.sortno ,
             a01.datatype,
+            'R'   as crudflg   ,
             row_number() over (order by a01.aidcode ,a01.createdAt desc) numrow
         from tbaidfunction a01
         inner join tbcommoncode j01 on j01.groupcode = '003' and j01.commoncode = a01.aidcode
@@ -121,6 +123,7 @@
         a01.aidcode    ,
         j01.codename        fnccodename,
         a01.useyn      ,
+        'R'   as crudflg   ,
         a01.sortno
         from tbaidfunction a01
         inner join tbcommoncode j01
@@ -154,6 +157,7 @@
             concat(substring(a01.eddate, 1, 4),'-',substring(a01.eddate, 5, 2),'-',substring(a01.eddate, 7, 2)) eddate,
             a01.sortno ,
             a01.datatype,
+            'R'   as crudflg   ,
             row_number() over (order by a01.aidcode ,a01.createdAt desc) numrow
         from tbaidfunction a01
         inner join tbcommoncode j01 on j01.groupcode = '003' and j01.commoncode = a01.aidcode

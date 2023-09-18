@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>하몬소프트</title>
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="stylesheet" type="text/css" href="css/sumoselect.css" />
+        <link rel="stylesheet" type="text/css" href="css/front.css" />
+        <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="js/jquery.sumoselect.js"></script>
+        <script type="text/javascript" src="js/front.js"></script>
+    </head>
+    <body>
+        <div id="wrap">
+            <div class="header">
+                <div class="inner">
+                    <h1>NETIS 클라우드 서비스</h1>
+                    <div class="right">
+                        <div class="menu">
+                            <a href="#">과금안내</a>
+                            <a href="#">서비스소개</a>
+                            <a href="#">자료실</a>
+                        </div>
+                        <a href="#" target="_blank" class="btn-link">Netis 통합모니터링 서비스</a>
+                        <a href="#" class="btn-user">홍길동</a>
+                    </div>
+                </div>
+            </div>
+            <!-- // header -->
+
+           
+            <div class="container">
+                <div class="h3-head">
+                    <h3 class="h3">라이선스 정책 관리</h3>
+                    
+                </div>
+                <div class="tabs-box">
+                    <div class="tabs">
+                        <a href="#" class="active">라이선스 정책 관리</a>
+                        <a href="#">라이선스 제공 기능</a>
+                        <a href="#">Credit 제공</a>
+                    </div>
+                    <div class="right">
+                        <span class="tit">솔루션 선택</span>
+                        <select class="select">
+                            <option>네트워크</option>
+                            <option>서버</option>
+                            <option>AP</option>
+                            <option>데이터베이스</option>
+                            <option>환경센서</option>
+                        </select>
+                        <button class="btn">조회</button>
+                    </div>
+                </div>
+                <div class="flex align-items-center gap10 align-end mb10">
+                    <button class="btn btn3">행추가</button>
+                    <button class="btn">저장</button>
+                </div>
+
+                <div class="table-type1 cursor">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>솔루션 명</th>
+                                <th>가격정책</th>
+                                <th>기본요금</th>
+                                <th>가용장비</th>
+                                <th>구분</th>
+                                <th>제공기능</th>
+                                <th>정책내용</th>
+                                <th>시작일자</th>
+                                <th>종료일자</th>
+                                <th>비고</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr onclick="javascript:popupOpen('Modal1');">
+                              <td rowspan="4" class="text-center">네트워크</td>
+                              <td class="text-center">FREE</td>
+                              <td class="text-center">무료</td>
+                              <td class="text-center">5</td>
+                              <td class="text-center">이하</td>
+                              <td class="text-center">기본기능</td>
+                              <td class="text-center">네트워크장비 5대 이하 기본 기능 제공</td>
+                              <td class="text-center">2023.08.08</td>
+                              <td class="text-center">2023.08.08</td>
+                              <td class="text-center"></td>
+                            </tr>
+                            <tr onclick="javascript:popupOpen('Modal1');">
+                              <td class="text-center">BASIC</td>
+                              <td class="text-center">400,000</td>
+                              <td class="text-center">25</td>
+                              <td class="text-center">이하</td>
+                              <td class="text-center">부가기능</td>
+                              <td class="text-center">네트워크장비 25대 이하 기본 + 부가 기능 제공</td>
+                              <td class="text-center">2023.08.08</td>
+                              <td class="text-center">2023.08.08</td>
+                              <td class="text-center"></td>
+                            </tr>
+                            <tr onclick="javascript:popupOpen('Modal1');">
+                              <td class="text-center">PRO</td>
+                              <td class="text-center">700,000</td>
+                              <td class="text-center">50</td>
+                              <td class="text-center">이하</td>
+                              <td class="text-center">고급기능</td>
+                              <td class="text-center">네트워크장비 50대 이하 기본 + 부가 + 고급 기능 제공</td>
+                              <td class="text-center">2023.08.08</td>
+                              <td class="text-center">2023.08.08</td>
+                              <td class="text-center"></td>
+                            </tr>
+                            <tr onclick="javascript:popupOpen('Modal1');">
+                                <td class="text-center">ENTERPRISE</td>
+                                <td class="text-center">별도협의</td>
+                                <td class="text-center">100</td>
+                                <td class="text-center">이상</td>
+                                <td class="text-center">고급기능</td>
+                                <td class="text-center">네트워크장비 100대 이상 전체 기능 제공</td>
+                                <td class="text-center">2023.08.08</td>
+                                <td class="text-center">2023.08.08</td>
+                                <td class="text-center"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+              </div>
+
+                
+
+
+            </div>
+
+            
+
+            
+            <footer>
+                <div class="in">
+                    <div>(주)하몬소프트 / 대표 : 강원석, 이석호  / 주소 : 서울특별시 금천구 디지털로9길 32 갑을그레이트밸리 B동 1201,1202,1203호 (본사) 2006호 (연구소)</div>
+                    <div>Copyright © HAMONSOFT CO,. LTD. All Rights Reserved.</div>
+                </div>
+            </footer>
+            <!-- // footer -->
+
+        </div>
+        <!-- // wrap -->
+
+
+        <div class="popup-wrap" id="Modal1">
+            <div class="bg-popup"></div>
+            <div class="popup-box">
+                <div class="popup-cont">
+                    <div class="popup" style="width:770px">
+                        <div class="popup-head">
+                            <h3 class="h3-popup">수정</h3>
+                            <button class="btn-close" onclick="javascript:popupClose('Modal1');"><span class="hidden">닫기</span></button>
+                        </div>
+                        <div class="popup-body ">
+                            
+                            <div class="table-type2" style="width:700px">
+                                <table>
+                                    <colgroup>
+                                        <col style="width:20%">
+                                        <col style="width:30%">
+                                        <col style="width:20%">
+                                        <col style="width:30%">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <th>가격정책</th>
+                                            <td>
+                                                <select class="select">
+                                                    <option>Free</option>
+                                                    <option>Basic</option>
+                                                    <option>Pro</option>
+                                                    <option>Ent.</option>
+                                                </select>
+                                            </td>
+                                            <th>기본요금</th>
+                                            <td><input type="text" class="inp" value="무료" style="width:100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>가용장비</th>
+                                            <td><input type="text" class="inp" value="5" style="width:100%"></td>
+                                            <th>구분</th>
+                                            <td>
+                                                <select class="select">
+                                                    <option>이하</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>제공기능</th>
+                                            <td>
+                                                <select class="select">
+                                                    <option>기본기능</option>
+                                                </select>
+                                            </td>
+                                            <td colspan="2">
+                                                
+                                            </td>
+                                           </tr>
+                                        <tr>
+                                            <th>라이선스 <br>정책 내용</th>
+                                            <td colspan="3">
+                                                <textarea class="textarea" style="height: 90px;">네트워크 장비 5대 이하 기본 기능 제공</textarea>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="popup-btns">
+                            <button class="btn">저장</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script>
+            // 팝업 함수 호출
+           popupOpen('Modal1');
+        </script>
+    </body>
+</html>

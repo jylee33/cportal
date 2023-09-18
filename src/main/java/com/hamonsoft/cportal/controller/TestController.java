@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/test")
 public class TestController {
@@ -48,5 +50,12 @@ public class TestController {
         logger.info("call billing ---------------");
     }
 
-
+    @GetMapping(value = "/test50") // memberinfo
+    public void test50(HttpServletRequest request) throws Exception {
+        logger.info("LicenseManageController 1111 test50 ---->");
+    }
+    @GetMapping(value = "/test53") // memberinfo
+    public void test53(HttpServletRequest request) throws Exception {
+        logger.info("LicenseManageController 1111 test50 ---->");
+    }
 }

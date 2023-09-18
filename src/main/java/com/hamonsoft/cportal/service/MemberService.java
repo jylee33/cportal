@@ -21,8 +21,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 @Service
@@ -52,6 +53,10 @@ public class MemberService {
         return memberRepository.selectTaxByEmail(email);
     }
 
+    public ArrayList<HashMap<String, String>> selectBaseLicense() {
+        return memberRepository.selectBaseLicense();
+    }
+
     public void updateNextPayDate(Map<String, Object> paramMap) {
         memberRepository.updateNextPayDate(paramMap);
     }
@@ -73,13 +78,17 @@ public class MemberService {
                 throw new RuntimeException();
             }
 
-            DateFormat df = new SimpleDateFormat("yyyyMMdd");
+            LocalDate ldNow = LocalDate.now();
+            int today = ldNow.getDayOfMonth();
+            int endday = ldNow.lengthOfMonth();
+            int dCount = endday - today + 1;
+            long paid_amount2 = taxInformation.getPaid_amount() * dCount / endday;  // 일할 계산
+            logger.info("일할 계산된 paid_amount2 - " + paid_amount2);
+            taxInformation.setPaid_amount(paid_amount2);
 
-            Calendar cal=Calendar.getInstance();
-            cal.add(cal.MONTH, 1);
-            String sDate = df.format(cal.getTime());
-            Date dtNext = new Date(Integer.parseInt(sDate.substring(0, 4)) - 1900, Integer.parseInt(sDate.substring(4, 6)) - 1, 1);
-
+            LocalDate ldNextMonth = ldNow.plusMonths(1).withDayOfMonth(1);
+            Instant instant = ldNextMonth.atStartOfDay(ZoneId.systemDefault()).toInstant();
+            Date dtNext = Date.from(instant);
             taxInformation.setNext_pay_date(dtNext);
 
             memberRepository.insertMember(member);

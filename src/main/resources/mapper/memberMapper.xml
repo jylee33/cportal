@@ -37,6 +37,13 @@
 		where email=#{email}
 	</select>
 
+	<select id="selectBaseLicense" resultType="HashMap">
+		select
+			commoncode, baselicense
+		from tbcommoncode
+		where groupcode = '001'
+	</select>
+
 	<select id="selectEmails" resultType="String">
 		select email from tbtaxinformation
 	</select>

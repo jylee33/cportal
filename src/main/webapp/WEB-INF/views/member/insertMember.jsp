@@ -220,17 +220,17 @@
                 $("input[name='basecharge']").val('0');
             } else {
                 $("#billinfo").show();
-                switch (grade) {
-                    // TODO : DB 에서 읽어와서 설정하도록 수정 필요. 일단 결제 개발을 위해서 하드 코딩
-                    case "2":
-                        $("input[name='basecharge']").val('1');
-                        break;
-                    case "3":
-                        $("input[name='basecharge']").val('2');
-                        break;
-                    case "4":
-                        $("input[name='basecharge']").val('3');
-                        break;
+
+                <c:forEach items="${licenselist}" var="license">
+                if (grade == "${license.commoncode}") {
+                    console.log("commoncode - ${license.commoncode}, baselicense - ${license.baselicense}");
+                    $("input[name='basecharge']").val("${license.baselicense}");
+                }
+                </c:forEach>
+
+                if (grade == "4") {
+                    console.log("Enterprise 등급은 baselicense 를 100만원으로 한다.");
+                    $("input[name='basecharge']").val("1000000");
                 }
             }
         });

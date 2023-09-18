@@ -18,6 +18,8 @@ public interface MemberRepository {
 
     HashMap<String, Object> selectTaxByEmail(String email);
 
+    ArrayList<HashMap<String, String>> selectBaseLicense();
+
     void updateNextPayDate(Map<String, Object> paramMap);
 
     void insertPayHistory(Map<String, Object> paramMap);

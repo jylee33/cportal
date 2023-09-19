@@ -6,27 +6,7 @@
 
 <%@include file="../include/header.jsp" %>
 
-<link rel="stylesheet" href="${path}/resources/js/jqwidgets/styles/jqx.base.css" type="text/css" />
-
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcore.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxbuttons.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxscrollbar.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxmenu.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.selection.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.columnsresize.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdata.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcombobox.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxradiobutton.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdropdownlist.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxlistbox.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.filter.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.edit.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.sort.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdatetimeinput.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcalendar.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcheckbox.js"></script>
-<%--<script type="text/javascript" src="${path}/resources/js/scripts/demos.js"></script>--%>
+<%@include file="../include/jQWidgets.jsp" %>
 
 
 <div class="container">
@@ -41,13 +21,13 @@
         </div>
         <div class="right">
             <form autocomplete="on">   <%--action="/portal/license/aidcodeview" method="get">--%>
-                <span class="tit">기능구분 선택</span>
-                <select class="select" name="sltcode" id="sltcode">
-                    <option value="10">네트워크</option>
-                    <option value="20">서버</option>
+                <span class="tit">솔루션 선택</span>
+                <select class="select" id="sltdeviceid">
+                    <option value="10">Network</option>
+                    <option value="20">Server</option>
                     <option value="30">AP</option>
-                    <option value="40">데이터베이스</option>
-                    <option value="50">환경센서</option>
+                    <option value="40">Database</option>
+                    <option value="50">FMS</option>
                 </select>
                 <button class="btn" type="button" onclick="selectReload()">조회</button>
             </form>
@@ -57,7 +37,7 @@
         <button class="btn btn3" id="btn_add_row">행추가</button>
         <button class="btn" id="btn-save">저장</button>
     </div>
-    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left; width:100%">
+    <div id='jqxWidget' border="1"> <!-- style="font-size: 13px; font-family: Verdana; float: left; width:100%"> -->
         <div id="aidInfo"></div>
         <div style="margin-top: 30px;"></div>
     </div>
@@ -101,6 +81,7 @@
             {
                 url : "${path}/license/aidcodeview?sltcode="+sltcode,
                 datatype: "json",
+                data: {solutioncode: $('#sltdeviceid option:selected').val()},
                 // postData: {"searchcode": $('#sltcode option:selected').val()},
                 datafields: [
                     { name: 'solutioncode', type:'string', cellsalign: 'center'},
@@ -121,28 +102,31 @@
                     { name: 'stdate', type: 'date' , cellsalign: 'center'},
                     { name: 'eddate', type: 'date' , cellsalign: 'center'},
                     { name: 'sortno', type:'int', cellsalign: 'right'},
+                    { name: 'crudflg', type:'string', cellsalign: 'center'},
                     { name: 'numrow', type:'int', cellsalign: 'right'}
                 ]
             };
 
         var dataAdapter = new $.jqx.dataAdapter(source);
+        var cellsrenderer = function (row, columnfield, value, defaulthtml, columnproperties) {
+            if (value = 'I') {
+                return 'editable: true';
+            }
+            else {
+                return 'editable: false';
+            }
+        }
         $("#aidInfo").jqxGrid(
             {
                 source: dataAdapter,
                 columnsresize: true,
-                //  showfilterrow: true,
-                filterable: true,
                 sortable: true,
                 altrows: true,
-                showstatusbar: true,
-                showtoolbar: false,
                 editable: true,
                 height: 700,
                 width: '100%',
-                selectionmode: 'singlecell',
-                editmode: 'click',
                 columns: [
-                    { text: '솔루션명', datafield: 'solutioncode', displayField: 'solutionname', align: "center" , cellsalign: "center" , width: '10%', editable: false, columntype: 'dropdownlist',
+                    { text: '솔루션명', datafield: 'solutioncode', displayField: 'solutionname', align: "center" , cellsalign: "center" , width: '8%', cellsrenderer: cellsrenderer, columntype: 'dropdownlist',
                         createeditor: function (row, column, editor) {
                             editor.jqxDropDownList({
                                 source: [
@@ -156,7 +140,7 @@
                             })
                         },
                     },
-                    { text: '기능구분', datafield: 'aidcode', displayField: 'fnccodename', align: "center" ,cellsalign: "center" , width: 100, columntype: 'dropdownlist',
+                    { text: '기능구분', datafield: 'aidcode', displayField: 'fnccodename', align: "center" ,cellsalign: "center" , width: '8%', columntype: 'dropdownlist',
                         createeditor: function (row, column, editor) {
                             editor.jqxDropDownList({
                                 source: [
@@ -168,9 +152,9 @@
                             })
                         },
                     },
-                    { text: '지원기능', datafield: 'functionname', width: 200, align:"left", editable: true},
-                    { text: '지원관리번호', datafield: 'functionno', width: 100, salign:"left", editable: false, hidden:true},
-                    { text: 'Free등급', datafield: 'freeaid', displayField: 'freenm', align: "center" , cellsalign: "center" ,width: 100, columntype: 'dropdownlist',
+                    { text: '지원기능', datafield: 'functionname', width: '20%',  align:"left", editable: true},
+                    { text: '지원관리번호', datafield: 'functionno', width: 0, salign:"left", editable: false, hidden:true},
+                    { text: 'Free등급', datafield: 'freeaid', displayField: 'freenm', align: "center" , cellsalign: "center" ,width: '8%', columntype: 'dropdownlist',
                         createeditor: function (row, column, editor) {
                             editor.jqxDropDownList({
                                 source: [
@@ -183,7 +167,7 @@
                             })
                         },
                     },
-                    { text: 'Basic등급', datafield: 'basicaid', displayField: 'basicnm', align: "center" ,cellsalign: "center" , width: 100, columntype: 'dropdownlist',
+                    { text: 'Basic등급', datafield: 'basicaid', displayField: 'basicnm', align: "center" ,cellsalign: "center" , width: '8%', columntype: 'dropdownlist',
                         createeditor: function (row, column, editor) {
                             editor.jqxDropDownList({
                                 source: [
@@ -195,7 +179,7 @@
                             })
                         },
                     },
-                    { text: 'Pro 등급', datafield: 'proaid', displayField: 'pronm', align: "center" ,cellsalign: "center" , width: 100, columntype: 'dropdownlist',
+                    { text: 'Pro 등급', datafield: 'proaid', displayField: 'pronm', align: "center" ,cellsalign: "center" , width: '8%', columntype: 'dropdownlist',
                         createeditor: function (row, column, editor) {
                             editor.jqxDropDownList({
                                 source: [
@@ -207,7 +191,7 @@
                             })
                         },
                     },
-                    { text: 'Ent 등급', datafield: 'entaid', displayField: 'entnm', align: "center" ,cellsalign: "center" , width: 100, columntype: 'dropdownlist',
+                    { text: 'Ent 등급', datafield: 'entaid', displayField: 'entnm', align: "center" ,cellsalign: "center" , width: '8%', columntype: 'dropdownlist',
                         createeditor: function (row, column, editor) {
                             editor.jqxDropDownList({
                                 source: [
@@ -219,11 +203,12 @@
                             })
                         },
                     },
-                    { text: '사용여부', datafield: 'useyn', width: 100, align:"center" ,columntype: 'checkbox' },
-                    { text: '시작일자' ,datafield: 'stdate', width: 100, align:"center", cellsformat: "yyyy-MM-dd",columntype: 'datetimeinput', editable: false},
-                    { text: '종료일자' ,datafield: 'eddate',  width: 100, align:"center", cellsformat: "yyyy-MM-dd",columntype: 'datetimeinput', editable: false},
-                    { text: '정렬순서', datafield: 'sortno', width: 100, align:"center", editable: false },
-                    { text: '연번', datafield: 'numrow', width: 100, align:"center", editable: false , hidden:true}
+                    { text: '사용여부', datafield: 'useyn', width: '8%', align:"center" ,columntype: 'checkbox' },
+                    { text: '시작일자' ,datafield: 'stdate', width: '8%', align:"center", cellsalign: "center", cellsformat: "yyyy-MM-dd",columntype: 'datetimeinput', editable: false},
+                    { text: '종료일자' ,datafield: 'eddate', width: '8%', align:"center", cellsalign: "center", cellsformat: "yyyy-MM-dd",columntype: 'datetimeinput', editable: false},
+                    { text: '정렬순서', datafield: 'sortno', width: '8%', align:"center", cellsalign: "center", editable: false },
+                    { text: '연번', datafield: 'numrow', width: 0, align:"center", editable: false , hidden:true},
+                    { text: 'status', datafield: 'crudflg', displayField: 'crudflg', width: '0%', align:"center" ,hidden:true}
                 ]
             });
         //$("#btn_add_row").jqxButton({ theme: theme });
@@ -234,8 +219,8 @@
             const sltname = $('#sltcode option:selected').text();
             $("#aidInfo").jqxGrid("addrow", null,
                 {solutioncode:sltcode, solutionname:sltname, functionno:"", functionname:"", freeaid:"O", basicaid:"O",
-                    proaid:"O",entaid: "O",stdate: date, eddate: "2019-12-31", useyn: "Y",
-                    codename:sltname, useyn: "Y", sortno: 99, aidcode: ""
+                    proaid:"O",entaid: "O",stdate: date, eddate: "2019-12-31", useyn: "Y",crudflg: "I",
+                    codename:sltname, sortno: 99, aidcode: ""
                 }, "first");
             $("#aidInfo").jqxGrid('endupdate');
         });
@@ -279,7 +264,6 @@
     });
 
     function selectReload(){
-        alert("ffffffffffffffffff");
         proc_jqxGridSelect();
     }
 </script>

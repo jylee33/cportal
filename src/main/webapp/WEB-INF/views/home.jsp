@@ -4,7 +4,7 @@
 
 <c:set var="path" value="<%=request.getContextPath() %>" scope="application"/>
 
-<%@include file="include/header.jsp" %>
+<%@include file="include/header_2.jsp" %>
 
 <div class="main">
     <div class="swiper-container">

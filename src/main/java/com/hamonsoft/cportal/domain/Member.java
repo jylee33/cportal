@@ -12,6 +12,7 @@ public class Member {
     private String password;
     private String businessname;
     private String businessnumber;
+    private int currlicensegrade;
     private int licensegrade;
     private String companyphone;
     private String administratoryn;
@@ -80,6 +81,14 @@ public class Member {
 
     public void setBusinessnumber(String businessnumber) {
         this.businessnumber = businessnumber;
+    }
+
+    public int getCurrlicensegrade() {
+        return currlicensegrade;
+    }
+
+    public void setCurrlicensegrade(int currlicensegrade) {
+        this.currlicensegrade = currlicensegrade;
     }
 
     public int getLicensegrade() {

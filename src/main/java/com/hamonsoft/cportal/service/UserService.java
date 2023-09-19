@@ -19,7 +19,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,7 +51,7 @@ public class UserService {
     }
 
     @Transactional(rollbackFor = {Exception.class})
-    public ResultDto chgmember(Member member, TaxInformation taxInformation) {
+    public ResultDto chgmember(Member member, TaxInformation tax) {
         ResultDto resultDto = new ResultDto();
         try {
             resultDto = chgMemberInfo(member);
@@ -56,14 +60,58 @@ public class UserService {
             }
 
             userRepository.chgmember(member);
-            userRepository.chgtaxinformation(taxInformation);
+            userRepository.chgtaxinformation(tax);
 
-            resultDto = chgGrade(member);
-            if (resultDto.getTRAN_STATUS() != 1) {
-                throw new RuntimeException();
+            int curGrade = member.getCurrlicensegrade();
+            int newGrade = member.getLicensegrade();
+
+            if (curGrade != newGrade) {
+                resultDto = chgGrade(member);
+                if (resultDto.getTRAN_STATUS() != 1) {
+                    throw new RuntimeException();
+                }
+
+                userRepository.chggrade(member);
+
+                Date dtCreated = userRepository.getCreatedAt(tax);
+
+                DateFormat df = new SimpleDateFormat("yyyyMMdd");
+                String sDate1 = df.format(dtCreated);
+
+                long paidAmount = tax.getPaid_amount();
+                LocalDate ldNow = LocalDate.now();
+                int today = ldNow.getDayOfMonth();
+                int endday = ldNow.lengthOfMonth();
+                int dCount = endday - today + 1;    // 오늘 이후 이번달 남은 날짜수
+
+                String sDate2 = df.format(java.sql.Date.valueOf(ldNow));
+
+                // 가입일이 현재 달과 같을 경우 즉 이번달에 가입한 경우, 과금액을 가입일 기준으로 재계산
+                if (sDate1.substring(0, 6).equals(sDate2.substring(0, 6))) {
+                    today = today - Integer.parseInt(sDate1.substring(6, 8)) + 1;
+                }
+
+                Map<String, Object> paramMap = new HashMap<>();
+                paramMap.put("commoncode", newGrade);
+
+                String baseLicense = userRepository.getBaseLicense(paramMap);
+                logger.info("baseLicense =============================== " + baseLicense);
+                long license = 0;
+                if (newGrade != 1) {
+                    if (newGrade == 4) {
+                        license = 1000000;  // enterprise 는 일단 1,000,000원
+                    } else {
+                        license = Long.parseLong(baseLicense);
+                    }
+
+                }
+
+                long paid_amount2 = paidAmount * (today-1) / endday + license * dCount / endday;  // 일할 계산
+                logger.info("일할 계산된 paid_amount2 - " + paid_amount2);
+                tax.setPaid_amount(paid_amount2);
+
+                userRepository.updatePaidAmount(tax);
             }
-
-            userRepository.chggrade(member);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             throw new RuntimeException(e);

@@ -17,10 +17,12 @@ public interface UserRepository {
     TaxInformation taxInfo(Member member);
     int chgmember(Member member);
     int chggrade(Member member);
+    int updatePaidAmount(TaxInformation tax);
     int chgtaxinformation(TaxInformation info);
     int chgpw(Member member);
     int withdrawal(Member member);
-
+    Date getCreatedAt(TaxInformation tax);
+    String getBaseLicense(Map<String, Object> paramMap);
 
     ArrayList<HashMap<String, Object>> findAll();
 //    Member info(Map<String, Object> paramMap);

@@ -65,6 +65,7 @@
                     <option value="4">Enterprise</option>
                 </select>
             </div>
+            <input type="hidden" name="currlicensegrade" value="${member.licensegrade}">
         </div>
 
         <div id="billinfo" style="display: block">
@@ -118,6 +119,7 @@
                 <div class="label">업태</div>
                 <div class="inp-box"><input type="text" class="inp2" placeholder="업태를 입력하세요" name="businesscondition" value="${tax.businesscondition}"></div>
             </div>
+            <input type="hidden" name="paid_amount" id="paid_amount" value="${tax.paid_amount}">
         </div>
         <button class="btn large block" id="chguserinfo">회원정보 변경</button>
     </form>

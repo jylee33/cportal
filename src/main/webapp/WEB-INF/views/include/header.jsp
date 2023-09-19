@@ -44,12 +44,8 @@
                                 <c:if test="${not empty login}">
                                     <a href="${path}/member/logout">로그아웃</a>
                                 </c:if>
-
-
                             </div>
-
                         </div>
-
                     </c:if>
                     <c:if test="${empty login}">
                         <a href="#">서비스안내</a>

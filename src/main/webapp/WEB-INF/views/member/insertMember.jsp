@@ -26,7 +26,7 @@
                         <option>naver.com</option>
                         <option>nate.com</option>
                         <option>gmail.com</option>
-                        <option>daum.com</option>
+                        <option>daum.net</option>
                         <option>직접입력</option>
                     </select>
                 </div>
@@ -361,6 +361,7 @@
             var grade = $("#licensegrade").val();
 
             if (grade != "1") {
+                alert('다음은 카드 등록을 위한 화면입니다.\n실제 결제는 이루어지지 않습니다.\n카드 정보는 따로 저장하지 않습니다.');
                 let IMP = window.IMP;
                 IMP.init("imp42261033");
 
@@ -374,7 +375,7 @@
                     console.log("getauth result ---------------");
                     console.log(auth);
 
-                    var membername = $("input[name='membername']").val();;
+                    var membername = $("input[name='membername']").val();
                     var basecharge = $("input[name='basecharge']").val();
                     var addcharge = $("input[name='addcharge']").val();
                     var paid_amount = Number(basecharge) + Number(addcharge);
@@ -386,7 +387,7 @@
                         pay_method: "card",
                         merchant_uid: "merchant_" + new Date().getTime(),   // 주문번호
                         name: "NETIS CLOUD",
-                        amount: 1, // 카드 등록을 위한 절차이므로 1원만.... paid_amount,                         // 숫자 타입
+                        amount: 0, // 카드 등록을 위한 절차이므로 0원.... paid_amount,                         // 숫자 타입
                         // customer_uid 파라미터가 있어야 빌링키 발급을 시도함.
                         customer_uid: "hamonsoft_" + new Date().getTime(),
                         buyer_name: membername

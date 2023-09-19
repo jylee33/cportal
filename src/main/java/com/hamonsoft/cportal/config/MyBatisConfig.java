@@ -92,7 +92,7 @@ public class MyBatisConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addCorsMappings(final CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:8080")
+                .allowedOrigins("http://localhost:8080", "https://localhost:8080", "http://cloud.hamonsoft.com", "https://cloud.hamonsoft.com")
                 .allowedMethods(ALLOWED_METHOD_NAMES.split(","));
     }
 }

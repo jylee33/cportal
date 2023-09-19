@@ -343,7 +343,7 @@ public class MailSend {
             if(prof.equals("dev")) {
                 body = body + "<br><a href=\"" + cpath + "/member/emailcertification?email=" + email + "&membername=" + membername + "&licensegrade=" + licensegrade + "\">이메일 인증하기</a>";
             } else {
-                body = body + "<br><a href=\"http://cloud.hamonsoft.com/portal/member/emailcertification?email=" + email + "&membername=" + membername + "&licensegrade=" + licensegrade + "\">이메일 인증하기</a>";
+                body = body + "<br><a href=\"https://cloud.hamonsoft.com/portal/member/emailcertification?email=" + email + "&membername=" + membername + "&licensegrade=" + licensegrade + "\">이메일 인증하기</a>";
             }
 
             logger.info(body);

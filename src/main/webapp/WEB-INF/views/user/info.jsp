@@ -20,22 +20,22 @@
         </div>
         <div class="inp-area">
             <div class="label">이메일 *</div>
-            <div class="inp-box"><input type="text" class="inp2" placeholder="이메일" name="email" id="email" value="${info.email}" readonly></div>
+            <div class="inp-box"><input type="text" class="inp2" placeholder="이메일" name="email" id="email" value="${member.email}" readonly></div>
         </div>
         <div class="inp-area">
             <div class="label">성명 *</div>
-            <div class="inp-box"><input type="text" class="inp2" placeholder="성명" name="membername" value="${info.membername}" required></div>
+            <div class="inp-box"><input type="text" class="inp2" placeholder="성명" name="membername" value="${member.membername}" required></div>
         </div>
         <div class="inp-area">
             <div class="label">그룹명 *</div>
             <div class="inp-box">
-                <input type="text" class="inp2" name="grpname" placeholder="그룹명" value="${info.grpname}" required>
+                <input type="text" class="inp2" name="grpname" placeholder="그룹명" value="${member.grpname}" required>
             </div>
         </div>
         <div class="inp-area">
             <div class="label">휴대전화 *</div>
             <div class="inp-box">
-                <input type="text" class="inp2" placeholder="휴대전화" name="celltel" value="${info.celltel}" required>
+                <input type="text" class="inp2" placeholder="휴대전화" name="celltel" value="${member.celltel}" required>
                 <button class="btn" style="display: none">인증번호전송</button>
             </div>
         </div>
@@ -49,11 +49,11 @@
         </div>
         <div class="inp-area">
             <div class="label">회사명 *</div>
-            <div class="inp-box"><input type="text" class="inp2" placeholder="회사명" name="businessname" value="${info.businessname}" required></div>
+            <div class="inp-box"><input type="text" class="inp2" placeholder="회사명" name="businessname" value="${member.businessname}" required></div>
         </div>
         <div class="inp-area">
             <div class="label">사업자등록번호 *</div>
-            <div class="inp-box"><input type="text" class="inp2" placeholder="'-'빼고 숫자만 입력하세요(10자리 체크)" maxlength="10" name="businessnumber" value="${info.businessnumber}" required></div>
+            <div class="inp-box"><input type="text" class="inp2" placeholder="'-'빼고 숫자만 입력하세요(10자리 체크)" maxlength="10" name="businessnumber" value="${member.businessnumber}" required></div>
         </div>
         <div class="inp-area">
             <div class="label">등급선택 *</div>
@@ -73,17 +73,17 @@
 
             <div class="inp-area">
                 <div class="label">법인(회사)명</div>
-                <div class="inp-box"><input type="text" class="inp2" placeholder="회사명" name="companyname" value="${info.companyname}"></div>
+                <div class="inp-box"><input type="text" class="inp2" placeholder="회사명" name="companyname" value="${tax.companyname}"></div>
             </div>
             <div class="inp-area">
                 <div class="label">대표자명</div>
-                <div class="inp-box"><input type="text" class="inp2" placeholder="대표자명" name="representationname" value="${info.representationname}"></div>
+                <div class="inp-box"><input type="text" class="inp2" placeholder="대표자명" name="representationname" value="${tax.representationname}"></div>
             </div>
             <div class="inp-area">
                 <div class="label">사업자 등록 번호</div>
                 <div class="inp-box">
                     <div class="hp-box">
-                        <input type="hidden" name="taxcompanynumber" id="taxcompanynumber" value="${info.taxcompanynumber}">
+                        <input type="hidden" name="taxcompanynumber" id="taxcompanynumber" value="${tax.taxcompanynumber}">
                         <input type="text" class="inp2" placeholder="" maxlength="3" id="tax1">
                         <span>-</span>
                         <input type="text" class="inp2" placeholder="" maxlength="2" id="tax2">
@@ -94,29 +94,29 @@
             </div>
             <div class="inp-area">
                 <div class="label">전자세금계산서<br>발행메일</div>
-                <div class="inp-box"><input type="text" class="inp2" placeholder="전자세금계산서 발행 메일을 입력하세요." name="taxemail" value="${info.taxemail}"></div>
+                <div class="inp-box"><input type="text" class="inp2" placeholder="전자세금계산서 발행 메일을 입력하세요." name="taxemail" value="${tax.taxemail}"></div>
             </div>
             <div class="inp-area">
                 <div class="label">주소</div>
                 <div class="inp-box">
-                    <input type="hidden" name="postnumber" id="postnumber" value="${info.postnumber}">
-                    <input type="text" class="inp2" id="address1" placeholder="우편번호를 검색하세요." name="address" value="${info.address}">
+                    <input type="hidden" name="postnumber" id="postnumber" value="${tax.postnumber}">
+                    <input type="text" class="inp2" id="address1" placeholder="우편번호를 검색하세요." name="address" value="${tax.address}">
                     <button class="btn" id="searchPostNum">우편번호검색</button>
                 </div>
             </div>
             <div class="inp-area">
                 <div class="label"></div>
                 <div class="inp-box">
-                    <input type="text" class="inp2" id="address2" placeholder="상세주소 등록" name="detailaddress" value="${info.detailaddress}">
+                    <input type="text" class="inp2" id="address2" placeholder="상세주소 등록" name="detailaddress" value="${tax.detailaddress}">
                 </div>
             </div>
             <div class="inp-area">
                 <div class="label">업종</div>
-                <div class="inp-box"><input type="text" class="inp2" placeholder="업종을 입력하세요" name="businesskind" value="${info.businesskind}"></div>
+                <div class="inp-box"><input type="text" class="inp2" placeholder="업종을 입력하세요" name="businesskind" value="${tax.businesskind}"></div>
             </div>
             <div class="inp-area">
                 <div class="label">업태</div>
-                <div class="inp-box"><input type="text" class="inp2" placeholder="업태를 입력하세요" name="businesscondition" value="${info.businesscondition}"></div>
+                <div class="inp-box"><input type="text" class="inp2" placeholder="업태를 입력하세요" name="businesscondition" value="${tax.businesscondition}"></div>
             </div>
         </div>
         <button class="btn large block" id="chguserinfo">회원정보 변경</button>
@@ -128,7 +128,7 @@
     $(document).ready(function () {
         var formObj = $("form[role='form']");
 
-        $("#licensegrade").val("${info.licensegrade}").prop("selected", true);
+        $("#licensegrade").val("${member.licensegrade}").prop("selected", true);
         $("#licensegrade").SumoSelect();
 
         $("#licensegrade").change(function (e) {

@@ -3,7 +3,6 @@ package com.hamonsoft.cportal.controller;
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.domain.MemberTaxInformation;
 import com.hamonsoft.cportal.domain.TaxInformation;
-import com.hamonsoft.cportal.dto.LoginDTO;
 import com.hamonsoft.cportal.dto.ResponseDTO;
 import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.service.UserService;
@@ -14,20 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.WebUtils;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
 @Controller
 @RequestMapping("/user")
@@ -50,8 +41,10 @@ public class UserController {
 
         logger.info("call user info --------------- email : " + email);
 
-        MemberTaxInformation info = userService.info(member);
-        model.addAttribute("info", info);
+        Member memberinfo = userService.memberInfo(member);
+        TaxInformation taxinfo = userService.taxInfo(member);
+        model.addAttribute("member", memberinfo);
+        model.addAttribute("tax", taxinfo);
 
     }
 

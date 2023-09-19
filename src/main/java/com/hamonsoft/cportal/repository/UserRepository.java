@@ -3,7 +3,6 @@ package com.hamonsoft.cportal.repository;
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.domain.MemberTaxInformation;
 import com.hamonsoft.cportal.domain.TaxInformation;
-import com.hamonsoft.cportal.dto.LoginDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +13,8 @@ import java.util.*;
 public interface UserRepository {
 
 
-    MemberTaxInformation info(Member member);
+    Member memberInfo(Member member);
+    TaxInformation taxInfo(Member member);
     int chgmember(Member member);
     int chggrade(Member member);
     int chgtaxinformation(TaxInformation info);

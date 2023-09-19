@@ -22,6 +22,9 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 @RestController
@@ -137,12 +140,17 @@ public class IamportHMClientController {
                 logger.info("return imp_uid - " + imp_uid);
 
                 // tbtaxinformation.next_pay_date update
-                DateFormat df = new SimpleDateFormat("yyyyMMdd");
+//                DateFormat df = new SimpleDateFormat("yyyyMMdd");
+//
+//                Calendar cal=Calendar.getInstance();
+//                cal.add(cal.MONTH, 1);
+//                String sDate = df.format(cal.getTime());
+//                Date dtNext = new Date(Integer.parseInt(sDate.substring(0, 4)) - 1900, Integer.parseInt(sDate.substring(4, 6)) - 1, 1);
 
-                Calendar cal=Calendar.getInstance();
-                cal.add(cal.MONTH, 1);
-                String sDate = df.format(cal.getTime());
-                Date dtNext = new Date(Integer.parseInt(sDate.substring(0, 4)) - 1900, Integer.parseInt(sDate.substring(4, 6)) - 1, 1);
+                LocalDate ldNow = LocalDate.now();
+                LocalDate ldNextMonth = ldNow.plusMonths(1).withDayOfMonth(1);
+                Instant instant = ldNextMonth.atStartOfDay(ZoneId.systemDefault()).toInstant();
+                Date dtNext = Date.from(instant);
 
                 Map<String, Object> paramMap = new HashMap<>();
                 paramMap.put("email", email);
@@ -151,7 +159,7 @@ public class IamportHMClientController {
                 paramMap.put("paid_amount", paid_amount);
                 paramMap.put("dtNext", dtNext);
 
-                memberService.updateNextPayDate(paramMap);
+                memberService.updatePayInformation(paramMap);
                 memberService.insertPayHistory(paramMap);
             }
 

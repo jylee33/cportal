@@ -57,8 +57,8 @@ public class MemberService {
         return memberRepository.selectBaseLicense();
     }
 
-    public void updateNextPayDate(Map<String, Object> paramMap) {
-        memberRepository.updateNextPayDate(paramMap);
+    public void updatePayInformation(Map<String, Object> paramMap) {
+        memberRepository.updatePayInformation(paramMap);
     }
 
     public void insertPayHistory(Map<String, Object> paramMap) {

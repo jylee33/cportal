@@ -38,8 +38,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public MemberTaxInformation info(Member member) {
-        return userRepository.info(member);
+    public Member memberInfo(Member member) {
+        return userRepository.memberInfo(member);
+    }
+
+    public TaxInformation taxInfo(Member member) {
+        return userRepository.taxInfo(member);
     }
 
     @Transactional(rollbackFor = {Exception.class})

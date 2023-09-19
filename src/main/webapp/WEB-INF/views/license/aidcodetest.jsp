@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@include file="../include/header_2.jsp" %>
+<%@include file="../include/header.jsp" %>
 <div class="container">
     <div class="h3-head">
         <h3 class="h3">라이선스 정책 관리</h3>

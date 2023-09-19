@@ -22,6 +22,7 @@
     <script type="text/javascript" src="${path}/resources/js/front.js"></script>
 
 </head>
+<link rel="icon" href="${path}/resources/favicon.ico">
 
 <body>
 <div id="wrap">
@@ -44,17 +45,8 @@
                                 <c:if test="${not empty login}">
                                     <a href="${path}/member/logout">로그아웃</a>
                                 </c:if>
-
-                                <c:if test="${login.administratoryn ne 'Y'}">
-                                    <a href="${path}/user/info" class="btn-user">${login.membername} (회원)</a>
-                                </c:if>
                             </div>
-
                         </div>
-                        <a href="http://cloud.hamonsoft.com" target="_blank" class="btn-link">Netis 통합모니터링 서비스</a>
-                        <c:if test="${login.administratoryn eq 'Y'}">
-                            <a href="${path}/license/licensemanage" class="btn-user">${login.membername} (관리자)</a>
-                        </c:if>
                     </c:if>
                     <c:if test="${empty login}">
                         <a href="#">서비스안내</a>
@@ -64,6 +56,15 @@
                     <%--                    <a href="${path}/member/listAll">회원 목록 조회</a>--%>
                     <%--                    <a href="${path}/charge/guide">과금안내</a>--%>
                 </div>
+                <a href="http://cloud.hamonsoft.com" target="_blank" class="btn-link">Netis 통합모니터링 서비스</a>
+                <c:if test="${not empty login}">
+                    <c:if test="${login.administratoryn eq 'Y'}">
+                        <a href="${path}/license/licensemanage" class="btn-user">${login.membername} (관리자)</a>
+                    </c:if>
+                    <c:if test="${login.administratoryn ne 'Y'}">
+                        <a href="${path}/user/info" class="btn-user">${login.membername} (회원)</a>
+                    </c:if>
+                </c:if>
             </div>
         </div>
     </div>

@@ -3,13 +3,16 @@
 	
 <mapper namespace="com.hamonsoft.cportal.repository.UserRepository">
 
-    <select id="info" resultType="MemberTaxInformation">
-        select  T1.email, T1.membername, T1.grpname, T1.celltel, T1.businessname, T1.businessnumber, T1.licensegrade
-                , T2.companyname, T2.representationname, T2.taxcompanynumber, T2.taxemail, T2.address, T2.detailaddress, T2.businesskind, T2.businesscondition
-        from tbmember T1
-            join tbtaxinformation T2
-            on T1.email = T2.email
-        where T1.email=#{email}
+    <select id="memberInfo" resultType="Member">
+        select  email, membername, grpname, celltel, businessname, businessnumber, licensegrade
+        from tbmember
+        where email=#{email}
+    </select>
+
+    <select id="taxInfo" resultType="TaxInformation">
+        select  companyname, representationname, taxcompanynumber, taxemail, address, detailaddress, businesskind, businesscondition
+        from tbtaxinformation
+        where email=#{email}
     </select>
 
     <update id="chgmember">

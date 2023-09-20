@@ -1,8 +1,19 @@
 package com.hamonsoft.cportal.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.dto.MemberLicenseDto;
+import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.utils.Pagination;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,5 +40,8 @@ public interface MemberInfoService {
 
     public List<Map<String, Object>> memberTaxInfo(String email) throws Exception;
 
+    @Transactional(rollbackFor = {Exception.class})
     public void licenseUpdate(MemberLicenseDto memberLicenseDto) throws Exception;
+
+
 }

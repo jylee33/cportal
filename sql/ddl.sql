@@ -154,3 +154,6 @@ create TABLE tbpayhistory (
     pay_date datetime NOT NULL DEFAULT current_timestamp() COMMENT '결제일시',
     primary key(payhistoryid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='결제히스토리';
+
+-- 2023.09.20 컬럼 변경
+ALTER TABLE tbtaxinformation CHANGE Representationname representationname VARCHAR(50) not NULL;

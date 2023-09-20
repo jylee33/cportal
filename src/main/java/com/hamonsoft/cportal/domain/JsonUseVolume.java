@@ -8,7 +8,7 @@ public class JsonUseVolume {
     private String usedeviceid;
     private String userid;
     private String useday;
-    private String transtatus;
+    private Integer transtatus;
     private String info;
     private Integer nmscount;
     private Integer smscount;

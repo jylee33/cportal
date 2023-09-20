@@ -24,6 +24,68 @@
 </head>
 <link rel="icon" href="${path}/resources/favicon.ico">
 
+
+<script language=javascript>
+    function currencyFormatter(amount){
+        return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');
+    }
+    //날자 포맷
+    function dateFormatter(stringDate){
+        if(!stringDate){
+            return "";
+        }
+        var formatNum = '';
+        stringDate=stringDate.replace(/\s/gi, "");
+        if(stringDate.length == 8){
+            formatNum = stringDate.replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3');
+        }else{
+            formatNum = stringDate;
+        }
+        // document.getElementById(id).innerHTML = formatNum;
+        //console.log("dateFormatter formatNum -->"+formatNum+" ..... num ->"+num);
+        return formatNum;
+    }
+
+    //전화번호 포맷
+    function phoneFormatter(num) {
+        var formatNum = '';
+        try{
+            num = num.replace(/[^0-9]/g, "");
+            if (num.length == 11) {
+                formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+            } else if (num.length == 8) {
+                formatNum = num.replace(/(\d{4})(\d{4})/, '$1-$2');
+            } else {
+                if (num.indexOf('02') == 0) {
+                    formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+                } else {
+                    formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+                }
+            }
+        } catch(e) {
+            formatNum = num;
+        }
+        console.log("phoneFormatter formatNum -->"+formatNum+" ..... num ->"+num);
+        return formatNum;
+    }
+    //사업자등록번호 포맷
+    function bizNoFormatter(num, type) {
+        var formatNum = '';
+        try{
+            if (num.length == 10) {
+                if (type == 0) {
+                    formatNum = num.replace(/(\d{3})(\d{2})(\d{5})/, '$1-$2-*****');
+                } else {
+                    formatNum = num.replace(/(\d{3})(\d{2})(\d{5})/, '$1-$2-$3');
+                }
+            }
+        } catch(e) {
+            formatNum = num;
+        }
+        console.log("bizNoFormatter formatNum -->"+formatNum+" ..... num ->"+num);
+        return formatNum;
+    }
+</script>
 <body>
 <div id="wrap">
     <div class="header">

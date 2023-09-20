@@ -58,11 +58,11 @@ public class JsonController {
 
         JSONObject jsonSubObj = (JSONObject)jsonMainObj.get("info");
 
-        String tran_status = (String) jsonMainObj.get("tran_status");
+        int tran_status = (Integer) jsonMainObj.get("tran_status");
         String reason = (String) jsonMainObj.get("reason");
         logger.info("tran_status -> "+tran_status+ " reason==> " + reason);
         Map<String, String> deviceUse = new HashMap<>();
-        deviceUse.put("tran_status", tran_status);
+        deviceUse.put("tran_status", tran_status+"");
         deviceUse.put("reason", reason);
         deviceUse.put("info", jsonSubObj.toJSONString());
         Iterator iterS = jsonSubObj.entrySet().iterator();

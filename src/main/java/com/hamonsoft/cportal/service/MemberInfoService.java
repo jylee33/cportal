@@ -42,6 +42,8 @@ public interface MemberInfoService {
 
     @Transactional(rollbackFor = {Exception.class})
     public void licenseUpdate(MemberLicenseDto memberLicenseDto) throws Exception;
+    @Transactional(rollbackFor = {Exception.class})
+    public void memberUpdate(MemberLicenseDto memberLicenseDto) throws Exception;
 
 
 }

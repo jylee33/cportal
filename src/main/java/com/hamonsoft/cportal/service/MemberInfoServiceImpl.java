@@ -118,6 +118,10 @@ public class MemberInfoServiceImpl implements MemberInfoService {
         memberinfoRepository.licenseUpdate(memberLicenseDto);
     };
 
+    public void memberUpdate(MemberLicenseDto memberLicenseDto) throws Exception{
+        memberinfoRepository.memberUpdate(memberLicenseDto);
+    };
+
 
     private NetisUseServiceDto serviceInfo(String email) throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();

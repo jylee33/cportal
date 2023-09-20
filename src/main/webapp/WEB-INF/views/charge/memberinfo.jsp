@@ -35,11 +35,11 @@
                     <th>가입일자</th>
                     <th>주소</th>
                     <th>전체 가용장비</th>
-                    <th>등록 장비</th>
-                    <th>사용율</th>
-                    <th>사용금액</th>
-                    <th>미납금액</th>
-                    <th>미납횟수</th>
+                    <th style="color:#8B0000;font: 17px">등록 장비</th>
+                    <th style="color:#8B0000;font: 17px">사용율</th>
+                    <th style="color:#8B0000;font: 17px">사용금액</th>
+                    <th style="color:#8B0000;font: 17px">미납금액</th>
+                    <th style="color:#8B0000;font: 17px">미납횟수</th>
                     <th>상태</th>
                     <th>변동일자</th>
                     <th>비고</th>
@@ -51,7 +51,7 @@
                         <c:forEach items="${list}" var="list">
                             <tr id="data-area">
                                 <td class="text-center">${list.membername}</td>
-                                <td class="text-center">${list.email}</td>
+                                <td class="text-left">${list.email}</td>
                                 <td class="text-center">
                                     <c:if test="${list.licensegrade eq '1'}">Free</c:if>
                                     <c:if test="${list.licensegrade eq '2'}">Basic</c:if>
@@ -59,16 +59,16 @@
                                     <c:if test="${list.licensegrade eq '4'}">Ent</c:if>
                                 </td>
                                 <td class="text-center">${list.celltel}</td>
-                                <td class="text-center">${list.businessname}</td>
+                                <td class="text-left">${list.businessname}</td>
                                 <td class="text-center">${list.strbusinessnumber}</td>
                                 <td class="text-center">${list.strjoindate}</td>
-                                <td class="text-center">${list.zipaddress}</td>
+                                <td class="text-left">${list.zipaddress}</td>
                                 <td class="text-center">${list.totalsoluble}</td>
-                                <td class="text-center">${list.totalvolume}</td>
-                                <td class="text-center">${list.userate}</td>
-                                <td class="text-center"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${list.totalcharge}" /></td>
-                                <td class="text-center">0</td>
-                                <td class="text-center">0</td>
+                                <td class="text-center" style="color:#8B0000;font: 17px">${list.totalvolume}</td>
+                                <td class="text-center" style="color:#8B0000;font: 17px">${list.userate}</td>
+                                <td class="text-center" style="color:#8B0000;font: 17px"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${list.totalcharge}" /></td>
+                                <td class="text-center" style="color:#8B0000;font: 17px">0</td>
+                                <td class="text-center" style="color:#8B0000;font: 17px">0</td>
                                 <td class="text-center">${list.statusnm}</td>
                                 <td class="text-center">${list.strstdate}</td>
                                 <td class="text-center"></td>
@@ -232,25 +232,25 @@
                                         </tr>
                                         <tr>
                                             <th>추가</th>
-                                            <td colspan="2" class="text-center" id="addvolume">
-                                                <input type="number" class="inp" style="text-align:center; width:100%" value=${userInfo.addvolume} name="addvolume" maxlength="8" required>
+                                            <td colspan="2" class="text-center" id=addvolume>
+                                                <input type="number" class="inp" style="text-align:center; width:100%" name="addvolume"  maxlength="8" value=${userInfo.addvolume} required>
                                             </td>
-                                            <script type="text/javascript">
-                                                var value1 = $('#addvolume').text();
-                                                var money2 = value1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                                $('#addvolume').text(money2);
-                                            </script>
+<%--                                            <script type="text/javascript">--%>
+<%--                                                var value1 = $('#addvolume').text();--%>
+<%--                                                var money2 = value1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");--%>
+<%--                                                $('#addvolume').text(money2);--%>
+<%--                                            </script>--%>
                                         </tr>
                                         <tr>
                                             <th>서비스</th>
                                             <td colspan="2" class="text-center" id=servicevolume>
-                                                <input type="number" class="inp" style="text-align:center; width:100%" value=${userInfo.servicevolume} name="servicevolume" maxlength="8" required>
+                                                <input type="number" class="inp" style="text-align:center; width:100%" name="servicevolume"  maxlength="8"  value=${userInfo.servicevolume} required>
                                             </td>
-                                            <script type="text/javascript">
-                                                var value1 = $('#servicevolume').text();
-                                                var money2 = value1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                                $('#servicevolume').text(money2);
-                                            </script>
+<%--                                            <script type="text/javascript">--%>
+<%--                                                var value1 = $('#servicevolume').text();--%>
+<%--                                                var money2 = value1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");--%>
+<%--                                                $('#servicevolume').text(money2);--%>
+<%--                                            </script>--%>
                                         </tr>
                                         <tr>
                                             <th rowspan="3">요금</th>
@@ -271,20 +271,20 @@
                                         <tr>
                                             <th>추가</th>
                                             <td colspan="2" id=addcharge class="text-center">
-                                                <input type="number" class="inp small" style="text-align:center;width:100%" value=${userInfo.addcharge} name="addcharge">
+                                                <input type="number" class="inp small" style="text-align:center;width:100%"  name="addcharge" value="${userInfo.addcharge}">
                                             </td>
-                                            <script type="text/javascript">
-                                                var value1 = $('#addcharge').text();
-                                                var money2 = value1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                                $('#addcharge').text(money2);
-                                            </script>
+<%--                                            <script type="text/javascript">--%>
+<%--                                                var value1 = $('#addcharge').text();--%>
+<%--                                                var money2 = value1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");--%>
+<%--                                                $('#addcharge').text(money2);--%>
+<%--                                            </script>--%>
 
                                         </tr>
                                         <tr>
                                             <th colspan="2">데이터 보관기간</th>
                                             <td>
                                                 <div class="flex gap10">
-                                                    <input type="number" class="inp text-cente" style="text-align:center; width:100%" value=${userInfo.datakeepterm} id="datakeepterm" required>
+                                                    <input type="number" class="inp text-cente" style="text-align:center; width:100%"  name="datakeepterm" value="${userInfo.datakeepterm}" required>
                                                     <select class="select small" value=${userInfo.datakeepunit} id="datakeepunit">
                                                         <option>일</option>
                                                         <option>월</option>
@@ -295,8 +295,8 @@
                                         </tr>
                                         <tr>
                                             <th colspan="3">회원접속도메인</th>
-                                            <td colspan="2" id=serverdomainname class="text-left">
-                                                <input type="text" class="inp small" style="text-align:center; width:100%" value=${userInfo.serverdomainname}>
+                                            <td colspan="2" id=serverdomainname class="text-center">
+                                                <input type="text" class="inp small" style="text-align:center; width:100%"  name="serverdomainname" value="${userInfo.serverdomainname}">
                                             </td>
                                         </tr>
                                     </tbody>
@@ -366,14 +366,14 @@
                             <th colspan="2">추가라이센스</th>
                             <th rowspan="2">서비스장비</th>
                             <th rowspan="2">데이터보관기간</th>
-                            <th rowspan="2">전체</th>
-                            <th rowspan="2">네트워크</th>
-                            <th rowspan="2">서버</th>
-                            <th rowspan="2">AP</th>
-                            <th rowspan="2">데이터베이스</th>
-                            <th rowspan="2">환경센서</th>
-                            <th rowspan="2">사용금액</th>
-                            <th rowspan="2">사용율</th>
+                            <th rowspan="2" style="color:#8B0000;font: 17px">전체</th>
+                            <th rowspan="2" style="color:#8B0000;font: 17px">네트워크</th>
+                            <th rowspan="2" style="color:#8B0000;font: 17px">서버</th>
+                            <th rowspan="2" style="color:#8B0000;font: 17px">AP</th>
+                            <th rowspan="2" style="color:#8B0000;font: 17px">데이터베이스</th>
+                            <th rowspan="2" style="color:#8B0000;font: 17px">환경센서</th>
+                            <th rowspan="2" style="color:#8B0000;font: 17px">사용금액</th>
+                            <th rowspan="2" style="color:#8B0000;font: 17px">사용율</th>
                             <th rowspan="2">비고</th>
                         </tr>
                         <tr>
@@ -388,7 +388,7 @@
                             <c:when test="${fn:length(chargeInfo) > 0}">
                                 <c:forEach items="${chargeInfo}" var="charge">
                                     <tr>
-                                        <td id=c_useyym class="text-center">${charge.useyym}</td>
+                                        <td id=c_useyym class="text-center">${charge.struseyym}</td>
                                         <td id=c_licensegrade class="text-center">
                                             <c:if test="${charge.licensegrade eq '1'}">Free</c:if>
                                             <c:if test="${charge.licensegrade eq '2'}">Basic</c:if>
@@ -402,14 +402,14 @@
                                         <td id=c_addcharge class="text-center"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${charge.addcharge}" /></td>
                                         <td id=c_servicevolume class="text-center">${charge.servicevolume}</td>
                                         <td id=c_datakeepnm class="text-center">${charge.datakeepnm}</td>
-                                        <td id=c_totalvolume class="text-center">${charge.totalvolume}</td>
-                                        <td id=c_networkvolume class="text-center">${charge.networkvolume}</td>
-                                        <td id=c_servervolume class="text-center">${charge.servervolume}</td>
-                                        <td id=c_apvolume class="text-center">${charge.apvolume}</td>
-                                        <td id=c_dbmsvolume class="text-center">${charge.dbmsvolume}</td>
-                                        <td id=c_fmsvolume class="text-center">${charge.fmsvolume}</td>
-                                        <td id=c_totalcharge class="text-center"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${charge.totalcharge}" /></td>
-                                        <td id=c_userate class="text-center">${charge.userate}</td>
+                                        <td id=c_totalvolume class="text-center" style="color:#8B0000;font: 17px">${charge.totalvolume}</td>
+                                        <td id=c_networkvolume class="text-center" style="color:#8B0000;font: 17px">${charge.networkvolume}</td>
+                                        <td id=c_servervolume class="text-center" style="color:#8B0000;font: 17px">${charge.servervolume}</td>
+                                        <td id=c_apvolume class="text-center" style="color:#8B0000;font: 17px">${charge.apvolume}</td>
+                                        <td id=c_dbmsvolume class="text-center" style="color:#8B0000;font: 17px">${charge.dbmsvolume}</td>
+                                        <td id=c_fmsvolume class="text-center" style="color:#8B0000;font: 17px">${charge.fmsvolume}</td>
+                                        <td id=c_totalcharge class="text-center" style="color:#8B0000;font: 17px"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${charge.totalcharge}" /></td>
+                                        <td id=c_userate class="text-center" style="color:#8B0000;font: 17px">${charge.userate}</td>
                                         <td class="text-center"></td>
                                     </tr>
                                 </c:forEach>
@@ -445,13 +445,14 @@
                                     <tr>
                                         <td class="text-center">${tax.rownum}</td>
                                         <td class="text-center">${tax.representationname}</td>
-                                        <td class="text-center">${tax.businessnumber}</td>
-                                        <td class="text-center">${tax.zipaddress}</td>
+                                        <td class="text-center">${tax.strbusinessnumber}</td>
+                                        <td class="text-left">${tax.zipaddress}</td>
                                         <td class="text-center">${tax.businesskind}</td>
                                         <td class="text-center">${tax.businesscondition}</td>
-                                        <td class="text-center">${tax.issuedate}</td>
-                                        <td class="text-center"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${tax.issueamount}" /></td>
-                                        <td class="text-center">N</td>
+                                        <td class="text-center" style="color:#8B0000;font: 17px">${tax.strissuedate}</td>
+                                        <td class="text-center" style="color:#8B0000;font: 17px"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${tax.issueamount}" /></td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center"></td>
                                         <td class="text-center"></td>
                                     </tr>
                                 </c:forEach>
@@ -498,11 +499,10 @@
             "email": '${userInfo.email}',
             "addvolume": $('input[name=addvolume]').val(),
             "servicevolume": $('input[name=servicevolume]').val(),
-            "basecharge": $('input[id=basecharge]').val(),
             "addcharge": $('input[name=addcharge]').val(),
-            "datakeepterm": $('input[id=datakeepterm]').val(),
-            "datakeepunit": $('select[id=datakeepunit]').val(),
-            "serverdomainname": $('input[id=serverdomainname]').val()
+            "datakeepterm": $('input[name=datakeepterm]').val(),
+            "datakeepunit": $('select[name=datakeepunit]').val(),
+            "serverdomainname": $('input[name=serverdomainname]').val()
         };
 
         $.ajax({
@@ -545,18 +545,18 @@
 
 
         $('#memberinfo-table tr').on('dblclick', function () {
-            console.log('1');
+           // console.log('1');
             var tdArr = new Array();	// 배열 선언
 
             // 현재 클릭된 Row(<tr>)
             var tr = $(this);
             var td = tr.children();
-            console.log("클릭한 Row의 모든 데이터 : "+tr.text()+"........................."+td.text());
+            //console.log("클릭한 Row의 모든 데이터 : "+tr.text()+"........................."+td.text());
             td.each(function(i){
                 tdArr.push(td.eq(i).text());
             });
-            console.log("배열에 담긴 값 : "+tdArr);
-            console.log("배열에 담긴 값 : "+td.eq(1).text());
+           // console.log("배열에 담긴 값 : "+tdArr);
+           // console.log("배열에 담긴 값 : "+td.eq(1).text());
 
 //            var url = '${pageContext.request.contextPath}/charge/@{td.eq(1).text()}';
             var url = '${pageContext.request.contextPath}/charge/'+td.eq(1).text();
@@ -583,18 +583,22 @@
                         jsonmap[i] = JSON.parse(jsonmap[i]);
                     }
                     const list0 = jsonmap[0]['userInfo'];
-                    document.getElementById('email').innerHTML=list0.email;
-                    document.getElementById('membername').innerHTML=list0.membername;
-                    document.getElementById('licensegrade').innerHTML=list0.licensegrade;
-                    document.getElementById('celltel').innerHTML=list0.celltel;
-                    document.getElementById('businessname').innerHTML=list0.businessname;
-                    document.getElementById('businessnumber').innerHTML=list0.businessnumber;
-                    document.getElementById('joindate').innerHTML=list0.joindate;
-                    document.getElementById('representationname').innerHTML=list0.representationname;
-                    document.getElementById('zipaddress').innerHTML=list0.zipaddress;
-                    document.getElementById('businesskind').innerHTML=list0.businesskind;
-                    document.getElementById('businesscondition').innerHTML=list0.businesscondition;
-                    document.getElementById('statusnm').innerHTML=list0.statusnm;
+                    var htmltag = "";
+                    console.log("list0.  -->  .." + JSON.stringify(list0));
+                    console.log("email-------------------------------", list0.email);
+                    var text = document.createTextNode(list0.email);
+                    console.log("text-------------------------------", text);
+                    $('#email').text(list0.email);
+                    $('#licensegrade').text(list0.licensegrade);
+                    $('#celltel').text(list0.celltel);
+                    $('#businessname').text(list0.businessname);
+                    $('#businessnumber').text(list0.email);
+                    $('#joindate').text(list0.joindate);
+                    $('#representationname').text(list0.representationname);
+                    $('#zipaddress').text(list0.zipaddress);
+                    $('#businesskind').text(list0.businesskind);
+                    $('#businesscondition').text(list0.businesscondition);
+                    $('#statusnm').text(list0.statusnm);
                     document.getElementById('totalsoluble').innerHTML=list0.totalsoluble;
                     document.getElementById('basevolume').innerHTML=list0.basevolume;
                     document.getElementById('addvolume').innerHTML=list0.addvolume;
@@ -603,14 +607,18 @@
                     document.getElementById('basecharge').innerHTML=currencyFormatter(list0.basecharge);
                     document.getElementById('addcharge').innerHTML=currencyFormatter(list0.addcharge);
                     document.getElementById('datakeepterm').innerHTML=list0.datakeepterm;
-                    document.getElementById('datakeepunit').innerHTML=list0.datakeepunit;
-                    document.getElementById('serverdomainname').innerHTML=list0.serverdomainname;
+                    document.getElementById('datakeepunit').innerHTML(list0.datakeepunit);
+                    console.log("1111==>"+document.getElementById('serverdomainname').innerHTML)
+                    htmltag  = '<input type="text" class="inp small" style="text-align:center; width:100%" value=';
+                    htmltag += list0.serverdomainname+' name="serverdomainname">';
+                    document.getElementById('serverdomainname').innerHTML=htmltag;
+                    console.log("2222==>"+document.getElementById('serverdomainname').innerHTML);
 
                     const list1 = jsonmap[1]['chargeInfo'];
                     var data = "";
 
                     for(var i=0;i<list1.length;i++) {
-                        console.log("map.  --> " + i + "..1." + list1[i].useyym + "..2." + "${list1[i].useyym}");
+                        //console.log("map.  --> " + i + "..1." + list1[i].useyym + "..2." + "${list1[i].useyym}");
                         data += "<tr>";
 
                         data += "<td id=c_useyym class='text-center'>"+list1[i].useyym+"</td>";
@@ -633,7 +641,7 @@
                         data += "<td class='text-center'></td>";
                         data += "</tr>";
                     }
-console.log("data--->"+data);
+//console.log("data--->"+data);
                     $("#chargeinfo").html(data);
                     var data2 = "";
                     const list2 = jsonmap[2]['taxInfo'];

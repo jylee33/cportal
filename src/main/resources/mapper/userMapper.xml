@@ -61,4 +61,9 @@
         WHERE groupcode = '001' AND commoncode = #{commoncode};
     </select>
 
+    <insert id="insertMemberLicenseHistory" >
+        insert into tbmemberlicensehistory (licenseid, email, licensegrade, datakeepterm, datakeepunit, basecharge, addcharge, basevolume, servicevolume, addvolume) values
+            (uuid(), #{email}, #{licensegrade}, #{datakeepterm}, #{datakeepunit}, #{basecharge}, #{addcharge}, 0, 0, 0)
+    </insert>
+
 </mapper>

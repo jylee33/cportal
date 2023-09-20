@@ -1,6 +1,7 @@
 package com.hamonsoft.cportal.controller;
 
 import com.hamonsoft.cportal.domain.Member;
+import com.hamonsoft.cportal.domain.MemberLicense;
 import com.hamonsoft.cportal.domain.MemberTaxInformation;
 import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.ResponseDTO;
@@ -50,12 +51,12 @@ public class UserController {
 
     @Transactional
     @PostMapping("chginforesult")
-    public void chginforesult(Member member, TaxInformation taxInformation, Model model) {
+    public void chginforesult(Member member, TaxInformation taxInformation, MemberLicense license, Model model) {
         logger.info("call chginforesult ......................");
         logger.info(member.toString());
         logger.info(taxInformation.toString());
 
-        ResultDto resultDto = userService.chgmember(member, taxInformation);
+        ResultDto resultDto = userService.chgmember(member, taxInformation, license);
         if (resultDto.getTRAN_STATUS() == 1) {
             model.addAttribute("result", "success");
         } else {

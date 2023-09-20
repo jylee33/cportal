@@ -157,3 +157,9 @@ create TABLE tbpayhistory (
 
 -- 2023.09.20 컬럼 변경
 ALTER TABLE tbtaxinformation CHANGE Representationname representationname VARCHAR(50) not NULL;
+
+-- 2023.09.20 tbmemberlicensehistory 도 tbmemberlicense 와 동일한 스킴으로 변경
+alter table tbmemberlicensehistory modify basevolume int(4) unsigned DEFAULT 0 ;
+alter table tbmemberlicensehistory modify servicevolume int(4) unsigned DEFAULT 0 ;
+alter table tbmemberlicensehistory modify addvolume  int(4) unsigned DEFAULT 0 ;
+alter table tbmemberlicensehistory modify updatedBy varchar(50)  DEFAULT NULL ;

@@ -3,6 +3,7 @@ package com.hamonsoft.cportal.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hamonsoft.cportal.domain.Member;
+import com.hamonsoft.cportal.domain.MemberLicense;
 import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.repository.UserRepository;
@@ -52,7 +53,7 @@ public class UserService {
     }
 
     @Transactional(rollbackFor = {Exception.class})
-    public ResultDto chgmember(Member member, TaxInformation tax) {
+    public ResultDto chgmember(Member member, TaxInformation tax, MemberLicense license) {
         ResultDto resultDto = new ResultDto();
         try {
             resultDto = chgMemberInfo(member);
@@ -97,12 +98,12 @@ public class UserService {
 
                 String baseLicense = userRepository.getBaseLicense(paramMap);
                 logger.info("baseLicense =============================== " + baseLicense);
-                long license = 0;
+                long lLicense = 0;
                 if (newGrade != 1) {
                     if (newGrade == 4) {
-                        license = 1000000;  // enterprise 는 일단 1,000,000원
+                        lLicense = 1000000;  // enterprise 는 일단 1,000,000원
                     } else {
-                        license = Long.parseLong(baseLicense);
+                        lLicense = Long.parseLong(baseLicense);
                     }
 
                 }
@@ -125,7 +126,7 @@ public class UserService {
 
                 } else {
                     // Free 이외의 그룹은 오늘 이후 이번달 잔여 날짜에 대한 금액을 더한다.
-                    paid_amount2 += license * dCount / endday;  // 일할 계산
+                    paid_amount2 += lLicense * dCount / endday;  // 일할 계산
 
                     logger.info("일할 계산된 paid_amount2 - " + paid_amount2);
                     tax.setPaid_amount(paid_amount2);
@@ -138,6 +139,8 @@ public class UserService {
 
                     userRepository.updatePaidAmount(tax);
                 }
+
+                userRepository.insertMemberLicenseHistory(license);
 
             }
         } catch (JsonProcessingException e) {

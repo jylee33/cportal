@@ -122,6 +122,10 @@
             <input type="hidden" name="paid_amount" id="paid_amount" value="${tax.paid_amount}">
         </div>
         <button class="btn large block" id="chguserinfo">회원정보 변경</button>
+        <input type="hidden" name="basecharge" value="0">
+        <input type="hidden" name="addcharge" value="0">
+        <input type="hidden" name="datakeepterm" value="30">
+        <input type="hidden" name="datakeepunit" value="D">
     </form>
 </div>
 
@@ -134,13 +138,26 @@
         $("#licensegrade").SumoSelect();
 
         $("#licensegrade").change(function (e) {
-            // var grade = $(this).val();
-            //
-            // if (grade == "1") {
-            //     $("#billinfo").hide();
-            // } else {
-            //     $("#billinfo").show();
-            // }
+            var grade = $(this).val();
+
+            if (grade == "1") {
+                $("#billinfo").hide();
+                $("input[name='basecharge']").val('0');
+            } else {
+                $("#billinfo").show();
+
+                <c:forEach items="${licenselist}" var="license">
+                if (grade == "${license.commoncode}") {
+                    console.log("commoncode - ${license.commoncode}, baselicense - ${license.baselicense}");
+                    $("input[name='basecharge']").val("${license.baselicense}");
+                }
+                </c:forEach>
+
+                if (grade == "4") {
+                    console.log("Enterprise 등급은 baselicense 를 100만원으로 한다.");
+                    $("input[name='basecharge']").val("1000000");
+                }
+            }
         });
 
         var taxnum = $("#taxcompanynumber").val();

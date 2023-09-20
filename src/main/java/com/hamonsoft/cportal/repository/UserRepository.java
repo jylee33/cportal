@@ -1,6 +1,7 @@
 package com.hamonsoft.cportal.repository;
 
 import com.hamonsoft.cportal.domain.Member;
+import com.hamonsoft.cportal.domain.MemberLicense;
 import com.hamonsoft.cportal.domain.MemberTaxInformation;
 import com.hamonsoft.cportal.domain.TaxInformation;
 import org.apache.ibatis.annotations.Mapper;
@@ -26,5 +27,7 @@ public interface UserRepository {
 
     ArrayList<HashMap<String, Object>> findAll();
 //    Member info(Map<String, Object> paramMap);
+
+    void insertMemberLicenseHistory(MemberLicense license);
 
 }

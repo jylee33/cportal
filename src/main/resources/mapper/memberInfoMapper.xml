@@ -93,7 +93,7 @@
         ,a01.businessnumber
         ,a01.joindate
         ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
-        ,a01.serverdomainname
+        ,ifnull(a01.serverdomainname,'') serverdomainname
         ,j01.datakeepterm
         ,j01.datakeepunit
         ,j01.basevolume + j01.servicevolume + j01.addvolume totalsoluble
@@ -151,9 +151,10 @@
             ,a01.celltel
             ,a01.businessname
             ,a01.businessnumber
+            ,concat(substring(a01.businessnumber,1,3),'-',substring(a01.businessnumber,4,2),'-',substring(a01.businessnumber,6,5)) strbusinessnumber
             ,a01.joindate
             ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
-            ,a01.serverdomainname
+            ,ifnull(a01.serverdomainname,'') serverdomainname
             ,case when a01.withdrawalyn = '0' then '회원' when a01.withdrawalyn = '1' then '탈퇴' else '중지' end statusnm
             ,j01.datakeepterm          -- 데이터보관기간
             ,j01.datakeepunit          -- 데이터보관단위(D:일,M:월,Y:년)
@@ -164,7 +165,7 @@
             ,j01.addvolume             -- 추가장비수량
             ,j01.addcharge             -- 추가라이센스요금
             ,j01.basecharge + IFNULL(j01.addcharge,0) totcharge  -- 라이센스합계금액
-            ,j02.Representationname
+            ,j02.representationname
             ,j02.businesskind
             ,j02.businesscondition
             ,j02.postnumber
@@ -201,6 +202,7 @@
              ,a01.celltel               -- 회원전화번호
              ,a01.businessname          -- 사업장명
              ,a01.businessnumber        -- 사업자등록번호
+             ,concat(substring(a01.businessnumber,1,3),'-',substring(a01.businessnumber,4,2),'-',substring(a01.businessnumber,6,5)) strbusinessnumber
              ,a01.joindate              -- 가입일자
              ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
              ,a01.serverdomainname
@@ -222,6 +224,8 @@
              ,j02.address               -- 주소
              ,j02.detailaddress         -- 상세주소
              ,concat(j02.postnumber,' ',j02.address,' ',j02.detailaddress) zipaddress
+             ,j03.useyym                  useyym
+             ,concat(substring(j03.useyym,1,4),'.',substring(j03.useyym,5,2)) struseyym
              ,j03.useyym                  useyym
              ,IFNULL(j03.totalvolume,0)   totalvolume
              ,IFNULL(j03.networkvolume,0) networkvolume
@@ -254,6 +258,7 @@
              ,a01.celltel               -- 회원전화번호
              ,a01.businessname          -- 사업장명
              ,a01.businessnumber        -- 사업자등록번호
+             ,concat(substring(a01.businessnumber,1,3),'-',substring(a01.businessnumber,4,2),'-',substring(a01.businessnumber,6,5)) strbusinessnumber
              ,a01.joindate              -- 가입일자
              ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
              ,a01.serverdomainname
@@ -414,22 +419,45 @@
         update tbmemberlicense
         set addvolume = #{addvolume}
         ,servicevolume = #{servicevolume}
-          ,basecharge = #{basecharge}
           ,addcharge = #{addcharge}
         ,datakeepterm = #{datakeepterm}
-        ,datakeepunit = #{datakeepunit}
+          ,datakeepunit = #{datakeepunit}
         where email = #{email}
     </update>
 
     <!-- 라이센스 수정  -->
     <update id="memberUpdate" parameterType="hashmap">
         update tbmember
-        set addvolume = #{addvolume}
-        ,servicevolume = #{servicevolume}
-        ,addcharge = #{addcharge}
-        ,datakeepterm = #{datakeepterm}
-        ,datakeepunit = #{datakeepunit}
-        ,serverdomainname = #{serverdomainname}
+        set serverdomainname = #{serverdomainname}
         where email = #{email}
     </update>
+
+
+    <!--  사용자 전체 건수  -->
+    <select id="jsonUseDeviceCount" resultType="String">
+        select IFNULL( max(usedeviceid), uuid()) usedeviceid
+        from tbusedevice            a01
+        where 1 = 1
+          and a01.userid = #{userid}
+          and a01.useday = date_format(curdate(),'%Y%m%d')
+    </select>
+    <!--  사용자등록장비  -->
+    <insert id="jsonUseDeviceInsert">
+        insert into tbusedevice(
+            usedeviceid     ,userid          ,useday          ,transtatus      ,info            ,
+            nmscount        ,smscount        ,dbmscount       ,apcount         ,fmscount        ,
+            reason                                                                              )
+        values(#{usedeviceid},#{userid}      ,date_format(curdate(),'%Y%m%d'),#{transtatus},#{info},
+               #{nmscount}  , #{smscount}  ,#{apcount}      ,#{dbmscount}    ,#{fmscount}     ,
+               #{reason}                                                                       )
+        ON DUPLICATE KEY UPDATE
+             transtatus  = #{transtatus}
+            ,info        = #{info}
+            ,nmscount    = #{nmscount}
+            ,smscount    = #{smscount}
+            ,dbmscount   = #{dbmscount}
+            ,apcount     = #{apcount}
+            ,fmscount    = #{fmscount}
+            ,reason      = #{reason}
+    </insert>
 </mapper>

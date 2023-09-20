@@ -35,6 +35,8 @@ public interface MemberInfoRepository {
 
     public void licenseUpdate(MemberLicenseDto memberLicenseDto) throws Exception;
 
+    public void memberUpdate(MemberLicenseDto memberLicenseDto) throws Exception;
+
 
     public String jsonUseDeviceCount(String email) throws Exception;
 

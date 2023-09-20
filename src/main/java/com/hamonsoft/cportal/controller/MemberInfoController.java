@@ -221,6 +221,8 @@ public class MemberInfoController {
         logger.info("memberLicenseDto --> "+memberLicenseDto);
 
         memberinfoService.licenseUpdate(memberLicenseDto);
+
+        memberinfoService.memberUpdate(memberLicenseDto);
        // licenseUpdate
     }
 

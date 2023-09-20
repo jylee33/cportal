@@ -17,7 +17,8 @@
         } else {
             alert("회원정보 변경 실패\nreason - ${reason}");
         }
-        self.location = "${path}/user/info";
+        <%--self.location = "${path}/user/info";--%>
+        self.location = "${path}/bill/again?email=${email}";
     });
 
 </script>

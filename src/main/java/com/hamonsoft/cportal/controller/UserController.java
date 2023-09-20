@@ -63,6 +63,7 @@ public class UserController {
             model.addAttribute("result", "fail");
             model.addAttribute("reason", resultDto.getREASON());
         }
+        model.addAttribute("email", member.getEmail());
     }
 
     @GetMapping(value = "chgpw")

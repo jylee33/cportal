@@ -68,4 +68,12 @@ public class BillController {
         ResponseEntity<String> response = restTemplate.postForEntity(url, req, String.class);
     }
 
+    @GetMapping(value = "again")
+    public void againPayment(@RequestParam("email") String email, Model model) {
+        logger.info("againPayment call --------------------------------");
+
+        model.addAttribute("email", email);
+
+    }
+
 }

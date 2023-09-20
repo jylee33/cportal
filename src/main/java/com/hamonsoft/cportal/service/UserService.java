@@ -111,7 +111,7 @@ public class UserService {
                 long paid_amount2 = paidAmount * (today-1) / endday;    // newGrade = 1, Free 가입자로 변경한 경우는 오늘까지만 금액 계산
 
                 if (newGrade == 1) {
-                    // Free 가입자는 next_pay_date 를 어제로 변경하고 다음 결제 체크 시점에 결제가 되도록 한다.
+                    // Free 가입자는 next_pay_date 를 어제로 변경하고 chginforesult.jsp 에서 결제 페이지(bill/again)로 이동해서 결제되도록 한다.
                     logger.info("일할 계산된 paid_amount2 - " + paid_amount2);
                     tax.setPaid_amount(paid_amount2);
 

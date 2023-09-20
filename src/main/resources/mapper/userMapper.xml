@@ -32,7 +32,7 @@
     </update>
 
     <update id="updatePaidAmount">
-        update tbtaxinformation set paid_amount = #{paid_amount}
+        update tbtaxinformation set paid_amount = #{paid_amount}, next_pay_date = #{next_pay_date}
         where email=#{email}
     </update>
 

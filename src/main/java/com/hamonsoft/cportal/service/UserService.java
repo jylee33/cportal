@@ -3,7 +3,6 @@ package com.hamonsoft.cportal.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hamonsoft.cportal.domain.Member;
-import com.hamonsoft.cportal.domain.MemberTaxInformation;
 import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.repository.UserRepository;
@@ -21,7 +20,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -106,11 +107,38 @@ public class UserService {
 
                 }
 
-                long paid_amount2 = paidAmount * (today-1) / endday + license * dCount / endday;  // 일할 계산
-                logger.info("일할 계산된 paid_amount2 - " + paid_amount2);
-                tax.setPaid_amount(paid_amount2);
+                long paid_amount2 = paidAmount * (today-1) / endday;    // newGrade = 1, Free 가입자로 변경한 경우는 오늘까지만 금액 계산
 
-                userRepository.updatePaidAmount(tax);
+                if (newGrade == 1) {
+                    // Free 가입자는 next_pay_date 를 어제로 변경하고 다음 결제 체크 시점에 결제가 되도록 한다.
+                    logger.info("일할 계산된 paid_amount2 - " + paid_amount2);
+                    tax.setPaid_amount(paid_amount2);
+
+                    LocalDate ldYesterday = ldNow.plusDays(-1);
+                    Instant instant = ldYesterday.atStartOfDay(ZoneId.systemDefault()).toInstant();
+                    Date dtYesterday = Date.from(instant);
+                    logger.info("dtYesterday - " + dtYesterday);
+
+                    tax.setNext_pay_date(dtYesterday);
+
+                    userRepository.updatePaidAmount(tax);
+
+                } else {
+                    // Free 이외의 그룹은 오늘 이후 이번달 잔여 날짜에 대한 금액을 더한다.
+                    paid_amount2 += license * dCount / endday;  // 일할 계산
+
+                    logger.info("일할 계산된 paid_amount2 - " + paid_amount2);
+                    tax.setPaid_amount(paid_amount2);
+
+                    LocalDate ldNextMonth = ldNow.plusMonths(1).withDayOfMonth(1);
+                    Instant instant = ldNextMonth.atStartOfDay(ZoneId.systemDefault()).toInstant();
+                    Date dtNext = Date.from(instant);
+                    tax.setNext_pay_date(dtNext);
+                    logger.info("next_pay_date - " + tax.getNext_pay_date());
+
+                    userRepository.updatePaidAmount(tax);
+                }
+
             }
         } catch (JsonProcessingException e) {
             e.printStackTrace();

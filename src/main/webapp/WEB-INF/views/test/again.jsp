@@ -8,7 +8,7 @@
 <%@include file="../include/header.jsp" %>
 
 <div class="container">
-    <button class="btn large block" id="again">재결제</button>
+<%--    <button class="btn large block" id="again">재결제</button>--%>
 </div>
 
 
@@ -20,22 +20,39 @@
         var customer_uid = "hamonsoft_1694665088551";
         var paid_amount = 1;
 
-        $("#again").on("click", function (e) {
-            $.ajax({
-                url: "${path}/iamport/again",
-                type: 'POST',
-                datatype: 'json',
-                data: {
-                    email: "${email}",
-                    // customer_uid: customer_uid,
-                    // paid_amount: paid_amount
-                }
-            }).done(function(result){
-                console.log("rsesult", result);
-            }).fail(function(error){
-                alert(JSON.stringify(error));
-            });
+        $.ajax({
+            url: "${path}/iamport/again",
+            type: 'POST',
+            datatype: 'json',
+            data: {
+                email: "${email}",
+                // customer_uid: customer_uid,
+                // paid_amount: paid_amount
+            }
+        }).done(function(result){
+            console.log("rsesult", result);
+        }).fail(function(error){
+            alert(JSON.stringify(error));
         });
+
+        self.location = "${path}/";
+
+        <%--$("#again").on("click", function (e) {--%>
+        <%--    $.ajax({--%>
+        <%--        url: "${path}/iamport/again",--%>
+        <%--        type: 'POST',--%>
+        <%--        datatype: 'json',--%>
+        <%--        data: {--%>
+        <%--            email: "${email}",--%>
+        <%--            // customer_uid: customer_uid,--%>
+        <%--            // paid_amount: paid_amount--%>
+        <%--        }--%>
+        <%--    }).done(function(result){--%>
+        <%--        console.log("rsesult", result);--%>
+        <%--    }).fail(function(error){--%>
+        <%--        alert(JSON.stringify(error));--%>
+        <%--    });--%>
+        <%--});--%>
 
     });
 

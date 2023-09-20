@@ -48,8 +48,8 @@
 		select email from tbtaxinformation
 	</select>
 
-	<update id="updateNextPayDate">
-		update tbtaxinformation set next_pay_date = #{dtNext}, imp_uid = #{imp_uid}, last_pay_date = now()
+	<update id="updatePayInformation">
+		update tbtaxinformation set next_pay_date = #{dtNext}, imp_uid = #{imp_uid}, last_pay_date = now(), updatedAt = now()
 		where email=#{email}
 	</update>
 

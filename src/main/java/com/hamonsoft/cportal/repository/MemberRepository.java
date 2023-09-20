@@ -20,7 +20,7 @@ public interface MemberRepository {
 
     ArrayList<HashMap<String, String>> selectBaseLicense();
 
-    void updateNextPayDate(Map<String, Object> paramMap);
+    void updatePayInformation(Map<String, Object> paramMap);
 
     void insertPayHistory(Map<String, Object> paramMap);
 

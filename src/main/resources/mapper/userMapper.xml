@@ -4,13 +4,19 @@
 <mapper namespace="com.hamonsoft.cportal.repository.UserRepository">
 
     <select id="memberInfo" resultType="Member">
-        select  email, membername, grpname, celltel, businessname, businessnumber, licensegrade
+        select email, membername, grpname, celltel, businessname, businessnumber, licensegrade
         from tbmember
         where email=#{email}
     </select>
 
     <select id="taxInfo" resultType="TaxInformation">
-        select  companyname, representationname, taxcompanynumber, taxemail, address, detailaddress, businesskind, businesscondition
+        select companyname, representationname, taxcompanynumber, taxemail, address, detailaddress, businesskind, businesscondition, paid_amount, DATE_FORMAT(updatedAt,'%Y-%m-%d %H:%i:%s') as updatedAt
+        from tbtaxinformation
+        where email=#{email}
+    </select>
+
+    <select id="getCreatedAt" resultType="Date">
+        select DATE_FORMAT(createdAt,'%Y-%m-%d %H:%i:%s') as createdAt
         from tbtaxinformation
         where email=#{email}
     </select>
@@ -23,6 +29,11 @@
     <update id="chggrade">
         update tbmember set licensegrade=#{licensegrade}
         where email = #{email}
+    </update>
+
+    <update id="updatePaidAmount">
+        update tbtaxinformation set paid_amount = #{paid_amount}
+        where email=#{email}
     </update>
 
     <update id="chgtaxinformation">
@@ -43,4 +54,11 @@
     <select id="findAll" resultType="HashMap">
         select * from tbmember
     </select>
+
+    <select id="getBaseLicense" resultType="String">
+        SELECT baselicense
+        FROM tbcommoncode
+        WHERE groupcode = '001' AND commoncode = #{commoncode};
+    </select>
+
 </mapper>

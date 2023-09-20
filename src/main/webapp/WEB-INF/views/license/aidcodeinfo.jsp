@@ -108,14 +108,10 @@
             };
 
         var dataAdapter = new $.jqx.dataAdapter(source);
-        var cellsrenderer = function (row, columnfield, value, defaulthtml, columnproperties) {
-            if (value = 'I') {
-                return 'editable: true';
-            }
-            else {
-                return 'editable: false';
-            }
+        var cellbeginedit = function (row, datafield, columntype, value) {
+            if (value == "I"){ return true} else{return false};
         }
+
         $("#aidInfo").jqxGrid(
             {
                 source: dataAdapter,
@@ -126,7 +122,7 @@
                 height: 700,
                 width: '100%',
                 columns: [
-                    { text: '솔루션명', datafield: 'solutioncode', displayField: 'solutionname', align: "center" , cellsalign: "center" , width: '8%', cellsrenderer: cellsrenderer, columntype: 'dropdownlist',
+                    { text: '솔루션명', datafield: 'solutioncode', displayField: 'solutionname', align: "center" , cellsalign: "center" , width: '8%', cellbeginedit: cellbeginedit, columntype: 'dropdownlist',
                         createeditor: function (row, column, editor) {
                             editor.jqxDropDownList({
                                 source: [

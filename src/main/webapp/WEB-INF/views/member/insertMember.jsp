@@ -38,7 +38,7 @@
                 <input type="password" class="inp2" name="password" id="password1" placeholder="비밀번호를 입력하세요(영문/숫자/특수문자 조합으로 9~16자)" required>
             </div>
         </div>
-        <div class="alert-msg" id="pwAlert">반드시 영문과 숫자, 특수문자를 혼합하여 9~16자 입력해주시기 바랍니다.<br>(허용 특수문자 : !@#$%^+=-)</div>
+        <div class="alert-msg" id="pwAlert">반드시 영문(대문자,소문자 반드시 1개 이상)과 숫자, 특수문자를 혼합하여 9~16자 입력해주시기 바랍니다.<br>(허용 특수문자 : !@#$%^+=-)</div>
 
         <div class="inp-area">
             <div class="label">비밀번호 확인 *</div>

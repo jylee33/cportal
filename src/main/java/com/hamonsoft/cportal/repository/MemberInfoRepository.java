@@ -1,5 +1,6 @@
 package com.hamonsoft.cportal.repository;
 
+import com.hamonsoft.cportal.domain.JsonUseVolume;
 import com.hamonsoft.cportal.dto.MemberLicenseDto;
 import com.hamonsoft.cportal.utils.Pagination;
 import org.apache.ibatis.annotations.Mapper;
@@ -33,5 +34,10 @@ public interface MemberInfoRepository {
     public List<Map<String, Object>> memberTaxPageList(Pagination pagination) throws Exception;
 
     public void licenseUpdate(MemberLicenseDto memberLicenseDto) throws Exception;
+
+
+    public String jsonUseDeviceCount(String email) throws Exception;
+
+    public void jsonUseDeviceInsert(JsonUseVolume jsonUseVolume) throws Exception;
 
 }

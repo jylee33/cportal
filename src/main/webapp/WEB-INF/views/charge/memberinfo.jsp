@@ -221,7 +221,7 @@
                                     </colgroup>
                                     <tbody>
                                         <tr>
-                                            <th rowspan="8">사용라이센스</th>
+                                            <th rowspan="8">사용</br>라이센스</th>
                                             <th rowspan="4">가용장비</th>
                                             <th>전체가용</th>
                                             <td colspan="2" id=totalsoluble class="text-center">${userInfo.totalsoluble}</td>
@@ -233,14 +233,24 @@
                                         <tr>
                                             <th>추가</th>
                                             <td colspan="2" class="text-center" id="addvolume">
-                                                <input type="number" class="inp" style="text-align:center; width:100%" value=${userInfo.addvolume} name="addvolume" required>
+                                                <input type="number" class="inp" style="text-align:center; width:100%" value=${userInfo.addvolume} name="addvolume" maxlength="8" required>
                                             </td>
+                                            <script type="text/javascript">
+                                                var value1 = $('#addvolume').text();
+                                                var money2 = value1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                                $('#addvolume').text(money2);
+                                            </script>
                                         </tr>
                                         <tr>
                                             <th>서비스</th>
                                             <td colspan="2" class="text-center" id=servicevolume>
-                                                <input type="number" class="inp" style="text-align:center; width:100%" value=${userInfo.servicevolume} name="servicevolume" required>
+                                                <input type="number" class="inp" style="text-align:center; width:100%" value=${userInfo.servicevolume} name="servicevolume" maxlength="8" required>
                                             </td>
+                                            <script type="text/javascript">
+                                                var value1 = $('#servicevolume').text();
+                                                var money2 = value1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                                $('#servicevolume').text(money2);
+                                            </script>
                                         </tr>
                                         <tr>
                                             <th rowspan="3">요금</th>
@@ -261,8 +271,14 @@
                                         <tr>
                                             <th>추가</th>
                                             <td colspan="2" id=addcharge class="text-center">
-                                                <input type="number" class="inp small" style="text-align:center;width:100%" value=${userInfo.addcharge} name="addcharge" required pattern="/\B(?=(\d{3})+(?!\d))/g,','">
+                                                <input type="number" class="inp small" style="text-align:center;width:100%" value=${userInfo.addcharge} name="addcharge">
                                             </td>
+                                            <script type="text/javascript">
+                                                var value1 = $('#addcharge').text();
+                                                var money2 = value1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                                $('#addcharge').text(money2);
+                                            </script>
+
                                         </tr>
                                         <tr>
                                             <th colspan="2">데이터 보관기간</th>
@@ -287,10 +303,11 @@
                                 </table>
                             </div>
                             <div class="bottom-btns">
-                                <button class="btn">저장</button>
+                                <button class="btn" id="userInfoSave">저장</button>
+<%--                                <button userInfoSave class="btn">저장</button>--%>
                             </div>
                         </div>
-                        <div class="col4" style="width: 25%">
+                        <div class="col4" style="width: 25%; color:#8B0000;">
                             <div class="table-type2">
                                 <table id="tbuser3">
                                     <colgroup>
@@ -481,10 +498,11 @@
             "email": '${userInfo.email}',
             "addvolume": $('input[name=addvolume]').val(),
             "servicevolume": $('input[name=servicevolume]').val(),
-            "basecharge": $('input[name=basecharge]').val(),
+            "basecharge": $('input[id=basecharge]').val(),
             "addcharge": $('input[name=addcharge]').val(),
-            "datakeepterm": $('input[name=datakeepterm]').val(),
-            "datakeepunit": $('select[name=datakeepunit]').val()
+            "datakeepterm": $('input[id=datakeepterm]').val(),
+            "datakeepunit": $('select[id=datakeepunit]').val(),
+            "serverdomainname": $('input[id=serverdomainname]').val()
         };
 
         $.ajax({
@@ -520,6 +538,11 @@
     $(document).ready(function() {
 
         changeColor();
+
+        // $('input[type=text]').on('keyup',function(){
+        //     updateTextView($(this));
+        // });
+
 
         $('#memberinfo-table tr').on('dblclick', function () {
             console.log('1');
@@ -716,19 +739,36 @@ console.log("data--->"+data);
             return false;
         }).filter(':eq(0)').click();
     });
-
-    $(document).ready(function(){
-        $('ul.tabs li').click(function(){
-            var tab_id = $(this).attr('data-tab');
-
-            $('ul.tabs li').removeClass('current');
-            $('.tab-content').removeClass('current');
-
-            $(this).addClass('current');
-            $("#"+tab_id).addClass('current');
-        })
-
-    })
+    function updateTextView(_obj){
+        var num = getNumber(_obj.val());
+        if(num==0){
+            _obj.val('');
+        }else{
+            _obj.val(num.toLocaleString());
+        }
+    }
+    function getNumber(_str){
+        var arr = _str.split('');
+        var out = new Array();
+        for(var cnt=0;cnt<arr.length;cnt++){
+            if(isNaN(arr[cnt])==false){
+                out.push(arr[cnt]);
+            }
+        }
+        return Number(out.join(''));
+    }
+    // $(document).ready(function(){
+    //     $('ul.tabs li').click(function(){
+    //         var tab_id = $(this).attr('data-tab');
+    //
+    //         $('ul.tabs li').removeClass('current');
+    //         $('.tab-content').removeClass('current');
+    //
+    //         $(this).addClass('current');
+    //         $("#"+tab_id).addClass('current');
+    //     })
+    //
+    // })
 
     function transExam(){
         const tableRows = document.querySelectorAll(".gold");

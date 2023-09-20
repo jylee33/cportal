@@ -56,7 +56,7 @@ public class MemberInfoController {
         mav.addObject("taxInfo",memberinfoService.memberTaxInfo(strEmail));
         logger.info("MemberSetList strEmail = memberInfo.toString() --->" + memberSet.get(0).toString());
         logger.info("mav.getViewName() = mav.getViewName() --->" +mav.getViewName());
-        logger.info("mav.getModelMap() = mav.getModelMap() --->" +memberinfoService.memberLicenseInfo(strEmail).toString());
+       //logger.info("mav.getModelMap() = mav.getModelMap() --->" +memberinfoService.memberLicenseInfo(strEmail).toString());
         return mav;
     }
 

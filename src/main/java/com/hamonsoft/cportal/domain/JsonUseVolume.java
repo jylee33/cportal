@@ -16,4 +16,5 @@ public class JsonUseVolume {
     private Integer apcount;
     private Integer fmscount;
     private String reason;
+    private String flag;
 }

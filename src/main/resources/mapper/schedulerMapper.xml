@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hamonsoft.cportal.repository.SchedulerRepository">
+
+    <select id="memberAllList" resultType="hashmap">
+        select *
+          from tbmember
+         where withdrawalyn = '0'
+    </select>
+
+    <!--  사용자사용장비 수 list-->
+    <insert id="batchUseListInsert" >
+        <foreach collection="list" item="item" open="insert all" close="" separator=" ">
+        into tbusedevice(
+            usedeviceid     ,userid          ,useday          ,transtatus      ,info            ,
+            nmscount        ,smscount        ,dbmscount       ,apcount         ,fmscount        ,
+            reason                                                                              )
+        values(#{usedeviceid},#{userid}      ,date_format(curdate(),'%Y%m%d'),#{transtatus},#{info},
+               #{nmscount}  , #{smscount}  ,#{apcount}      ,#{dbmscount}    ,#{fmscount}     ,
+               #{reason}                                                                       )
+        ON DUPLICATE KEY UPDATE
+            transtatus  = #{transtatus}
+              ,info        = #{info}
+              ,nmscount    = #{nmscount}
+              ,smscount    = #{smscount}
+              ,dbmscount   = #{dbmscount}
+              ,apcount     = #{apcount}
+              ,fmscount    = #{fmscount}
+              ,reason      = #{reason}
+        </foreach>
+    </insert>
+
+
+    <!--  사용자사용장비 수 -->
+    <insert id="batchUseDeviceInsert" >
+            insert into tbusedevice(
+            usedeviceid     ,userid          ,useday          ,transtatus      ,info            ,
+            nmscount        ,smscount        ,dbmscount       ,apcount         ,fmscount        ,
+            reason                                                                              )
+            values(#{usedeviceid},#{userid}      ,date_format(curdate(),'%Y%m%d'),#{transtatus},#{info},
+            #{nmscount}  , #{smscount}  ,#{apcount}      ,#{dbmscount}    ,#{fmscount}     ,
+            #{reason}                                                                       )
+            ON DUPLICATE KEY UPDATE
+            transtatus  = #{transtatus}
+            ,info        = #{info}
+            ,nmscount    = #{nmscount}
+            ,smscount    = #{smscount}
+            ,dbmscount   = #{dbmscount}
+            ,apcount     = #{apcount}
+            ,fmscount    = #{fmscount}
+            ,reason      = #{reason}
+    </insert>
+</mapper>

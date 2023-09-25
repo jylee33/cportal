@@ -23,15 +23,15 @@
                     <tbody>
                     <tr>
                         <th colspan="3">이메일</th>
-                        <td id=email class="text-center">${userInfo.email}</td>
+                        <td id=email class="text-left">${userInfo.email}</td>
                     </tr>
                     <tr>
                         <th colspan="3">사용자명</th>
-                        <td id=membername cclass="text-center">${userInfo.membername}</td>
+                        <td id=membername class="text-left">${userInfo.membername}</td>
                     </tr>
                     <tr>
                         <th colspan="3">라이센스등급</th>
-                        <td id=licensegrade class="text-center">
+                        <td id=licensegrade class="text-left">
                             <c:if test="${userInfo.licensegrade eq '1'}">Free</c:if>
                             <c:if test="${userInfo.licensegrade eq '2'}">Basic</c:if>
                             <c:if test="${userInfo.licensegrade eq '3'}">Pro</c:if>
@@ -40,19 +40,28 @@
                     </tr>
                     <tr>
                         <th colspan="3">전화번호</th>
-                        <td id=celltel class="text-center">${userInfo.celltel}</td>
+                        <td id=celltel class="text-left">${userInfo.celltel}</td>
+                        <script type="text/javascript">
+                            $('#celltel').text(phoneFormatter("${userInfo.celltel}"));
+                        </script>
                     </tr>
                     <tr>
                         <th colspan="3">사업장명</th>
-                        <td id=businessname class="text-center">${userInfo.businessname}</td>
+                        <td id=businessname class="text-left">${userInfo.businessname}</td>
                     </tr>
                     <tr>
                         <th colspan="3">사업자등록번호</th>
-                        <td id=businessnumber class="text-center">${userInfo.businessnumber}</td>
+                        <td id=businessnumber class="text-left">${userInfo.businessnumber}</td>
+                        <script type="text/javascript">
+                            $('#businessnumber').text(bizNoFormatter("${userInfo.businessnumber}","2"));
+                        </script>
                     </tr>
                     <tr>
                         <th colspan="3">가입일자</th>
-                        <td id=joindate class="text-center">${userInfo.joindate}</td>
+                        <td id=joindate class="text-left">${userInfo.joindate}</td>
+                        <script type="text/javascript">
+                            $('#joindate').text(dateFormatter("${userInfo.strjoindate}"));
+                        </script>
                     </tr>
                     <tr>
                         <th rowspan="7">사용라이센스</th>
@@ -73,42 +82,51 @@
                         <td id=servicevolume class="text-center">${userInfo.servicevolume}</td>
                     </tr>
                     <tr>
-                        <th rowspan="3">요금</th>
-                        <th>합계</th>
-                        <td id=totcharge class="text-center"><fmt:formatNumber type="number" maxIntegerDigits="3" value="${userInfo.totcharge}" />></td>
+                        <th rowspan="3" style="font: 17px">요금</th>
+                        <th style="color:#8B0000;font: 17px">합계</th>
+                        <td id=totcharge class="text-center" style="color:#8B0000;font: 17px">${userInfo.totcharge}</td>
+                        <script type="text/javascript">
+                            $('#totcharge').text(currencyFormatter("${userInfo.totcharge}"));
+                        </script>
                     </tr>
                     <tr>
-                        <th>기본</th>
-                        <td id=basecharge class="text-center"><fmt:formatNumber type="number" maxIntegerDigits="3" value="${userInfo.addcharge}" />></td>
+                        <th style="font: 17px">기본</th>
+                        <td id=basecharge class="text-center" style="font: 17px">${userInfo.basecharge}</td>
+                        <script type="text/javascript">
+                            $('#basecharge').text(currencyFormatter("${userInfo.basecharge}"));
+                        </script>
                     </tr>
                     <tr>
-                        <th>추가</th>
-                        <td id=addcharge class="text-center"><fmt:formatNumber type="number" maxIntegerDigits="3" value="${userInfo.addcharge}" />></td>
+                        <th style="color:#8B0000;font: 17px">추가</th>
+                        <td id=addcharge class="text-center" style="color:#8B0000;font: 17px">${userInfo.addcharge}</td>
+                        <script type="text/javascript">
+                            $('#addcharge').text(currencyFormatter("${userInfo.addcharge}"));
+                        </script>
                     </tr>
                     <tr>
-                        <th rowspan="7">등록장비</th>
-                        <th colspan="2">전체</th>
-                        <td id=totalvolume class="text-center">${userInfo.totalvolume}</td>
+                        <th rowspan="7" style="color:#8B0000;font: 17px">등록장비</th>
+                        <th colspan="2" style="color:#8B0000;font: 17px">전체</th>
+                        <td id=totalvolume class="text-center" style="color:#8B0000;font: 17px">${userInfo.totalvolume}</td>
                     </tr>
                     <tr>
-                        <th colspan="2">NMS</th>
-                        <td id=networkvolume class="text-center">${userInfo.networkvolume}</td>
+                        <th colspan="2" style="color:#8B0000;font: 17px">네트워크</th>
+                        <td id=networkvolume class="text-center" style="color:#8B0000;font: 17px">${userInfo.networkvolume}</td>
                     </tr>
                     <tr>
-                        <th colspan="2">SMS</th>
-                        <td id=servervolume class="text-center">${userInfo.servervolume}</td>
+                        <th colspan="2" style="color:#8B0000;font: 17px">서버</th>
+                        <td id=servervolume class="text-center" style="color:#8B0000;font: 17px">${userInfo.servervolume}</td>
                     </tr>
                     <tr>
-                        <th colspan="2">AP</th>
-                        <td id=apvolume class="text-center">${userInfo.apvolume}</td>
+                        <th colspan="2" style="color:#8B0000;font: 17px">무선네트워크</th>
+                        <td id=apvolume class="text-center" style="color:#8B0000;font: 17px">${userInfo.apvolume}</td>
                     </tr>
                     <tr>
-                        <th colspan="2">DBMS</th>
-                        <td id=dbmsvolume class="text-center">${userInfo.dbmsvolume}</td>
+                        <th colspan="2" style="color:#8B0000;font: 17px">데이터베이스</th>
+                        <td id=dbmsvolume class="text-center" style="color:#8B0000;font: 17px">${userInfo.dbmsvolume}</td>
                     </tr>
                     <tr>
-                        <th colspan="2">FMS</th>
-                        <td id=fmsvolume class="text-center">${userInfo.fmsvolume}</td>
+                        <th colspan="2" style="color:#8B0000;font: 17px">환경센스</th>
+                        <td id=fmsvolume class="text-center" style="color:#8B0000;font: 17px">${userInfo.fmsvolume}</td>
                     </tr>
 
                     </tbody>
@@ -131,14 +149,14 @@
                                 <th rowspan="2">서비스 장비</th>
                                 <th colspan="2">기본라이센스</th>
                                 <th colspan="2">추가라이센스</th>
-                                <th rowspan="2">전체</th>
-                                <th rowspan="2">네트워크</th>
-                                <th rowspan="2">서버</th>
-                                <th rowspan="2">AP</th>
-                                <th rowspan="2">데이터베이스</th>
-                                <th rowspan="2">환경센서</th>
-                                <th rowspan="2">사용금액</th>
-                                <th rowspan="2">사용율</th>
+                                <th rowspan="2" style="color:#8B0000;font: 17px">전체</th>
+                                <th rowspan="2" style="color:#8B0000;font: 17px">네트워크</th>
+                                <th rowspan="2" style="color:#8B0000;font: 17px">서버</th>
+                                <th rowspan="2" style="color:#8B0000;font: 17px">무선네트워크</th>
+                                <th rowspan="2" style="color:#8B0000;font: 17px">데이터베이스</th>
+                                <th rowspan="2" style="color:#8B0000;font: 17px">환경센서</th>
+                                <th rowspan="2" style="color:#8B0000;font: 17px">사용금액</th>
+                                <th rowspan="2" style="color:#8B0000;font: 17px">사용율</th>
                                 <th rowspan="2">비고</th>
                             </tr>
                             <tr>
@@ -154,7 +172,7 @@
                                 <c:when test="${fn:length(chargeInfo) > 0}">
                                     <c:forEach items="${chargeInfo}" var="charge">
                                         <tr>
-                                            <td id=c_useyym class="text-center">${charge.useyym}</td>
+                                            <td id=c_useyym class="text-center">${charge.struseyym}</td>
                                             <td id=c_licensegrade class="text-center">
                                                 <c:if test="${charge.licensegrade eq '1'}">Free</c:if>
                                                 <c:if test="${charge.licensegrade eq '2'}">Basic</c:if>
@@ -163,17 +181,17 @@
                                             </td>
                                             <td id=c_servicevolume class="text-center">${charge.servicevolume}</td>
                                             <td id=c_basevolume class="text-center">${charge.basevolume}</td>
-                                            <td id=c_basecharge class="text-center">${charge.basecharge}</td>
+                                            <td id=c_basecharge class="text-center"><fmt:formatNumber type="number" maxIntegerDigits="10" value="${charge.basecharge}"/></td>
                                             <td id=c_addvolume class="text-center">${charge.addvolume}</td>
-                                            <td id=c_addcharge class="text-center">${charge.addcharge}</td>
-                                            <td id=c_totalvolume class="text-center">${charge.totalvolume}</td>
-                                            <td id=c_networkvolume class="text-center">${charge.networkvolume}</td>
-                                            <td id=c_servervolume class="text-center">${charge.servervolume}</td>
-                                            <td id=c_apvolume class="text-center">${charge.apvolume}</td>
-                                            <td id=c_dbmsvolume class="text-center">${charge.dbmsvolume}</td>
-                                            <td id=c_fmsvolume class="text-center"><fmt:formatNumber type="number" maxIntegerDigits="3" value="${charge.fmsvolume}" />></td>
-                                            <td id=c_totalcharge class="text-center">${charge.totalcharge}</td>
-                                            <td id=c_userate class="text-center">${charge.userate}</td>
+                                            <td id=c_addcharge class="text-center"><fmt:formatNumber type="number" maxIntegerDigits="10" value="${charge.addcharge}"/></td>
+                                            <td id=c_totalvolume class="text-center" style="color:#8B0000;font: 17px">${charge.totalvolume}</td>
+                                            <td id=c_networkvolume class="text-center" style="color:#8B0000;font: 17px">${charge.networkvolume}</td>
+                                            <td id=c_servervolume class="text-center" style="color:#8B0000;font: 17px">${charge.servervolume}</td>
+                                            <td id=c_apvolume class="text-center" style="color:#8B0000;font: 17px">${charge.apvolume}</td>
+                                            <td id=c_dbmsvolume class="text-center" style="color:#8B0000;font: 17px">${charge.dbmsvolume}</td>
+                                            <td id=c_fmsvolume class="text-center" style="color:#8B0000;font: 17px"><fmt:formatNumber type="number" maxIntegerDigits="10" value="${charge.fmsvolume}"/></td>
+                                            <td id=c_totalcharge class="text-center" style="color:#8B0000;font: 17px"><fmt:formatNumber type="number" maxIntegerDigits="10" value="${charge.totalcharge}"/></td>
+                                            <td id=c_userate class="text-center" style="color:#8B0000;font: 17px">${charge.userate}(%)</td>
                                             <td class="text-center"></td>
                                         </tr>
                                     </c:forEach>
@@ -221,12 +239,12 @@
                                         <tr>
                                             <td class="text-center">${tax.rownum}</td>
                                             <td class="text-center">${tax.representationname}</td>
-                                            <td class="text-center">${tax.businessnumber}</td>
+                                            <td class="text-center">${tax.strbusinessnumber}</td>
                                             <td class="text-center">${tax.zipaddress}</td>
                                             <td class="text-center">${tax.businesskind}</td>
                                             <td class="text-center">${tax.businesscondition}</td>
-                                            <td class="text-center">${tax.issuedate}</td>
-                                            <td class="text-center"><fmt:formatNumber type="number" maxIntegerDigits="3" value="${tax.issueamount}" />></td>
+                                            <td class="text-center">${tax.strissuedate}</td>
+                                            <td class="text-center"><fmt:formatNumber type="number" maxIntegerDigits="10" value="${tax.issueamount}" /></td>
                                             <td class="text-center">N</td>
                                             <td class="text-center"></td>
                                         </tr>
@@ -272,20 +290,20 @@
 <!-- // wrap -->
 
 <script language="javascript">
-        //10,20,30개씩 selectBox 클릭 이벤트
-        function changeSelectBox(currentPage, cntPerPage, pageSize){
+    //10,20,30개씩 selectBox 클릭 이벤트
+    function changeSelectBox(currentPage, cntPerPage, pageSize){
         var selectValue = $("#cntSelectBox").children("option:selected").val();
         movePage(currentPage, selectValue, pageSize);
 
     }
 
-        $(document).ready(function () {
+    $(document).ready(function () {
         var formObj = $("form[role='form']");
 
         // formObj.submit();
     });
-        //페이지 이동
-        function movePage(currentPage, cntPerPage, pageSize){
+    //페이지 이동
+    function movePage(currentPage, cntPerPage, pageSize){
 
         var url = "${pageContext.request.contextPath}/charge/individualinfo";
         url = url + "?currentPage="+currentPage;

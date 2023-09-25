@@ -15,8 +15,8 @@
             <div class="right">
                 <div class="srch-box">
                     <form name="memberNm" autocomplete="on" action="/portal/charge/memberinfo" method="post">
-                        <input type="text" class="inp" name="searchname" placeholder="사용자명 검색">
-                        <button class="btn-srch" type="submit"><span class="hidden">검색</span></button>
+                    <input type="text" class="inp" name="searchname" placeholder="사용자명 검색">
+                    <button class="btn-srch" type="submit"><span class="hidden">검색</span></button>
                     </form>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                                 <td class="text-center">${list.totalsoluble}</td>
                                 <td class="text-center" style="color:#8B0000;font: 17px">${list.totalvolume}</td>
                                 <td class="text-center" style="color:#8B0000;font: 17px">${list.userate}</td>
-                                <td class="text-center" style="color:#8B0000;font: 17px"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${list.totcharge}" /></td>
+                                <td class="text-center" style="color:#8B0000;font: 17px"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${list.totalcharge}" /></td>
                                 <td class="text-center" style="color:#8B0000;font: 17px">0</td>
                                 <td class="text-center" style="color:#8B0000;font: 17px">0</td>
                                 <td class="text-center">${list.statusnm}</td>
@@ -117,22 +117,22 @@
             </c:forEach>
             <a href="javascript:void(0);" class="next"
                onclick="movePage(${pagination.currentPage}<c:if test="${pagination.hasNextPage == true}">+1</c:if>,${pagination.cntPerPage},${pagination.pageSize});">
-                <i class="xi-angle-right-thin"></i></a>
+              <i class="xi-angle-right-thin"></i></a>
         </div>
-        <div class="tabs">
-            <a href="#" class="active">사용자 정보</a>
-            <a href="#">과금내역</a>
-            <a href="#">세금계산서 발행내역</a>
-        </div>
+            <div class="tabs">
+                <a href="#" class="active">사용자 정보</a>
+                <a href="#">과금내역</a>
+                <a href="#">세금계산서 발행내역</a>
+            </div>
 
-        <%--        <div class="tabs">--%>
-        <%--            <a href="${path}/charge/memberinfo" class="active">사용자 정보</a>--%>
-        <%--            <a href="${path}/charge/memberchargelist">과금내역(3건)</a>--%>
-        <%--            <a href="${path}/charge/membertaxlist">세금계산서 발행내역(3)</a>--%>
-        <%--        </div>--%>
+    <%--        <div class="tabs">--%>
+    <%--            <a href="${path}/charge/memberinfo" class="active">사용자 정보</a>--%>
+    <%--            <a href="${path}/charge/memberchargelist">과금내역(3건)</a>--%>
+    <%--            <a href="${path}/charge/membertaxlist">세금계산서 발행내역(3)</a>--%>
+    <%--        </div>--%>
 
-        <%--            <div style="max-width:1600px; margin:0 auto;">--%>
-        <div class="tab-cont">
+<%--            <div style="max-width:1600px; margin:0 auto;">--%>
+            <div class="tab-cont">
             <div class="cont">
                 <div style="max-width:1600px;">
                     <div class="cols">
@@ -144,68 +144,68 @@
                                         <col style="width:250px">
                                     </colgroup>
                                     <tbody>
-                                    <tr>
-                                        <th>이메일</th>
-                                        <td id=email class="text-left">${userInfo.email}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>사용자명</th>
-                                        <td id=membername class="text-left">${userInfo.membername}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>라이센스등급</th>
-                                        <td id=licensegrade class="text-left">
-                                            <c:if test="${userInfo.licensegrade eq '1'}">Free</c:if>
-                                            <c:if test="${userInfo.licensegrade eq '2'}">Basic</c:if>
-                                            <c:if test="${userInfo.licensegrade eq '3'}">Pro</c:if>
-                                            <c:if test="${userInfo.licensegrade eq '4'}">Ent</c:if>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>전화번호</th>
-                                        <td id=celltel class="text-left">${userInfo.celltel}</td>
-                                        <script type="text/javascript">
-                                            $('#celltel').text(phoneFormatter("${userInfo.celltel}"));
-                                        </script>
-                                    </tr>
-                                    <tr>
-                                        <th>사업장명</th>
-                                        <td id=businessname class="text-left">${userInfo.businessname}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>사업자등록번호</th>
-                                        <td id=businessnumber class="text-left">${userInfo.businessnumber}</td>
-                                        <script type="text/javascript">
-                                            $('#businessnumber').text(bizNoFormatter("${userInfo.businessnumber}","2"));                                                businessnumber.innerHTML=bizNoFormatter("${userInfo.businessnumber}",'2');
-                                        </script>
-                                    </tr>
-                                    <tr>
-                                        <th>가입일자</th>
-                                        <td id=joindate class="text-left">${userInfo.strjoindate}</td>
-                                        <script type="text/javascript">
-                                            $('#joindate').text(dateFormatter("${userInfo.strjoindate}"));
-                                        </script>
-                                    </tr>
-                                    <tr>
-                                        <th>대표자명</th>
-                                        <td id=representationname class="text-left">${userInfo.representationname}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>주소</th>
-                                        <td id=zipaddress class="text-left">${userInfo.zipaddress}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>업종</th>
-                                        <td id=businesskind class="text-left">${userInfo.businesskind}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>업태</th>
-                                        <td id=businesscondition class="text-left">${userInfo.businesscondition}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>회원상태</th>
-                                        <td id=statusnm class="text-left">${userInfo.statusnm}</td>
-                                    </tr>
+                                        <tr>
+                                            <th>이메일</th>
+                                            <td id=email class="text-left">${userInfo.email}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>사용자명</th>
+                                            <td id=membername class="text-left">${userInfo.membername}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>라이센스등급</th>
+                                            <td id=licensegrade class="text-left">
+                                                <c:if test="${userInfo.licensegrade eq '1'}">Free</c:if>
+                                                <c:if test="${userInfo.licensegrade eq '2'}">Basic</c:if>
+                                                <c:if test="${userInfo.licensegrade eq '3'}">Pro</c:if>
+                                                <c:if test="${userInfo.licensegrade eq '4'}">Ent</c:if>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>전화번호</th>
+                                            <td id=celltel class="text-left">${userInfo.celltel}</td>
+                                            <script type="text/javascript">
+                                                celltel.innerHTML=phoneFormatter("${userInfo.celltel}");
+                                            </script>
+                                        </tr>
+                                        <tr>
+                                            <th>사업장명</th>
+                                            <td id=businessname class="text-left">${userInfo.businessname}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>사업자등록번호</th>
+                                            <td id=businessnumber class="text-left">${userInfo.businessnumber}</td>
+                                            <script type="text/javascript">
+                                                businessnumber.innerHTML=bizNoFormatter("${userInfo.businessnumber}",'2');
+                                            </script>
+                                        </tr>
+                                        <tr>
+                                            <th>가입일자</th>
+                                            <td id=joindate class="text-left">${userInfo.strjoindate}</td>
+                                            <script type="text/javascript">
+                                                joindate.innerHTML=dateFormatter("${userInfo.strjoindate}");
+                                            </script>
+                                        </tr>
+                                        <tr>
+                                            <th>대표자명</th>
+                                            <td id=representationname class="text-left">${userInfo.representationname}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>주소</th>
+                                            <td id=zipaddress class="text-left">${userInfo.zipaddress}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>업종</th>
+                                            <td id=businesskind class="text-left">${userInfo.businesskind}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>업태</th>
+                                            <td id=businesscondition class="text-left">${userInfo.businesscondition}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>회원상태</th>
+                                            <td id=statusnm class="text-left">${userInfo.statusnm}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -220,78 +220,91 @@
                                         <col style="width:30px">
                                     </colgroup>
                                     <tbody>
-                                    <tr>
-                                        <th rowspan="8">사용</br>라이센스</th>
-                                        <th rowspan="4">가용장비</th>
-                                        <th>전체가용</th>
-                                        <td colspan="2" id=totalsoluble class="text-center">${userInfo.totalsoluble}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>기본</th>
-                                        <td colspan="2" id=basevolume class="text-center">${userInfo.basevolume}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>추가</th>
-                                        <td colspan="2" class="text-center" id=addvolume>
-                                            <input type="number" class="inp" style="text-align:center; width:100%" name="addvolume"  maxlength="8" value=${userInfo.addvolume} required>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>서비스</th>
-                                        <td colspan="2" class="text-center" id=servicevolume>
-                                            <input type="number" class="inp" style="text-align:center; width:100%" name="servicevolume"  maxlength="8"  value=${userInfo.servicevolume} required>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th style="color:#8B0000;font: 17px" rowspan="3">요금</th>
-                                        <th style="color:#8B0000;font: 17px">합계</th>
-                                        <td colspan="2"><div id=totcharge class="text-center" style="color:#8B0000;font: 17px">${userInfo.totcharge}</div></td>
-                                        <script type="text/javascript">
-                                            $('#totcharge').text(currencyFormatter("${userInfo.totcharge}"));
-                                        </script>
-                                    </tr>
-                                    <tr>
-                                        <th style="color:#8B0000;font: 17px">기본</th>
-                                        <td colspan="2" id=basecharge class="text-center" style="color:#8B0000;font: 17px">${userInfo.basecharge}</td>
-                                        <script type="text/javascript">
-                                            $('#basecharge').text(currencyFormatter("${userInfo.basecharge}"));
-                                        </script>
-                                    </tr>
-                                    <tr>
-                                        <th style="color:#8B0000;font: 17px">추가</th>
-                                        <td colspan="2" class="text-center">
-                                            <input type="text" class="inp small" style="text-align:center;width:100%;color:#8B0000;font: 17px" id="addcharge" value=${userInfo.addcharge}>
-                                        </td>
-                                        <script type="text/javascript">
-                                            $('input[id=addcharge]').attr('value',currencyFormatter("${userInfo.addcharge}"));
-                                        </script>
+                                        <tr>
+                                            <th rowspan="8">사용</br>라이센스</th>
+                                            <th rowspan="4">가용장비</th>
+                                            <th>전체가용</th>
+                                            <td colspan="2" id=totalsoluble class="text-center">${userInfo.totalsoluble}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>기본</th>
+                                            <td colspan="2" id=basevolume class="text-center">${userInfo.basevolume}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>추가</th>
+                                            <td colspan="2" class="text-center" id=addvolume>
+                                                <input type="number" class="inp" style="text-align:center; width:100%" name="addvolume"  maxlength="8" value=${userInfo.addvolume} required>
+                                            </td>
+<%--                                            <script type="text/javascript">--%>
+<%--                                                var value1 = $('#addvolume').text();--%>
+<%--                                                var money2 = value1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");--%>
+<%--                                                $('#addvolume').text(money2);--%>
+<%--                                            </script>--%>
+                                        </tr>
+                                        <tr>
+                                            <th>서비스</th>
+                                            <td colspan="2" class="text-center" id=servicevolume>
+                                                <input type="number" class="inp" style="text-align:center; width:100%" name="servicevolume"  maxlength="8"  value=${userInfo.servicevolume} required>
+                                            </td>
+<%--                                            <script type="text/javascript">--%>
+<%--                                                var value1 = $('#servicevolume').text();--%>
+<%--                                                var money2 = value1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");--%>
+<%--                                                $('#servicevolume').text(money2);--%>
+<%--                                            </script>--%>
+                                        </tr>
+                                        <tr>
+                                            <th rowspan="3" style="color:#8B0000;font: 15px">요금</th>
+                                            <th style="color:#8B0000;font: 15px">합계</th>
+                                            <td colspan="2"><div id=totcharge class="text-center" style="color:#8B0000;font: 15px">${userInfo.totcharge}</div></td>
+                                            <script type="text/javascript">
+                                                totcharge.innerHTML=currencyFormatter("${userInfo.totcharge}");
+                                            </script>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:#8B0000;font: 15px">기본</th>
+                                            <td colspan="2" id=basecharge class="text-center" style="color:#8B0000;font: 15px">${userInfo.basecharge}</td>
+                                            <script type="text/javascript">
+                                                var value1 = '<td colspan="2" id=basecharge class="text-center" style="color:#8B0000;font: 15px">'+currencyFormatter("${userInfo.basecharge}")+'</td>';
+                                                basecharge.innerHTML=value1;
+                                            </script>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:#8B0000;font: 15px">추가</th>
+                                            <td colspan="2" id=addcharge class="text-center">
+                                                <input type="number" class="inp small" style="color:#8B0000;font: 15px;text-align:center;width:100%"  name="addcharge" value="${userInfo.addcharge}">
+                                            </td>
+<%--                                            <script type="text/javascript">--%>
+<%--                                                var value1 = $('#addcharge').text();--%>
+<%--                                                var money2 = value1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");--%>
+<%--                                                $('#addcharge').text(money2);--%>
+<%--                                            </script>--%>
 
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2">데이터 보관기간</th>
-                                        <td>
-                                            <div class="flex gap10" >
-                                                <input type="number" class="inp text-cente" style="text-align:center; width:100%"  name="datakeepterm" value="${userInfo.datakeepterm}" required>
-                                                <select class="select small" name="datakeepunit" value=${userInfo.datakeepunit}>
-                                                    <option>일</option>
-                                                    <option>월</option>
-                                                    <option>년</option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="3">회원접속도메인</th>
-                                        <td colspan="2" id=serverdomainname class="text-center">
-                                            <input type="text" class="inp small" style="text-align:center; width:100%"  name="serverdomainname" value="${userInfo.serverdomainname}">
-                                        </td>
-                                    </tr>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2">데이터 보관기간</th>
+                                            <td>
+                                                <div class="flex gap10">
+                                                    <input type="number" class="inp text-cente" style="text-align:center; width:100%"  name="datakeepterm" value="${userInfo.datakeepterm}" required>
+                                                    <select class="select small" value=${userInfo.datakeepunit} id="datakeepunit">
+                                                        <option>일</option>
+                                                        <option>월</option>
+                                                        <option>년</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3">회원접속도메인</th>
+                                            <td colspan="2" id=serverdomainname class="text-center">
+                                                <input type="text" class="inp small" style="text-align:center; width:100%"  name="serverdomainname" value="${userInfo.serverdomainname}">
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="bottom-btns">
                                 <button class="btn" id="userInfoSave">저장</button>
-                                <%--                                <button userInfoSave class="btn">저장</button>--%>
+<%--                                <button userInfoSave class="btn">저장</button>--%>
                             </div>
                         </div>
                         <div class="col4" style="width: 25%; color:#8B0000;">
@@ -304,35 +317,35 @@
                                         <col style="width:100px">
                                     </colgroup>
                                     <tbody>
-                                    <tr>
-                                        <th rowspan="7">등록장비</th>
-                                        <th rowspan="2" style="color:#8B0000;font: 15px">전체</th>
-                                        <td rowspan="2"  style="color:#8B0000;font: 15px" id=totalvolume>${userInfo.totalvolume}</td>
-                                        <th style="color:#8B0000;font: 15px">사용율</th>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="6" id=userate class="text-center" style="color:#8B0000;font: 15px">${userInfo.userate}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>NMS</th>
-                                        <td id=networkvolume class="text-center">${userInfo.networkvolume}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>SMS</th>
-                                        <td id=servervolume class="text-center">${userInfo.servervolume}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>AP</th>
-                                        <td id=apvolume class="text-center">${userInfo.apvolume}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>DBMS</th>
-                                        <td id=dbmsvolume class="text-center">${userInfo.dbmsvolume}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>FMS</th>
-                                        <td id=fmsvolume class="text-center">${userInfo.fmsvolume}</td>
-                                    </tr>
+                                        <tr>
+                                            <th rowspan="7">등록장비</th>
+                                            <th rowspan="2" style="color:#8B0000;font: 15px">전체</th>
+                                            <td rowspan="2"  style="color:#8B0000;font: 15px" id=totalvolume>${userInfo.totalvolume}</td>
+                                            <th style="color:#8B0000;font: 15px">사용율</th>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="6" id=userate class="text-center" style="color:#8B0000;font: 15px">${userInfo.userate}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>NMS</th>
+                                            <td id=networkvolume class="text-center">${userInfo.networkvolume}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>SMS</th>
+                                            <td id=servervolume class="text-center">${userInfo.servervolume}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>AP</th>
+                                            <td id=apvolume class="text-center">${userInfo.apvolume}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>DBMS</th>
+                                            <td id=dbmsvolume class="text-center">${userInfo.dbmsvolume}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>FMS</th>
+                                            <td id=fmsvolume class="text-center">${userInfo.fmsvolume}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -457,7 +470,7 @@
                 })
             </script>
         </div>
-    </div>
+        </div>
 </div>
 
 <script language="javascript">
@@ -532,7 +545,7 @@
 
 
         $('#memberinfo-table tr').on('dblclick', function () {
-            // console.log('1');
+           // console.log('1');
             var tdArr = new Array();	// 배열 선언
 
             // 현재 클릭된 Row(<tr>)
@@ -542,8 +555,8 @@
             td.each(function(i){
                 tdArr.push(td.eq(i).text());
             });
-            // console.log("배열에 담긴 값 : "+tdArr);
-            // console.log("배열에 담긴 값 : "+td.eq(1).text());
+           // console.log("배열에 담긴 값 : "+tdArr);
+           // console.log("배열에 담긴 값 : "+td.eq(1).text());
 
 //            var url = '${pageContext.request.contextPath}/charge/@{td.eq(1).text()}';
             var url = '${pageContext.request.contextPath}/charge/'+td.eq(1).text();
@@ -571,34 +584,35 @@
                     }
                     const list0 = jsonmap[0]['userInfo'];
                     var htmltag = "";
+                    console.log("list0.  -->  .." + JSON.stringify(list0));
+                    console.log("email-------------------------------", list0.email);
                     var text = document.createTextNode(list0.email);
                     console.log("text-------------------------------", text);
                     $('#email').text(list0.email);
-
-
-                    <c:if test="${list0.licensegrade eq '1'}">$('#licensegrade').text("Free")</c:if>
-                    <c:if test="${list0.licensegrade eq '2'}">$('#licensegrade').text("Basic")</c:if>
-                    <c:if test="${list0.licensegrade eq '3'}">$('#licensegrade').text("Pro")</c:if>
-                    <c:if test="${list0.licensegrade eq '4'}">$('#licensegrade').text("Ent")</c:if>
-                    $('#celltel').text(phoneFormatter(list0.celltel));
+                    $('#licensegrade').text(list0.licensegrade);
+                    $('#celltel').text(list0.celltel);
                     $('#businessname').text(list0.businessname);
-                    $('#businessnumber').text(bizNoFormatter(list0.businessnumber,'2'));
-                    $('#joindate').text(dateFormatter(list0.joindate));
+                    $('#businessnumber').text(list0.email);
+                    $('#joindate').text(list0.joindate);
                     $('#representationname').text(list0.representationname);
                     $('#zipaddress').text(list0.zipaddress);
                     $('#businesskind').text(list0.businesskind);
                     $('#businesscondition').text(list0.businesscondition);
                     $('#statusnm').text(list0.statusnm);
-                    $('#totalsoluble').text(list0.totalsoluble);
-                    $('#basevolume').text(list0.basevolume);
-                    $('input[name=addvolume]').attr('value',list0.addvolume);
-                    $('input[name=servicevolume]').attr('value',list0.servicevolume);
-                    $('#totcharge').text(currencyFormatter(list0.totcharge));
-                    $('#basecharge').text(currencyFormatter(list0.basecharge));
-                    $('input[id=addcharge]').attr('value',currencyFormatter(list0.addcharge));
-                    $('input[name=datakeepterm]').attr('value',list0.datakeepterm);
-                    $('select[name=datakeepunit]').attr('value',list0.datakeepunit);
-                    $('input[name=serverdomainname]').attr('value',list0.serverdomainname);
+                    document.getElementById('totalsoluble').innerHTML=list0.totalsoluble;
+                    document.getElementById('basevolume').innerHTML=list0.basevolume;
+                    document.getElementById('addvolume').innerHTML=list0.addvolume;
+                    document.getElementById('servicevolume').innerHTML=list0.servicevolume;
+                    document.getElementById('totcharge').innerHTML=currencyFormatter(list0.totcharge);
+                    document.getElementById('basecharge').innerHTML=currencyFormatter(list0.basecharge);
+                    document.getElementById('addcharge').innerHTML=currencyFormatter(list0.addcharge);
+                    document.getElementById('datakeepterm').innerHTML=list0.datakeepterm;
+                    document.getElementById('datakeepunit').innerHTML(list0.datakeepunit);
+                    console.log("1111==>"+document.getElementById('serverdomainname').innerHTML)
+                    htmltag  = '<input type="text" class="inp small" style="text-align:center; width:100%" value=';
+                    htmltag += list0.serverdomainname+' name="serverdomainname">';
+                    document.getElementById('serverdomainname').innerHTML=htmltag;
+                    console.log("2222==>"+document.getElementById('serverdomainname').innerHTML);
 
                     const list1 = jsonmap[1]['chargeInfo'];
                     var data = "";
@@ -670,51 +684,20 @@
         }
     });
 
-    const addvolume = document.querySelector('#addvolume');
-    addvolume.addEventListener('keyup', function(e) {
-        let value = e.target.value;
-        value = Number(value.replaceAll(',', ''));
-        if(isNaN(value)) {
-            addvolume.value = 0;
-        }else {
-            const formatValue = value.toLocaleString('ko-KR');
-            addvolume.value = formatValue;
+
+    $('#addcharge').on('focus', function (){
+        var totval = $('#addcharge').val();
+        if(!isEmpty(val)){
+            totval = totval.replace(/,/g,'');
+            $('#addcharge').val(totval);
         }
-        let volume1 = Number($('#basevolume').text().replaceAll(',', ''));
-        let volume2 = Number($('#servicevolume').text().replaceAll(',', ''));
-        let totval  = 0;
-        if(isEmpty(volume1)){
-            volume1 = 0;
-        }
-        if(isEmpty(volume2)){
-            volume2 = 0;
-        }
-        totval  = parseInt(volume1) + parseInt(volume2) + parseInt(value);
-        $('#totalsoluble').text(totval.toLocaleString('ko-KR'));
     });
-
-
-    const servicevolume = document.querySelector('#servicevolume');
-    servicevolume.addEventListener('keyup', function(e) {
-        let value = e.target.value;
-        value = Number(value.replaceAll(',', ''));
-        if(isNaN(value)) {
-            addvolume.value = 0;
-        }else {
-            const formatValue = value.toLocaleString('ko-KR');
-            addvolume.value = formatValue;
+    $('#addcharge').on('blur', function (){
+        var totval = $('#addcharge').val();
+        if(!isEmpty(val) && isNumeric(totval)){
+            totval = currencyFormatter(totval);
+            $('#addcharge').val(totval);
         }
-        let volume1 = Number($('#basevolume').text().replaceAll(',', ''));
-        let volume2 = Number($('#addvolume').text().replaceAll(',', ''));
-        let totval  = 0;
-        if(isEmpty(volume1)){
-            volume1 = 0;
-        }
-        if(isEmpty(volume2)){
-            volume2 = 0;
-        }
-        totval  = parseInt(volume1) + parseInt(volume2) + parseInt(value);
-        $('#totalsoluble').text(totval.toLocaleString('ko-KR'));
     });
 
     function isEmpty(value){
@@ -794,26 +777,6 @@
     //     })
     //
     // })
-
-    const input = document.querySelector('#addcharge');
-    input.addEventListener('keyup', function(e) {
-        let value = e.target.value;
-        value = Number(value.replaceAll(',', ''));
-        if(isNaN(value)) {
-            input.value = 0;
-        }else {
-            const formatValue = value.toLocaleString('ko-KR');
-            input.value = formatValue;
-        }
-        let charge1 = Number($('#basecharge').text().replaceAll(',', ''));
-        let totval  = 0;
-        if(isEmpty(charge1)){
-            charge1 = 0;
-        }
-        totval  = parseInt(charge1) + parseInt(value);
-        //alert("totval-->"+totval+"..charge1-->"+charge1+"..value-->"+value);
-        $('#totcharge').text(totval.toLocaleString('ko-KR'));
-    })
 
     function transExam(){
         const tableRows = document.querySelectorAll(".gold");

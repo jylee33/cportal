@@ -68,9 +68,9 @@ public class MemberInfoServiceImpl implements MemberInfoService {
         NetisUseServiceDto netisUseServiceDto = new NetisUseServiceDto();
         try {
             netisUseServiceDto = serviceInfo(email);
-            logger.info("resultDto.getTRAN_STATUS()---------------------------------- memberLicenseInfo ---->"+netisUseServiceDto.getTRAN_STATUS());
+            logger.info("resultDto----- memberLicenseInfo ---->"+netisUseServiceDto.getTRAN_STATUS()+".."+netisUseServiceDto.getERROR_CODE());
             if (netisUseServiceDto.getTRAN_STATUS() != 1) {
-                logger.info("MemberInfoServiceImpl memberLicenseInfo ---->"+email);
+                logger.info("MemberInfoServiceImpl memberLicenseInfo ---->"+email+".."+netisUseServiceDto.getERROR_CODE());
                 throw new RuntimeException();
             }
             logger.info("MemberInfoServiceImpl memberLicenseInfo ---->"+netisUseServiceDto.toString());

@@ -37,8 +37,9 @@
     </div>
     <div id='jqxWidget' class="table-type1 text-center cursor">
         <div id="jaxLicense"></div>
+        <div id="log"></div>
 
-<%--        <div style="margin-top: 30px;">--%>
+    <%--        <div style="margin-top: 30px;">--%>
 <%--            <div id="cellbegineditevent"></div>--%>
 <%--            <div style="margin-top: 10px;" id="cellendeditevent"></div>--%>
 <%--        </div>--%>
@@ -275,6 +276,13 @@
         // update the edited row when the user clicks the 'Save' button.
         $("#addSave").click(function () {
             var licenseData = $("#jaxLicense").jqxGrid("getrows");   //1
+
+            var licenseData = $("#jaxLicense").jqxGrid("updaterow");   //1
+
+            1. beginrowedit 또는 endrowedit 를 이용하여 수정 Row 값을 저장하는 방법을 사용하시면 될듯 합니다.
+
+            2. updaterow 항목도 확인해 보세요.
+
             console.log("rows------>"+licenseData.length);
             console.log("rows------>"+JSON.stringify(licenseData));
 

@@ -305,15 +305,25 @@ function popupOpen(id,idx,num){
   var idx = idx - 1;
   $('.cont-box > div').hide();
   $('.cont-box > div').eq(idx).show();
-  $('.cont-box > div').eq(idx).addClass('td'+num); 
-  $('.tabs.type2 a').eq(idx).addClass('active').siblings().removeClass('active');
-  $('#Modal1 .h3-popup > span').eq(idx).show().siblings().hide();
+  $('.tabs a').eq(idx).addClass('active').siblings().removeClass('active');
+  if(num == 1){
+    $('#'+id).find('.table-type2').addClass('td1');
+  }else if(num == 2){
+    $('#'+id).find('.table-type2').addClass('td2');
+  }else if(num == 3){
+    $('#'+id).find('.table-type2').addClass('td3');
+  }else if(num == 4){
+    $('#'+id).find('.table-type2').addClass('td4');
+  }
 } 
 
 function popupClose(id){
 	$('#'+id).fadeOut(300);
 	$('body').removeClass('popup-on');
-  $('.cont-box > div').removeClass('td1 td2 td3 td4');
+  $('#'+id).find('.table-type2').removeClass('td1');
+  $('#'+id).find('.table-type2').removeClass('td2');
+  $('#'+id).find('.table-type2').removeClass('td3');
+  $('#'+id).find('.table-type2').removeClass('td4');
 } 
 
 
@@ -324,25 +334,19 @@ $(document).mousedown(function (e){
 	if(LayerPopup.has(e.target).length === 0){
 		LayerPopup.closest('.popup-wrap').fadeOut(300);
 		$('body').removeClass('popup-on');
-    $('.cont-box > div').removeClass('td1 td2 td3 td4');
 
- 
+    
+  $('.table-type2').removeClass('td1');
+  $('.table-type2').removeClass('td2');
+  $('.table-type2').removeClass('td3');
+  $('.table-type2').removeClass('td4');
+
 
 	};
 });
 
 
 
-
-
 $(function(){
 	$('.select').SumoSelect();	
-
-  
-$('.tabs.type2 a').click(function(){
-  $(this).addClass('active').siblings().removeClass('active');
-  $('.cont-box > div').eq($(this).index()).show().siblings().hide();
- 
-})
-
 });

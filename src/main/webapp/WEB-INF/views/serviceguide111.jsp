@@ -6,8 +6,6 @@
 <c:set var="path" value="<%=request.getContextPath() %>" scope="application"/>
 
 <%@include file="include/header.jsp" %>
-    <!-- // header -->
-
 
     <div class="container">
         <h3 class="h3 text-center">NETIS 클라우드 서비스 안내</h3>
@@ -142,8 +140,7 @@
         </div>
 
 
-    </div>    <!-- // footer -->
-
+    </div>
 </div>
 <!-- // wrap -->
 
@@ -153,7 +150,13 @@
         <div class="popup-cont">
             <div class="popup" style="width:1100px">
                 <div class="popup-head">
-                    <h3 class="h3-popup">네트워크</h3>
+                    <h3 class="h3-popup">
+                        <span>네트워크</span>
+                        <span style="display: none;">서버</span>
+                        <span style="display: none;">무선네트워크</span>
+                        <span style="display: none;">데이터베이스</span>
+                        <span style="display: none;">환경센서</span>
+                    </h3>
                     <button class="btn-close" onclick="javascript:popupClose('Modal1');"><span class="hidden">닫기</span></button>
                 </div>
                 <div class="popup-body ">
@@ -640,11 +643,7 @@
 <script>
     // 팝업 함수 호출
     //popupOpen('Modal2');
-    $('.tabs.type2 a').click(function(){
-        $(this).addClass('active').siblings().removeClass('active');
-        $('.cont-box > div').eq($(this).index()).show().siblings().hide();
-        $('.table-type2').removeClass('td1 td2 td3 td4');
-    })
+
 
 </script>
 <%@include file="include/footer.jsp" %>

@@ -64,10 +64,10 @@ public class UserService {
             userRepository.chgmember(member);
             userRepository.chgtaxinformation(tax);
 
-            int curGrade = member.getCurrlicensegrade();
+            int preGrade = member.getPrelicensegrade();
             int newGrade = member.getLicensegrade();
 
-            if (curGrade != newGrade) {
+            if (preGrade != newGrade) {
                 resultDto = chgGrade(member);
                 if (resultDto.getTRAN_STATUS() != 1) {
                     throw new RuntimeException();

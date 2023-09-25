@@ -62,8 +62,8 @@
     </select>
 
     <insert id="insertMemberLicenseHistory" >
-        insert into tbmemberlicensehistory (licenseid, email, licensegrade, datakeepterm, datakeepunit, basecharge, addcharge, basevolume, servicevolume, addvolume) values
-            (uuid(), #{email}, #{licensegrade}, #{datakeepterm}, #{datakeepunit}, #{basecharge}, #{addcharge}, 0, 0, 0)
+        insert into tbmemberlicensehistory (licenseid, email, prelicensegrade, licensegrade, datakeepterm, datakeepunit, basecharge, addcharge, basevolume, servicevolume, addvolume) values
+            (uuid(), #{email}, #{prelicensegrade}, #{licensegrade}, #{datakeepterm}, #{datakeepunit}, #{basecharge}, #{addcharge}, 0, 0, 0)
     </insert>
 
 </mapper>

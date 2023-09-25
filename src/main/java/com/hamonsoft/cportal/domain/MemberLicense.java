@@ -16,6 +16,7 @@ import java.time.ZonedDateTime;
 @Data
 public class MemberLicense {
     private String email;
+    private String prelicensegrade;
     private String licensegrade;
     private int datakeepterm;
     private String datakeepunit;

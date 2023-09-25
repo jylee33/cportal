@@ -65,7 +65,7 @@
                     <option value="4">Enterprise</option>
                 </select>
             </div>
-            <input type="hidden" name="currlicensegrade" value="${member.licensegrade}">
+            <input type="hidden" name="prelicensegrade" value="${member.licensegrade}">
         </div>
 
         <div id="billinfo" style="display: block">

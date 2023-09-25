@@ -91,6 +91,7 @@
         ,a01.celltel
         ,a01.businessname
         ,a01.businessnumber
+        ,concat(substring(a01.businessnumber,1,3),'-',substring(a01.businessnumber,4,2),'-',substring(a01.businessnumber,6)) strbusinessnumber
         ,a01.joindate
         ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
         ,ifnull(a01.serverdomainname,'') serverdomainname

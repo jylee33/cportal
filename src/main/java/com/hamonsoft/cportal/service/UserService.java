@@ -74,6 +74,7 @@ public class UserService {
                 }
 
                 userRepository.chggrade(member);
+                userRepository.chgLicenseGrade(member);
 
                 Date dtCreated = userRepository.getCreatedAt(tax);
 
@@ -221,6 +222,7 @@ public class UserService {
 
         body.put("USER_ID", member.getEmail());
         body.put("CLOUD_GRADE", member.getLicensegrade());
+        body.put("CREDIT", member.getLicensegrade());
 
         // Request Message
         HttpEntity<?> request = new HttpEntity<>(body, headers);

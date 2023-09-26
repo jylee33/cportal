@@ -22,9 +22,9 @@ public class BaroBillHMController {
         this.baroBillHMService = baroBillHMService;
     }
 
-    @GetMapping(value = "registtaxinvoice")
-    public void registtaxinvoice(Model model) {
-        logger.info("call registtaxinvoice ---------------");
+    @GetMapping(value = "regist")
+    public void regist(Model model) {
+        logger.info("call regist ---------------");
         baroBillHMService.regist();
     }
 }

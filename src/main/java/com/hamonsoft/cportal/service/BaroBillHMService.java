@@ -41,11 +41,11 @@ public class BaroBillHMService {
 
         taxInvoice.setAmountTotal("100");
         taxInvoice.setTaxTotal("10");
-        taxInvoice.setTotalAmount("1");
-        taxInvoice.setCash("100");
-        taxInvoice.setChkBill("");
-        taxInvoice.setNote("");
-        taxInvoice.setCredit("");
+        taxInvoice.setTotalAmount("110");
+        taxInvoice.setCash("110");
+        taxInvoice.setChkBill("0");
+        taxInvoice.setNote("0");
+        taxInvoice.setCredit("0");
 
         taxInvoice.setRemark1("");
         taxInvoice.setRemark2("");
@@ -57,41 +57,41 @@ public class BaroBillHMService {
 
         // 공급자 정보
         taxInvoice.setInvoicerParty(new InvoiceParty());
-        taxInvoice.getInvoicerParty().setMgtNum("");
-        taxInvoice.getInvoicerParty().setCorpNum("");
+        taxInvoice.getInvoicerParty().setMgtNum("000004");
+        taxInvoice.getInvoicerParty().setCorpNum("1198604153");
         taxInvoice.getInvoicerParty().setTaxRegID("");
-        taxInvoice.getInvoicerParty().setCorpName("");
-        taxInvoice.getInvoicerParty().setCEOName("");
-        taxInvoice.getInvoicerParty().setAddr("");
+        taxInvoice.getInvoicerParty().setCorpName("(주)하몬소프트");
+        taxInvoice.getInvoicerParty().setCEOName("강원석, 이석호");
+        taxInvoice.getInvoicerParty().setAddr("서울특별시 금천구 디지털로9길 32, 비동 1201호");
         taxInvoice.getInvoicerParty().setBizType("");
         taxInvoice.getInvoicerParty().setBizClass("");
-        taxInvoice.getInvoicerParty().setContactID("");
-        taxInvoice.getInvoicerParty().setContactName("");
-        taxInvoice.getInvoicerParty().setTEL("");
-        taxInvoice.getInvoicerParty().setHP("");
-        taxInvoice.getInvoicerParty().setEmail("");
+        taxInvoice.getInvoicerParty().setContactID("hamoncloud");
+        taxInvoice.getInvoicerParty().setContactName("홍지혜");
+        taxInvoice.getInvoicerParty().setTEL("01067675597");
+        taxInvoice.getInvoicerParty().setHP("01067675597");
+        taxInvoice.getInvoicerParty().setEmail("wisd0m@hamonsoft.co.kr");
 
         //공급받는자 정보
         taxInvoice.setInvoiceeParty(new InvoiceParty());
-        taxInvoice.getInvoiceeParty().setCorpNum("");
+        taxInvoice.getInvoiceeParty().setCorpNum("1198604153");
         taxInvoice.getInvoiceeParty().setTaxRegID("");
-        taxInvoice.getInvoiceeParty().setCorpName("");
-        taxInvoice.getInvoiceeParty().setCEOName("");
-        taxInvoice.getInvoiceeParty().setAddr("");
+        taxInvoice.getInvoiceeParty().setCorpName("하몬공급받는회사");
+        taxInvoice.getInvoiceeParty().setCEOName("강원석, 이석호");
+        taxInvoice.getInvoiceeParty().setAddr("서울특별시 금천구 디지털로9길 32, 비동 1201호");
         taxInvoice.getInvoiceeParty().setBizType("");
         taxInvoice.getInvoiceeParty().setBizClass("");
         taxInvoice.getInvoiceeParty().setContactID("");
-        taxInvoice.getInvoiceeParty().setContactName("");
-        taxInvoice.getInvoiceeParty().setTEL("");
-        taxInvoice.getInvoiceeParty().setHP("");
-        taxInvoice.getInvoiceeParty().setEmail("");
+        taxInvoice.getInvoiceeParty().setContactName("홍지혜");
+        taxInvoice.getInvoicerParty().setTEL("01067675597");
+        taxInvoice.getInvoicerParty().setHP("01067675597");
+        taxInvoice.getInvoicerParty().setEmail("wisd0m@hamonsoft.co.kr");
 
         // 수탁자 정보
         taxInvoice.setBrokerParty(new InvoiceParty());
-        taxInvoice.getBrokerParty().setCorpNum("");
+        taxInvoice.getBrokerParty().setCorpNum("1198604153");
         taxInvoice.getBrokerParty().setTaxRegID("");
-        taxInvoice.getBrokerParty().setCorpName("");
-        taxInvoice.getBrokerParty().setCEOName("");
+        taxInvoice.getBrokerParty().setCorpName("하몬");
+        taxInvoice.getBrokerParty().setCEOName("강원석, 이석호");
         taxInvoice.getBrokerParty().setAddr("");
         taxInvoice.getBrokerParty().setBizType("");
         taxInvoice.getBrokerParty().setBizClass("");

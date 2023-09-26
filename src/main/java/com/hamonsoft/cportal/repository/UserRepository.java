@@ -18,6 +18,7 @@ public interface UserRepository {
     TaxInformation taxInfo(Member member);
     int chgmember(Member member);
     int chggrade(Member member);
+    int chgLicenseGrade(Member member);
     int updatePaidAmount(TaxInformation tax);
     int chgtaxinformation(TaxInformation info);
     int chgpw(Member member);

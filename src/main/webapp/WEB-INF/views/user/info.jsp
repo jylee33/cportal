@@ -137,8 +137,28 @@
         $("#licensegrade").val("${member.licensegrade}").prop("selected", true);
         $("#licensegrade").SumoSelect();
 
+        var grade = $("#licensegrade").val();
+
+        if (grade == "1") {
+            $("#billinfo").hide();
+            $("input[name='basecharge']").val('0');
+        } else {
+            $("#billinfo").show();
+
+            <c:forEach items="${licenselist}" var="license">
+            if (grade == "${license.commoncode}") {
+                console.log("commoncode - ${license.commoncode}, baselicense - ${license.baselicense}");
+                $("input[name='basecharge']").val("${license.baselicense}");
+            }
+            </c:forEach>
+
+            if (grade == "4") {
+                console.log("Enterprise 등급은 baselicense 를 100만원으로 한다.");
+                $("input[name='basecharge']").val("1000000");
+            }
+        }
+
         $("#licensegrade").change(function (e) {
-            var grade = $(this).val();
 
             if (grade == "1") {
                 $("#billinfo").hide();

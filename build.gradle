@@ -63,6 +63,8 @@ dependencies {
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'com.github.iamport:iamport-rest-client-java:0.2.23'
+    implementation files('libs/barobill-api-sdk-java11.jar')
+    implementation 'com.sun.xml.ws:jaxws-rt:2.3.1'
 }
 
 tasks.named('test') {

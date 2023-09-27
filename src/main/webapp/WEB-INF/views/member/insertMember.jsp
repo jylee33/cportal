@@ -471,7 +471,7 @@
 
             var grade = $("#licensegrade").val();
 
-            if (grade == "5") {
+            if (grade != "1") {
                 alert('다음은 카드 등록을 위한 화면입니다.\n실제 결제는 이루어지지 않습니다.\n카드 정보는 따로 저장하지 않습니다.');
                 let IMP = window.IMP;
                 IMP.init("imp42261033");

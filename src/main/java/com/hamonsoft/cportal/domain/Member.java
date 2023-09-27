@@ -1,8 +1,11 @@
 package com.hamonsoft.cportal.domain;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Date;
 
+@Data
 public class Member {
 
     private String email;
@@ -12,8 +15,9 @@ public class Member {
     private String password;
     private String businessname;
     private String businessnumber;
-    private int currlicensegrade;
+    private int prelicensegrade;
     private int licensegrade;
+    private int credit;
     private String companyphone;
     private String administratoryn;
     private int emailcertificationyn;
@@ -26,162 +30,6 @@ public class Member {
     private Date updatedAt;
     private MemberLicense memberLicenseVO;
     private MemberUseTax memberUseTaxVO;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getMembername() {
-        return membername;
-    }
-
-    public void setMembername(String membername) {
-        this.membername = membername;
-    }
-
-    public String getGrpname() {
-        return grpname;
-    }
-
-    public void setGrpname(String grpname) {
-        this.grpname = grpname;
-    }
-
-    public String getCelltel() {
-        return celltel;
-    }
-
-    public void setCelltel(String celltel) {
-        this.celltel = celltel;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getBusinessname() {
-        return businessname;
-    }
-
-    public void setBusinessname(String businessname) {
-        this.businessname = businessname;
-    }
-
-    public String getBusinessnumber() {
-        return businessnumber;
-    }
-
-    public void setBusinessnumber(String businessnumber) {
-        this.businessnumber = businessnumber;
-    }
-
-    public int getCurrlicensegrade() {
-        return currlicensegrade;
-    }
-
-    public void setCurrlicensegrade(int currlicensegrade) {
-        this.currlicensegrade = currlicensegrade;
-    }
-
-    public int getLicensegrade() {
-        return licensegrade;
-    }
-
-    public void setLicensegrade(int licensegrade) {
-        this.licensegrade = licensegrade;
-    }
-
-    public String getCompanyphone() {
-        return companyphone;
-    }
-
-    public void setCompanyphone(String companyphone) {
-        this.companyphone = companyphone;
-    }
-
-    public String getAdministratoryn() {
-        return administratoryn;
-    }
-
-    public void setAdministratoryn(String administratoryn) {
-        this.administratoryn = administratoryn;
-    }
-    public int getEmailcertificationyn() {
-        return emailcertificationyn;
-    }
-
-    public void setEmailcertificationyn(int emailcertificationyn) {
-        this.emailcertificationyn = emailcertificationyn;
-    }
-
-    public String getWithdrawalyn() {
-        return withdrawalyn;
-    }
-
-    public void setWithdrawalyn(String withdrawalyn) {
-        this.withdrawalyn = withdrawalyn;
-    }
-
-    public String getWithdrawaldate() {
-        return withdrawaldate;
-    }
-
-    public void setWithdrawaldate(String withdrawaldate) {
-        this.withdrawaldate = withdrawaldate;
-    }
-
-    public String getJoindate() {
-        return joindate;
-    }
-
-    public void setJoindate(String joindate) {
-        this.joindate = joindate;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public String getServerdomainname() {
-        return serverdomainname;
-    }
-
-    public void setServerdomainname(String serverdomainname) { this.serverdomainname = serverdomainname; }
-
-    public MemberLicense getMemberLicenseVO() {
-        return memberLicenseVO;
-    }
-    public void setMemberLicenseVO(MemberLicense memberLicenseVO){
-        this.memberLicenseVO = memberLicenseVO;
-    }
 
 
 //    @OneToOne(fetch = FetchType.LAZY)
@@ -210,17 +58,19 @@ public class Member {
                 ", password='" + password + '\'' +
                 ", businessname='" + businessname + '\'' +
                 ", businessnumber='" + businessnumber + '\'' +
+                ", prelicensegrade=" + prelicensegrade +
                 ", licensegrade=" + licensegrade +
+                ", credit=" + credit +
                 ", companyphone='" + companyphone + '\'' +
-                ", administratoryn=" + administratoryn +
+                ", administratoryn='" + administratoryn + '\'' +
                 ", emailcertificationyn=" + emailcertificationyn +
                 ", withdrawalyn='" + withdrawalyn + '\'' +
                 ", withdrawaldate='" + withdrawaldate + '\'' +
                 ", joindate='" + joindate + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedBy='" + updatedBy + '\'' +
+                ", serverdomainname='" + serverdomainname + '\'' +
                 ", updatedAt=" + updatedAt +
-                ", serverdomainname=" + serverdomainname +
                 ", memberLicenseVO=" + memberLicenseVO +
                 ", memberUseTaxVO=" + memberUseTaxVO +
                 '}';

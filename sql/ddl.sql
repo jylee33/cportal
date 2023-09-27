@@ -163,3 +163,6 @@ alter table tbmemberlicensehistory modify basevolume int(4) unsigned DEFAULT 0 ;
 alter table tbmemberlicensehistory modify servicevolume int(4) unsigned DEFAULT 0 ;
 alter table tbmemberlicensehistory modify addvolume  int(4) unsigned DEFAULT 0 ;
 alter table tbmemberlicensehistory modify updatedBy varchar(50)  DEFAULT NULL ;
+
+-- 2023.09.21 tbmemberlicensehistory.prelicensegrade 컬럼 추가
+alter table tbmemberlicensehistory add column prelicensegrade varchar(6) not null COMMENT '변경 전 라이센스등급' AFTER email;

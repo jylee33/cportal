@@ -64,16 +64,17 @@ public class UserService {
             userRepository.chgmember(member);
             userRepository.chgtaxinformation(tax);
 
-            int curGrade = member.getCurrlicensegrade();
+            int preGrade = member.getPrelicensegrade();
             int newGrade = member.getLicensegrade();
 
-            if (curGrade != newGrade) {
+            if (preGrade != newGrade) {
                 resultDto = chgGrade(member);
                 if (resultDto.getTRAN_STATUS() != 1) {
                     throw new RuntimeException();
                 }
 
                 userRepository.chggrade(member);
+                userRepository.chgLicenseGrade(member);
 
                 Date dtCreated = userRepository.getCreatedAt(tax);
 
@@ -221,6 +222,7 @@ public class UserService {
 
         body.put("USER_ID", member.getEmail());
         body.put("CLOUD_GRADE", member.getLicensegrade());
+        body.put("CREDIT", member.getLicensegrade());
 
         // Request Message
         HttpEntity<?> request = new HttpEntity<>(body, headers);

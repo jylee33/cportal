@@ -22,22 +22,27 @@
     </select>
 
     <update id="chgmember">
-        update tbmember set businessname=#{businessname}, membername=#{membername}, grpname=#{grpname}, celltel=#{celltel}, businessname=#{businessname}, businessnumber=#{businessnumber}
+        update tbmember set businessname=#{businessname}, membername=#{membername}, grpname=#{grpname}, celltel=#{celltel}, businessname=#{businessname}, businessnumber=#{businessnumber}, updatedAt=now()
         where email = #{email}
     </update>
 
     <update id="chggrade">
-        update tbmember set licensegrade=#{licensegrade}
+        update tbmember set licensegrade=#{licensegrade}, updatedAt=now()
+        where email = #{email}
+    </update>
+
+    <update id="chgLicenseGrade">
+        update tbmemberlicense set licensegrade=#{licensegrade}, updatedAt=now()
         where email = #{email}
     </update>
 
     <update id="updatePaidAmount">
-        update tbtaxinformation set paid_amount = #{paid_amount}, next_pay_date = #{next_pay_date}
+        update tbtaxinformation set paid_amount = #{paid_amount}, next_pay_date = #{next_pay_date}, updatedAt=now()
         where email=#{email}
     </update>
 
     <update id="chgtaxinformation">
-        update tbtaxinformation set companyname=#{companyname}, Representationname=#{representationname}, taxcompanynumber=#{taxcompanynumber}, taxemail=#{taxemail}, postnumber=#{postnumber}, address=#{address}, detailaddress=#{detailaddress}, businesskind=#{businesskind}, businesscondition=#{businesscondition}
+        update tbtaxinformation set companyname=#{companyname}, Representationname=#{representationname}, taxcompanynumber=#{taxcompanynumber}, taxemail=#{taxemail}, postnumber=#{postnumber}, address=#{address}, detailaddress=#{detailaddress}, businesskind=#{businesskind}, businesscondition=#{businesscondition}, updatedAt=now()
         where email = #{email}
     </update>
 
@@ -62,8 +67,8 @@
     </select>
 
     <insert id="insertMemberLicenseHistory" >
-        insert into tbmemberlicensehistory (licenseid, email, licensegrade, datakeepterm, datakeepunit, basecharge, addcharge, basevolume, servicevolume, addvolume) values
-            (uuid(), #{email}, #{licensegrade}, #{datakeepterm}, #{datakeepunit}, #{basecharge}, #{addcharge}, 0, 0, 0)
+        insert into tbmemberlicensehistory (licenseid, email, prelicensegrade, licensegrade, datakeepterm, datakeepunit, basecharge, addcharge, basevolume, servicevolume, addvolume) values
+            (uuid(), #{email}, #{prelicensegrade}, #{licensegrade}, #{datakeepterm}, #{datakeepunit}, #{basecharge}, #{addcharge}, 0, 0, 0)
     </insert>
 
 </mapper>

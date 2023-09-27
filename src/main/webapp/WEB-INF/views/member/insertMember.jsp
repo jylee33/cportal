@@ -21,7 +21,7 @@
                     <input type="text" class="inp2" placeholder="아이디" id="id" required>
                     <span>@</span>
                     <input type="text" class="inp2" placeholder="메일주소" id="EmailInput" required>
-                    <select class="select large" style="width:130px" id="Email">
+                    <select class="large" style="width:130px" id="Email">
                         <option>선택</option>
                         <option>naver.com</option>
                         <option>nate.com</option>
@@ -92,7 +92,7 @@
         <div class="inp-area">
             <div class="label">등급선택 *</div>
             <div class="inp-box">
-                <select class="select large" name="licensegrade" id="licensegrade">
+                <select class="large" name="licensegrade" id="licensegrade">
                     <option value="1">Free</option>
                     <option value="2">Basic</option>
                     <option value="3">Pro</option>
@@ -164,9 +164,14 @@
                 <div class="label">업태</div>
                 <div class="inp-box"><input type="text" class="inp2" placeholder="업태를 입력하세요" name="businesscondition"></div>
             </div>
-            <div class="inp-area" style="display: none">
+            <div class="inp-area">
                 <div class="label">결재수단</div>
-                <div class="inp-box"><input type="text" class="inp2" placeholder="결재수단을 입력하세요" name="settlementmeans"></div>
+                <div class="inp-box">
+                    <select class="large" name="settlementmeans" id="settlementmeans">
+                        <option value="card">카드</option>
+                        <option value="cash">현금</option>
+                    </select>
+                </div>
             </div>
         </div>
         <div class="mb5">
@@ -359,8 +364,9 @@
             }
 
             var grade = $("#licensegrade").val();
+            var settlementmeans = $("#settlementmeans").val();
 
-            if (grade != "1") {
+            if (grade != "1" && settlementmeans == "card") {
                 alert('다음은 카드 등록을 위한 화면입니다.\n실제 결제는 이루어지지 않습니다.\n카드 정보는 따로 저장하지 않습니다.');
                 let IMP = window.IMP;
                 IMP.init("imp42261033");

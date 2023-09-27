@@ -7,6 +7,7 @@
 <c:set var="path" value="<%=request.getContextPath() %>" scope="application"/>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 
 <%@include file="../include/header.jsp" %>
 
@@ -119,13 +120,26 @@
                 <div class="label">업태</div>
                 <div class="inp-box"><input type="text" class="inp2" placeholder="업태를 입력하세요" name="businesscondition" value="${tax.businesscondition}"></div>
             </div>
+            <div class="inp-area">
+                <div class="label">결재수단</div>
+                <div class="inp-box">
+                    <select class="large" name="settlementmeans" id="settlementmeans">
+                        <option value="card">카드</option>
+                        <option value="cash">현금</option>
+                    </select>
+                </div>
+            </div>
             <input type="hidden" name="paid_amount" id="paid_amount" value="${tax.paid_amount}">
         </div>
         <button class="btn large block" id="chguserinfo">회원정보 변경</button>
+
+        <input type="hidden" name="baseamount" value="0">
         <input type="hidden" name="basecharge" value="0">
         <input type="hidden" name="addcharge" value="0">
         <input type="hidden" name="datakeepterm" value="30">
         <input type="hidden" name="datakeepunit" value="D">
+        <input type="hidden" name="customer_uid" value="${tax.customer_uid}">
+        <input type="hidden" name="paid_amount" value="0">
     </form>
 </div>
 
@@ -136,6 +150,9 @@
 
         $("#licensegrade").val("${member.licensegrade}").prop("selected", true);
         $("#licensegrade").SumoSelect();
+
+        $("#settlementmeans").val("${tax.settlementmeans}").prop("selected", true);
+        $("#settlementmeans").SumoSelect();
 
         var grade = $("#licensegrade").val();
 
@@ -159,6 +176,7 @@
         }
 
         $("#licensegrade").change(function (e) {
+            var grade = $(this).val();
 
             if (grade == "1") {
                 $("#billinfo").hide();
@@ -226,7 +244,69 @@
                 return;
             }
 
-            formObj.submit();
+            var grade = $("#licensegrade").val();
+            var settlementmeans = $("#settlementmeans").val();
+
+            if (grade != "1") {
+                if (settlementmeans == "card") {
+                    alert('다음은 카드 등록을 위한 화면입니다.\n실제 결제는 이루어지지 않습니다.\n카드 정보는 따로 저장하지 않습니다.');
+                    let IMP = window.IMP;
+                    IMP.init("imp42261033");
+
+                    $.ajax({
+                        url: "${path}/iamport/gettoken",
+                        type: 'POST',
+                        datatype: 'json',
+                        data: {
+                        }
+                    }).done(function (auth) {
+                        console.log("getauth result ---------------");
+                        console.log(auth);
+
+                        var membername = $("input[name='membername']").val();
+                        var basecharge = $("input[name='basecharge']").val();
+                        var addcharge = $("input[name='addcharge']").val();
+                        var paid_amount = Number(basecharge) + Number(addcharge);
+                        $("input[name='paid_amount']").val(paid_amount);
+                        console.log("paid_amount", paid_amount);
+
+                        IMP.request_pay({
+                            pg: "html5_inicis.INIBillTst",
+                            pay_method: "card",
+                            merchant_uid: "merchant_" + new Date().getTime(),   // 주문번호
+                            name: "NETIS CLOUD",
+                            amount: 0, // 카드 등록을 위한 절차이므로 0원.... paid_amount,                         // 숫자 타입
+                            // customer_uid 파라미터가 있어야 빌링키 발급을 시도함.
+                            customer_uid: "hamonsoft_" + new Date().getTime(),
+                            buyer_name: membername
+                            // buyer_email: $('#email').val(),
+                            // buyer_tel: $('#mobile').val(),
+                            // buyer_addr: $('#address').val(),
+                            // buyer_postcode: "08512"
+                        }, function (rsp) { // callback
+                            console.log("rsp.imp_uid - ", rsp.imp_uid);
+                            console.log("rsp -", rsp);
+                            if (rsp.success) {
+                                console.log("customer_uid", rsp.customer_uid);
+                                console.log("merchant_uid", rsp.merchant_uid);
+
+                                $("input[name='customer_uid']").val(rsp.customer_uid);
+
+                                $("form[role='form']").submit();
+                            }
+                        });
+                    }).fail(function(error){
+                        alert(JSON.stringify(error));
+                    });
+                } else {
+                    $("input[name='customer_uid']").val("");
+                    $("form[role='form']").submit();
+                }
+
+            } else {
+                $("input[name='customer_uid']").val("");
+                formObj.submit();
+            }
         });
 
         $("#searchPostNum").on("click", function (e) {

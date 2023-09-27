@@ -10,7 +10,7 @@
     </select>
 
     <select id="taxInfo" resultType="TaxInformation">
-        select companyname, representationname, taxcompanynumber, taxemail, address, detailaddress, businesskind, businesscondition, paid_amount, DATE_FORMAT(updatedAt,'%Y-%m-%d %H:%i:%s') as updatedAt
+        select companyname, representationname, taxcompanynumber, taxemail, address, detailaddress, businesskind, settlementmeans, businesscondition, paid_amount, customer_uid, DATE_FORMAT(updatedAt,'%Y-%m-%d %H:%i:%s') as updatedAt
         from tbtaxinformation
         where email=#{email}
     </select>
@@ -42,7 +42,7 @@
     </update>
 
     <update id="chgtaxinformation">
-        update tbtaxinformation set companyname=#{companyname}, Representationname=#{representationname}, taxcompanynumber=#{taxcompanynumber}, taxemail=#{taxemail}, postnumber=#{postnumber}, address=#{address}, detailaddress=#{detailaddress}, businesskind=#{businesskind}, businesscondition=#{businesscondition}, updatedAt=now()
+        update tbtaxinformation set companyname=#{companyname}, Representationname=#{representationname}, taxcompanynumber=#{taxcompanynumber}, taxemail=#{taxemail}, postnumber=#{postnumber}, address=#{address}, detailaddress=#{detailaddress}, businesskind=#{businesskind}, settlementmeans=#{settlementmeans}, customer_uid=#{customer_uid}, businesscondition=#{businesscondition}, updatedAt=now()
         where email = #{email}
     </update>
 

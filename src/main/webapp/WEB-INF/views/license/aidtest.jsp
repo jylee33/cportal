@@ -4,47 +4,38 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@include file="../include/header.jsp" %>
+
+  <%@include file="../include/header.jsp" %>
 
 
+<div class="container">
 
+<div class="tab_menu">
+  <ul class="list">
+    <li class="is_on">
+      <a href="#tab1" class="btn">라이선스 정책 관리</a>
+    </li>
+    <li>
+      <a href="#tab2" class="btn">라이선스 제공 기능</a>
+    </li>
+    <li>
+      <a href="#tab3" class="btn">Credit 제공</a>
+    </li>
+  </ul>
 
-
-<div class="table-type1 cursor">
-    <table id="memberinfo-table">
-        <thead>
-        <tr>
-            <th>사용자</th>
-        </tr>
-        </thead>
-        <tbody onload='transExam();'>
-        <c:choose>
-            <c:when test="${fn:length(aidInfo) > 0}">
-                <c:forEach items="${aidInfo}" var="list">
-                    <tr id="data-area">
-                        <td>${list}</td>
-                    </tr>
-                </c:forEach>
-            </c:when>
-        </c:choose>
-        </tbody>
-    </table>
+  <div class="cont_area">
+     <div id="tab1" class="cont" style="display:block;">
+      Tab Content1
+    </div>
+    <div id="tab2" class="cont">
+      Tab Content2
+    </div>
+    <div id="tab3" class="cont">
+      Tab Content3
+    </div>
+  </div>
+</div>
+</div>
 </div>
 
-
-
-
-
-
-
-
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-   <script>
-       alert(${aidInfo});
-   </script>
-</body>
-</html>
+<%@include file="../include/footer.jsp" %>

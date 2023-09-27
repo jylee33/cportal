@@ -2,9 +2,6 @@
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-
 <%@include file="../include/header.jsp" %>
 
 <div class="container">
@@ -36,6 +33,9 @@
             <div class="label">비밀번호 *</div>
             <div class="inp-box">
                 <input type="password" class="inp2" name="password" id="password1" placeholder="비밀번호를 입력하세요(영문/숫자/특수문자 조합으로 9~16자)" required>
+                  <i class="far fa-eye" id="togglePassword" style="margin-top: 15px;margin-left: -30px; cursor: pointer;"></i>
+
+
             </div>
         </div>
         <div class="alert-msg" id="pwAlert">반드시 영문(대문자,소문자 반드시 1개 이상)과 숫자, 특수문자를 혼합하여 9~16자 입력해주시기 바랍니다.<br>(허용 특수문자 : !@#$%^+=-)</div>
@@ -106,7 +106,7 @@
 
             <div class="inp-area">
                 <div class="label">법인(회사)명</div>
-                <div class="inp-box"><input type="text" class="inp2" placeholder="회사명"></div>
+                <div class="inp-box"><input type="text" class="inp2" placeholder="회사명" name="companyname"></div>
             </div>
             <div class="inp-area">
                 <div class="label">대표자명</div>
@@ -117,11 +117,11 @@
                 <div class="inp-box">
                     <div class="hp-box">
                         <input type="hidden" name="companyphone" value="">
-                        <input type="text" class="inp2" id="companyphone1" placeholder="" maxlength="3" required>
+                        <input type="text" class="inp2" id="companyphone1" placeholder="" maxlength="3">
                         <span>-</span>
-                        <input type="text" class="inp2" id="companyphone2" placeholder="" maxlength="4" required>
+                        <input type="text" class="inp2" id="companyphone2" placeholder="" maxlength="4">
                         <span>-</span>
-                        <input type="text" class="inp2" id="companyphone3" placeholder="" maxlength="4" required>
+                        <input type="text" class="inp2" id="companyphone3" placeholder="" maxlength="4">
                     </div>
                 </div>
             </div>
@@ -140,7 +140,7 @@
             </div>
             <div class="inp-area">
                 <div class="label">전자세금계산서<br>발행메일</div>
-                <div class="inp-box"><input type="text" class="inp2" placeholder="전자세금계산서 발행 메일을 입력하세요." name="taxemail"></div>
+                <div class="inp-box"><input type="email" class="inp2" placeholder="전자세금계산서 발행 메일을 입력하세요." name="taxemail"></div>
             </div>
             <div class="inp-area">
                 <div class="label">주소</div>
@@ -217,15 +217,25 @@
 
             if (grade == "1") {
                 $("#billinfo").hide();
+                $("[id=companyphone1]").attr("required" , false);
+                $("[id=companyphone2]").attr("required" , false);
+                $("[id=companyphone3]").attr("required" , false);
                 $("input[name='basecharge']").val('0');
             } else {
                 $("#billinfo").show();
-
+                $("[id=companyphone1]").attr("required" , true);
+                $("[id=companyphone2]").attr("required" , true);
+                $("[id=companyphone3]").attr("required" , true);
+                $("input[name='companyname']").val($("input[name='businessname']").val());
+                $("input[name='taxcompanynumber']").val($("input[name='businessnumber']").val());
+                $("#tax1").val($("input[name='businessnumber']").val().substr(0,3));
+                $("#tax2").val($("input[name='businessnumber']").val().substr(3,2));
+                $("#tax3").val($("input[name='businessnumber']").val().substr(5,5));
                 <c:forEach items="${licenselist}" var="license">
-                if (grade == "${license.commoncode}") {
-                    console.log("commoncode - ${license.commoncode}, baselicense - ${license.baselicense}");
-                    $("input[name='basecharge']").val("${license.baselicense}");
-                }
+                    if (grade == "${license.commoncode}") {
+                        console.log("commoncode - ${license.commoncode}, baselicense - ${license.baselicense}");
+                        $("input[name='basecharge']").val("${license.baselicense}");
+                    }
                 </c:forEach>
 
                 if (grade == "4") {
@@ -245,14 +255,26 @@
             }
         });
 
+
+        const togglePassword = document.querySelector('#togglePassword');
+          const password = document.querySelector('#password1');
+
+          togglePassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password1.getAttribute('type') === 'password' ? 'text' : 'password';
+            password1.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
+
         $('#password1').change(function () {
             var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^+=-]).{9,16}$/;
 
             var pw = $(this).val();
-
             if (false === reg.test(pw)) {
                 $("#pwAlert").show();
-                $(this).focus();
+             //   alert("비밀번호 : 영문(대문자,소문자 반드시 1개 이상)과 숫자,\n 특수문자를 혼합하여 9~16자입니다.");
+                $("#password1").focus();
             } else {
                 $("#pwAlert").hide();
             }
@@ -268,6 +290,11 @@
 
 
         $("#insertMember").on("click", function (e) {
+        	if(!confirm("회원가입 하시겠습니까?")){
+        	    $("#membername").focus();
+        		return;
+        	}
+
             e.preventDefault();
 
             var id = $("#id").val();
@@ -322,20 +349,97 @@
             var tel3 = $("#tel3").val();
             var celltel = tel1 + tel2 + tel3;
 
-            if (tel1.trim().length == 0 || tel2.trim().length == 0 || tel3.trim().length == 0) {
+            if (tel1.trim().length <= 2 || tel2.trim().length <= 2 || tel3.trim().length != 4) {
                 alert("휴대전화를 입력해 주세요.");
                 return;
+            }else{
+                var regPhone = /^[0-9]+$/;
+                if (false === regPhone.test(celltel)) {
+                   alert("휴대폰 번호를 정확하게 입력하십시요.(3-(3,4)-4 자리)");
+                   $("#tel1").focus();
+                   retuirn;
+                }
             }
 
             $("input[name='celltel']").val(celltel);
-            // alert($("input[name='celltel']").val());
+            if($("#licensegrade").val() >= "2"){
+                var companyphone1 = $("#companyphone1").val();
+                var companyphone2 = $("#companyphone2").val();
+                var companyphone3 = $("#companyphone3").val();
+                var companyphone = companyphone1 + companyphone2 + companyphone3;
+                if (companyphone1.trim().length <= 1 || companyphone2.trim().length <= 2 || companyphone3.trim().length != 4) {
+                    alert("사업장 전화번호를 입력해 주세요.");
+                    $("#companyphone1").focus();
+                    return;
+                }else{
+                    var regPhone = /^[0-9]+$/;
+                    if (false === regPhone.test(companyphone)) {
+                       alert("사업장 전화번호를 정확하게 입력하십시요.(0-9숫자만 가능)");
+                       $("#companyphone1").focus();
+                       return;
+                    }
+                    $("input[name='companyphone']").val(companyphone);
+                }
+                // 법인(회사)명 입력여부 확인
+                if($("input[name='companyname']").val().length <= 1){
+                    alert("법인(회사)명을 입력하십시요.");
+                    $("input[name='companyname']").focus();
+                    return;
+                }
 
-            var companyphone1 = $("#companyphone1").val();
-            var companyphone2 = $("#companyphone2").val();
-            var companyphone3 = $("#companyphone3").val();
-            var companyphone = companyphone1 + companyphone2 + companyphone3;
+                // 대표자명 입력여부 확인
+                if($("input[name='representationname']").val().length <= 1){
+                    alert("대표자명을 입력하십시요.");
+                    $("input[name='representationname']").focus();
+                    return;
+                }
 
-            $("input[name='companyphone']").val(companyphone);
+                // 사업자 등록 번호 입력여부 확인
+                if($("input[name='taxcompanynumber']").val().length != 10){
+                    alert("세금계산서 발행기관 사업자등록번호를 입력하십시요.");
+                    $("input[name='taxcompanynumber']").focus();
+                    return;
+                }else{
+                     console.log("taxcompanynumber.val() -->"+$("input[name='taxcompanynumber']").val());
+                     if(false == checkCorporateRegiNumber($("input[name='taxcompanynumber']").val())){
+                         var errMsg = "세금계산서 발행기관 사업자등록번호를 유효성 검사에 실패 했습니다.\n정확한 사업자 등록번호를 입력하십시요.";
+                         errMsg += "\n"+$("input[name='taxcompanynumber']").val();
+                         alert(errMsg);
+                         $("input[name='taxcompanynumber']").focus();
+                         return;
+                     }
+                 }
+
+                // 법인(회사) 주소 입력여부 확인
+                if($("#postnumber").val().length != 5){
+                    alert("법인(회사) 주소를 입력하십시요.");
+                    $("input[name='address']").focus();
+                    return;
+                }
+
+                // 법인(회사)상세주소 입력여부 확인
+                if($("input[name='detailaddress']").val().length == 0){
+                    alert("법인(회사) 상세주소를 입력하십시요.");
+                    $("input[name='detailaddress']").focus();
+                    return;
+                }
+
+                // 업종 입력여부 확인
+                if($("input[name='businesskind']").val().length == 0){
+                    alert("업종을 입력하십시요.");
+                    $("input[name='businesskind']").focus();
+                    return;
+                }
+
+                // 업태 입력여부 확인
+                if($("input[name='businesscondition']").val().length == 0){
+                    alert("업태을 입력하십시요.");
+                    $("input[name='businesscondition']").focus();
+                    return;
+                }
+
+
+            }
 
             if ($("input[name='businessname']").val() == "") {
                 alert("회사명을 입력해 주세요.");
@@ -345,6 +449,13 @@
             if ($("input[name='businessnumber']").val() == "") {
                 alert("사업자등록번호를 입력해 주세요.");
                 return;
+            }else{
+                console.log("businessnumber.val() -->"+$("input[name='businessnumber']").val());
+                if(false == checkCorporateRegiNumber($("input[name='businessnumber']").val())){
+                    alert("사업자등록번호를 유효성 검사에 실패 했습니다.\n정확한 사업자 등록번호를 입력하십시요.");
+                    $("#businessnumber").focus();
+                    return;
+                }
             }
 
             if ($("#agreement").prop("checked") == false) {
@@ -360,7 +471,7 @@
 
             var grade = $("#licensegrade").val();
 
-            if (grade != "1") {
+            if (grade == "5") {
                 alert('다음은 카드 등록을 위한 화면입니다.\n실제 결제는 이루어지지 않습니다.\n카드 정보는 따로 저장하지 않습니다.');
                 let IMP = window.IMP;
                 IMP.init("imp42261033");
@@ -485,6 +596,29 @@
         });
 
     });
+
+
+    //사업자 등록번호 유효성 체크
+    function checkCorporateRegiNumber(number){
+        var numberMap = number.replace(/-/gi, '').split('').map(function (d){
+            return parseInt(d, 10);
+        });
+
+        if(numberMap.length == 10){
+            var keyArr = [1, 3, 7, 1, 3, 7, 1, 3, 5];
+            var chk = 0;
+
+            keyArr.forEach(function(d, i){
+                chk += d * numberMap[i];
+            });
+
+            chk += parseInt((keyArr[8] * numberMap[8])/ 10, 10);
+            console.log(chk);
+            return Math.floor(numberMap[9]) === ( (10 - (chk % 10) ) % 10);
+        }
+
+        return false;
+    }
 
 </script>
 

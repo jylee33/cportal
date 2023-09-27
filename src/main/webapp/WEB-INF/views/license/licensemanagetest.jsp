@@ -16,8 +16,8 @@
     <div class="tabs-box">
         <div class="tabs">
             <a href="#" class="active">라이선스 정책 관리</a>
-            <a href="${path}/license/aidcodeinfo" >라이선스 제공 기능</a>
-            <a href="${path}/license/creditinfo">Credit 제공</a>
+            <a href="#">라이선스 제공 기능</a>
+            <a href="#">Credit 제공</a>
         </div>
         <div class="right">
             <span class="tit">솔루션 선택</span>
@@ -30,14 +30,25 @@
             </select>
             <button class="btn" type="button" onclick="selectDevice()">조회</button>
         </div>
-    </div>
-    <div class="flex align-items-center gap10 align-end mb10">
-        <button id="addRow" class="btn btn3">행추가</button>
-        <button id="addSave" class="btn">저장</button>
-    </div>
-    <div id='jqxWidget' class="table-type1 text-center cursor">
-        <div id="jaxLicense"></div>
-        <div id="log"></div>
+        <div class="flex align-items-center gap10 align-end mb10">
+            <button id="addRow" class="btn btn3">행추가</button>
+            <button id="addSave" class="btn">저장</button>
+        </div>
+        <div class="cont">
+             <div id='jqxWidgettab1' class="table-type1 center">
+                 <div id="jaxLicense"></div>
+             </div>
+        </div>
+        <div class="cont" style="display: none;">
+             <div id='jqxWidgettab2' class="table-type1 center">
+                 <div id="aidInfo"></div>
+             </div>
+        </div>
+        <div class="cont" style="display: none;">
+             <div id='jqxWidgettab3' class="table-type1 center">
+                 <div id="jaxCredit"></div>
+             </div>
+        </div>
     </div>
 </div>
 <!-- // wrap -->
@@ -45,16 +56,23 @@
 </div>
 
 <script>
+    $('.tabs a').click(function(){
+        $(this).addClass('active').siblings().removeClass('active');
+        $('.tab-cont > div').eq($(this).index()).show().siblings().hide();
+        console.log('$(this-->'+$(this));
+        console.log('$(this [0]-->'+$(this)[0]);
+        console.log('$(this .index()-->'+$(this).index());
 
+        return false;
+    })
 
     $(document).ready(function(){
         console.log("jqxGridCreate-->");
-        proc_jqxGridSelect();
+        proc_jqxWidgettab1();
     });
 
-    function proc_jqxGridSelect() {
+    function proc_jqxWidgettab1() {
         var theme = "";
-        //var param =
         var source =
             {
                 url : "${path}/license/licensemanageview",
@@ -163,7 +181,6 @@
                 ]
             });
 
-        //$("#btn_add_row").jqxButton({ theme: theme });
         $("#addRow").click(function () {
             var system_date = "";
             var year = new Date().getFullYear();
@@ -191,7 +208,6 @@
                 }
             }
 
-            console.log("11111111111111111111111111");
             maxSortNo = maxSortNo + 1;
             var fncName = "";
             const sltcode = $('#sltdeviceid option:selected').val();
@@ -236,8 +252,7 @@
 
 
     function selectDevice(){
-        proc_jqxGridSelect();
-
+        proc_jqxWidgettab1();
     }
 
     var selectDeviceChange = function (value){

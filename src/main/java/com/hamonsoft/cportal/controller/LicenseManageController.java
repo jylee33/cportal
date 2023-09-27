@@ -352,4 +352,13 @@ public class LicenseManageController {
         }
         return json;
     }
+    @GetMapping(value = "/aidtest") // memberinfo
+    public void aidtest(HttpServletRequest request) throws Exception {
+        logger.info("LicenseManageController 357 aidtest ---->");
+    }
+
+    @GetMapping(value = "/licensemanagetest") // memberinfo
+    public void licensemanagetest(HttpServletRequest request) throws Exception {
+        logger.info("LicenseManageController 1111 licensemanagetest ---->");
+    }
 }

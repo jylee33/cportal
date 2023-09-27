@@ -17,10 +17,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" type="text/css" href="${path}/resources/css/sumoselect.css" />
     <link rel="stylesheet" type="text/css" href="${path}/resources/css/front.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <script type="text/javascript" src="${path}/resources/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="${path}/resources/js/jquery.sumoselect.js"></script>
     <script type="text/javascript" src="${path}/resources/js/front.js"></script>
 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 </head>
 <link rel="icon" href="${path}/resources/favicon.ico">
 

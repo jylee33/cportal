@@ -27,7 +27,7 @@
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.selection.js"></script>
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/scripts/webcomponents-lite.min.js"></script>
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/scripts/demos.js"></script>
-<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxtabs.js"></script>
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcore.elements.js"></script>
 
 

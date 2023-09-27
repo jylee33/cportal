@@ -23,12 +23,14 @@ public interface UserRepository {
     int chgtaxinformation(TaxInformation info);
     int chgpw(Member member);
     int withdrawal(Member member);
-    Date getCreatedAt(TaxInformation tax);
+    Date getUserCreatedDate(TaxInformation tax);
     String getBaseLicense(Map<String, Object> paramMap);
 
     ArrayList<HashMap<String, Object>> findAll();
 //    Member info(Map<String, Object> paramMap);
 
     void insertMemberLicenseHistory(MemberLicense license);
+
+    ArrayList<HashMap<String, String>> getMemberLicenseHistory(Map<String, Object> paramMap);
 
 }

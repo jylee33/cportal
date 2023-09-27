@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.domain.MemberLicense;
+import com.hamonsoft.cportal.domain.MemberUseDevice;
 import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.repository.UserRepository;
@@ -52,6 +53,10 @@ public class UserService {
         return userRepository.taxInfo(member);
     }
 
+    public ArrayList<HashMap<String, String>> getMemberLicenseHistory(Map<String, Object> paramMap) {
+        return userRepository.getMemberLicenseHistory(paramMap);
+    }
+
     @Transactional(rollbackFor = {Exception.class})
     public ResultDto chgmember(Member member, TaxInformation tax, MemberLicense license) {
         ResultDto resultDto = new ResultDto();
@@ -75,11 +80,28 @@ public class UserService {
 
                 userRepository.chggrade(member);
                 userRepository.chgLicenseGrade(member);
+                userRepository.insertMemberLicenseHistory(license);
 
-                Date dtCreated = userRepository.getCreatedAt(tax);
+                Date dtCreated = userRepository.getUserCreatedDate(tax);
 
                 DateFormat df = new SimpleDateFormat("yyyyMMdd");
                 String sDate1 = df.format(dtCreated);
+
+                // TODO, tbmemberlicensehistory 에서 이번달 변경 이력 찾아서 과금액 재계산한다.
+                Map<String, Object> param = new HashMap<>();
+                param.put("email", tax.getEmail());
+                param.put("createdAt", sDate1.substring(0, 6));
+
+                ArrayList<HashMap<String, String>> list = getMemberLicenseHistory(param);
+                logger.info("getMemberLicenseHistory ==============================");
+                for (HashMap<String, String> map:list) {
+                    logger.info("======================================");
+                    for (Map.Entry<String, String> entry : map.entrySet()) {
+                        String key = entry.getKey();
+                        Object value = entry.getValue();
+                        logger.info(key + " : " + value);
+                    }
+                }
 
                 long paidAmount = tax.getPaid_amount();
                 LocalDate ldNow = LocalDate.now();
@@ -140,8 +162,6 @@ public class UserService {
 
                     userRepository.updatePaidAmount(tax);
                 }
-
-                userRepository.insertMemberLicenseHistory(license);
 
             }
         } catch (JsonProcessingException e) {

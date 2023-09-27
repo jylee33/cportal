@@ -15,7 +15,7 @@
         where email=#{email}
     </select>
 
-    <select id="getCreatedAt" resultType="Date">
+    <select id="getUserCreatedDate" resultType="Date">
         select DATE_FORMAT(createdAt,'%Y-%m-%d %H:%i:%s') as createdAt
         from tbtaxinformation
         where email=#{email}
@@ -70,5 +70,12 @@
         insert into tbmemberlicensehistory (licenseid, email, prelicensegrade, licensegrade, datakeepterm, datakeepunit, basecharge, addcharge, basevolume, servicevolume, addvolume) values
             (uuid(), #{email}, #{prelicensegrade}, #{licensegrade}, #{datakeepterm}, #{datakeepunit}, #{basecharge}, #{addcharge}, 0, 0, 0)
     </insert>
+
+    <select id="getMemberLicenseHistory" resultType="HashMap">
+        SELECT prelicensegrade, licensegrade
+        FROM tbmemberlicensehistory
+        WHERE email = #{email} AND DATE_FORMAT(createdAt,'%Y%m') = #{createdAt}
+        ORDER BY createdAt asc
+    </select>
 
 </mapper>

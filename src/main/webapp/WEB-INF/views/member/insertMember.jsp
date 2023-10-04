@@ -511,12 +511,12 @@
                 alert("사업자등록번호를 입력해 주세요.");
                 return;
             }else{
-                console.log("businessnumber.val() -->"+$("input[name='businessnumber']").val());
-                if(false == checkCorporateRegiNumber($("input[name='businessnumber']").val())){
-                    alert("사업자등록번호를 유효성 검사에 실패 했습니다.\n정확한 사업자 등록번호를 입력하십시요.");
-                    $("#businessnumber").focus();
-                    return;
-                }
+           //     console.log("businessnumber.val() -->"+$("input[name='businessnumber']").val());
+           //     if(false == checkCorporateRegiNumber($("input[name='businessnumber']").val())){
+           //         alert("사업자등록번호를 유효성 검사에 실패 했습니다.\n정확한 사업자 등록번호를 입력하십시요.");
+           //         $("#businessnumber").focus();
+           //         return;
+           //     }
             }
 
             if ($("#agreement").prop("checked") == false) {

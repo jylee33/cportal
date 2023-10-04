@@ -358,9 +358,7 @@ for(var i = 0; i < tabList.length; i++){
 
 
 $(function(){
-	$('.select').SumoSelect();	
 
-  
 $('.tabs.type2 a').click(function(){
   $(this).addClass('active').siblings().removeClass('active');
   $('.cont-box > div').eq($(this).index()).show().siblings().hide();

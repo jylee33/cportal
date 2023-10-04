@@ -59,7 +59,7 @@
         <div class="inp-area">
             <div class="label">등급선택 *</div>
             <div class="inp-box">
-                <select class="large" name="licensegrade" id="licensegrade">
+                <select class="select large" name="licensegrade" id="licensegrade">
                     <option value="1">Free</option>
                     <option value="2">Basic</option>
                     <option value="3">Pro</option>
@@ -123,7 +123,7 @@
             <div class="inp-area">
                 <div class="label">결재수단</div>
                 <div class="inp-box">
-                    <select class="large" name="settlementmeans" id="settlementmeans">
+                    <select class="select large" name="settlementmeans" id="settlementmeans">
                         <option value="card">카드</option>
                         <option value="cash">현금</option>
                     </select>

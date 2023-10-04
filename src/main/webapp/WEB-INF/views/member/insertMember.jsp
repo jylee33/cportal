@@ -14,7 +14,7 @@
             <div class="label">이메일 *</div>
             <div class="inp-box">
                 <div class="email">
-                    <input type="hidden" name="email" value="">
+                    <input type="hidden" name="email" id="emailId" value="">
                     <input type="text" class="inp2" placeholder="아이디" id="id" required>
                     <span>@</span>
                     <input type="text" class="inp2" placeholder="메일주소" id="EmailInput" required>
@@ -204,6 +204,34 @@
         window.open("mail/test_mail?mailto=" + mailto, "", "width=370, height=360, resizable=no, scrollbars=no, status=no");
     }
 
+    function existEmailYN(value){
+        console.log("..................."+value);
+        var url = "${path}/member/findEmail";
+        const params = {
+            "email": value
+        };
+
+        $.ajax({
+            type: 'post',
+            url: url,
+            async : true, // 비동기화 동작 여부
+            data: JSON.stringify(params),
+            contentType: "application/json",
+            success: function(data) {
+                if(data == "Y"){
+                    alert("입력하신 이메일 아이디("+value+")는\n이미 등록된 아이디 입니다.");
+                    $("input[name='email']").val("");
+                    $("#id").val("")
+                    $('#EmailInput').val("");
+                    $('#Email').val("선택");
+                    $("#id").focus();
+                }
+            },
+            error: function(err){
+            }
+        });
+    }
+
     $(document).ready(function () {
 
         console.log("result = ${result}");
@@ -257,9 +285,37 @@
                 $('#EmailInput').val('');
             } else {
                 $('#EmailInput').val($(this).val());
+                var email = $("#id").val() + "@" + $(this).val();
+                $("input[name='email']").val(email);
+                existEmailYN(email);
+
             }
         });
 
+
+        $('#id').change(function () {
+            console.log($(this).val());
+            var emailInput = $("#EmailInput").val();
+            if (emailInput.trim().length >= 1) {
+                var email = $("#id").val() + "@" + emailInput;
+                $("input[name='email']").val(email);
+                existEmailYN(email);
+            }
+        });
+
+        $('#EmailInput').change(function () {
+            console.log($(this).val());
+
+            var id = $("#id").val();
+            if (id.trim().length == 0) {
+                alert("id를 입력해 주세요.");
+                return;
+            }
+            var emailInput = $("#EmailInput").val();
+            var email = id + "@" + emailInput;
+            $("input[name='email']").val(email);
+            existEmailYN(email);
+        });
 
         const togglePassword = document.querySelector('#togglePassword');
           const password = document.querySelector('#password1');

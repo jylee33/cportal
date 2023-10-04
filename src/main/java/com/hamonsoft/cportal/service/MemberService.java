@@ -7,6 +7,7 @@ import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.domain.MemberLicense;
 import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.LoginDTO;
+import com.hamonsoft.cportal.dto.MemberLicenseDto;
 import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.repository.MemberRepository;
 import org.slf4j.Logger;
@@ -175,6 +176,11 @@ public class MemberService {
 
     public void emailcertification(Map<String, Object> paramMap) {
         memberRepository.emailcertification(paramMap);
+    }
+
+
+    public int existsEmail(String email)  {
+        return memberRepository.existsEmail(email);
     }
 
 }

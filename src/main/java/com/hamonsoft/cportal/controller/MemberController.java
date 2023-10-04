@@ -1,13 +1,13 @@
 package com.hamonsoft.cportal.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.hamonsoft.cportal.domain.Authentication;
-import com.hamonsoft.cportal.domain.Member;
-import com.hamonsoft.cportal.domain.MemberLicense;
-import com.hamonsoft.cportal.domain.TaxInformation;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hamonsoft.cportal.domain.*;
 import com.hamonsoft.cportal.dto.LoginDTO;
+import com.hamonsoft.cportal.dto.MemberLicenseDto;
 import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.service.MemberService;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +20,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.*;
@@ -76,6 +77,21 @@ public class MemberController {
         String membername = URLEncoder.encode(member.getMembername(), "UTF-8");
 
         return "redirect:/member/sendmail_emailcertification?email=" + member.getEmail() + "&membername=" + membername + "&licensegrade=" + member.getLicensegrade();
+    }
+
+
+    @ResponseBody
+    @PostMapping(value = "findEmail")
+    public String findEmailPost(@RequestBody Map<String, Object> map) throws Exception {
+        logger.info("call findEmailPost Email----------------"+(String)map.get("email"));
+
+        int existsCnt = memberService.existsEmail((String)map.get("email"));
+
+        if(existsCnt != 0){
+           return "Y";
+        }else{
+           return "N";
+        }
     }
 
     @GetMapping(value = "sendmail_emailcertification")

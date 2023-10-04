@@ -49,4 +49,8 @@ public interface MemberRepository {
     void updatePw(Map<String, Object> paramMap);
 
     void emailcertification(Map<String, Object> paramMap);
+
+
+    int existsEmail(String email);
+
 }

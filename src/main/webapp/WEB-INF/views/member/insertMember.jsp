@@ -24,7 +24,7 @@
                         <option>nate.com</option>
                         <option>gmail.com</option>
                         <option>daum.net</option>
-                        <option>hamonsoft.com</option>
+                        <option>hamonsoft.co.kr</option>
                         <option>직접입력</option>
                     </select>
                 </div>

@@ -24,6 +24,7 @@
                         <option>nate.com</option>
                         <option>gmail.com</option>
                         <option>daum.net</option>
+                        <option>hamonsoft.com</option>
                         <option>직접입력</option>
                     </select>
                 </div>
@@ -34,8 +35,6 @@
             <div class="inp-box">
                 <input type="password" class="inp2" name="password" id="password1" placeholder="비밀번호를 입력하세요(영문/숫자/특수문자 조합으로 9~16자)" required>
                   <i class="far fa-eye" id="togglePassword" style="margin-top: 15px;margin-left: -30px; cursor: pointer;"></i>
-
-
             </div>
         </div>
         <div class="alert-msg" id="pwAlert">반드시 영문(대문자,소문자 반드시 1개 이상)과 숫자, 특수문자를 혼합하여 9~16자 입력해주시기 바랍니다.<br>(허용 특수문자 : !@#$%^+=-)</div>
@@ -223,7 +222,8 @@
                     $("input[name='email']").val("");
                     $("#id").val("")
                     $('#EmailInput').val("");
-                    $('#Email').val("선택");
+                    // 직접 index 값을 주어 selected 속성 주기
+                    $("#Email option:eq(0)").attr("selected", "selected");
                     $("#id").focus();
                 }
             },
@@ -280,7 +280,6 @@
 
         $('#Email').change(function () {
             console.log($(this).val());
-
             if ($(this).val() == "선택" || $(this).val() == "직접입력") {
                 $('#EmailInput').val('');
             } else {
@@ -334,8 +333,10 @@
             var pw = $(this).val();
             if (false === reg.test(pw)) {
                 $("#pwAlert").show();
-             //   alert("비밀번호 : 영문(대문자,소문자 반드시 1개 이상)과 숫자,\n 특수문자를 혼합하여 9~16자입니다.");
-                $("#password1").focus();
+                alert("비밀번호 : 영문(대문자,소문자 반드시 1개 이상)과 숫자,\n 특수문자를 혼합하여 9~16자입니다.");
+                setTimeout(function(){
+                  $("#password1").focus();
+                });
             } else {
                 $("#pwAlert").hide();
             }

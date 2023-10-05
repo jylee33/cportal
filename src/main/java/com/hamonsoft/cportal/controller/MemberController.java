@@ -62,7 +62,10 @@ public class MemberController {
     @PostMapping(value = "insertMember")
     public String insertMemberPost(Member member, TaxInformation taxInformation, Authentication authentication, MemberLicense license, Model model) throws UnsupportedEncodingException, JsonProcessingException {
         logger.info("call insertMemberPost ----------------");
-        logger.info(member.toString());
+        logger.info("member->"+member.toString());
+        logger.info("taxInformation->"+taxInformation.toString());
+        logger.info("authentication->"+authentication.toString());
+        logger.info("license->"+license.toString());
 
         ResultDto resultDto = memberService.insertMember(member, taxInformation, authentication, license);
         if (resultDto.getTRAN_STATUS() == 1) {
@@ -86,6 +89,7 @@ public class MemberController {
         logger.info("call findEmailPost Email----------------"+(String)map.get("email"));
 
         int existsCnt = memberService.existsEmail((String)map.get("email"));
+        logger.info("call findEmailPost Email----------------"+(String)map.get("email")+"...existsCnt ->"+existsCnt);
 
         if(existsCnt != 0){
            return "Y";

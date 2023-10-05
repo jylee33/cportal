@@ -183,7 +183,7 @@
         <div class="msg1">본 마케팅 활용 및 정보수신에 동의를 거부하실 수 있으며 이경우 회원가입은 가능하나 일부 서비스 이용 및 이벤트 안내 등의 서비스 제공이 제한 될 수 있습니다.</div>
         <button class="btn large block" id="insertMember">회원가입</button>
         <input type="hidden" name="emailcertificationyn" value="0">
-        <input type="hidden" name="withdrawalyn" value="1">
+        <input type="hidden" name="withdrawalyn" value="0">
         <input type="hidden" name="withdrawaldate" value="">
         <input type="hidden" name="updatedBy" value="administrator">
 

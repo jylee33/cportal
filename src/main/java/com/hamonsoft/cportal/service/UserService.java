@@ -87,27 +87,11 @@ public class UserService {
                 DateFormat df = new SimpleDateFormat("yyyyMMdd");
                 String sDate1 = df.format(dtCreated);
 
-                // TODO, tbmemberlicensehistory 에서 이번달 변경 이력 찾아서 과금액 재계산한다.
-                Map<String, Object> param = new HashMap<>();
-                param.put("email", tax.getEmail());
-                param.put("createdAt", sDate1.substring(0, 6));
-
-                ArrayList<HashMap<String, String>> list = getMemberLicenseHistory(param);
-                logger.info("getMemberLicenseHistory ==============================");
-                for (HashMap<String, String> map:list) {
-                    logger.info("======================================");
-                    for (Map.Entry<String, String> entry : map.entrySet()) {
-                        String key = entry.getKey();
-                        Object value = entry.getValue();
-                        logger.info(key + " : " + value);
-                    }
-                }
-
-                long paidAmount = tax.getPaid_amount();
                 LocalDate ldNow = LocalDate.now();
                 int today = ldNow.getDayOfMonth();
-                int endday = ldNow.lengthOfMonth();
-                int dCount = endday - today + 1;    // 오늘 이후 이번달 남은 날짜수
+                int firstday = 1;
+                int lastday = ldNow.lengthOfMonth();
+                int dCount = lastday - today + 1;    // 오늘 이후 이번달 남은 날짜수
 
                 String sDate2 = df.format(java.sql.Date.valueOf(ldNow));
 
@@ -116,27 +100,82 @@ public class UserService {
                     today = today - Integer.parseInt(sDate1.substring(6, 8)) + 1;
                 }
 
-                Map<String, Object> paramMap = new HashMap<>();
-                paramMap.put("commoncode", newGrade);
+                // tbmemberlicensehistory 에서 이번달 변경 이력 찾아서 과금액 재계산한다.
+                Map<String, Object> param = new HashMap<>();
+                param.put("email", tax.getEmail());
+                param.put("createdAt", sDate2.substring(0, 6));
 
-                String baseLicense = userRepository.getBaseLicense(paramMap);
-                logger.info("baseLicense =============================== " + baseLicense);
-                long lLicense = 0;
-                if (newGrade != 1) {
-                    if (newGrade == 4) {
-                        lLicense = 1000000;  // enterprise 는 일단 1,000,000원
-                    } else {
-                        lLicense = Long.parseLong(baseLicense);
+                // 이번달에 등급 변경 이력을 조회
+                ArrayList<HashMap<String, String>> list = getMemberLicenseHistory(param);
+                logger.info("getMemberLicenseHistory ==============================");
+                logger.info("firstday : " + firstday);
+                logger.info("lastday : " + lastday);
+
+                int changedday = 1;
+                int grade1 = 0;
+                int grade2 = 0;
+                long baseCharge = 0;
+                long paid_amount = 0;
+                for (HashMap<String, String> map:list) {
+                    logger.info("======================================");
+                    for (Map.Entry<String, String> entry : map.entrySet()) {
+                        String key = entry.getKey();
+                        Object value = entry.getValue();
+                        logger.info(key + " : " + value);
+
+                        switch (key) {
+                            case "createdAt":
+                                changedday = Integer.parseInt(value.toString().substring(8, 10));
+                                break;
+                            case "prelicensegrade":
+                                grade1 = Integer.parseInt(value.toString());
+                                break;
+                            case "licensegrade":
+                                grade2 = Integer.parseInt(value.toString());
+                                break;
+                        }
+                    }
+                    logger.info("changed date : " + changedday + ", grade1 : " + grade1 + ", grade2 : " + grade2);
+
+                    Map<String, Object> paramMap = new HashMap<>();
+                    paramMap.put("commoncode", grade1);
+
+                    String baseLicense = userRepository.getBaseLicense(paramMap);
+                    logger.info("baseLicense =============================== " + baseLicense);
+                    if (grade1 != 1) {
+                        if (grade1 == 4) {
+                            baseCharge = 1000000;  // enterprise 는 일단 1,000,000원
+                        } else {
+                            baseCharge = Long.parseLong(baseLicense);
+                        }
                     }
 
+                    paid_amount = paid_amount + (changedday - firstday) * baseCharge / lastday;
+                    firstday = changedday;
+                    logger.info("paid_amount : " + paid_amount);
+                    logger.info("firstday : " + firstday);
                 }
 
-                long paid_amount2 = paidAmount * (today-1) / endday;    // newGrade = 1, Free 가입자로 변경한 경우는 오늘까지만 금액 계산
+                Map<String, Object> paramMap2 = new HashMap<>();
+                paramMap2.put("commoncode", newGrade);
+
+                String baseLicense = userRepository.getBaseLicense(paramMap2);
+                logger.info("baseLicense =============================== " + baseLicense);
+                if (newGrade != 1) {
+                    if (newGrade == 4) {
+                        baseCharge = 1000000;  // enterprise 는 일단 1,000,000원
+                    } else {
+                        baseCharge = Long.parseLong(baseLicense);
+                    }
+                }
+
+                paid_amount = paid_amount + (lastday - today + 1) * baseCharge / lastday;
+                logger.info("last paid_amount : " + paid_amount);
 
                 if (newGrade == 1) {
                     // Free 가입자는 next_pay_date 를 어제로 변경하고 chginforesult.jsp 에서 결제 페이지(bill/again)로 이동해서 결제되도록 한다.
-                    logger.info("일할 계산된 paid_amount2 - " + paid_amount2);
-                    tax.setPaid_amount(paid_amount2);
+                    logger.info("일할 계산된 paid_amount - " + paid_amount);
+                    tax.setPaid_amount(paid_amount);
 
                     LocalDate ldYesterday = ldNow.plusDays(-1);
                     Instant instant = ldYesterday.atStartOfDay(ZoneId.systemDefault()).toInstant();
@@ -148,11 +187,8 @@ public class UserService {
                     userRepository.updatePaidAmount(tax);
 
                 } else {
-                    // Free 이외의 그룹은 오늘 이후 이번달 잔여 날짜에 대한 금액을 더한다.
-                    paid_amount2 += lLicense * dCount / endday;  // 일할 계산
-
-                    logger.info("일할 계산된 paid_amount2 - " + paid_amount2);
-                    tax.setPaid_amount(paid_amount2);
+                    logger.info("일할 계산된 paid_amount - " + paid_amount);
+                    tax.setPaid_amount(paid_amount);
 
                     LocalDate ldNextMonth = ldNow.plusMonths(1).withDayOfMonth(1);
                     Instant instant = ldNextMonth.atStartOfDay(ZoneId.systemDefault()).toInstant();
@@ -203,6 +239,7 @@ public class UserService {
         // Header set
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("netis-route", "free1");
 
         // Body set
         Map<String, Object> body = new HashMap<>();
@@ -236,6 +273,7 @@ public class UserService {
         // Header set
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("netis-route", "free1");
 
         // Body set
         Map<String, Object> body = new HashMap<>();

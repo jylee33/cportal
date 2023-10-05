@@ -72,7 +72,7 @@
     </insert>
 
     <select id="getMemberLicenseHistory" resultType="HashMap">
-        SELECT prelicensegrade, licensegrade
+        SELECT prelicensegrade, licensegrade, DATE_FORMAT(createdAt,'%Y-%m-%d %H:%i:%s') as createdAt
         FROM tbmemberlicensehistory
         WHERE email = #{email} AND DATE_FORMAT(createdAt,'%Y%m') = #{createdAt}
         ORDER BY createdAt asc

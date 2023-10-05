@@ -18,13 +18,17 @@ public interface MemberRepository {
 
     HashMap<String, Object> selectTaxByEmail(String email);
 
+    TaxInformation taxInfo(String email);
+
     ArrayList<HashMap<String, String>> selectBaseLicense();
 
     void updatePayInformation(Map<String, Object> paramMap);
 
     void insertPayHistory(Map<String, Object> paramMap);
 
-    List<String> selectEmails();
+    ArrayList<HashMap<String, String>> selectEmails();
+
+    String selectSettlementmeans(String email);
 
     void insertMember(Member member);
 

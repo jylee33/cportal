@@ -3,7 +3,10 @@ spring:
     active: dev
 
 rest:
-  url: http://125.141.17.60:60003/cloud/v1
+  # 20층
+  #url: http://125.141.17.60:60003/cloud/v1
+  # AWS
+  url: http://api.aws.hamon.vip/cloud/v1
 
 ---
 server:

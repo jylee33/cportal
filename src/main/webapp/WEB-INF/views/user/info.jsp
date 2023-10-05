@@ -59,7 +59,7 @@
         <div class="inp-area">
             <div class="label">등급선택 *</div>
             <div class="inp-box">
-                <select class="select large" name="licensegrade" id="licensegrade"  value="${member.licensegrade}">
+                <select class="select large" name="licensegrade" id="licensegrade">
                     <option value="1">Free</option>
                     <option value="2">Basic</option>
                     <option value="3">Pro</option>
@@ -147,7 +147,8 @@
 
     $(document).ready(function () {
         var formObj = $("form[role='form']");
-
+//        console.log("#licensegrade -->"+${member.licensegrade});
+//alert("......licensegrade........"+${member.licensegrade});
         $("#licensegrade").val("${member.licensegrade}").prop("selected", true);
         $("#licensegrade").SumoSelect();
 

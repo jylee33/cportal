@@ -321,5 +321,4 @@ $(document).mousedown(function (e){
 
 
 $(function(){
-	$('.select').SumoSelect();	
 });

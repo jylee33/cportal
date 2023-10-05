@@ -13,127 +13,114 @@
                   
                   <div class="cloud-wrap">
                     <div class="kinds">
-                      <div><p>공통</p></div>
-                      <div><img src="${path}/resources/images/common/ico_p1.png"><p>네트워크</p><span>장비 1대당 1Credit 적용</span></div>
-                      <div><img src="${path}/resources/images/common/ico_p2.png"><p>서버</p><span>장비 1대당 1Credit 적용</span></div>
-                      <div><img src="${path}/resources/images/common/ico_p3.png"><p>무선 네트워크</p><span>무선 AP 2대당 1 Credit 적용<br>무선 컨트롤러 1대당 5 Credit 적용</span></div>
-                      <div><img src="${path}/resources/images/common/ico_p4.png"><p>데이터 베이스</p><span>장비 1대당 1Credit 적용</span></div>
-                      <div><img src="${path}/resources/images/common/ico_p5.png"><p>환경 센서</p><span>RTU 1대당 1 Credit 적용<br>센서 2대당 1 Credit 적용</span></div>
+                      <div><img src="${path}/resources/images/common/ico_p1.png"><p>네트워크</p></div>
+                      <div><img src="${path}/resources/images/common/ico_p2.png"><p>서버</p></div>
+                      <div><img src="${path}/resources/images/common/ico_p3.png"><p>무선 네트워크</p></div>
+                      <div><img src="${path}/resources/images/common/ico_p4.png"><p>데이터 베이스</p></div>
+                      <div><img src="${path}/resources/images/common/ico_p5.png"><p>환경 센서</p></div>
                     </div>
                     <ul>
                       <li>
                         <div class="tit">FREE</div>
                         <div class="item-wrap">
-
+                          <div class="price">무료</div>
                           <div class="item">
-                            <div class="price">무료</div>
-                            <div class="txt"><strong>5 Credit 제공</strong><br>
-                              기본기능<br>데이터 1일 보관
-                              </div>
+                            <div class="txt">장비 <strong>5대</strong> 이하<br>기본기능제공</div>
                             <button class="btn" onclick="javascript:popupOpen('Modal1',1,1);">자세히보기</button>
                           </div>
                           <div class="item">
-                            <div class="txt">구성/성능/장애 정보<br>Syslog/Trap 모니터링 등</div>
+                            <div class="txt"><strong>5대</strong> 이하<br>기본기능제공</div>
+                            <button class="btn" onclick="javascript:popupOpen('Modal1',2,1);">자세히보기</button>
                           </div>
                           <div class="item">
-                            <div class="txt">구성/성능/장애 정보<br>감시 정책 설정 등</div>
+                            <div class="txt"><strong>5대</strong> 이하(단독형)<br><strong>2대</strong> 이하(무선컨트롤러포함)</div>
+                            <button class="btn" onclick="javascript:popupOpen('Modal1',3,1);">자세히보기</button>
                           </div>
                           <div class="item">
-                            <div class="txt">AP Controller 관리<br>감시 정책 설정 등</div>
+                            <div class="txt"><strong>5개</strong> 이하<br>전체기능제공</div>
+                            <button class="btn" onclick="javascript:popupOpen('Modal1',4,1);">자세히보기</button>
                           </div>
                           <div class="item">
-                            <div class="txt">Database 운영 현황  <br>Database 성능 관리 등</div>
-                          </div>
-                          <div class="item">
-                            <div class="txt">항온항습기,온/습도 관리<br>UPS, 전력 관리 등</div>
+                            <div class="txt"><strong>5대</strong> 이하(단독 감시형)<br>기본기능제공</div>
+                            <button class="btn" onclick="javascript:popupOpen('Modal1',5,1);">자세히보기</button>
                           </div>
                         </div>
                       </li>
                       <li>
                         <div class="tit">BASIC</div>
                         <div class="item-wrap">
+                          <div class="price"><small>월</small> ₩400,000 </div>
                           <div class="item">
-                            <div class="price"><small>월</small> ₩400,000 </div>
-                            <div class="txt"><strong>25 Credit 이하</strong><br>Free 기능 모두 포함<br>데이터 30일 보관
-                            </div>
+                            <div class="txt">장비 <strong>25대</strong> 이하<br>기본 + 부가기능제공</div>
                             <button class="btn" onclick="javascript:popupOpen('Modal1',1,2);">자세히보기</button>
                           </div>
                           <div class="item">
-                            <div class="txt">대시보드, 성능비교<br>
-                              Configuration 백업<br>
-                              L4 VIP/RIP 성능 등
-                              </div>
+                            <div class="txt"><strong>25대</strong> 이하<br>기본 + 부가기능제공</div>
+                            <button class="btn" onclick="javascript:popupOpen('Modal1',2,2);">자세히보기</button>
                           </div>
                           <div class="item">
-                            <div class="txt">대시보드, 성능비교<br>
-                              프로세스 감시, 로그 감시<br>
-                              알람통보(문자/메일/메신저) 등
-                              </div>
+                            <div class="txt"><strong>25대</strong> 이하(단독형)<br>기본 + 부가 기능제공</div>
+                            <button class="btn" onclick="javascript:popupOpen('Modal1',3,2);">자세히보기</button>
                           </div>
                           <div class="item">
-                            <div class="txt">GIS 맵, 대시보드 <br>
-                              Syslog/Trap 모니터링<br>
-                              알람통보(문자/메일/메신저)
-                              </div>
+                            <div class="txt"><strong>25개</strong> 이하<br>전체기능제공</div>
+                            <button class="btn" onclick="javascript:popupOpen('Modal1',4,2);">자세히보기</button>
                           </div>
                           <div class="item">
-                            <div class="txt">Database 운영 현황<br>
-                              Database 성능 관리 등
-                              </div>
-                          </div>
-                          <div class="item">
-                            <div class="txt">대시보드 <br>
-                              Syslog/Trap 모니터링<br>
-                              알람통보(문자/메일/메신저) 등
-                              </div>
+                            <div class="txt"><strong>25대</strong> 이하(단독 감시형)<br>기본 + 부가기능제공</div>
+                            <button class="btn" onclick="javascript:popupOpen('Modal1',5,2);">자세히보기</button>
                           </div>
                         </div>
                       </li>
                       <li>
                         <div class="tit">PRO</div>
                         <div class="item-wrap">
+                          <div class="price"><small>월</small> ₩700,000 </div>
                           <div class="item">
-                            <div class="price"><small>월</small> ₩700,000 </div>
-                            <div class="txt"><strong>50 Credit 이하</strong><br>Basic 기능 모두 포함<br>데이터 30일 보관
-                            </div>
+                            <div class="txt">장비 <strong>50대</strong> 이하<br>기본 + 부가 + 고급기능제공</div>
                             <button class="btn" onclick="javascript:popupOpen('Modal1',1,3);">자세히보기</button>
                           </div>
                           <div class="item">
-                            <div class="txt">TCP Port / URL 감시<br>
-                              Rack 실장 관리<br>
-                              성능 예측/상관 분석 등 추가
-                              </div>
+                            <div class="txt"><strong>50대</strong> 이하<br>기본 + 부가 + 고급기능제공</div>
+                            <button class="btn" onclick="javascript:popupOpen('Modal1',2,3);">자세히보기</button>
                           </div>
                           <div class="item">
-                            <div class="txt">TCP Port / URL 감시<br>
-                              임계치가이드 추가
-                              </div>
+                            <div class="txt"><strong>50대</strong> 이하(단독형)<br>기본 + 부가기능제공</div>
+                            <button class="btn" onclick="javascript:popupOpen('Modal1',3,3);">자세히보기</button>
                           </div>
                           <div class="item">
-                            <div class="txt">Basic기능 과 동일</div>
+                            <div class="txt"><strong>50개</strong> 이하<br>전체기능제공</div>
+                            <button class="btn" onclick="javascript:popupOpen('Modal1',4,3);">자세히보기</button>
                           </div>
                           <div class="item">
-                            <div class="txt">Basic기능 과 동일</div>
-                          </div>
-                          <div class="item">
-                            <div class="txt">Basic기능 과 동일</div>
+                            <div class="txt"><strong>50대</strong> 이하(단독 감시형)<br>기본 + 부가기능제공</div>
+                            <button class="btn" onclick="javascript:popupOpen('Modal1',5,3);">자세히보기</button>
                           </div>
                         </div>
                       </li>
                       <li>
                         <div class="tit">ENTERPRISE</div>
                         <div class="item-wrap">
+                          <div class="price">별도협의</div>
                           <div class="item">
-                            <div class="price">별도 협의 </div>
-                            <div class="txt"><strong>100 Credit 이상</strong><br>Pro 기능 모두 포함<br>&nbsp;
-                            </div>
+                            <div class="txt">장비 <strong>100대</strong> 이상<br>전체기능제공</div>
                             <button class="btn" onclick="javascript:popupOpen('Modal1',1,4);">자세히보기</button>
                           </div>
-                          <div class="item last">
-                            <div class="txt">
-                              <strong>ㆍ100대 이상 대규모 인프라 관리 시</strong><br>
-                              <strong>ㆍ데이터 보관 기간 별도 협의</strong>
-                              </div>
+                          <div class="item">
+                            <div class="txt"><strong>100대</strong> 이상<br>전체기능제공</div>
+                            <button class="btn" onclick="javascript:popupOpen('Modal1',2,4);">자세히보기</button>
+                          </div>
+                          <div class="item">
+                            <div class="txt"><strong>100대</strong> 이상<br>전체기능제공</div>
+                            <button class="btn" onclick="javascript:popupOpen('Modal1',3,4);">자세히보기</button>
+                          </div>
+                          <div class="item">
+                            <div class="txt"><strong>100개</strong> 이상<br>전체기능제공</div>
+                            <button class="btn" onclick="javascript:popupOpen('Modal1',4,4);">자세히보기</button>
+                          </div>
+                          <div class="item">
+                            <div class="txt">환경 센서 <strong>100대</strong> 이상<br>기본 + 부가기능제공</div>
+                            <button class="btn" onclick="javascript:popupOpen('Modal1',5,4);">자세히보기</button>
                           </div>
                         </div>
                       </li>
@@ -144,17 +131,16 @@
                         <strong>※ 위 라이선스 정책은 개별 인프라 단독 감시 기준 정책이며 여러 인프라를 통합 모니터링하는 경우 아래의 정책 적용</strong>
                         <div>1. 라이선스는 Credit 단위로 적용 Free/Basic/Pro 각 5/25/50/100 Credit 기본 제공<br>
                         2. 추가 Credit 구매  5 Credit / ₩100,000, 10 Credit 180,000제공<br>
-                    3. 네트워크 장비, 서버, 데이터베이스 각 1대당 1 Credit 적용<br>
+                    3.네트워크 장비, 서버, 데이터베이스 각 1대당 1 Credit 적용<br>
                 4. 무선 Ap/환경 센서 각 2대당 1Credit 적용<br>
             5. 무선 컨트롤러 / RTU 각 1대당 5 Credit 적용
                         </div>
                     </div>
-
+                    
                 </div>
 
 
             </div>
-
 
         </div>
         <!-- // wrap -->
@@ -418,7 +404,7 @@
                               </table>
                             </div>
 
-
+                            
                             <div class="table-type2 type2">
                               <table border="0" cellpadding="0" cellspacing="0" width="504">
                                 <col>
@@ -566,7 +552,7 @@
                               </tbody>
                               </table>
                             </div>
-
+                            
                             <div class="table-type2 type2">
                               <table border="0" cellpadding="0" cellspacing="0" width="451">
                                 <col>
@@ -646,11 +632,10 @@
                             </div>
                           </div>
                         </div>
-
+                        
                     </div>
                 </div>
             </div>
         </div>
-
 
 <%@include file="include/footer.jsp" %>

@@ -8,23 +8,61 @@
 	</select>
 	
 	<insert id="insertMember" >
-		insert into tbmember (email,membername,grpname,celltel,password,businessname,businessnumber,licensegrade,companyphone,emailcertificationyn,withdrawalyn,withdrawaldate,joindate,createdAt,updatedBy,updatedAt) values
-		(#{email}, #{membername}, #{grpname}, #{celltel}, sha2(#{password}, 256), #{businessname}, #{businessnumber}, #{licensegrade}, #{companyphone}, #{emailcertificationyn}, #{withdrawalyn}, #{withdrawaldate}, DATE_FORMAT(now(),'%Y%m%d'), now(), #{updatedBy}, now())
+		insert into tbmember(
+			email          ,membername       ,grpname          ,celltel        ,password
+			,businessname   ,businessnumber   ,licensegrade     ,companyphone   ,emailcertificationyn
+			,withdrawalyn   ,withdrawaldate   ,joindate         ,createdAt      ,updatedBy
+		    ,updatedAt      ,administratoryn
+		)values(
+			#{email}       ,#{membername}    ,#{grpname}       ,#{celltel}     ,sha2(#{password}, 256)
+			,#{businessname},#{businessnumber},#{licensegrade}  ,#{companyphone},#{emailcertificationyn}
+			,#{withdrawalyn},#{withdrawaldate},DATE_FORMAT(now(),'%Y%m%d')      ,now()    ,#{email}
+		    ,now()
+		    ,(select case when infomalityname = #{businessnumber} then 'Y' else 'N' end from tbcommoncode where groupcode = '000000' and commoncode = '999')
+		)
 	</insert>
 
 	<insert id="insertTaxInfomation" >
-		insert into tbtaxinformation (taxid, email, Representationname, taxcompanynumber, taxemail, postnumber, address, detailaddress, businesscondition, businesskind, settlementmeans, baseamount, customer_uid, next_pay_date, paid_amount, createdAt, updatedBy, updatedAt) values
-			(uuid(), #{email}, #{representationname}, #{taxcompanynumber}, #{taxemail}, #{postnumber}, #{address}, #{detailaddress}, #{businesscondition}, #{businesskind}, #{settlementmeans}, #{baseamount}, #{customer_uid}, #{next_pay_date}, #{paid_amount}, now(), #{updatedBy}, now())
+		insert into tbtaxinformation (
+			taxid             , email        , Representationname   , taxcompanynumber    , taxemail
+			,postnumber        , address      , detailaddress        , businesscondition   , businesskind
+			,settlementmeans   , baseamount   , customer_uid         , next_pay_date       , paid_amount
+			,createdAt         , updatedBy    , updatedAt
+		)values(
+			uuid()            , #{email}     , #{representationname}, #{taxcompanynumber} , #{taxemail}
+			,#{postnumber}     , #{address}   , #{detailaddress}     , #{businesscondition}, #{businesskind}
+			,#{settlementmeans}, #{baseamount}, #{customer_uid}      , #{next_pay_date}    , #{paid_amount}
+			,now()             , #{updatedBy} , now()
+		)
 	</insert>
 
 	<insert id="insertAuthentication" >
-		insert into tbauthentication (authenticationid, email, agreeyn, createdAt) values
-			(uuid(), #{email}, #{agreeyn}, now())
+		insert into tbauthentication (
+		      authenticationid, email   , agreeyn   , createdAt
+		)values(
+		      uuid()          , #{email}, #{agreeyn}, now())
 	</insert>
 
 	<insert id="insertMemberLicense" >
-		insert into tbmemberlicense (email, licensegrade, datakeepterm, datakeepunit, basecharge, addcharge) values
-			(#{email}, #{licensegrade}, #{datakeepterm}, #{datakeepunit}, #{basecharge}, #{addcharge})
+		insert into tbmemberlicense (
+			email   , licensegrade   , datakeepterm   , datakeepunit   , basevolume   , addcharge , updatedBy)
+		select #{email}, #{licensegrade}
+			,case when commoncode = 1 then SUBSTRING_INDEX(freeaid , '일', 1)
+			when commoncode = 2 then SUBSTRING_INDEX(basicaid, '일', 1)
+			when commoncode = 3 then SUBSTRING_INDEX(proaid  , '일', 1) else 30 end datakeepterm
+			,'D'  datakeepterm
+			,a02.applyvolume, a02.basecharge, #{email}
+		from tbaidfunction as a01
+			,(select commoncode, applyvolume
+			,case when baselicense = '무료'   then 0
+			when baselicense = '별도협의' then 0
+			else CAST(baselicense AS UNSIGNED)
+			end basecharge
+			from tbcommoncode
+			where groupcode  = '001'
+			and commoncode = #{licensegrade}) as a02
+		where a01.solutioncode = '10'
+		and a01.functionno   = '11'
 	</insert>
 
 	<select id="selectMember" resultType="com.hamonsoft.cportal.domain.Member">
@@ -116,5 +154,9 @@
 		where email = #{email}
 	</update>
 
+	<select id="existsEmail" resultType="int">
+		select count(*) cnt from tbmember
+		where email = #{email}
+	</select>
 
 </mapper>

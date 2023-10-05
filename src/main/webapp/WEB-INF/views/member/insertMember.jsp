@@ -14,7 +14,7 @@
             <div class="label">이메일 *</div>
             <div class="inp-box">
                 <div class="email">
-                    <input type="hidden" name="email" value="">
+                    <input type="hidden" name="email" id="emailId" value="">
                     <input type="text" class="inp2" placeholder="아이디" id="id" required>
                     <span>@</span>
                     <input type="text" class="inp2" placeholder="메일주소" id="EmailInput" required>
@@ -24,6 +24,7 @@
                         <option>nate.com</option>
                         <option>gmail.com</option>
                         <option>daum.net</option>
+                        <option>hamonsoft.co.kr</option>
                         <option>직접입력</option>
                     </select>
                 </div>
@@ -34,8 +35,6 @@
             <div class="inp-box">
                 <input type="password" class="inp2" name="password" id="password1" placeholder="비밀번호를 입력하세요(영문/숫자/특수문자 조합으로 9~16자)" required>
                   <i class="far fa-eye" id="togglePassword" style="margin-top: 15px;margin-left: -30px; cursor: pointer;"></i>
-
-
             </div>
         </div>
         <div class="alert-msg" id="pwAlert">반드시 영문(대문자,소문자 반드시 1개 이상)과 숫자, 특수문자를 혼합하여 9~16자 입력해주시기 바랍니다.<br>(허용 특수문자 : !@#$%^+=-)</div>
@@ -184,7 +183,7 @@
         <div class="msg1">본 마케팅 활용 및 정보수신에 동의를 거부하실 수 있으며 이경우 회원가입은 가능하나 일부 서비스 이용 및 이벤트 안내 등의 서비스 제공이 제한 될 수 있습니다.</div>
         <button class="btn large block" id="insertMember">회원가입</button>
         <input type="hidden" name="emailcertificationyn" value="0">
-        <input type="hidden" name="withdrawalyn" value="1">
+        <input type="hidden" name="withdrawalyn" value="0">
         <input type="hidden" name="withdrawaldate" value="">
         <input type="hidden" name="updatedBy" value="administrator">
 
@@ -202,6 +201,35 @@
     function send_mail() {
         var mailto = $('#mailto').val();
         window.open("mail/test_mail?mailto=" + mailto, "", "width=370, height=360, resizable=no, scrollbars=no, status=no");
+    }
+
+    function existEmailYN(value){
+        console.log("..................."+value);
+        var url = "${path}/member/findEmail";
+        const params = {
+            "email": value
+        };
+
+        $.ajax({
+            type: 'post',
+            url: url,
+            async : true, // 비동기화 동작 여부
+            data: JSON.stringify(params),
+            contentType: "application/json",
+            success: function(data) {
+                if(data == "Y"){
+                    alert("입력하신 이메일 아이디("+value+")는\n이미 등록된 아이디 입니다.");
+                    $("input[name='email']").val("");
+                    $("#id").val("")
+                    $('#EmailInput').val("");
+                    // 직접 index 값을 주어 selected 속성 주기
+                    $("#Email option:eq(0)").attr("selected", "selected");
+                    $("#id").focus();
+                }
+            },
+            error: function(err){
+            }
+        });
     }
 
     $(document).ready(function () {
@@ -252,14 +280,41 @@
 
         $('#Email').change(function () {
             console.log($(this).val());
-
             if ($(this).val() == "선택" || $(this).val() == "직접입력") {
                 $('#EmailInput').val('');
             } else {
                 $('#EmailInput').val($(this).val());
+                var email = $("#id").val() + "@" + $(this).val();
+                $("input[name='email']").val(email);
+                existEmailYN(email);
+
             }
         });
 
+
+        $('#id').change(function () {
+            console.log($(this).val());
+            var emailInput = $("#EmailInput").val();
+            if (emailInput.trim().length >= 1) {
+                var email = $("#id").val() + "@" + emailInput;
+                $("input[name='email']").val(email);
+                existEmailYN(email);
+            }
+        });
+
+        $('#EmailInput').change(function () {
+            console.log($(this).val());
+
+            var id = $("#id").val();
+            if (id.trim().length == 0) {
+                alert("id를 입력해 주세요.");
+                return;
+            }
+            var emailInput = $("#EmailInput").val();
+            var email = id + "@" + emailInput;
+            $("input[name='email']").val(email);
+            existEmailYN(email);
+        });
 
         const togglePassword = document.querySelector('#togglePassword');
           const password = document.querySelector('#password1');
@@ -278,8 +333,10 @@
             var pw = $(this).val();
             if (false === reg.test(pw)) {
                 $("#pwAlert").show();
-             //   alert("비밀번호 : 영문(대문자,소문자 반드시 1개 이상)과 숫자,\n 특수문자를 혼합하여 9~16자입니다.");
-                $("#password1").focus();
+                alert("비밀번호 : 영문(대문자,소문자 반드시 1개 이상)과 숫자,\n 특수문자를 혼합하여 9~16자입니다.");
+                setTimeout(function(){
+                  $("#password1").focus();
+                });
             } else {
                 $("#pwAlert").hide();
             }
@@ -455,12 +512,12 @@
                 alert("사업자등록번호를 입력해 주세요.");
                 return;
             }else{
-                console.log("businessnumber.val() -->"+$("input[name='businessnumber']").val());
-                if(false == checkCorporateRegiNumber($("input[name='businessnumber']").val())){
-                    alert("사업자등록번호를 유효성 검사에 실패 했습니다.\n정확한 사업자 등록번호를 입력하십시요.");
-                    $("#businessnumber").focus();
-                    return;
-                }
+           //     console.log("businessnumber.val() -->"+$("input[name='businessnumber']").val());
+           //     if(false == checkCorporateRegiNumber($("input[name='businessnumber']").val())){
+           //         alert("사업자등록번호를 유효성 검사에 실패 했습니다.\n정확한 사업자 등록번호를 입력하십시요.");
+           //         $("#businessnumber").focus();
+           //         return;
+           //     }
             }
 
             if ($("#agreement").prop("checked") == false) {

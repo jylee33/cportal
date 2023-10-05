@@ -171,6 +171,7 @@ public class TaxInformation {
     public String toString() {
         return "TaxInformation{" +
                 "email='" + email + '\'' +
+                ", companyname='" + companyname + '\'' +
                 ", representationname='" + representationname + '\'' +
                 ", taxcompanynumber='" + taxcompanynumber + '\'' +
                 ", taxemail='" + taxemail + '\'' +
@@ -181,6 +182,9 @@ public class TaxInformation {
                 ", businesskind='" + businesskind + '\'' +
                 ", settlementmeans='" + settlementmeans + '\'' +
                 ", baseamount=" + baseamount +
+                ", customer_uid='" + customer_uid + '\'' +
+                ", next_pay_date=" + next_pay_date +
+                ", paid_amount=" + paid_amount +
                 ", createdAt=" + createdAt +
                 ", updatedBy='" + updatedBy + '\'' +
                 ", updatedAt=" + updatedAt +

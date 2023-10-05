@@ -75,6 +75,12 @@
 		where email=#{email}
 	</select>
 
+	<select id="taxInfo" resultType="TaxInformation">
+		select email, companyname, representationname, taxcompanynumber, taxemail, address, detailaddress, businesskind, settlementmeans, businesscondition, paid_amount, customer_uid, DATE_FORMAT(updatedAt,'%Y-%m-%d %H:%i:%s') as updatedAt
+		from tbtaxinformation
+		where email=#{email}
+	</select>
+
 	<select id="selectBaseLicense" resultType="HashMap">
 		select
 			commoncode, baselicense
@@ -82,9 +88,17 @@
 		where groupcode = '001'
 	</select>
 
-	<select id="selectEmails" resultType="String">
-		select email from tbtaxinformation
+	<select id="selectEmails" resultType="HashMap">
+		select email, settlementmeans
+		from tbtaxinformation
 	</select>
+
+	<select id="selectSettlementmeans" resultType="String">
+		select settlementmeans
+		from tbtaxinformation
+		where email=#{email}
+	</select>
+
 
 	<update id="updatePayInformation">
 		update tbtaxinformation set next_pay_date = #{dtNext}, imp_uid = #{imp_uid}, last_pay_date = now(), updatedAt = now()

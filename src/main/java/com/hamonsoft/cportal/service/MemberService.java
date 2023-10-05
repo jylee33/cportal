@@ -54,6 +54,10 @@ public class MemberService {
         return memberRepository.selectTaxByEmail(email);
     }
 
+    public TaxInformation taxInfo(String email) {
+        return memberRepository.taxInfo(email);
+    }
+
     public ArrayList<HashMap<String, String>> selectBaseLicense() {
         return memberRepository.selectBaseLicense();
     }
@@ -66,8 +70,12 @@ public class MemberService {
         memberRepository.insertPayHistory(paramMap);
     }
 
-    public List<String> selectEmails() {
+    public ArrayList<HashMap<String, String>> selectEmails() {
         return memberRepository.selectEmails();
+    }
+
+    public String selectSettlementmeans(String email) {
+        return memberRepository.selectSettlementmeans(email);
     }
 
     @Transactional(rollbackFor = {Exception.class})

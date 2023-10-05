@@ -305,10 +305,9 @@ function popupOpen(id,idx,num){
   var idx = idx - 1;
   $('.cont-box > div').hide();
   $('.cont-box > div').eq(idx).show();
-  $('.cont-box > div').addClass('td'+num); 
+  $('.cont-box > div').addClass('td'+num);
   $('.tabs.type2 a').eq(idx).addClass('active').siblings().removeClass('active');
   $('#Modal1 .h3-popup > span').eq(idx).show().siblings().hide();
-  
 } 
 
 function popupClose(id){
@@ -337,12 +336,13 @@ $(document).mousedown(function (e){
 
 
 $(function(){
+
 $('.tabs.type2 a').click(function(){
   $(this).addClass('active').siblings().removeClass('active');
   $('.cont-box > div').eq($(this).index()).show().siblings().hide();
   $('#Modal1 .h3-popup > span').eq($(this).index()).show().siblings().hide();
-  
- 
+
+
 })
 
 });

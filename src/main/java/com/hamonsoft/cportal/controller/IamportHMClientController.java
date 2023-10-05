@@ -1,5 +1,8 @@
 package com.hamonsoft.cportal.controller;
 
+import com.hamonsoft.cportal.domain.Member;
+import com.hamonsoft.cportal.domain.TaxInformation;
+import com.hamonsoft.cportal.service.BaroBillHMService;
 import com.hamonsoft.cportal.service.MemberService;
 import com.siot.IamportRestClient.Iamport;
 import com.siot.IamportRestClient.IamportClient;
@@ -36,6 +39,7 @@ public class IamportHMClientController {
     private static final Logger logger = LoggerFactory.getLogger(BillController.class);
 
     MemberService memberService;
+    BaroBillHMService baroBillHMService;
 
     protected Iamport iamport = null;
 
@@ -43,10 +47,12 @@ public class IamportHMClientController {
     String apiSecret = "RldZHse07tEdv7luguc4oh6bJdcWvLluhsbo8Jg3dIL94Azrw3BhDuFKDjLTavBHxeBNjgOgKdKwfqTy";
 
     @Autowired
-    public IamportHMClientController(MemberService memberService) {
+    public IamportHMClientController(MemberService memberService, BaroBillHMService baroBillHMService) {
         logger.info("call IamportHMClientController constructor ......................");
         this.memberService = memberService;
         this.iamportClient = new IamportClient(this.apiKey, this.apiSecret);
+
+        this.baroBillHMService = baroBillHMService;
     }
 
     public IamportResponse<AccessToken> getAuth() throws IamportResponseException, IOException {
@@ -114,7 +120,8 @@ public class IamportHMClientController {
 
                     break;
                 case "paid_amount":
-                    paid_amount = Integer.parseInt(value.toString());
+                    paid_amount = Long.parseLong(value.toString());
+                    paid_amount *= 1.1; // VAT 추가
                     break;
             }
         }
@@ -167,26 +174,101 @@ public class IamportHMClientController {
         }
     }
 
+    private void barobill(String email) {
+        Date dtNextPayDate = null;
+        long paid_amount = 1;
+
+        HashMap<String, Object> map = memberService.selectTaxByEmail(email);
+        for( Map.Entry<String, Object> entry : map.entrySet() ){
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            switch (key) {
+                case "next_pay_date":
+                    String dateStr = value.toString();
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                    try {
+                        dtNextPayDate = df.parse(dateStr);
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    break;
+                case "paid_amount":
+                    paid_amount = Long.parseLong(value.toString());
+                    break;
+            }
+        }
+
+        Date dtNow = new Date();
+        logger.info("dtNow - " + dtNow);
+        logger.info("dtNextPayDate - " + dtNextPayDate);
+        int result = dtNextPayDate.compareTo(dtNow);
+
+        if (result > 0) {
+            logger.info("tbtaxinformation.next_pay_date 와 현재 시간 비교해서 결제가 필요하지 않아 그냥 return");
+            return;
+        } else {
+            Member member = memberService.selectMember(email);
+            TaxInformation tax = memberService.taxInfo(email);
+            baroBillHMService.issue(member, tax);
+        }
+    }
+
     @PostMapping("/again")
-    // test
     public IamportResponse<Payment> againPayment(String email) throws IamportResponseException, IOException {
         logger.info("call againPayment ......................");
         logger.info("email --- " + email);
-        IamportResponse<Payment> result = pay(email);
 
-        return result;
+        String means = memberService.selectSettlementmeans(email);
+
+        if (means.equals("card")) {
+            // 카드 결제
+            IamportResponse<Payment> result = pay(email);
+            return result;
+        } else if (means.equals("cash")) {
+            // 현금 결제, 세금계산서 발행
+            barobill(email);
+        } else {
+            logger.info("settlementmeans is empty ============================");
+        }
+        return null;
     }
 
     @PostMapping("/payall")
     public void payAll() throws IamportResponseException, IOException {
         logger.info("call IamportHMClientController payAll ......................");
 
-        List<String> emailList = memberService.selectEmails();
-        for (String email : emailList) {
-            logger.info("email --- " + email);
-            IamportResponse<Payment> result = pay(email);
-        }
+        ArrayList<HashMap<String, String>> list = memberService.selectEmails();
+        String email = "";
+        String means = "";
 
+        for (HashMap<String, String> map:list) {
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                String key = entry.getKey();
+                Object value = entry.getValue();
+                logger.info(key + " : " + value);
+
+                switch (key) {
+                    case "email":
+                        email = value.toString();
+                        break;
+                    case "settlementmeans":
+                        means = value.toString();
+                        break;
+                }
+            }
+            logger.info("email --- " + email);
+            if (means.equals("card")) {
+                // 카드 결제
+                IamportResponse<Payment> result = pay(email);
+            } else if (means.equals("cash")) {
+                // 현금 결제, 세금계산서 발행
+                barobill(email);
+            } else {
+                logger.info("settlementmeans is empty ============================");
+            }
+        }
     }
 
 

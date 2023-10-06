@@ -70,6 +70,10 @@ public class MemberController {
         ResultDto resultDto = memberService.insertMember(member, taxInformation, authentication, license);
         if (resultDto.getTRAN_STATUS() == 1) {
             model.addAttribute("result", "success");
+
+            String membername = URLEncoder.encode(member.getMembername(), "UTF-8");
+
+            return "redirect:/member/sendmail_emailcertification?email=" + member.getEmail() + "&membername=" + membername + "&licensegrade=" + member.getLicensegrade();
         } else {
             model.addAttribute("result", "fail");
             model.addAttribute("reason", resultDto.getREASON());
@@ -77,9 +81,6 @@ public class MemberController {
             return "/member/insertMember";
         }
 
-        String membername = URLEncoder.encode(member.getMembername(), "UTF-8");
-
-        return "redirect:/member/sendmail_emailcertification?email=" + member.getEmail() + "&membername=" + membername + "&licensegrade=" + member.getLicensegrade();
     }
 
 

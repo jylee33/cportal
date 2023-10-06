@@ -128,6 +128,15 @@
 		from tbmember
     </select>
 
+	<select id="getIpAddress" resultType="HashMap">
+		select
+			t2.codename as ipAddress
+		from tbmember t1
+		    join tbcommoncode t2
+		        on t1.hostname = t2.commoncode
+		where t2.groupcode = '100' and t1.memberid=#{uuid}
+	</select>
+
 	<select id="login" resultType="Member">
 		select * from tbmember
 		where email=#{uid} and password=sha2(#{upw}, 256) and emailcertificationyn = 1 and withdrawalyn != '1'

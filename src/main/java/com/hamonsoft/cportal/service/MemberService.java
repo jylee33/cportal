@@ -106,9 +106,11 @@ public class MemberService {
             memberRepository.insertMemberLicense(license);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
+            resultDto.setTRAN_STATUS(-1);
             throw new RuntimeException(e);
         } catch (RuntimeException ex) {
             ex.printStackTrace();
+            resultDto.setTRAN_STATUS(-1);
         }
 
         return resultDto;
@@ -162,6 +164,10 @@ public class MemberService {
 
     public ArrayList<HashMap<String, Object>> findAll() {
         return memberRepository.findAll();
+    }
+
+    public HashMap<String, Object> getIpAddress(String uuid) {
+        return memberRepository.getIpAddress(uuid);
     }
 
     public Member login(LoginDTO dto) {

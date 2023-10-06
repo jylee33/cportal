@@ -167,14 +167,17 @@ alter table tbmemberlicensehistory modify updatedBy varchar(50)  DEFAULT NULL ;
 -- 2023.09.21 tbmemberlicensehistory.prelicensegrade 컬럼 추가
 alter table tbmemberlicensehistory add column prelicensegrade varchar(6) not null COMMENT '변경 전 라이센스등급' AFTER email;
 
--- 2023.10.05
-ALTER TABLE tbmember ADD COLUMN host_name VARCHAR(50) not null COMMENT 'netis 서버명';
-ALTER TABLE tbmember ADD COLUMN host_uuid VARCHAR(36) not null COMMENT 'netis 접속 정보를 찾기위한 uuid';
 
-CREATE TABLE tbhostinstance (
-    tbhostinstanceid varchar(36) NOT NULL COMMENT '아이디관리번호(uuid)',
-    host_name varchar(50) NOT NULL COMMENT 'host_name',
-    ip_address varchar(50) NOT NULL COMMENT 'ip_address',
-    PRIMARY KEY (tbhostinstanceid),
-    FOREIGN KEY(host_name) REFERENCES tbmember(host_name)
-);
+
+-- 2023.10.06
+ALTER TABLE tbmember ADD COLUMN hostname VARCHAR(50) not null COMMENT 'netis 서버명';
+
+ALTER TABLE tbmember ADD COLUMN memberid VARCHAR(36) not null COMMENT '회원관리번호(uuid)';
+
+update tbmember set memberid = uuid();  -- uuid 일괄 update
+
+ALTER TABLE tbmember ADD UNIQUE tbmember_UK (email); -- unique 추가
+
+ALTER TABLE tbmember DROP PRIMARY key, ADD PRIMARY KEY (memberid); -- p'key 삭제후 추가
+
+select * from tbcommoncode where groupcode = '100' or (groupcode = '000000' and commoncode = '100'); -- netis host 관리 codename에 도메인 ip입력

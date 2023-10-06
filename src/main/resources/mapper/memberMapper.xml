@@ -126,9 +126,11 @@
 
 	<select id="getIpAddress" resultType="HashMap">
 		select
-			codename as ipAddress
-		from tbcommoncode
-		where groupcode = '100' and commoncode=#{uuid}
+			t2.codename as ipAddress
+		from tbmember t1
+		    join tbcommoncode t2
+		        on t1.hostname = t2.commoncode
+		where t2.groupcode = '100' and t1.memberid=#{uuid}
 	</select>
 
 	<select id="login" resultType="Member">

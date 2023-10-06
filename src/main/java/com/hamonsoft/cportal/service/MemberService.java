@@ -99,7 +99,8 @@ public class MemberService {
             Instant instant = ldNextMonth.atStartOfDay(ZoneId.systemDefault()).toInstant();
             Date dtNext = Date.from(instant);
             taxInformation.setNext_pay_date(dtNext);
-
+            member.setMemberid(resultDto.getUUID());
+            member.setMemberid(resultDto.g);
             memberRepository.insertMember(member);
             memberRepository.insertTaxInfomation(taxInformation);
             memberRepository.insertAuthentication(authentication);
@@ -137,6 +138,19 @@ public class MemberService {
         body.put("EMAIL", member.getEmail());
         body.put("CELL_TEL", member.getCelltel());
         body.put("CLOUD_GRADE", member.getLicensegrade());
+        int credit = 0;
+        if(member.getLicensegrade() == 1){
+            credit = 5;
+        }else if(member.getLicensegrade() == 2) {
+            credit = 25;
+
+        }else if(member.getLicensegrade() == 3) {
+            credit = 50;
+
+        }else if(member.getLicensegrade() == 4) {
+            credit = 100;
+        }
+        body.put("CREDIT",credit);
 
         // Request Message
         HttpEntity<?> request = new HttpEntity<>(body, headers);

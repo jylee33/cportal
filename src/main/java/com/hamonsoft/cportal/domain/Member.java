@@ -8,6 +8,7 @@ import java.util.Date;
 @Data
 public class Member {
 
+    private String memberid;
     private String email;
     private String membername;
     private String grpname;
@@ -24,6 +25,7 @@ public class Member {
     private String withdrawalyn;
     private String withdrawaldate;
     private String joindate;
+    private String hostname;
     private Date createdAt;
     private String updatedBy;
     private String serverdomainname;
@@ -51,7 +53,8 @@ public class Member {
     @Override
     public String toString() {
         return "Member{" +
-                "email='" + email + '\'' +
+                "memberid='" + memberid + '\'' +
+                " email='" + email + '\'' +
                 ", membername='" + membername + '\'' +
                 ", grpname='" + grpname + '\'' +
                 ", celltel='" + celltel + '\'' +
@@ -67,6 +70,7 @@ public class Member {
                 ", withdrawalyn='" + withdrawalyn + '\'' +
                 ", withdrawaldate='" + withdrawaldate + '\'' +
                 ", joindate='" + joindate + '\'' +
+                ", hostname='" + hostname + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedBy='" + updatedBy + '\'' +
                 ", serverdomainname='" + serverdomainname + '\'' +

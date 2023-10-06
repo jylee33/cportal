@@ -180,4 +180,8 @@ ALTER TABLE tbmember ADD UNIQUE tbmember_UK (email); -- unique 추가
 
 ALTER TABLE tbmember DROP PRIMARY key, ADD PRIMARY KEY (memberid); -- p'key 삭제후 추가
 
+insert into tbcommoncode
+      (groupcode,	commoncode, codename)
+values('100000'  ,   '100'    , 'netis host 관리'), ('100'  ,   'F1'    , 'free domain')
+
 select * from tbcommoncode where groupcode = '100' or (groupcode = '000000' and commoncode = '100'); -- netis host 관리 codename에 도메인 ip입력

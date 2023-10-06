@@ -8,6 +8,7 @@ import com.hamonsoft.cportal.domain.MemberLicense;
 import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.LoginDTO;
 import com.hamonsoft.cportal.dto.MemberLicenseDto;
+import com.hamonsoft.cportal.dto.RequestIPDTO;
 import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.repository.MemberRepository;
 import org.slf4j.Logger;
@@ -100,7 +101,7 @@ public class MemberService {
             Date dtNext = Date.from(instant);
             taxInformation.setNext_pay_date(dtNext);
             member.setMemberid(resultDto.getUUID());
-            member.setMemberid(resultDto.g);
+            member.setHostname(resultDto.getHOST_NAME());
             memberRepository.insertMember(member);
             memberRepository.insertTaxInfomation(taxInformation);
             memberRepository.insertAuthentication(authentication);
@@ -151,6 +152,7 @@ public class MemberService {
             credit = 100;
         }
         body.put("CREDIT",credit);
+        member.setCredit(credit);
 
         // Request Message
         HttpEntity<?> request = new HttpEntity<>(body, headers);

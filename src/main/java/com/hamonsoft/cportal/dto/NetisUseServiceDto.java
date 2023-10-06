@@ -12,8 +12,8 @@ public class NetisUseServiceDto {
     private String REASON;
     @JsonProperty("ERROR_CODE")
     private String ERROR_CODE;
-    @JsonProperty("SERVER_IP")
-    private String SERVER_IP;
+    @JsonProperty("HOST_NAME")
+    private String HOST_NAME;
     @JsonProperty("TRAN_STATUS")
     private int TRAN_STATUS;
 

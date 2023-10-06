@@ -172,6 +172,7 @@ public class UserService {
                 paid_amount = paid_amount + (lastday - today + 1) * baseCharge / lastday;
                 logger.info("last paid_amount : " + paid_amount);
 
+                /* free 등급의 경우 바로 결제하도록 하는 부분 막는다. 모든 등급에 대해서 다음달 1일 일괄 결제하도록 한다.
                 if (newGrade == 1) {
                     // Free 가입자는 next_pay_date 를 어제로 변경하고 chginforesult.jsp 에서 결제 페이지(bill/again)로 이동해서 결제되도록 한다.
                     logger.info("일할 계산된 paid_amount - " + paid_amount);
@@ -197,7 +198,22 @@ public class UserService {
                     logger.info("next_pay_date - " + tax.getNext_pay_date());
 
                     userRepository.updatePaidAmount(tax);
+                }*/
+
+                // --> 위에 free 로 변경할 경우에 바로 결제하도록 하는 부분 막고.. 모든 등급에 대해서 다음달 1일에 일괄 결제하도록 한다.
+                {
+                    logger.info("일할 계산된 paid_amount - " + paid_amount);
+                    tax.setPaid_amount(paid_amount);
+
+                    LocalDate ldNextMonth = ldNow.plusMonths(1).withDayOfMonth(1);
+                    Instant instant = ldNextMonth.atStartOfDay(ZoneId.systemDefault()).toInstant();
+                    Date dtNext = Date.from(instant);
+                    tax.setNext_pay_date(dtNext);
+                    logger.info("next_pay_date - " + tax.getNext_pay_date());
+
+                    userRepository.updatePaidAmount(tax);
                 }
+                // <-- 위에 free 로 변경할 경우에 바로 결제하도록 하는 부분 막고.. 모든 등급에 대해서 다음달 1일에 일괄 결제하도록 한다.
 
             }
         } catch (JsonProcessingException e) {
@@ -304,6 +320,7 @@ public class UserService {
         // Header set
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("netis-route", "free1");
 
         // Body set
         Map<String, Object> body = new HashMap<>();
@@ -354,6 +371,7 @@ public class UserService {
         // Header set
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("netis-route", "free1");
 
         // Body set
         Map<String, Object> body = new HashMap<>();

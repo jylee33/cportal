@@ -64,6 +64,7 @@
 
 	$(document).ready(function () {
 
+		$("#pay_method").SumoSelect();
 
 		$("#btn_pay").on("click", function (event) {
 			event.preventDefault();

@@ -234,6 +234,10 @@
 
     $(document).ready(function () {
 
+        $("#Email").SumoSelect();
+        $("#licensegrade").SumoSelect();
+        $("#settlementmeans").SumoSelect();
+
         console.log("result = ${result}");
         console.log("resaon = ${reason}");
 

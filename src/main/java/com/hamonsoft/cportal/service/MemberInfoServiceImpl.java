@@ -131,6 +131,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
         // Header set
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("netis-route", "free1");
 
         // Body set
         Map<String, Object> body = new HashMap<>();

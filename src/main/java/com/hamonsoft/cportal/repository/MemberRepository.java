@@ -42,6 +42,8 @@ public interface MemberRepository {
 
     ArrayList<HashMap<String, Object>> findAll();
 
+    HashMap<String, Object> getIpAddress(String uuid);
+
     Member login(LoginDTO dto);
 
     void keepLogin(Map<String, Object> paramMap);

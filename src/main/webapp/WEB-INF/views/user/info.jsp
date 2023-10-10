@@ -20,6 +20,10 @@
             <a href="${path}/user/withdrawal">회원탈퇴</a>
         </div>
         <div class="inp-area">
+            <div class="label">고객관리번호</div>
+            <div class="inp-box"><input type="text" class="inp2" placeholder="고객관리번호" name="memberid" id="memberid" value="${member.memberid}" readonly></div>
+        </div>
+        <div class="inp-area">
             <div class="label">이메일 *</div>
             <div class="inp-box"><input type="text" class="inp2" placeholder="이메일" name="email" id="email" value="${member.email}" readonly></div>
         </div>
@@ -37,6 +41,9 @@
             <div class="label">휴대전화 *</div>
             <div class="inp-box">
                 <input type="text" class="inp2" placeholder="휴대전화" name="celltel" value="${member.celltel}" required>
+                <script type="text/javascript">
+                    $('#celltel').text(phoneFormatter("${member.celltel}"));
+                </script>
                 <button class="btn" style="display: none">인증번호전송</button>
             </div>
         </div>

@@ -174,7 +174,7 @@
                                         <th>사업자등록번호</th>
                                         <td id=businessnumber class="text-left">${userInfo.businessnumber}</td>
                                         <script type="text/javascript">
-                                            $('#businessnumber').text(bizNoFormatter("${userInfo.businessnumber}","2"));                                                businessnumber.innerHTML=bizNoFormatter("${userInfo.businessnumber}",'2');
+                                            $('#businessnumber').text(bizNoFormatter("${userInfo.businessnumber}","2"));
                                         </script>
                                     </tr>
                                     <tr>

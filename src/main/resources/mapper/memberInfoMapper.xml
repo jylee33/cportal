@@ -27,45 +27,51 @@
     <select id="memberInfoFirstList" resultType="hashmap">
         select a.*
         from(
-        select a01.membername
-        ,a01.email
-        ,a01.licensegrade
-        ,a01.celltel
-        ,a01.businessname
-        ,a01.businessnumber
-        ,concat(substring(a01.businessnumber,1,3),'-',substring(a01.businessnumber,4,2),'-',substring(a01.businessnumber,6)) strbusinessnumber
-        ,a01.joindate
-        ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
-        ,a01.serverdomainname
-        ,j01.datakeepterm
-        ,j01.datakeepunit
-        ,j01.basevolume + j01.servicevolume + j01.addvolume totalsoluble
-        ,j01.basevolume
-        ,j01.basecharge
-        ,j01.servicevolume
-        ,j01.addvolume
-        ,j01.addcharge
-        ,j02.postnumber
-        ,j02.address
-        ,j02.detailaddress
-        ,concat(j02.postnumber,' ',j02.address,' ',j02.detailaddress) zipaddress
-        ,j03.totalvolume
-        ,j03.networkvolume
-        ,j03.servervolume
-        ,j03.apvolume
-        ,j03.dbmsvolume
-        ,j03.fmsvolume
-        ,j03.totalcharge
-        ,round(j03.totalvolume / (j01.basevolume + j01.servicevolume + j01.addvolume) * 100,2) userate
-        ,row_number() over(order by a01.joindate DESC, a01.email) AS rownum
-        from tbmember                      a01
-        inner join tbmemberlicense    j01
-        on a01.email = j01.email
-        left  join tbtaxinformation   j02
-        on a01.email = j02.email
-        left  join tbmemberusehistory j03
-        on a01.email = j03.email
-        and(j03.email, j03.useday) in  (select email, max(useday) useday from tbmemberusehistory group by email)
+            select a01.memberid
+            ,a01.membername
+            ,a01.email
+            ,a01.licensegrade
+            ,a01.celltel
+            ,a01.businessname
+            ,a01.businessnumber
+            ,concat(substring(a01.businessnumber,1,3),'-',substring(a01.businessnumber,4,2),'-',substring(a01.businessnumber,6)) strbusinessnumber
+            ,a01.joindate
+            ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
+            ,a01.hostname
+            ,j04.codename hostip
+            ,a01.serverdomainname
+            ,j01.datakeepterm
+            ,j01.datakeepunit
+            ,j01.basevolume + j01.servicevolume + j01.addvolume totalsoluble
+            ,j01.basevolume
+            ,j01.basecharge
+            ,j01.servicevolume
+            ,j01.addvolume
+            ,j01.addcharge
+            ,j02.postnumber
+            ,j02.address
+            ,j02.detailaddress
+            ,concat(j02.postnumber,' ',j02.address,' ',j02.detailaddress) zipaddress
+            ,j03.totalvolume
+            ,j03.networkvolume
+            ,j03.servervolume
+            ,j03.apvolume
+            ,j03.dbmsvolume
+            ,j03.fmsvolume
+            ,j03.totalcharge
+            ,round(j03.totalvolume / (j01.basevolume + j01.servicevolume + j01.addvolume) * 100,2) userate
+            ,row_number() over(order by a01.joindate DESC, a01.email) AS rownum
+            from tbmember                      a01
+            inner join tbmemberlicense    j01
+            on a01.email = j01.email
+            left  join tbtaxinformation   j02
+            on a01.email = j02.email
+            left  join tbmemberusehistory j03
+            on a01.email = j03.email
+            and(j03.email, j03.useday) in  (select email, max(useday) useday from tbmemberusehistory group by email)
+            left  join tbcommoncode       j04
+                    on j04.groupcode = '100'
+                   and j04.commoncode = a01.hostname
         where 1 = 1
         and a01.withdrawalyn != '1'
         <choose>
@@ -85,7 +91,8 @@
     <select id="memberInfoList" resultType="hashmap">
         select a.*
         from(
-        select a01.membername          -- memberInfoList
+        select a01.memberid
+        ,a01.membername
         ,a01.email
         ,a01.licensegrade
         ,a01.celltel
@@ -94,6 +101,8 @@
         ,concat(substring(a01.businessnumber,1,3),'-',substring(a01.businessnumber,4,2),'-',substring(a01.businessnumber,6)) strbusinessnumber
         ,a01.joindate
         ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
+        ,a01.hostname
+        ,j04.codename hostip
         ,ifnull(a01.serverdomainname,'') serverdomainname
         ,j01.datakeepterm
         ,j01.datakeepunit
@@ -129,6 +138,9 @@
         left  join tbmemberusehistory j03
         on a01.email = j03.email
         and(j03.email, j03.useday) in  (select email, max(useday) useday from tbmemberusehistory group by email)
+        left  join tbcommoncode       j04
+        on j04.groupcode = '100'
+        and j04.commoncode = a01.hostname
         where 1 = 1
         and a01.withdrawalyn != '1'
         <choose>
@@ -146,7 +158,8 @@
 
     <!--  사용자정보 조회  -->
     <select id="memberLicenseInfo" resultType="hashmap">
-        select a01.membername
+        select a01.memberid
+             ,a01.membername
              ,a01.email
              ,a01.licensegrade
              ,a01.celltel
@@ -155,6 +168,8 @@
              ,concat(substring(a01.businessnumber,1,3),'-',substring(a01.businessnumber,4,2),'-',substring(a01.businessnumber,6,5)) strbusinessnumber
              ,a01.joindate
              ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
+            ,a01.hostname
+            ,j04.codename hostip
              ,ifnull(a01.serverdomainname,'') serverdomainname
              ,case when a01.withdrawalyn = '0' then '회원' when a01.withdrawalyn = '1' then '탈퇴' else '중지' end statusnm
              ,j01.datakeepterm          -- 데이터보관기간
@@ -190,6 +205,9 @@
                  left  join tbmemberusehistory j03
                             on a01.email = j03.email
                                 and j03.useday= (select max(useday) useday from tbmemberusehistory where email = #{strEmail})
+                left  join tbcommoncode       j04
+                on j04.groupcode = '100'
+                and j04.commoncode = a01.hostname
         where 1 = 1
           and a01.email = #{strEmail}
           and a01.withdrawalyn != '1'
@@ -197,7 +215,8 @@
 
     <!--  과금내역 정보 조회  -->
     <select id="memberChargeList" resultType="hashmap">
-        select a01.membername          -- 회원명
+        select a01.memberid
+             ,a01.membername          -- 회원명
              ,a01.email                 -- 이메일
              ,a01.licensegrade          -- 라이센스등급
              ,a01.celltel               -- 회원전화번호
@@ -206,6 +225,8 @@
              ,concat(substring(a01.businessnumber,1,3),'-',substring(a01.businessnumber,4,2),'-',substring(a01.businessnumber,6,5)) strbusinessnumber
              ,a01.joindate              -- 가입일자
              ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
+            ,a01.hostname
+            ,j04.codename hostip
              ,a01.serverdomainname
              ,case when a01.withdrawalyn = '0' then '회원' when a01.withdrawalyn = '1' then '탈퇴' else '중지' end statusnm  -- 회원상태
              ,j01.datakeepterm          -- 데이터보관기간
@@ -244,6 +265,9 @@
                              on a01.email = j02.email
                  inner  join tbmemberusemonth j03
                              on a01.email = j03.email
+                left  join tbcommoncode       j04
+                on j04.groupcode = '100'
+                and j04.commoncode = a01.hostname
         where 1 = 1
           and a01.email = #{email}
           and a01.withdrawalyn != '1'
@@ -253,7 +277,8 @@
 
     <!--  세금계산서 내역 정보 조회  -->
     <select id="memberTaxList" resultType="hashmap">
-        select a01.membername          -- 회원명
+        select a01.memberid
+              ,a01.membername          -- 회원명
              ,a01.email                 -- 이메일
              ,a01.licensegrade          -- 라이센스등급
              ,a01.celltel               -- 회원전화번호
@@ -262,6 +287,8 @@
              ,concat(substring(a01.businessnumber,1,3),'-',substring(a01.businessnumber,4,2),'-',substring(a01.businessnumber,6,5)) strbusinessnumber
              ,a01.joindate              -- 가입일자
              ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
+            ,a01.hostname
+            ,j04.codename hostip
              ,a01.serverdomainname
              ,case when a01.withdrawalyn = '0' then '회원' when a01.withdrawalyn = '1' then '탈퇴' else '중지' end statusnm
              ,j01.taxhistoryid          -- 세금계산서발행내역
@@ -281,9 +308,12 @@
              ,row_number() over(order by j01.issueyearmonth DESC, j01.createdAt desc) AS rownum
         from tbmember                    a01
                  inner join tbtaxinformation j02
-                 inner join tbtaxhistory     j01
-                            on j02.taxid = j01.taxid
-            on a01.email = j02.email
+                     inner join tbtaxhistory     j01
+                                on j02.taxid = j01.taxid
+                          on a01.email = j02.email
+                left  join tbcommoncode       j04
+                on j04.groupcode = '100'
+                and j04.commoncode = a01.hostname
         where 1 = 1
           and a01.email = #{strEmail}
           and a01.withdrawalyn != '1'
@@ -294,7 +324,8 @@
     <!--  과금내역 정보 조회  paging구현-->
     <select id="memberChargePageList" resultType="hashmap">
         select a.*
-        from(select a01.membername          -- 회원명
+        from(select a01.memberid
+        ,a01.membername          -- 회원명
         ,a01.email                 -- 이메일
         ,a01.licensegrade          -- 라이센스등급
         ,a01.celltel               -- 회원전화번호
@@ -302,6 +333,8 @@
         ,a01.businessnumber        -- 사업자등록번호
         ,a01.joindate              -- 가입일자
         ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
+        ,a01.hostname
+        ,j04.codename hostip
         ,a01.serverdomainname
         ,case when a01.withdrawalyn = '0' then '회원' when a01.withdrawalyn = '1' then '탈퇴' else '중지' end statusnm  -- 회원상태
         ,j01.datakeepterm          -- 데이터보관기간
@@ -333,12 +366,15 @@
         ,round(IFNULL(j03.totalvolume,0) / (j01.basevolume + IFNULL(j01.servicevolume,0) + IFNULL(j01.addvolume,0)) * 100,2) userate
         ,row_number() over(order by j03.useyym DESC) AS rownum
         from tbmember                      a01
-        inner join tbmemberlicense    j01
-        on a01.email = j01.email
-        inner  join tbtaxinformation   j02
-        on a01.email = j02.email
-        inner  join tbmemberusemonth j03
-        on a01.email = j03.email
+            inner join tbmemberlicense    j01
+            on a01.email = j01.email
+            inner  join tbtaxinformation   j02
+            on a01.email = j02.email
+            inner  join tbmemberusemonthvv j03
+            on a01.email = j03.email
+            left  join tbcommoncode        j04
+            on j04.groupcode = '100'
+            and j04.commoncode = a01.hostname
         where 1 = 1
         and a01.email = #{searchName}
         and a01.withdrawalyn != '1') as a
@@ -354,7 +390,8 @@
     <select id="memberTaxPageList" resultType="hashmap">
         select a.*
         from(
-        select a01.membername          -- 회원명
+        select a01.memberid
+        ,a01.membername          -- 회원명
         ,a01.email                 -- 이메일
         ,a01.licensegrade          -- 라이센스등급
         ,a01.celltel               -- 회원전화번호
@@ -363,6 +400,8 @@
         ,concat(substring(a01.businessnumber,1,3),'-',substring(a01.businessnumber,4,2),'-',substring(a01.businessnumber,6,5)) strbusinessnumber
         ,a01.joindate              -- 가입일자
         ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
+        ,a01.hostname
+        ,j04.codename hostip
         ,a01.serverdomainname
         ,case when a01.withdrawalyn = '0' then '회원' when a01.withdrawalyn = '1' then '탈퇴' else '중지' end statusnm
         ,j01.taxhistoryid          -- 세금계산서발행내역
@@ -381,10 +420,13 @@
         ,j01.createdAt
         ,row_number() over(order by j01.issueyearmonth DESC, j01.createdAt desc) AS rownum
         from tbmember                    a01
-        inner join tbtaxinformation j02
-        inner join tbtaxhistory     j01
-        on j02.taxid = j01.taxid
-        on a01.email = j02.email
+             inner join tbtaxinformation j02
+                     inner join tbtaxhistory     j01
+                           on j02.taxid = j01.taxid
+                      on a01.email = j02.email
+             left  join tbcommoncode       j04
+                      on j04.groupcode = '100'
+                     and j04.commoncode = a01.hostname
         where 1 = 1
         and a01.email = #{searchName}
         and a01.withdrawalyn != '1')  as a

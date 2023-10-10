@@ -166,7 +166,8 @@ body,html { min-height: 100%; }
 .table-type1 table tbody th.text-center { padding:0; }
 .table-type1.type2 table tbody th { border-right:1px solid #ddd; padding:0 15px; }
 .table-type1.cursor table tbody tr { cursor: pointer; transition: all 0.5s ease;}
-.table-type1.cursor table tbody tr:hover { background-color: #f9f0dd;}
+.table-type1.cursor table tbody tr:hover { background-color: #e5e7de;}
+.table-type1.cursor table tbody tr.active{ background-color: #f9f0dd;}
 .table-type1.center tbody td { text-align: center;}
 
 

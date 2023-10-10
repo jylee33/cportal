@@ -5,7 +5,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@include file="../include/header.jsp" %>
-
 <%--<style>--%>
 <%--</style>--%>
 <div id="wrap">
@@ -45,7 +44,7 @@
                     <th>비고</th>
                 </tr>
                 </thead>
-                <tbody onload='transExam();'>
+                <tbody>
                 <c:choose>
                     <c:when test="${fn:length(list) > 0}">
                         <c:forEach items="${list}" var="list">
@@ -124,7 +123,6 @@
             <a href="#">과금내역</a>
             <a href="#">세금계산서 발행내역</a>
         </div>
-
         <%--        <div class="tabs">--%>
         <%--            <a href="${path}/charge/memberinfo" class="active">사용자 정보</a>--%>
         <%--            <a href="${path}/charge/memberchargelist">과금내역(3건)</a>--%>
@@ -507,11 +505,6 @@
         })
     })
 
-    // $(document).ready(function(){
-    //     changeColor();
-    // })
-
-
     function changeColor(){
         $('memberinfo-table tr').mouseover(function(){
             $(this).addClass('changeColor');
@@ -522,19 +515,29 @@
         });
     }
 
+  function ready() {
+    alert('DOM이 준비되었습니다!');
+
+    // 이미지가 로드되지 않은 상태이기 때문에 사이즈는 0x0입니다.
+    alert(`이미지 사이즈: ${img.offsetWidth}x${img.offsetHeight}`);
+  }
+
     $(document).ready(function() {
 
         changeColor();
-
-        // $('input[type=text]').on('keyup',function(){
-        //     updateTextView($(this));
-        // });
-
+        $('#memberinfo-table tr:eq(1)').addClass('active');
+//alert("..."+JSON.stringify($('#memberinfo-table tr:eq(1)')));
+//alert("..."+$('#memberinfo-table tr:first').child(0));
+//        $('#memberinfo-table').on('load', function () {
+//        alert("load -->");
+//            $('#memberinfo-table tr:first').addClass('active');
+//        })
 
         $('#memberinfo-table tr').on('dblclick', function () {
             // console.log('1');
             var tdArr = new Array();	// 배열 선언
-
+            $('#memberinfo-table tr').removeClass('active'); // 전체 remove 후
+            $(this).addClass('active');
             // 현재 클릭된 Row(<tr>)
             var tr = $(this);
             var td = tr.children();
@@ -816,13 +819,48 @@
     })
 
     function transExam(){
+console.log("transExam  1 -----------------------------------------");
         const tableRows = document.querySelectorAll(".gold");
-
+console.log("transExam  2 -----------------------------------------");
         for ( var i = 0; i < tableRows.length ; i ++ )
         {
             tableRows[i].textContent =  parseInt(tableRows[i].textContent).toLocaleString() ;
         }
 
     }
+
+    function getReserveInfo(target) {
+        var tbody = target.parentNode;
+        var trs = tbody.getElementsByTagName('tr');
+
+        var backColor = "#ffffff";
+        var textColor = "black";
+        var orgBColor = "#FF2E2E";
+        var orgTColor = "#ffffff";
+
+        var no = "";
+        var no1 = "";
+        $("#data-area tr").removeClass('active');
+        $(this).addClass('active');
+        //for ( var i = 0; i < trs.length; i++ ) {
+       // var element = document.getElementById("data-area");
+      //  console.log(trs[i]+".."+target+".."+element);
+         //   if ( trs[i] != target ) {
+         //      trs[i].removeClass("active");
+         //       trs[i].style.backgroundColor = backColor;
+         //       trs[i].style.color = textColor;
+         //   } else {
+        //        trs[i].addClass("active");
+                // trs[i].active;
+        //        style.backgroundColor = orgBColor;
+        //        trs[i].style.color = orgTColor;
+         //       var td = trs[i].getElementsByTagName('td');
+         //       no = td[0].innerText;
+        //        no1 = td[1].innerText;
+         //   }
+        //}
+    }
+
+
 </script>
 <%@include file="../include/footer.jsp" %>

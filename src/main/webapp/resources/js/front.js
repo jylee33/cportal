@@ -337,12 +337,11 @@ $(document).mousedown(function (e){
 
 $(function(){
 
-$('.tabs.type2 a').click(function(){
-  $(this).addClass('active').siblings().removeClass('active');
-  $('.cont-box > div').eq($(this).index()).show().siblings().hide();
-  $('#Modal1 .h3-popup > span').eq($(this).index()).show().siblings().hide();
+    $('.tabs.type2 a').click(function(){
+      $(this).addClass('active').siblings().removeClass('active');
+      $('.cont-box > div').eq($(this).index()).show().siblings().hide();
+      $('#Modal1 .h3-popup > span').eq($(this).index()).show().siblings().hide();
+    })
 
-
-})
-
+	$('.select').SumoSelect();
 });

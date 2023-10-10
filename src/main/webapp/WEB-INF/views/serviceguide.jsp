@@ -14,11 +14,11 @@
                   <div class="cloud-wrap">
                     <div class="kinds">
                       <div><p>공통</p></div>
-                      <div><img src="${path}/resources/images/common/ico_p1.png"><p>네트워크</p><span>장비 1대당 1Credit 적용</span></div>
-                      <div><img src="${path}/resources/images/common/ico_p2.png"><p>서버</p><span>장비 1대당 1Credit 적용</span></div>
-                      <div><img src="${path}/resources/images/common/ico_p3.png"><p>무선 네트워크</p><span>무선 AP 2대당 1 Credit 적용<br>무선 컨트롤러 1대당 5 Credit 적용</span></div>
-                      <div><img src="${path}/resources/images/common/ico_p4.png"><p>데이터 베이스</p><span>장비 1대당 1Credit 적용</span></div>
-                      <div><img src="${path}/resources/images/common/ico_p5.png"><p>환경 센서</p><span>RTU 1대당 1 Credit 적용<br>센서 2대당 1 Credit 적용</span></div>
+                      <div><p>네트워크</p><img src="${path}/resources/images/common/ico_p1.png"><span>장비 1대당 1 Credit 적용</span></div>
+                      <div><p>서버</p><img src="${path}/resources/images/common/ico_p2.png"><span>장비 1대당 1 Credit 적용</span></div>
+                      <div><p>무선 네트워크</p><img src="${path}/resources/images/common/ico_p3.png"><span>무선 AP 2대당 1 Credit 적용<br>무선 컨트롤러 1대당 5 Credit 적용</span></div>
+                      <div><p>데이터 베이스</p><img src="${path}/resources/images/common/ico_p4.png"><span>장비 1대당 1 Credit 적용</span></div>
+                      <div><p>환경 센서</p><img src="${path}/resources/images/common/ico_p5.png"><span>RTU 1대당 5 Credit 적용<br>센서 2대당 1 Credit 적용</span></div>
                     </div>
                     <ul>
                       <li>

@@ -480,7 +480,7 @@ footer { background-color: #3b3b3b; height:100px; display: flex; align-items: ce
 .cloud-wrap ul li { flex:1; }
 .cloud-wrap ul li .tit { height:40px; line-height: 40px; text-align: center; background-color: #85af34; font-size:19px; font-weight:700; color:#fff;}
 .cloud-wrap ul li .item-wrap { padding: 0 16px; border:1px solid #ddd; border-top:0;   height: calc(100% - 40px);}
-.cloud-wrap ul li .item-wrap .price { font-size:22px; font-weight:700; text-align: center; color:#85af34; }
+.cloud-wrap ul li .item-wrap .price { font-size:30px; font-weight:700; text-align: center; color:#85af34; }
 .cloud-wrap ul li .item-wrap .item { height: 120px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px 0; text-align: center; border-bottom: 1px dashed #ddd;}
 .cloud-wrap ul li .item-wrap .item:last-child { border-bottom:0; }
 .cloud-wrap ul li .item-wrap .item:first-child { height: 208px;}

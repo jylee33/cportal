@@ -78,6 +78,7 @@ public class MyBatisConfig extends WebMvcConfigurerAdapter {
 //                .addPathPatterns("/member/insertMember")
 //                .addPathPatterns("/member/listAll");
                 .addPathPatterns("/user/*")
+                .addPathPatterns("/license/*")
                 .addPathPatterns("/charge/*");
 //                .excludePathPatterns("/user/login");
 //                .excludePathPatterns("/member/insertMember");

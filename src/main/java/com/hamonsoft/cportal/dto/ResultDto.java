@@ -8,17 +8,14 @@ public class ResultDto {
 
     @JsonProperty("TRAN_STATUS")
     int TRAN_STATUS;
-    @JsonProperty("SERVER_IP")
-    String SERVER_IP;
     @JsonProperty("HOST_NAME")
     String HOST_NAME;
+    @JsonProperty("UUID")
+    String UUID;
     @JsonProperty("ERROR_CODE")
     String ERROR_CODE;
     @JsonProperty("REASON")
     String REASON;
-
-    @JsonProperty("UUID")
-    String UUID;
 
     //
 //    public int getTRAN_STATUS() {

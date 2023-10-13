@@ -185,3 +185,7 @@ insert into tbcommoncode
 values('100000'  ,   '100'    , 'netis host 관리'), ('100'  ,   'F1'    , 'free domain')
 
 select * from tbcommoncode where groupcode = '100' or (groupcode = '000000' and commoncode = '100'); -- netis host 관리 codename에 도메인 ip입력
+
+
+-- 2023.10.13
+ALTER TABLE tbaidfunction ADD COLUMN datatype VARCHAR(100)  COMMENT '데이터입력방법' AFTER createdAt;

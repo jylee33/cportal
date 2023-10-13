@@ -135,10 +135,10 @@
                 datatype: "json",
                 datafields: [
                     { name: 'email',type:'string'},
-                    // { name: 'membername',type:'string'},
-                    // { name: 'celltel', type: 'string' },
-                    // { name: 'businessname', type: 'string' },
-                    // { name: 'licensegrade',type:'int'},
+                    { name: 'membername',type:'string'},
+                    { name: 'celltel', type: 'string' },
+                    { name: 'businessname', type: 'string' },
+                    { name: 'licensegrade',type:'int'},
                     { name: 'administratoryn', value:'administratoryn', values: {source:da1.records, value:'value', name:'label'}}
                 ],
                 id: 'id',
@@ -154,10 +154,10 @@
                 editable: true,
                 columns: [
                     { text: 'email', datafield: 'email', width: 250},
-                    // { text: 'membername', datafield: 'membername', width: 250},
-                    // { text: 'celltel',datafield: 'celltel',  width: 250 },
-                    // { text: 'businessname',datafield: 'businessname',  width: 250 },
-                    // { text: 'licensegrade', datafield: 'licensegrade', width: 250},
+                    { text: 'membername', datafield: 'membername', width: 250},
+                    { text: 'celltel',datafield: 'celltel',  width: 250 },
+                    { text: 'businessname',datafield: 'businessname',  width: 250 },
+                    { text: 'licensegrade', datafield: 'licensegrade', width: 250},
                     {
                         text: 'administratoryn', datafield: 'administratoryn', displayfield:'administratoryn', width: 250, columntype: 'dropdownlist',
                         createeditor: function (row, value, editor) {

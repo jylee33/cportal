@@ -125,7 +125,7 @@
 
 	<select id="findAll" resultType="HashMap">
 		select
-			email,membername,celltel,businessname,licensegrade
+			email,membername,celltel,businessname,licensegrade,administratoryn
 		from tbmember
     </select>
 

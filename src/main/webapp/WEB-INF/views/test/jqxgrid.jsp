@@ -18,6 +18,10 @@
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.columnsresize.js"></script>
 <script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdata.js"></script>
 <%--<script type="text/javascript" src="${path}/resources/js/scripts/demos.js"></script>--%>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.edit.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxlistbox.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdropdownlist.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcheckbox.js"></script>
 
 <div class="container">
     <div id="grid1"></div>
@@ -105,6 +109,25 @@
                 ]
             });
 
+
+        var data1 = [
+            {value: "Y", label: "Yes"},
+            {value: "N", label: "No"}
+        ];
+
+        var src1 =
+            {
+                datatype: "array",
+                datafields: [
+                    { name: 'label', type: 'string' },
+                    { name: 'value', type: 'string' }
+                ],
+                localdata: data1
+            };
+
+        var da1 = new $.jqx.dataAdapter(src1, { autoBind: true });
+
+
         url = "${path}/api/findAll";
         // prepare the data
         source =
@@ -112,10 +135,11 @@
                 datatype: "json",
                 datafields: [
                     { name: 'email',type:'string'},
-                    { name: 'membername',type:'string'},
-                    { name: 'celltel', type: 'string' },
-                    { name: 'businessname', type: 'string' },
-                    { name: 'licensegrade',type:'int'}
+                    // { name: 'membername',type:'string'},
+                    // { name: 'celltel', type: 'string' },
+                    // { name: 'businessname', type: 'string' },
+                    // { name: 'licensegrade',type:'int'},
+                    { name: 'administratoryn', value:'administratoryn', values: {source:da1.records, value:'value', name:'label'}}
                 ],
                 id: 'id',
                 url: url,
@@ -126,15 +150,24 @@
         $("#grid3").jqxGrid({
                 width: 1000,
                 source: dataAdapter,
-                // columnsresize: true,
+                columnsresize: true,
+                editable: true,
                 columns: [
                     { text: 'email', datafield: 'email', width: 250},
-                    { text: 'membername', datafield: 'membername', width: 250},
-                    { text: 'celltel',datafield: 'celltel',  width: 250 },
-                    { text: 'businessname',datafield: 'businessname',  width: 250 },
-                    { text: 'licensegrade', datafield: 'licensegrade', width: 250}
+                    // { text: 'membername', datafield: 'membername', width: 250},
+                    // { text: 'celltel',datafield: 'celltel',  width: 250 },
+                    // { text: 'businessname',datafield: 'businessname',  width: 250 },
+                    // { text: 'licensegrade', datafield: 'licensegrade', width: 250},
+                    {
+                        text: 'administratoryn', datafield: 'administratoryn', displayfield:'administratoryn', width: 250, columntype: 'dropdownlist',
+                        createeditor: function (row, value, editor) {
+                            editor.jqxDropDownList({ source: da1, displayMember: 'label', valueMember: 'value' });
+                        }
+                    }
                 ]
             });
+
+
     });
 
 </script>

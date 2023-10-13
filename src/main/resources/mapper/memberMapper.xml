@@ -64,7 +64,7 @@
 			where groupcode  = '001'
 			and commoncode = #{licensegrade}) as a02
 		where a01.solutioncode = '10'
-		and a01.functionno   = '10
+		and a01.functionno   = '10'
 	</insert>
 
 	<select id="selectMember" resultType="com.hamonsoft.cportal.domain.Member">

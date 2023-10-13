@@ -52,7 +52,7 @@
 			,case when commoncode = 1 then SUBSTRING_INDEX(freeaid , '일', 1)
 			when commoncode = 2 then SUBSTRING_INDEX(basicaid, '일', 1)
 			when commoncode = 3 then SUBSTRING_INDEX(proaid  , '일', 1) else 30 end datakeepterm
-			,'D'  datakeepterm
+			,'D'  datakeepunit
 			,a02.applyvolume, a02.basecharge, #{email}
 		from tbaidfunction as a01
 			,(select commoncode, applyvolume

@@ -89,6 +89,7 @@ public class LicenseManageController {
 
         JSONParser jsonParser = new JSONParser();
         JSONArray insertParam = null;
+        logger.info("licenseData.size-->"+licenseData.toString());
         try {
             insertParam = (JSONArray) jsonParser.parse(licenseData);
         } catch (ParseException e) {

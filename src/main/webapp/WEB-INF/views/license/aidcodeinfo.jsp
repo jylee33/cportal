@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -6,8 +6,33 @@
 
 <%@include file="../include/header.jsp" %>
 
-<%@include file="../include/jQWidgets.jsp" %>
+<link rel="stylesheet" href="${path}/resources/js/jqwidgets/styles/jqx.base.css" type="text/css" />
 
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 minimum-scale=1" />
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.selection.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.columnsresize.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdata.js"></script>
+<%--script type="text/javascript" src="${path}/resources/js/jqwidgets/scripts/demos.js"></script>--%>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.edit.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.sort.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdatetimeinput.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcalendar.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxlistbox.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdropdownlist.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcheckbox.js"></script>
+
+
+
+
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/globalization/globalize.js"></script>
+<script type="text/javascript" src="https://www.jqwidgets.com/jquery-widgets-demo/demos/jqxgrid/generatedata.js"></script>
 
 <div class="container">
     <div class="h3-head">
@@ -20,7 +45,7 @@
             <a href="${path}/license/creditinfo">Credit 제공</a>
         </div>
         <div class="right">
-            <form autocomplete="on">   <%--action="/portal/license/aidcodeview" method="get">--%>
+            <form>   <%--action="/portal/license/aidcodeview" method="get">--%>
                 <span class="tit">솔루션 선택</span>
                 <select class="select" id="sltdeviceid">
                     <option value="10">Network</option>
@@ -37,20 +62,13 @@
         <button class="btn btn3" id="btn_add_row">행추가</button>
         <button class="btn" id="btn-save">저장</button>
     </div>
-    <div id='jqxWidget' border="1"> <!-- style="font-size: 13px; font-family: Verdana; float: left; width:100%"> -->
+    <div id='jqxWidget'>
         <div id="aidInfo"></div>
-        <div style="margin-top: 30px;"></div>
+        <div style="margin-top: 30px;" id="cellendeditevent"></div>
     </div>
 </div>
 </div>
 
-
-<%--<body class='default'>--%>
-<%--<div id='jqxradiobutton1'>--%>
-<%--    Radio Button 1</div>--%>
-<%--<div id='jqxradiobutton2'>--%>
-<%--    Radio Button 2</div>--%>
-<%--</body>--%>
 <script>
 
     // if (typeof jQuery == 'undefined') {
@@ -72,6 +90,26 @@
     });
 
     function proc_jqxGridSelect() {
+
+        var datause = [
+            {value: "Y", label: "사용중"},
+            {value: "N", label: "미사용"}
+        ];
+
+        var srcuse =
+            {
+                datatype: "array",
+                datafields: [
+                    { name: 'label', type: 'string' },
+                    { name: 'value', type: 'string' }
+                ],
+                localdata: datause
+            };
+
+
+        var dause = new $.jqx.dataAdapter(srcuse, { autoBind: true });
+
+
         var theme = "";
         var sltcode = $('#sltdeviceid option:selected').val();
         var slttext = $('#sltdeviceid option:selected').text();
@@ -98,7 +136,8 @@
                     { name: 'proaid', type: 'string' , cellsalign: 'center'},
                     { name: 'entnm', type: 'string', cellsalign: 'center' },
                     { name: 'entaid', type: 'string' , cellsalign: 'center'},
-                    { name: 'useyn', type:'string', cellsalign: 'center'},
+                    { name: 'useyn', type: 'string' , cellsalign: 'center'},
+                    { name: 'usenm', value:'useyn', values: {source:dause.records, value:'value', name:'label'}},
                     { name: 'stdate', type: 'date' , cellsalign: 'center'},
                     { name: 'eddate', type: 'date' , cellsalign: 'center'},
                     { name: 'sortno', type:'int', cellsalign: 'right'},
@@ -108,8 +147,8 @@
             };
 
         var dataAdapter = new $.jqx.dataAdapter(source);
-        var cellbeginedit = function (row, datafield, columntype, value) {
-            if (value == "I"){ return true} else{return false};
+         var cellbeginedit = function (row, datafield, columntype, value) {
+//            if (value == "I"){ return true} else{return false};
         }
 
         $("#aidInfo").jqxGrid(
@@ -199,7 +238,13 @@
                             })
                         },
                     },
-                    { text: '사용여부', datafield: 'useyn', width: '8%', align:"center" ,columntype: 'checkbox' },
+
+                    {
+                        text: '사용여부', datafield: 'useyn', displayfield:'usenm',align: "center" ,cellsalign: "center" , width: '8%', columntype: 'dropdownlist',
+                              createeditor: function (row, value, editor) {
+                              editor.jqxDropDownList({ source: dause, displayMember: 'label', valueMember: 'value' });
+                        }
+                    },
                     { text: '시작일자' ,datafield: 'stdate', width: '8%', align:"center", cellsalign: "center", cellsformat: "yyyy-MM-dd",columntype: 'datetimeinput', editable: false},
                     { text: '종료일자' ,datafield: 'eddate', width: '8%', align:"center", cellsalign: "center", cellsformat: "yyyy-MM-dd",columntype: 'datetimeinput', editable: false},
                     { text: '정렬순서', datafield: 'sortno', width: '8%', align:"center", cellsalign: "center", editable: false },
@@ -215,11 +260,28 @@
             const sltname = $('#sltcode option:selected').text();
             $("#aidInfo").jqxGrid("addrow", null,
                 {solutioncode:sltcode, solutionname:sltname, functionno:"", functionname:"", freeaid:"O", basicaid:"O",
-                    proaid:"O",entaid: "O",stdate: date, eddate: "2019-12-31", useyn: "Y",crudflg: "I",
+                    proaid:"O",entaid: "O",stdate: date, eddate: "2019-12-31", useyn:"Y", usenm:"사용중", crudflg: "I",
                     codename:sltname, sortno: 99, aidcode: ""
                 }, "first");
             $("#aidInfo").jqxGrid('endupdate');
         });
+
+        $("#aidInfo").on('cellvaluechanged', function (event)
+        {
+            // event arguments.
+            var args = event.args;
+            // column data field.
+            var datafield = event.args.datafield;
+            // row's bound index.
+            var rowBoundIndex = args.rowindex;
+            // new cell value.
+            var value = args.newvalue;
+            // old cell value.
+            var oldvalue = args.oldvalue;
+        });
+
+
+
     }
 
 

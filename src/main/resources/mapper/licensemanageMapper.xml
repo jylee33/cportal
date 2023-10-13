@@ -17,7 +17,7 @@
         concat(substring(a01.stdate, 1, 4),'-',substring(a01.stdate, 5, 2),'-',substring(a01.stdate, 7, 2)) stdate,
         concat(substring(a01.eddate, 1, 4),'-',substring(a01.eddate, 5, 2),'-',substring(a01.eddate, 7, 2)) eddate,
         a01.useyn,
-        case when a01.useyn = 'Y' then '사용' else '미사용' end usenm,
+        case when a01.useyn = 'Y' then '사용중' else '미사용' end usenm,
         a01.sortno          ,
         a01.createdAt       ,
         a01.updatedAt       ,
@@ -72,7 +72,7 @@
         str_to_date(a01.stdate,'%Y%m%d') strstdate,
         str_to_date(a01.eddate,'%Y%m%d') streddate,
         a01.useyn,
-        case when a01.useyn = 'Y' then '사용' else '미사용' end usenm,
+        case when a01.useyn = 'Y' then '사용중' else '미사용' end usenm,
         a01.sortno          ,      --   정렬기준
         a01.createdAt       ,      --   등록일시
         a01.updatedAt       ,       --   수정일시
@@ -100,7 +100,7 @@
             case when a01.proaid = 'O' then '지원' when a01.proaid = 'X' then '지원안함' else a01.proaid end pronm, a01.proaid,
             case when a01.entaid = 'O' then '지원' when a01.entaid = 'X' then '지원안함' else a01.entaid end entnm, a01.entaid,
             a01.useyn,
-            case when a01.useyn = 'Y' then '사용' else '미사용' end usenm,
+            case when a01.useyn = 'Y' then '사용중' else '미사용' end usenm,
             STR_TO_DATE(a01.stdate, '%Y%m%d') stdate,
             STR_TO_DATE(a01.eddate, '%Y%m%d') eddate,
             a01.sortno ,
@@ -126,7 +126,7 @@
         a01.aidcode    ,
         j01.codename        fnccodename,
         a01.useyn,
-        case when a01.useyn = 'Y' then '사용' else '미사용' end usenm,
+        case when a01.useyn = 'Y' then '사용중' else '미사용' end usenm,
         'R'   as crudflg   ,
         a01.sortno
         from tbaidfunction a01
@@ -157,7 +157,7 @@
             case when a01.proaid = 'O' then '지원' when a01.proaid = 'X' then '지원안함' else a01.proaid end pronm, a01.proaid,
             case when a01.entaid = 'O' then '지원' when a01.entaid = 'X' then '지원안함' else a01.entaid end entnm, a01.entaid,
             a01.useyn,
-           case when a01.useyn = 'Y' then '사용' else '미사용' end usenm,
+           case when a01.useyn = 'Y' then '사용중' else '미사용' end usenm,
             concat(substring(a01.stdate, 1, 4),'-',substring(a01.stdate, 5, 2),'-',substring(a01.stdate, 7, 2)) stdate,
             concat(substring(a01.eddate, 1, 4),'-',substring(a01.eddate, 5, 2),'-',substring(a01.eddate, 7, 2)) eddate,
             a01.sortno ,

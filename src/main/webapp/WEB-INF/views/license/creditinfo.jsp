@@ -6,7 +6,33 @@
 
 <%@include file="../include/header.jsp" %>
 
-<%@include file="../include/jQWidgets.jsp" %>
+<link rel="stylesheet" href="${path}/resources/js/jqwidgets/styles/jqx.base.css" type="text/css" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 minimum-scale=1" />
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.selection.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.columnsresize.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdata.js"></script>
+<%--script type="text/javascript" src="${path}/resources/js/jqwidgets/scripts/demos.js"></script>--%>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.edit.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.sort.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdatetimeinput.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcalendar.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxlistbox.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdropdownlist.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcheckbox.js"></script>
+
+
+
+
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/globalization/globalize.js"></script>
+<script type="text/javascript" src="https://www.jqwidgets.com/jquery-widgets-demo/demos/jqxgrid/generatedata.js"></script>
 
 <div class="container">
     <div class="h3-head">
@@ -42,6 +68,27 @@
     });
 
     function proc_jqxGridSelect() {
+
+        var datause = [
+            {value: "Y", label: "사용중"},
+            {value: "N", label: "미사용"}
+        ];
+
+        var srcuse =
+            {
+                datatype: "array",
+                datafields: [
+                    { name: 'label', type: 'string' },
+                    { name: 'value', type: 'string' }
+                ],
+                localdata: datause
+            };
+
+
+        var dause = new $.jqx.dataAdapter(srcuse, { autoBind: true });
+
+
+
         var theme = "";
         var source =
             {
@@ -54,6 +101,7 @@
                     { name: 'codename', type:'string', cellsalign: 'center'},
                     { name: 'applyvolume', type:'string', cellsalign: 'center'},
                     { name: 'useyn', type:'string', cellsalign: 'center'},
+                    { name: 'usenm', value:'useyn', values: {source:dause.records, value:'value', name:'label'}},
                     { name: 'sortno', type:'int', cellsalign: 'center'},
                     { name: 'stdate', type:'string', format: 'yyyy-MM-dd', cellsalign: 'center'},
                     { name: 'eddate', type:'string', format: 'yyyy-MM-dd', cellsalign: 'center'},
@@ -90,7 +138,11 @@
                     { text: 'Credit 관리코드', datafield: 'commoncode', displayField: 'commoncode', align: "center" , cellsalign: "center" , editable: true, width: '15%'},
                     { text: 'Credit 구분', datafield: 'codename', displayField: 'codename', align: "center" ,cellsalign: "center" , width: '25%'},
                     { text: 'Credit 적용', datafield: 'applyvolume',displayField: 'applyvolume', align: "center" ,cellsalign: "center" , width: '25%', editable: true},
-                    { text: '사용여부', datafield: 'useyn',  width: '6%', align:"center" ,columntype: 'checkbox' },
+                    { text: '사용여부', datafield: 'useyn', displayfield:'usenm',align: "center" ,cellsalign: "center" , width: '8%', columntype: 'dropdownlist',
+                          createeditor: function (row, value, editor) {
+                          editor.jqxDropDownList({ source: dause, displayMember: 'label', valueMember: 'value' });
+                        }
+                    },
                     { text: '정렬순서', datafield: 'sortno', width: '5%', align:"center" ,cellsalign: "center" , editable: true},
                     { text: '시작일자' ,datafield: 'stdate', width: '12%', align:"center", cellsalign: 'center',format: 'yyyy-MM-dd', editable: false},
                     { text: '종료일자' ,datafield: 'eddate', width: '12%', align:"center", cellsalign: 'center',format: 'yyyy-MM-dd', editable: false},
@@ -131,7 +183,7 @@
             // alert(maxSortNo);
             // $("#log").html(res);
             $("#jaxCredit").jqxGrid("addrow", null,
-                {groupcode:'006', commoncode:'', codename:"", applyvolume:0, useyn:"Y", stdate: system_date, eddate: "2199-12-31",sortno: maxSortNo, crudflg:'I'}, "first");
+                {groupcode:'006', commoncode:'', codename:"", applyvolume:0, useyn:"Y", usenm:"사용중", stdate: system_date, eddate: "2199-12-31",sortno: maxSortNo, crudflg:'I'}, "first");
             $("#jaxCredit").jqxGrid('endupdate');
         });
 

@@ -6,7 +6,32 @@
 
 <%@include file="../include/header.jsp" %>
 
-<%@include file="../include/jQWidgets.jsp" %>
+<link rel="stylesheet" href="${path}/resources/js/jqwidgets/styles/jqx.base.css" type="text/css" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 minimum-scale=1" />
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.selection.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.columnsresize.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdata.js"></script>
+<%--script type="text/javascript" src="${path}/resources/js/jqwidgets/scripts/demos.js"></script>--%>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.edit.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxgrid.sort.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdatetimeinput.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxnumberinput.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcalendar.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxlistbox.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxdropdownlist.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/jqxcheckbox.js"></script>
+
+
+<script type="text/javascript" src="${path}/resources/js/jqwidgets/globalization/globalize.js"></script>
+<script type="text/javascript" src="https://www.jqwidgets.com/jquery-widgets-demo/demos/jqxgrid/generatedata.js"></script>
            
 <div class="container">
     <div class="h3-head">
@@ -212,7 +237,7 @@
         $("#addSave").click(function () {
             var licenseData = $("#jaxLicense").jqxGrid("getrows");   //1
 
-            var licenseData = $("#jaxLicense").jqxGrid("updaterow");   //1
+         //   var licenseData = $("#jaxLicense").jqxGrid("updaterow");   //1
 
 
             console.log("rows------>"+licenseData.length);

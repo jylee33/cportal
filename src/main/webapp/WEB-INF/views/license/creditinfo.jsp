@@ -86,7 +86,7 @@
                 height: 700,
                 width: '100%',
                 columns: [
-                    { text: '공통코드그룹코두', datafield: 'groupcode', displayField: 'groupcode', align: "center" , cellsalign: "center" , editable: false, width: '0%', hidden:true},
+                    { text: '공통코드그룹코드', datafield: 'groupcode', displayField: 'groupcode', align: "center" , cellsalign: "center" , editable: false, width: '0%', hidden:true},
                     { text: 'Credit 관리코드', datafield: 'commoncode', displayField: 'commoncode', align: "center" , cellsalign: "center" , editable: true, width: '15%'},
                     { text: 'Credit 구분', datafield: 'codename', displayField: 'codename', align: "center" ,cellsalign: "center" , width: '25%'},
                     { text: 'Credit 적용', datafield: 'applyvolume',displayField: 'applyvolume', align: "center" ,cellsalign: "center" , width: '25%', editable: true},

@@ -123,18 +123,23 @@ public class MemberService {
         String url = restURL + "/user_manager/add_user";
         logger.info("url - " + url);
         String strGrade = "free";
+        int credit = 0;
         switch (member.getLicensegrade()) {
             case 1:
                 strGrade = "free1";
+                credit = 5;
                 break;
             case 2:
                 strGrade = "basic1";
+                credit = 25;
                 break;
             case 3:
                 strGrade = "pro1";
+                credit = 50;
                 break;
             case 4:
                 strGrade = "enterprise1";
+                credit = 100;
                 break;
         }
 
@@ -154,18 +159,6 @@ public class MemberService {
         body.put("EMAIL", member.getEmail());
         body.put("CELL_TEL", member.getCelltel());
         body.put("CLOUD_GRADE", member.getLicensegrade());
-        int credit = 0;
-        if(member.getLicensegrade() == 1){
-            credit = 5;
-        }else if(member.getLicensegrade() == 2) {
-            credit = 25;
-
-        }else if(member.getLicensegrade() == 3) {
-            credit = 50;
-
-        }else if(member.getLicensegrade() == 4) {
-            credit = 100;
-        }
         body.put("CREDIT",credit);
         member.setCredit(credit);
 

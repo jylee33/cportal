@@ -189,3 +189,16 @@ select * from tbcommoncode where groupcode = '100' or (groupcode = '000000' and 
 
 -- 2023.10.13
 ALTER TABLE tbaidfunction ADD COLUMN datatype VARCHAR(100)  COMMENT '데이터입력방법' AFTER createdAt;
+
+
+
+-- 2023.10.16
+ALTER TABLE tbcommoncode modify COLUMN applyvolume decimal(7,2);
+
+update tbcommoncode
+  set applyvolume = case when commoncode = 1 then 5 when commoncode = 2 then 25 when commoncode = 3 then 50 else 100 end
+  where groupcode = '001';
+
+
+
+

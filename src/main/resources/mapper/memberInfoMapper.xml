@@ -370,7 +370,7 @@
             on a01.email = j01.email
             inner  join tbtaxinformation   j02
             on a01.email = j02.email
-            inner  join tbmemberusemonthvv j03
+            inner  join tbmemberusemonth   j03
             on a01.email = j03.email
             left  join tbcommoncode        j04
             on j04.groupcode = '100'

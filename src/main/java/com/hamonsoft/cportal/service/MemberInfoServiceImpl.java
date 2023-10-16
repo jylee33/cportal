@@ -10,6 +10,7 @@ import com.hamonsoft.cportal.dto.MemberLicenseDto;
 import com.hamonsoft.cportal.dto.NetisUseServiceDto;
 import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.repository.MemberInfoRepository;
+import com.hamonsoft.cportal.repository.MemberRepository;
 import com.hamonsoft.cportal.utils.Pagination;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -41,6 +42,10 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 
     @Autowired
     MemberInfoRepository memberinfoRepository;
+
+    @Autowired
+    MemberRepository memberRepository;
+
     @Override
     public int memberInfoCount(String searchname) throws Exception {
         return memberinfoRepository.memberInfoCount(searchname);
@@ -128,10 +133,13 @@ public class MemberInfoServiceImpl implements MemberInfoService {
         String url = restURL + "/user_manager/service_info";
         logger.info("url - " + url);
 
+        Member member = memberRepository.selectMember(email);
+
         // Header set
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("netis-route", "free1");
+//        headers.add("netis-route", "free1");
+        headers.add("netis-route", member.getHostname());
 
         // Body set
         Map<String, Object> body = new HashMap<>();

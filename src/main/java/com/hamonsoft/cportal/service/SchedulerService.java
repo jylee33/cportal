@@ -4,10 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hamonsoft.cportal.ScheduleTaskClass;
 import com.hamonsoft.cportal.domain.JsonUseVolume;
+import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.dto.ChildResultDto;
 import com.hamonsoft.cportal.dto.NetisUseServiceDto;
 import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.repository.MemberInfoRepository;
+import com.hamonsoft.cportal.repository.MemberRepository;
 import com.hamonsoft.cportal.repository.SchedulerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +42,10 @@ public class SchedulerService {
 
     @Autowired
     MemberInfoRepository memberinfoRepository;
+
+    @Autowired
+    MemberRepository memberRepository;
+
 
     public String memberAllList() throws Exception{
         String msgtext = "";
@@ -108,10 +114,13 @@ public class SchedulerService {
         String url = restURL + "/user_manager/service_info";
         logger.info("url - " + url);
 
+        Member member = memberRepository.selectMember(email);
+
         // Header set
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("netis-route", "free1");
+//        headers.add("netis-route", "free1");
+        headers.add("netis-route", member.getHostname());
 
         // Body set
         Map<String, Object> body = new HashMap<>();

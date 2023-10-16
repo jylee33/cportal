@@ -255,7 +255,8 @@ public class UserService {
         // Header set
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("netis-route", "free1");
+//        headers.add("netis-route", "free1");
+        headers.add("netis-route", member.getHostname());
 
         // Body set
         Map<String, Object> body = new HashMap<>();
@@ -289,7 +290,8 @@ public class UserService {
         // Header set
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("netis-route", "free1");
+//        headers.add("netis-route", "free1");
+        headers.add("netis-route", member.getHostname());
 
         // Body set
         Map<String, Object> body = new HashMap<>();
@@ -320,7 +322,8 @@ public class UserService {
         // Header set
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("netis-route", "free1");
+//        headers.add("netis-route", "free1");
+        headers.add("netis-route", member.getHostname());
 
         // Body set
         Map<String, Object> body = new HashMap<>();
@@ -371,7 +374,8 @@ public class UserService {
         // Header set
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("netis-route", "free1");
+//        headers.add("netis-route", "free1");
+        headers.add("netis-route", member.getHostname());
 
         // Body set
         Map<String, Object> body = new HashMap<>();

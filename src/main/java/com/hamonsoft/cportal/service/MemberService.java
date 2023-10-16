@@ -146,7 +146,8 @@ public class MemberService {
         // Header set
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("netis-route", strGrade);
+//        headers.add("netis-route", strGrade);
+        headers.add("netis-route", member.getHostname());
 
 
         // Body set

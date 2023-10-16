@@ -25,20 +25,41 @@ import java.util.Map;
 public class RestApiService {
 
     @Value("${rest.url}")
-    String url;
+    String restURL;
 
     private static final Logger logger = LoggerFactory.getLogger(RestApiService.class);
 
 
     public ResultDto addUser(Member member) throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
-        url += "/user_manager/add_user";
+        String url = "http://aws.lb.hamon.vip/cloud/v1/user_manager/add_user";
+
+        String strGrade = "free";
+        int credit = 0;
+        switch (member.getLicensegrade()) {
+            case 1:
+                strGrade = "free";
+                credit = 5;
+                break;
+            case 2:
+                strGrade = "basic";
+                credit = 25;
+                break;
+            case 3:
+                strGrade = "pro";
+                credit = 50;
+                break;
+            case 4:
+                strGrade = "enterprise";
+                credit = 100;
+                break;
+        }
 
         // Header set
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 //        headers.add("netis-route", "free1");
-        headers.add("netis-route", member.getHostname());
+        headers.add("netis-route", strGrade);
 
         // Body set
         Map<String, Object> body = new HashMap<>();

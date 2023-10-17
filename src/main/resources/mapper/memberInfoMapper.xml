@@ -477,6 +477,12 @@
         where email = #{email}
     </update>
 
+    <!-- netis 서버명  -->
+    <select id="memberHostName" resultType="String">
+        select hostname
+        from tbmember
+        where emial = #{email}         <!-- netis 서버명 -->
+    </select>
 
     <!--  사용자 전체 건수  -->
     <select id="jsonUseDeviceCount" resultType="String">

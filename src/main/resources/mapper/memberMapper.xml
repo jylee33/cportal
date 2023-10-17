@@ -19,7 +19,7 @@
 			,#{withdrawalyn},#{withdrawaldate},DATE_FORMAT(now(),'%Y%m%d')      ,now()    ,#{email}
 		    ,now()
 		    ,(select case when infomalityname = #{businessnumber} then 'Y' else 'N' end from tbcommoncode where groupcode = '000000' and commoncode = '999')
-			,#{serverdomainname}
+			,replace('aws.$1.hamon.vip:8080','$1',ifnull(#{hostname},case when #{licensegrade} = '1' then 'free1' when #{licensegrade} = '2' then 'basic1' when #{licensegrade} = '3' then 'pro1' else 'ent1' end))
 		    ,ifnull(#{hostname},case when #{licensegrade} = '1' then 'free1' when #{licensegrade} = '2' then 'basic1' when #{licensegrade} = '3' then 'pro1' else 'ent1' end)
 		)
 	</insert>

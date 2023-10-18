@@ -78,7 +78,7 @@
 	</select>
 
 	<select id="taxInfo" resultType="TaxInformation">
-		select email, companyname, representationname, taxcompanynumber
+		select email, taxid, companyname, representationname, taxcompanynumber
 		      ,taxemail, address, detailaddress, businesskind, settlementmeans
 		      ,businesscondition, paid_amount, customer_uid, DATE_FORMAT(updatedAt,'%Y-%m-%d %H:%i:%s') as updatedAt
 		from tbtaxinformation
@@ -109,9 +109,9 @@
 		where email=#{email}
 	</update>
 
-	<insert id="insertPayHistory">
-		insert into tbpayhistory(payhistoryid, email, customer_uid, imp_uid, paid_amount) values
-			(uuid(), #{email}, #{customer_uid}, #{imp_uid}, #{paid_amount})
+	<insert id="insertTaxHistory">
+		insert into tbtaxhistory(taxhistoryid, taxid, licensegrade, issueamount, issuedate, settlementmeans, customer_uid, imp_uid, createdAt) values
+			(uuid(), #{taxid}, #{licensegrade}, #{issueamount}, #{issuedate}, #{settlementmeans}, #{customer_uid}, #{imp_uid}, now())
 	</insert>
 
 	<select id="listAll" resultType="Member">

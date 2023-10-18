@@ -148,7 +148,7 @@ public class BaroBillHMService {
         }
     }
 
-    public void issue(Member member, TaxInformation tax) {
+    public int issue(Member member, TaxInformation tax) {
         logger.info(tax.toString());
         String certKey = "DC632BA8-541F-48CC-B39E-7C5C2ACFAFB7";
 
@@ -274,6 +274,7 @@ public class BaroBillHMService {
         } else { // 성공
             // 파트너 프로그램의 후 처리
         }
+        return result;
     }
 
 }

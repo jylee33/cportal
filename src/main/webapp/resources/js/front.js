@@ -343,5 +343,4 @@ $(function(){
       $('#Modal1 .h3-popup > span').eq($(this).index()).show().siblings().hide();
     })
 
-	$('.select').SumoSelect();
 });

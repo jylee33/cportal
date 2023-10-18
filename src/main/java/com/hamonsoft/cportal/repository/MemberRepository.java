@@ -24,7 +24,7 @@ public interface MemberRepository {
 
     void updatePayInformation(Map<String, Object> paramMap);
 
-    void insertPayHistory(Map<String, Object> paramMap);
+    void insertTaxHistory(Map<String, Object> paramMap);
 
     ArrayList<HashMap<String, String>> selectEmails();
 

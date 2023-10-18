@@ -154,20 +154,29 @@ public class IamportHMClientController {
 //                String sDate = df.format(cal.getTime());
 //                Date dtNext = new Date(Integer.parseInt(sDate.substring(0, 4)) - 1900, Integer.parseInt(sDate.substring(4, 6)) - 1, 1);
 
+                Member member = memberService.selectMember(email);
+                TaxInformation tax = memberService.taxInfo(email);
+
                 LocalDate ldNow = LocalDate.now();
                 LocalDate ldNextMonth = ldNow.plusMonths(1).withDayOfMonth(1);
                 Instant instant = ldNextMonth.atStartOfDay(ZoneId.systemDefault()).toInstant();
                 Date dtNext = Date.from(instant);
 
+                String strnow = new SimpleDateFormat("yyyyMMdd").format(new Date());
+
                 Map<String, Object> paramMap = new HashMap<>();
                 paramMap.put("email", email);
+                paramMap.put("taxid", tax.getTaxid());
+                paramMap.put("licensegrade", String.valueOf(member.getLicensegrade()));
+                paramMap.put("issueamount", paid_amount);
+                paramMap.put("issuedate", strnow);
+                paramMap.put("settlementmeans", tax.getSettlementmeans());
                 paramMap.put("customer_uid", customer_uid);
                 paramMap.put("imp_uid", imp_uid);
-                paramMap.put("paid_amount", paid_amount);
                 paramMap.put("dtNext", dtNext);
 
                 memberService.updatePayInformation(paramMap);
-                memberService.insertPayHistory(paramMap);
+                memberService.insertTaxHistory(paramMap);
             }
 
             return response;
@@ -211,7 +220,29 @@ public class IamportHMClientController {
         } else {
             Member member = memberService.selectMember(email);
             TaxInformation tax = memberService.taxInfo(email);
-            baroBillHMService.issue(member, tax);
+
+            if(baroBillHMService.issue(member, tax) >= 0) {
+                LocalDate ldNow = LocalDate.now();
+                LocalDate ldNextMonth = ldNow.plusMonths(1).withDayOfMonth(1);
+                Instant instant = ldNextMonth.atStartOfDay(ZoneId.systemDefault()).toInstant();
+                Date dtNext = Date.from(instant);
+
+                String strnow = new SimpleDateFormat("yyyyMMdd").format(new Date());
+
+                Map<String, Object> paramMap = new HashMap<>();
+                paramMap.put("email", email);
+                paramMap.put("taxid", tax.getTaxid());
+                paramMap.put("licensegrade", String.valueOf(member.getLicensegrade()));
+                paramMap.put("issueamount", paid_amount);
+                paramMap.put("issuedate", strnow);
+                paramMap.put("settlementmeans", tax.getSettlementmeans());
+                paramMap.put("customer_uid", "");
+                paramMap.put("imp_uid", "");
+                paramMap.put("dtNext", dtNext);
+
+                memberService.updatePayInformation(paramMap);
+                memberService.insertTaxHistory(paramMap);
+            }
         }
     }
 

@@ -67,8 +67,8 @@ public class MemberService {
         memberRepository.updatePayInformation(paramMap);
     }
 
-    public void insertPayHistory(Map<String, Object> paramMap) {
-        memberRepository.insertPayHistory(paramMap);
+    public void insertTaxHistory(Map<String, Object> paramMap) {
+        memberRepository.insertTaxHistory(paramMap);
     }
 
     public ArrayList<HashMap<String, String>> selectEmails() {

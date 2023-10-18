@@ -418,7 +418,9 @@
                             <th>업종</th>
                             <th>발행일자</th>
                             <th>발행금액</th>
-                            <th>입금일자</th>
+                            <th>결제일자</th>
+                            <th>카드고객 uid</th>
+                            <th>카드결제 결과</th>
                             <th>체납여부</th>
                             <th>비고</th>
                         </tr>
@@ -428,16 +430,18 @@
                             <c:when test="${fn:length(taxInfo) > 0}">
                                 <c:forEach items="${taxInfo}" var="tax">
                                     <tr>
-                                        <td class="text-center">${tax.rownum}</td>
-                                        <td class="text-center">${tax.representationname}</td>
-                                        <td class="text-center">${tax.strbusinessnumber}</td>
-                                        <td class="text-left">${tax.zipaddress}</td>
-                                        <td class="text-center">${tax.businesskind}</td>
-                                        <td class="text-center">${tax.businesscondition}</td>
-                                        <td class="text-center" style="color:#8B0000;font: 17px">${tax.strissuedate}</td>
-                                        <td class="text-center" style="color:#8B0000;font: 17px"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${tax.issueamount}" /></td>
-                                        <td class="text-center"></td>
-                                        <td class="text-center"></td>
+                                        <td id=t_rownum class="text-center">${tax.rownum}</td>
+                                        <td id=t_representationname class="text-center">${tax.representationname}</td>
+                                        <td id=t_strbusinessnumber class="text-center">${tax.strbusinessnumber}</td>
+                                        <td id=t_zipaddress class="text-left">${tax.zipaddress}</td>
+                                        <td id=t_businesskind class="text-center">${tax.businesskind}</td>
+                                        <td id=t_businesscondition class="text-center">${tax.businesscondition}</td>
+                                        <td id=t_strissuedate class="text-center" style="color:#8B0000;font: 17px">${tax.strissuedate}</td>
+                                        <td id=t_issueamount class="text-center" style="color:#8B0000;font: 17px"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${tax.issueamount}" /></td>
+                                        <td id=t_strissuedate class="text-center" style="color:#8B0000;font: 17px">${tax.strsettlementdt}</td>
+                                        <td id=t_strissuedate class="text-center" style="color:#8B0000;font: 17px">${tax.customer_uid}</td>
+                                        <td id=t_strissuedate class="text-center" style="color:#8B0000;font: 17px">${tax.imp_uid}</td>
+                                        <td id=t_strissuedate class="text-center" style="color:#8B0000;font: 17px">${tax.arrearsyn}</td>
                                         <td class="text-center"></td>
                                     </tr>
                                 </c:forEach>
@@ -635,16 +639,20 @@
                     var data2 = "";
                     const list2 = jsonmap[2]['taxInfo'];
                     for(var i=0;i<list2.length;i++) {
+                    console.log("data--->"+JSON.stringify(list2[i]));
                         data2 += "<tr>";
                         data2 += "<td class='text-center'>"+list2[i].rownum+"</td>";
                         data2 += "<td class='text-center'>"+list2[i].representationname+"</td>";
-                        data2 += "<td class='text-center'>"+list2[i].businessnumber+"</td>";
-                        data2 += "<td class='text-center'>"+list2[i].zipaddress+"</td>";
+                        data2 += "<td class='text-center'>"+list2[i].strbusinessnumber+"</td>";
+                        data2 += "<td class='text-left'>"+list2[i].zipaddress+"</td>";
                         data2 += "<td class='text-center'>"+list2[i].businesskind+"</td>";
                         data2 += "<td class='text-center'>"+list2[i].businesscondition+"</td>";
-                        data2 += "<td class='text-center'>"+list2[i].issuedate+"</td>";
-                        data2 += "<td class='text-center'>"+list2[i].issueamount+"</td>";
-                        data2 += "<td class='text-center'>N</td>";
+                        data2 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list2[i].strissuedate+"</td>";
+                        data2 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list2[i].issueamount+"</td>";
+                        data2 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+dateFormatter(list2[i].settlementdt)+"</td>";
+                        data2 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list2[i].customer_uid+"</td>";
+                        data2 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list2[i].imp_uid+"</td>";
+                        data2 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list2[i].arrearsyn+"</td>";
                         data2 += "<td class='text-center'></td>";
                         data2 += "</tr>";
                     }

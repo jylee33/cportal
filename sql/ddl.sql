@@ -213,6 +213,9 @@ values('100000'  ,   '009'    , '결제방법'), ('009'  ,   'cash'    , '현금
 
 ALTER TABLE tbtaxhistory ADD COLUMN settlementmeans VARCHAR(006)  COMMENT '결제방법' AFTER issuedate;
 
+ALTER TABLE tbtaxhistory DROP COLUMN issueyearmonth;
+ALTER TABLE tbtaxhistory DROP COLUMN logindate;
+
 -- 2023.10.18 jylee
 ALTER TABLE tbtaxhistory ADD COLUMN customer_uid VARCHAR(50) null COMMENT '카드결제용 고객 uid';
 ALTER TABLE tbtaxhistory ADD COLUMN imp_uid VARCHAR(50) null COMMENT '카드결제 결과 uid';

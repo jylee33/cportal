@@ -224,3 +224,4 @@ drop table tbpayhistory;
 
 -- 2023.10.18 결제일자 추가
 ALTER TABLE tbtaxhistory ADD COLUMN settlementdt VARCHAR(08) null COMMENT '결제일자';
+카드결제일경우 발행일자을 결제일자로 update

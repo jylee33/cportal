@@ -199,6 +199,19 @@ update tbcommoncode
   set applyvolume = case when commoncode = 1 then 5 when commoncode = 2 then 25 when commoncode = 3 then 50 else 100 end
   where groupcode = '001';
 
+-- 2023.10.16
+ALTER TABLE tbcommoncode modify COLUMN applyvolume decimal(7,2);
+
+
+-- 2023.10.18
+ALTER TABLE tbtaxinformation modify COLUMN settlementmeans varchar(06);
+
+insert into tbcommoncode
+      (groupcode,	commoncode, codename)
+values('100000'  ,   '009'    , '결제방법'), ('009'  ,   'cash'    , '현금'), ('009'  ,   'card'    , '카드');
+
+
+ALTER TABLE tbtaxhistory ADD COLUMN settlementmeans VARCHAR(006)  COMMENT '결제방법' AFTER issuedate;
 
 
 

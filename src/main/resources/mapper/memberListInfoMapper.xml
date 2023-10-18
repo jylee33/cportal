@@ -202,8 +202,8 @@
              ,a01.businessnumber        -- 사업자등록번호
              ,a01.joindate              -- 가입일자
              ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
-            ,a01.hostname
-            ,j04.codename hostip
+             ,a01.hostname
+             ,j04.codename hostip
              ,a01.serverdomainname
              ,case when a01.withdrawalyn = '0' then '회원' when a01.withdrawalyn = '1' then '탈퇴' else '중지' end statusnm
              ,j01.taxhistoryid          -- 세금계산서발행내역
@@ -211,6 +211,11 @@
              ,j01.issueamount           -- 발행금액
              ,j01.issuedate             -- 발행일자
              ,str_to_date(j01.issuedate,'%Y%m%d') strissuedate
+            ,case when j01.issuedate >= date_format(DATE_ADD(curdate(), interval -15 day), '%Y%m%d') then '' else '체납' end arrearsyn
+            ,IFNULL(j01.customer_uid,'')          customer_uid
+            ,IFNULL(j01.imp_uid,'')               imp_uid
+            ,str_to_date(j01.settlementdt,'%Y%m%d') strsettlementdt
+            ,IFNULL(j01.settlementdt,'')            settlementdt
              ,j02.representationname    -- 대표자
              ,j02.businesskind          -- 업태
              ,j02.businesscondition     -- 업종

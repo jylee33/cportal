@@ -128,7 +128,7 @@ public class MemberInfoController {
         listMap.add(map2);
         listMap.add(map3);
 
-        logger.info("chargeInfo ---->"+chargeInfo);
+        logger.info("taxInfo ---->"+taxInfo);
         logger.info("strEmail ---------------------------------------------------------------------------------->"+listMap);
         return listMap;
         //return mav; //mav.addObject("list",memberinfoService.memberLicenseInfo(strEmail));

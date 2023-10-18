@@ -234,11 +234,11 @@
              ,concat(j01.datakeepterm,'(',if(j01.datakeepunit='D','일',if(j01.datakeepunit='M','월', '년')),')') datakeepnm
              ,IFNULL(j01.basevolume,0) + IFNULL(j01.servicevolume,0) + IFNULL(j01.addvolume,0) totalsoluble -- 전체가용장비
              ,j01.basevolume            -- 기본장비수량
-             ,j01.basecharge            -- 기본요금(라이센스요금)
+             ,FORMAT(j01.basecharge, 0) basecharge -- 기본요금(라이센스요금)
              ,j01.servicevolume         -- 서비스장비수량
              ,j01.addvolume             -- 추가장비수량
              ,j01.addcharge             -- 추가라이센스요금
-             ,IFNULL(j01.basecharge,0) + IFNULL(j01.addcharge,0) totcharge  -- 라이센스합계금액
+             ,FORMAT(IFNULL(j01.basecharge,0) + IFNULL(j01.addcharge,0),0) totcharge  -- 라이센스합계금액
              ,j02.Representationname    -- 대표자
              ,j02.businesskind          -- 업태
              ,j02.businesscondition     -- 업종
@@ -255,7 +255,7 @@
              ,IFNULL(j03.apvolume,0)      apvolume
              ,IFNULL(j03.dbmsvolume,0)    dbmsvolume
              ,IFNULL(j03.fmsvolume,0)     fmsvolume
-             ,IFNULL(j03.totalcharge,0)   totalcharge
+             ,FORMAT(IFNULL(j03.totalcharge,0),0)   totalcharge
              ,round(IFNULL(j03.totalvolume,0) / (IFNULL(j01.basevolume,0) + IFNULL(j01.servicevolume,0) + IFNULL(j01.addvolume,0)) * 100,2) userate
              ,row_number() over(order by j03.useyym DESC) AS rownum
         from tbmember                      a01
@@ -293,9 +293,14 @@
              ,case when a01.withdrawalyn = '0' then '회원' when a01.withdrawalyn = '1' then '탈퇴' else '중지' end statusnm
              ,j01.taxhistoryid          -- 세금계산서발행내역
              ,j01.taxid                 -- 세금계산서발행기관정보
-             ,j01.issueamount           -- 발행금액
+            ,FORMAT(j01.issueamount, 0) issueamount -- 발행금액
              ,j01.issuedate             -- 발행일자
              ,str_to_date(j01.issuedate,'%Y%m%d') strissuedate
+            ,IFNULL(j01.customer_uid,'')          customer_uid
+            ,IFNULL(j01.imp_uid,'')               imp_uid
+            ,str_to_date(j01.settlementdt,'%Y%m%d') strsettlementdt
+            ,IFNULL(j01.settlementdt,'')            settlementdt
+            ,case when j01.issuedate >= date_format(DATE_ADD(curdate(), interval -15 day), '%Y%m%d') then '' else '체납' end arrearsyn
              ,j02.representationname    -- 대표자
              ,j02.businesskind          -- 업태
              ,j02.businesscondition     -- 업종
@@ -341,10 +346,10 @@
         ,concat(j01.datakeepterm,'(',if(j01.datakeepunit='D','일',if(j01.datakeepunit='M','월', '년')),')') datakeepnm
         ,j01.basevolume + IFNULL(j01.servicevolume,0) + IFNULL(j01.addvolume,0) totalsoluble -- 전체가용장비
         ,j01.basevolume            -- 기본장비수량
-        ,j01.basecharge            -- 기본요금(라이센스요금)
+        ,FORMAT(j01.basecharge, 0) basecharge -- 기본요금(라이센스요금)
         ,j01.servicevolume         -- 서비스장비수량
         ,j01.addvolume             -- 추가장비수량
-        ,j01.addcharge             -- 추가라이센스요금
+        ,FORMAT(j01.addcharge, 0) addcharge -- 추가라이센스요금
         ,j01.basecharge + IFNULL(j01.addcharge,0) totcharge  -- 라이센스합계금액
         ,j02.Representationname    -- 대표자
         ,j02.businesskind          -- 업태
@@ -405,9 +410,14 @@
         ,case when a01.withdrawalyn = '0' then '회원' when a01.withdrawalyn = '1' then '탈퇴' else '중지' end statusnm
         ,j01.taxhistoryid          -- 세금계산서발행내역
         ,j01.taxid                 -- 세금계산서발행기관정보
-        ,j01.issueamount           -- 발행금액
+        ,FORMAT(j01.issueamount, 0) issueamount
         ,j01.issuedate             -- 발행일자
         ,str_to_date(j01.issuedate,'%Y%m%d') strissuedate
+        ,case when j01.issuedate >= date_format(DATE_ADD(curdate(), interval -15 day), '%Y%m%d') then '' else '체납' end arrearsyn
+        ,IFNULL(j01.customer_uid,'')          customer_uid
+        ,IFNULL(j01.imp_uid,'')               imp_uid
+        ,str_to_date(j01.settlementdt,'%Y%m%d') strsettlementdt
+        ,IFNULL(j01.settlementdt,'')            settlementdt
         ,j02.representationname    -- 대표자
         ,j02.businesskind          -- 업태
         ,j02.businesscondition     -- 업종

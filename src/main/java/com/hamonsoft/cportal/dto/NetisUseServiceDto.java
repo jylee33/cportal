@@ -2,6 +2,9 @@ package com.hamonsoft.cportal.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+
+import java.util.UUID;
+
 //등록된 장비 대수 요청
 @Data
 public class NetisUseServiceDto {
@@ -12,10 +15,10 @@ public class NetisUseServiceDto {
     private String REASON;
     @JsonProperty("ERROR_CODE")
     private String ERROR_CODE;
-    @JsonProperty("SERVER_IP")
-    private String SERVER_IP;
     @JsonProperty("HOST_NAME")
     private String HOST_NAME;
+    @JsonProperty("UUID")
+    private String UUID;
     @JsonProperty("TRAN_STATUS")
     private int TRAN_STATUS;
 

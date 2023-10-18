@@ -222,3 +222,5 @@ ALTER TABLE tbtaxhistory ADD COLUMN imp_uid VARCHAR(50) null COMMENT '카드결�
 
 drop table tbpayhistory;
 
+-- 2023.10.18 결제일자 추가
+ALTER TABLE tbtaxhistory ADD COLUMN settlementdt VARCHAR(08) null COMMENT '결제일자';

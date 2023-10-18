@@ -213,5 +213,5 @@ values('100000'  ,   '009'    , '결제방법'), ('009'  ,   'cash'    , '현금
 
 ALTER TABLE tbtaxhistory ADD COLUMN settlementmeans VARCHAR(006)  COMMENT '결제방법' AFTER issuedate;
 
-
-
+ALTER TABLE tbtaxhistory DROP COLUMN issueyearmonth;
+ALTER TABLE tbtaxhistory DROP COLUMN logindate;

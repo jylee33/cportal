@@ -136,7 +136,6 @@
                     a01.settlementmeans     ,
                     a01.baseamount          ,
                     j01.taxhistoryid        ,
-                    j01.issueyearmonth      ,
                     j01.issueamount         ,
                     j01.issuedate           ,
                     j01.logindate

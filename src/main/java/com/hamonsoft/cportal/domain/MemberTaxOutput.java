@@ -24,8 +24,6 @@ public class MemberTaxOutput {
     private String settlementmeans;
     private int baseamount;
     private String taxhistoryid;
-    private String issueyearmonth;
     private int issueamount;
     private String issuedate;
-    private int logindate;
 }

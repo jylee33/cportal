@@ -42,4 +42,6 @@ public interface MemberInfoRepository {
 
     public void jsonUseDeviceInsert(JsonUseVolume jsonUseVolume) throws Exception;
 
+
+    public String memberHostName(String email);
 }

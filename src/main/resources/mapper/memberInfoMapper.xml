@@ -293,7 +293,6 @@
              ,case when a01.withdrawalyn = '0' then '회원' when a01.withdrawalyn = '1' then '탈퇴' else '중지' end statusnm
              ,j01.taxhistoryid          -- 세금계산서발행내역
              ,j01.taxid                 -- 세금계산서발행기관정보
-             ,j01.issueyearmonth        -- 발행년월
              ,j01.issueamount           -- 발행금액
              ,j01.issuedate             -- 발행일자
              ,str_to_date(j01.issuedate,'%Y%m%d') strissuedate
@@ -305,7 +304,7 @@
              ,j02.detailaddress         -- 상세주소
              ,concat(j02.postnumber,' ',j02.address,' ',j02.detailaddress) zipaddress
              ,j01.createdAt
-             ,row_number() over(order by j01.issueyearmonth DESC, j01.createdAt desc) AS rownum
+             ,row_number() over(order by j01.issuedate DESC, j01.createdAt desc) AS rownum
         from tbmember                    a01
                  inner join tbtaxinformation j02
                      inner join tbtaxhistory     j01
@@ -317,7 +316,7 @@
         where 1 = 1
           and a01.email = #{strEmail}
           and a01.withdrawalyn != '1'
-        order by j01.issueyearmonth DESC, j01.createdAt desc
+        order by j01.issuedate DESC, j01.createdAt desc
     </select>
 
 
@@ -406,7 +405,6 @@
         ,case when a01.withdrawalyn = '0' then '회원' when a01.withdrawalyn = '1' then '탈퇴' else '중지' end statusnm
         ,j01.taxhistoryid          -- 세금계산서발행내역
         ,j01.taxid                 -- 세금계산서발행기관정보
-        ,j01.issueyearmonth        -- 발행년월
         ,j01.issueamount           -- 발행금액
         ,j01.issuedate             -- 발행일자
         ,str_to_date(j01.issuedate,'%Y%m%d') strissuedate
@@ -418,7 +416,7 @@
         ,j02.detailaddress         -- 상세주소
         ,concat(j02.postnumber,' ',j02.address,' ',j02.detailaddress) zipaddress
         ,j01.createdAt
-        ,row_number() over(order by j01.issueyearmonth DESC, j01.createdAt desc) AS rownum
+        ,row_number() over(order by j01.issuedate DESC, j01.createdAt desc) AS rownum
         from tbmember                    a01
              inner join tbtaxinformation j02
                      inner join tbtaxhistory     j01
@@ -434,7 +432,7 @@
         <if test="firstRecordIndex !=null and lastRecordIndex != null">
             and a.rownum BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
         </if>
-        order by a.issueyearmonth DESC, a.createdAt desc
+        order by a.issuedate DESC, a.createdAt desc
     </select>
 
 

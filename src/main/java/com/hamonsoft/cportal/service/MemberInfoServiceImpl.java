@@ -161,7 +161,10 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 //        objectMapper.configure(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS, false);
 //        objectMapper.configure(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY, true);
 
-        NetisUseServiceDto dto = objectMapper.readValue(response.getBody(), NetisUseServiceDto.class);
+        String resBody = response.getBody();
+        logger.info("response - " + resBody);
+
+        NetisUseServiceDto dto = objectMapper.readValue(resBody, NetisUseServiceDto.class);
 
         return dto;
     }

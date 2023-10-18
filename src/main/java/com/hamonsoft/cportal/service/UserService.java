@@ -277,7 +277,10 @@ public class UserService {
         // Response 파싱
         ObjectMapper objectMapper = new ObjectMapper();
 
-        ResultDto dto = objectMapper.readValue(response.getBody(), ResultDto.class);
+        String resBody = response.getBody();
+        logger.info("response - " + resBody);
+
+        ResultDto dto = objectMapper.readValue(resBody, ResultDto.class);
 
         return dto;
     }
@@ -309,7 +312,10 @@ public class UserService {
         // Response 파싱
         ObjectMapper objectMapper = new ObjectMapper();
 
-        ResultDto dto = objectMapper.readValue(response.getBody(), ResultDto.class);
+        String resBody = response.getBody();
+        logger.info("response - " + resBody);
+
+        ResultDto dto = objectMapper.readValue(resBody, ResultDto.class);
 
         return dto;
     }
@@ -340,7 +346,10 @@ public class UserService {
         // Response 파싱
         ObjectMapper objectMapper = new ObjectMapper();
 
-        ResultDto dto = objectMapper.readValue(response.getBody(), ResultDto.class);
+        String resBody = response.getBody();
+        logger.info("response - " + resBody);
+
+        ResultDto dto = objectMapper.readValue(resBody, ResultDto.class);
 
         return dto;
     }
@@ -391,7 +400,10 @@ public class UserService {
         // Response 파싱
         ObjectMapper objectMapper = new ObjectMapper();
 
-        ResultDto dto = objectMapper.readValue(response.getBody(), ResultDto.class);
+        String resBody = response.getBody();
+        logger.info("response - " + resBody);
+
+        ResultDto dto = objectMapper.readValue(resBody, ResultDto.class);
 
         return dto;
     }

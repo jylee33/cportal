@@ -79,6 +79,9 @@ public class ScheduleTaskClass {
         // Request
         ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
 
+        String resBody = response.getBody();
+        logger.info("response - " + resBody);
+
         // Response 파싱
 //        ObjectMapper objectMapper = new ObjectMapper();
 

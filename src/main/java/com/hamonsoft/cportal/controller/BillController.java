@@ -66,6 +66,9 @@ public class BillController {
 
         // Request
         ResponseEntity<String> response = restTemplate.postForEntity(url, req, String.class);
+
+        String resBody = response.getBody();
+        logger.info("response - " + resBody);
     }
 
     @GetMapping(value = "again")

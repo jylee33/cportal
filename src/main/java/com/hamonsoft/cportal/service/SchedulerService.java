@@ -136,7 +136,10 @@ public class SchedulerService {
         // Response 파싱
         ObjectMapper objectMapper = new ObjectMapper();
 
-        NetisUseServiceDto dto = objectMapper.readValue(response.getBody(), NetisUseServiceDto.class);
+        String resBody = response.getBody();
+        logger.info("response - " + resBody);
+
+        NetisUseServiceDto dto = objectMapper.readValue(resBody, NetisUseServiceDto.class);
 
         return dto;
     }

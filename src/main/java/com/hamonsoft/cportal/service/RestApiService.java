@@ -87,7 +87,10 @@ public class RestApiService {
 //        objectMapper.configure(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS, false);
 //        objectMapper.configure(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY, true);
 
-        ResultDto dto = objectMapper.readValue(response.getBody(), ResultDto.class);
+        String resBody = response.getBody();
+        logger.info("response - " + resBody);
+
+        ResultDto dto = objectMapper.readValue(resBody, ResultDto.class);
 
         return dto;
     }

@@ -220,4 +220,5 @@ ALTER TABLE tbtaxhistory DROP COLUMN logindate;
 ALTER TABLE tbtaxhistory ADD COLUMN customer_uid VARCHAR(50) null COMMENT '카드결제용 고객 uid';
 ALTER TABLE tbtaxhistory ADD COLUMN imp_uid VARCHAR(50) null COMMENT '카드결제 결과 uid';
 
+drop table tbpayhistory;
 

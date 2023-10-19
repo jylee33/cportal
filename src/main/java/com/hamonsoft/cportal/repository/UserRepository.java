@@ -22,6 +22,8 @@ public interface UserRepository {
     int updatePaidAmount(TaxInformation tax);
     int chgtaxinformation(TaxInformation info);
     int chgpw(Member member);
+    int chgpwHistoryUpdate(Member member);
+    int chgpwHistoryInsert(Member member);
     int withdrawal(Member member);
     Date getUserCreatedDate(TaxInformation tax);
     String getBaseLicense(Map<String, Object> paramMap);

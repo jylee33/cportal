@@ -66,6 +66,21 @@
         where email = #{email}
     </update>
 
+    <update id="chgpwHistoryUpdate">
+        update tbmemberpassword
+        set useyn = 'N'
+        where email = #{email}
+        and useyn = 'Y'
+    </update>
+
+    <insert id="chgpwHistoryInsert">
+        insert into tbmemberpassword (
+        passwordid  ,email       ,salt       ,password    ,useyn
+        )values(
+        uuid()      ,#{email}    ,sha2(#{password}, 256), sha2(#{password}, 256), 'Y'
+        )
+    </insert>
+
     <update id="withdrawal">
         update tbmember set withdrawalyn = '1', withdrawaldate = DATE_FORMAT(now(),'%Y%m%d')
         where email = #{email}

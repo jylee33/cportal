@@ -234,13 +234,16 @@ public class UserService {
             if (resultDto.getTRAN_STATUS() != 1) {
                 throw new RuntimeException();
             }
-
             userRepository.chgpw(member);
+            userRepository.chgpwHistoryUpdate(member);
+            userRepository.chgpwHistoryInsert(member);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
+            resultDto.setTRAN_STATUS(3);
             throw new RuntimeException(e);
         } catch (RuntimeException ex) {
             ex.printStackTrace();
+            resultDto.setTRAN_STATUS(3);
         }
 
         return resultDto;

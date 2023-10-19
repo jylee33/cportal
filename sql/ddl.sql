@@ -225,3 +225,7 @@ drop table tbpayhistory;
 -- 2023.10.18 결제일자 추가
 ALTER TABLE tbtaxhistory ADD COLUMN settlementdt VARCHAR(08) null COMMENT '결제일자';
 카드결제일경우 발행일자을 결제일자로 update
+
+-- 2023.10.19 login history
+ALTER TABLE tbloginhistory CHANGE failreason reason varchar(10) COMMENT '사유(login or logout)';
+ALTER TABLE tbloginhistory modify COLUMN logindate datetime default current_timestamp() COMMENT '로그인(로그아웃) 시간';

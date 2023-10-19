@@ -47,7 +47,7 @@ public interface MemberRepository {
     Member login(LoginDTO dto);
 
     void keepLogin(Map<String, Object> paramMap);
-
+    void loginHistoryInsert(Map<String, Object> paramMap);
     Member checkUserWithSessionKey(Map<String, Object> paramMap);
 
     String fineId(Map<String, Object> paramMap);

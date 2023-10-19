@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.Cookie;
@@ -24,7 +26,8 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.*;
-
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
@@ -139,7 +142,7 @@ public class MemberController {
     }
 
     @PostMapping("loginPost")
-    public void loginPost(LoginDTO dto, HttpSession session, Model model) {
+    public void loginPost(LoginDTO dto, HttpSession session, Model model, HttpServletRequest request) throws UnknownHostException {
         logger.info("call login post ......................");
 
         Member member = memberService.login(dto);
@@ -147,21 +150,22 @@ public class MemberController {
         if (member == null) {
             return;
         }
-
+        String ipaddr = getClientIp(request);
         model.addAttribute("member", member);
-
+        logger.info("ipaddr -->"+ipaddr);
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("uid", member.getEmail());
+        paramMap.put("sessionId", session.getId());
+        paramMap.put("ipaddr", ipaddr);
+        paramMap.put("reason", "login");
         if (dto.isUseCookie()) {
             int amount = 60 * 60 * 24 * 7;
             Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount));
-
-            Map<String, Object> paramMap = new HashMap<>();
-            paramMap.put("uid", member.getEmail());
-            paramMap.put("sessionId", session.getId());
             paramMap.put("next", sessionLimit);
-
             memberService.keepLogin(paramMap);
+        }else{
+            memberService.loginHistoryInsert(paramMap);
         }
-
     }
 
     @GetMapping("logout")
@@ -171,6 +175,7 @@ public class MemberController {
         logger.info("logout.................................");
 
         Object obj = session.getAttribute("login");
+        String ipaddr = getClientIp(request);
 
         if (obj != null) {
             Member member = (Member) obj;
@@ -179,19 +184,21 @@ public class MemberController {
 
             String cpath = request.getContextPath();
             Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
-
+            Map<String, Object> paramMap = new HashMap<>();
+            paramMap.put("uid", member.getEmail());
+            paramMap.put("ipaddr", ipaddr);
+            paramMap.put("reason", "logout");
             if (loginCookie != null) {
                 logger.info("logout.................................4");
                 loginCookie.setPath(cpath);
                 loginCookie.setMaxAge(0);
                 response.addCookie(loginCookie);
-
-                Map<String, Object> paramMap = new HashMap<>();
-                paramMap.put("uid", member.getEmail());
                 paramMap.put("sessionId", session.getId());
                 paramMap.put("next", new Date());
 
                 memberService.keepLogin(paramMap);
+            }else{
+                memberService.loginHistoryInsert(paramMap);
             }
 
         }
@@ -279,4 +286,36 @@ public class MemberController {
         logger.info("call findpw ......................");
     }
 
+    public static String getClientIp(HttpServletRequest request) throws UnknownHostException{
+        String ipaddr = request.getHeader("X-Forwarded-For");
+        if (ipaddr == null || ipaddr.length() == 0 || "unknown".equalsIgnoreCase(ipaddr)) {
+            ipaddr = request.getHeader("Proxy-Client-ipaddr");
+        }
+        if (ipaddr == null || ipaddr.length() == 0 || "unknown".equalsIgnoreCase(ipaddr)) {
+            ipaddr = request.getHeader("WL-Proxy-Client-ipaddr");
+        }
+        if (ipaddr == null || ipaddr.length() == 0 || "unknown".equalsIgnoreCase(ipaddr)) {
+            ipaddr = request.getHeader("HTTP_CLIENT_ipaddr");
+        }
+        if (ipaddr == null || ipaddr.length() == 0 || "unknown".equalsIgnoreCase(ipaddr)) {
+            ipaddr = request.getHeader("HTTP_X_FORWARDED_FOR");
+        }
+        if (ipaddr == null || ipaddr.length() == 0 || "unknown".equalsIgnoreCase(ipaddr)) {
+            ipaddr = request.getHeader("X-Real-ipaddr");
+        }
+        if (ipaddr == null || ipaddr.length() == 0 || "unknown".equalsIgnoreCase(ipaddr)) {
+            ipaddr = request.getHeader("X-Realipaddr");
+        }
+        if (ipaddr == null || ipaddr.length() == 0 || "unknown".equalsIgnoreCase(ipaddr)) {
+            ipaddr = request.getHeader("REMOTE_ADDR");
+        }
+        if (ipaddr == null || ipaddr.length() == 0 || "unknown".equalsIgnoreCase(ipaddr)) {
+            ipaddr = request.getRemoteAddr();
+        }
+        if(ipaddr.equals("0:0:0:0:0:0:0:1") || ipaddr.equals("127.0.0.1")){
+            InetAddress address = InetAddress.getLocalHost();
+            ipaddr = address.getHostName() + "/" + address.getHostAddress();
+        }
+        return ipaddr;
+    }
 }

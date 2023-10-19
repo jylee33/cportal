@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -204,8 +205,12 @@ public class MemberService {
 
     public void keepLogin(Map<String, Object> paramMap) {
         memberRepository.keepLogin(paramMap);
+        logger.info("paramMap -->"+paramMap.toString());
+        memberRepository.loginHistoryInsert(paramMap);
     }
-
+    public void loginHistoryInsert(Map<String, Object> paramMap) {
+        memberRepository.loginHistoryInsert(paramMap);
+    }
     public Member checkUserWithSessionKey(Map<String, Object> paramMap) {
         return memberRepository.checkUserWithSessionKey(paramMap);
     }

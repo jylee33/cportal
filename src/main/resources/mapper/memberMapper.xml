@@ -148,6 +148,14 @@
 		where email = #{uid}
 	</update>
 
+	<insert id="loginHistoryInsert">
+		insert into tbloginhistory
+		      (loginid    ,email     ,statuscode   ,ip        ,reason   )
+		select uuid()     ,email     ,'OK'         ,#{ipaddr} ,#{reason}
+		  from tbmember
+		 where email = #{uid}
+	</insert>
+
 	<select id="checkUserWithSessionKey" resultType="Member">
 		select * from tbmember
 		where sessionKey = #{value} and sessionlimit > now()

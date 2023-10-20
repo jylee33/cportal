@@ -6,10 +6,7 @@ import com.hamonsoft.cportal.domain.Authentication;
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.domain.MemberLicense;
 import com.hamonsoft.cportal.domain.TaxInformation;
-import com.hamonsoft.cportal.dto.LoginDTO;
-import com.hamonsoft.cportal.dto.MemberLicenseDto;
-import com.hamonsoft.cportal.dto.RequestIPDTO;
-import com.hamonsoft.cportal.dto.ResultDto;
+import com.hamonsoft.cportal.dto.*;
 import com.hamonsoft.cportal.repository.MemberRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -119,6 +116,59 @@ public class MemberService {
         return resultDto;
     }
 
+    public String getNetisToken(String email) {
+        ResultAuthDto resultDto = new ResultAuthDto();
+        logger.info("email - " + email);
+
+        try {
+            resultDto = getAccessToken(email);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return resultDto.getAccess_token();
+    }
+
+    private ResultAuthDto getAccessToken(String email) throws JsonProcessingException {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "http://aws.auth.hamon.vip/netis/auth/token";
+        logger.info("url - " + url);
+
+        Member member = memberRepository.selectMember(email);
+
+        // Header set
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("netis-route", member.getHostname());
+
+        // Body set
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("username", email);
+
+        // Request Message
+        HttpEntity<?> request = new HttpEntity<>(body, headers);
+
+        // Request
+        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+
+        // Response 파싱
+        ObjectMapper objectMapper = new ObjectMapper();
+//        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+//        objectMapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
+//        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//        objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
+//        objectMapper.configure(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS, false);
+//        objectMapper.configure(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY, true);
+
+        String resBody = response.getBody();
+        logger.info("response - " + resBody);
+
+        ResultAuthDto dto = objectMapper.readValue(resBody, ResultAuthDto.class);
+
+        return dto;
+    }
+
     private ResultDto addUser(Member member) throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://aws.lb.hamon.vip/cloud/v1/user_manager/add_user";
@@ -201,6 +251,10 @@ public class MemberService {
 
     public Member login(LoginDTO dto) {
         return memberRepository.login(dto);
+    }
+
+    public void updateAccessToken(Map<String, Object> paramMap) {
+        memberRepository.updateAccessToken(paramMap);
     }
 
     public void keepLogin(Map<String, Object> paramMap) {

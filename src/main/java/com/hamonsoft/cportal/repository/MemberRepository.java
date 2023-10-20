@@ -46,6 +46,7 @@ public interface MemberRepository {
 
     Member login(LoginDTO dto);
 
+    void updateAccessToken(Map<String, Object> paramMap);
     void keepLogin(Map<String, Object> paramMap);
     void loginHistoryInsert(Map<String, Object> paramMap);
     Member checkUserWithSessionKey(Map<String, Object> paramMap);

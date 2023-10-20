@@ -12,7 +12,8 @@ rest:
 server:
   port: 8080
   servlet:
-    context-path: /portal
+#    context-path: /portal
+    context-path: /
 
 spring:
   config:
@@ -60,7 +61,8 @@ pagehelper:
 server:
   port: 8080
   servlet:
-    context-path: /portal
+#    context-path: /portal
+    context-path: /
 
 spring:
   config:

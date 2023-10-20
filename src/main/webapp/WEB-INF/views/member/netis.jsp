@@ -7,16 +7,21 @@
 
 <%@include file="../include/header.jsp" %>
 
+<div class="container">
+    <form class="form-wrap" id="myForm" action="" method="post">
+        <input type='hidden' name='accessToken' style="width:90%" value="${access_token}" />
+    </form>
+</div>
 
 <script>
 
     $(document).ready(function () {
-        if ("${member.email}" == "") {
-            alert("Login Failed");
-            self.location = "${path}/member/login";
-        } else {
-            self.location = "${path}/member/ssologin?email=${member.email}";
-        }
+
+        console.log("hostname - ${hostname}");
+        var actUrl = "https://aws.${hostname}.hamon.vip/login/ssoLogin.do";
+
+        $("#myForm").attr("action", actUrl);
+        $("#myForm").submit();
     });
 
 </script>

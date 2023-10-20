@@ -229,3 +229,6 @@ ALTER TABLE tbtaxhistory ADD COLUMN settlementdt VARCHAR(08) null COMMENT '결�
 -- 2023.10.19 login history
 ALTER TABLE tbloginhistory CHANGE failreason reason varchar(10) COMMENT '사유(login or logout)';
 ALTER TABLE tbloginhistory modify COLUMN logindate datetime default current_timestamp() COMMENT '로그인(로그아웃) 시간';
+
+-- 2023.10.20 jylee
+ALTER TABLE tbmember ADD COLUMN access_token VARCHAR(300) null COMMENT 'SSO 로긴용 access_token';

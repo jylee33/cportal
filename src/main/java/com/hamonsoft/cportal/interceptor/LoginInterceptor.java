@@ -55,7 +55,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 //            response.sendRedirect(cpath);
             Object dest = session.getAttribute("dest");
-            response.sendRedirect(dest != null ? (String)dest : cpath);
+//            response.sendRedirect(dest != null ? (String)dest : cpath);
         }
     }
 

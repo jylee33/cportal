@@ -143,6 +143,11 @@
 		where email=#{uid} and password=sha2(#{upw}, 256) and emailcertificationyn = 1 and withdrawalyn != '1'
 	</select>
 
+	<update id="updateAccessToken">
+		update tbmember set access_token = #{access_token}
+		where email = #{email}
+	</update>
+
 	<update id="keepLogin">
 		update tbmember set sessionkey = #{sessionId}, sessionlimit = #{next}
 		where email = #{uid}

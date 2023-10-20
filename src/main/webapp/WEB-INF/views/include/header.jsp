@@ -120,7 +120,7 @@
                     <%--                    <a href="${path}/charge/guide">과금안내</a>--%>
                 </div>
                 <c:if test="${not empty login}">
-                    <a href="http://cloud.hamonsoft.com" target="_blank" class="btn-link">Netis 통합모니터링 서비스</a>
+                    <a href="${path}/member/netis" target="_blank" class="btn-link">Netis 통합모니터링 서비스</a>
                     <c:if test="${login.administratoryn eq 'Y'}">
                         <a href="${path}/license/licensemanage" class="btn-user">${login.membername} (관리자)</a>
                     </c:if>

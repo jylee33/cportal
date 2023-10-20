@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hamonsoft.cportal.domain.*;
 import com.hamonsoft.cportal.dto.LoginDTO;
 import com.hamonsoft.cportal.dto.MemberLicenseDto;
+import com.hamonsoft.cportal.dto.ResultAuthDto;
 import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.service.MemberService;
 import org.json.simple.JSONObject;
@@ -165,6 +166,33 @@ public class MemberController {
             memberService.keepLogin(paramMap);
         }else{
             memberService.loginHistoryInsert(paramMap);
+        }
+    }
+
+    @GetMapping("ssologin")
+    public void ssoLogin(@RequestParam("email") String email, Model model) {
+        logger.info("call ssoLogin get ......................");
+
+        String accessToken = memberService.getNetisToken(email);
+
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("email", email);
+        paramMap.put("access_token", accessToken);
+
+        memberService.updateAccessToken(paramMap);
+    }
+
+    @GetMapping("netis")
+    public void netis(HttpSession session, Model model) {
+        logger.info("call netis get ......................");
+
+        Object obj = session.getAttribute("login");
+
+        if (obj != null) {
+            Member member = (Member) obj;
+
+            model.addAttribute("access_token", member.getAccess_token());
+            model.addAttribute("hostname", member.getHostname());
         }
     }
 

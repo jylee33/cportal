@@ -7,16 +7,11 @@
 
 <%@include file="../include/header.jsp" %>
 
-
 <script>
 
     $(document).ready(function () {
-        if ("${member.email}" == "") {
-            alert("Login Failed");
-            self.location = "${path}/member/login";
-        } else {
-            self.location = "${path}/member/ssologin?email=${member.email}";
-        }
+
+        self.location = "${path}/";
     });
 
 </script>

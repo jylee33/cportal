@@ -32,6 +32,7 @@ public class Member {
     private Date updatedAt;
     private MemberLicense memberLicenseVO;
     private MemberUseTax memberUseTaxVO;
+    private String access_token;
 
 
 //    @OneToOne(fetch = FetchType.LAZY)
@@ -54,7 +55,7 @@ public class Member {
     public String toString() {
         return "Member{" +
                 "memberid='" + memberid + '\'' +
-                " email='" + email + '\'' +
+                ", email='" + email + '\'' +
                 ", membername='" + membername + '\'' +
                 ", grpname='" + grpname + '\'' +
                 ", celltel='" + celltel + '\'' +
@@ -77,6 +78,7 @@ public class Member {
                 ", updatedAt=" + updatedAt +
                 ", memberLicenseVO=" + memberLicenseVO +
                 ", memberUseTaxVO=" + memberUseTaxVO +
+                ", access_token='" + access_token + '\'' +
                 '}';
     }
 }

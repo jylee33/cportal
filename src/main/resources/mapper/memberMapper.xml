@@ -29,12 +29,12 @@
 			taxid             , email        , Representationname   , taxcompanynumber    , taxemail
 			,postnumber        , address      , detailaddress        , businesscondition   , businesskind
 			,settlementmeans   , baseamount   , customer_uid         , next_pay_date       , paid_amount
-			,createdAt         , updatedBy    , updatedAt
+			,companyname,createdAt         , updatedBy    , updatedAt
 		)values(
 			uuid()            , #{email}     , #{representationname}, #{taxcompanynumber} , #{taxemail}
 			,#{postnumber}     , #{address}   , #{detailaddress}     , #{businesscondition}, #{businesskind}
 			,#{settlementmeans}, #{baseamount}, #{customer_uid}      , #{next_pay_date}    , #{paid_amount}
-			,now()             , #{updatedBy} , now()
+			,#{companyname}, now()             , #{updatedBy} , now()
 		)
 	</insert>
 
@@ -142,6 +142,11 @@
 		select * from tbmember
 		where email=#{uid} and password=sha2(#{upw}, 256) and emailcertificationyn = 1 and withdrawalyn != '1'
 	</select>
+
+	<update id="updateAccessToken">
+		update tbmember set access_token = #{access_token}
+		where email = #{email}
+	</update>
 
 	<update id="keepLogin">
 		update tbmember set sessionkey = #{sessionId}, sessionlimit = #{next}

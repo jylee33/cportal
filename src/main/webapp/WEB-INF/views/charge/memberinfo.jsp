@@ -57,7 +57,7 @@
                                     <c:if test="${list.licensegrade eq '3'}">Pro</c:if>
                                     <c:if test="${list.licensegrade eq '4'}">Ent</c:if>
                                 </td>
-                                <td class="text-center">${list.celltel}</td>
+                                <td class="text-center">${list.celltel}</script></td>
                                 <td class="text-left">${list.businessname}</td>
                                 <td class="text-center">${list.strbusinessnumber}</td>
                                 <td class="text-center">${list.strjoindate}</td>
@@ -212,10 +212,10 @@
                             <div class="table-type2">
                                 <table id="tbuser2">
                                     <colgroup>
-                                        <col style="width:150px">
-                                        <col style="width:100px">
-                                        <col style="width:100px">
-                                        <col style="width:30px">
+                                        <col style="width:90px">
+                                        <col style="width:90px">
+                                        <col style="width:90px">
+                                        <col style="width:110px">
                                     </colgroup>
                                     <tbody>
                                     <tr>
@@ -281,7 +281,7 @@
                                     <tr>
                                         <th colspan="3">회원접속도메인</th>
                                         <td colspan="2" id=serverdomainname class="text-center">
-                                            <input type="text" class="inp small" style="text-align:center; width:100%"  name="serverdomainname" value="${userInfo.serverdomainname}">
+                                            <input type="text" class="inp small" style="text-align:center; width:100%"  name="hostname" value="${userInfo.hostname}">
                                         </td>
                                     </tr>
                                     </tbody>
@@ -382,9 +382,9 @@
                                         </td>
                                         <td id=c_totalsoluble class="text-center">${charge.totalsoluble}</td>
                                         <td id=c_basevolume class="text-center">${charge.basevolume}</td>
-                                        <td id=c_basecharge class="text-center"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${charge.basecharge}" /></td>
+                                        <td id=c_basecharge class="text-center">${charge.format_basecharge}</td>
                                         <td id=c_addvolume class="text-center">${charge.addvolume}</td>
-                                        <td id=c_addcharge class="text-center"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${charge.addcharge}" /></td>
+                                        <td id=c_addcharge class="text-center">${charge.format_addcharge}</td>
                                         <td id=c_servicevolume class="text-center">${charge.servicevolume}</td>
                                         <td id=c_datakeepnm class="text-center">${charge.datakeepnm}</td>
                                         <td id=c_totalvolume class="text-center" style="color:#8B0000;font: 17px">${charge.totalvolume}</td>
@@ -393,7 +393,7 @@
                                         <td id=c_apvolume class="text-center" style="color:#8B0000;font: 17px">${charge.apvolume}</td>
                                         <td id=c_dbmsvolume class="text-center" style="color:#8B0000;font: 17px">${charge.dbmsvolume}</td>
                                         <td id=c_fmsvolume class="text-center" style="color:#8B0000;font: 17px">${charge.fmsvolume}</td>
-                                        <td id=c_totalcharge class="text-center" style="color:#8B0000;font: 17px"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${charge.totalcharge}" /></td>
+                                        <td id=c_totalcharge class="text-center" style="color:#8B0000;font: 17px">${charge.format_totalcharge}</td>
                                         <td id=c_userate class="text-center" style="color:#8B0000;font: 17px">${charge.userate}</td>
                                         <td class="text-center"></td>
                                     </tr>
@@ -437,7 +437,7 @@
                                         <td id=t_businesskind class="text-center">${tax.businesskind}</td>
                                         <td id=t_businesscondition class="text-center">${tax.businesscondition}</td>
                                         <td id=t_strissuedate class="text-center" style="color:#8B0000;font: 17px">${tax.strissuedate}</td>
-                                        <td id=t_issueamount class="text-center" style="color:#8B0000;font: 17px"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${tax.issueamount}" /></td>
+                                        <td id=t_issueamount class="text-center" style="color:#8B0000;font: 17px">${tax.format_issueamount}</td>
                                         <td id=t_strissuedate class="text-center" style="color:#8B0000;font: 17px">${tax.strsettlementdt}</td>
                                         <td id=t_strissuedate class="text-center" style="color:#8B0000;font: 17px">${tax.customer_uid}</td>
                                         <td id=t_strissuedate class="text-center" style="color:#8B0000;font: 17px">${tax.imp_uid}</td>
@@ -605,11 +605,10 @@
                     $('input[id=addcharge]').attr('value',currencyFormatter(list0.addcharge));
                     $('input[name=datakeepterm]').attr('value',list0.datakeepterm);
                     $('select[name=datakeepunit]').attr('value',list0.datakeepunit);
-                    $('input[name=serverdomainname]').attr('value',list0.serverdomainname);
+                    $('input[name=hostname]').attr('value',list0.hostname);
 
                     const list1 = jsonmap[1]['chargeInfo'];
                     var data = "";
-
                     for(var i=0;i<list1.length;i++) {
                         //console.log("map.  --> " + i + "..1." + list1[i].useyym + "..2." + "${list1[i].useyym}");
                         data += "<tr>";
@@ -618,9 +617,9 @@
                         data += "<td class='text-center'>"+list1[i].licensegrade+"</td>";
                         data += "<td id=c_totalsoluble class='text-center'>"+list1[i].totalsoluble+"</td>";
                         data += "<td id=c_basevolume class='text-center'>"+list1[i].basevolume+"</td>";
-                        data += "<td id=c_basecharge class='text-center'>"+list1[i].basecharge+"</td>";
+                        data += "<td id=c_basecharge class='text-center'>"+list1[i].format_basecharge+"</td>";
                         data += "<td id=c_addvolume class='text-center'>"+list1[i].addvolume+"</td>";
-                        data += "<td id=c_addcharge class='text-center'>"+list1[i].addcharge+"</td>";
+                        data += "<td id=c_addcharge class='text-center'>"+list1[i].format_addcharge+"</td>";
                         data += "<td id=c_servicevolume class='text-center'>"+list1[i].servicevolume+"</td>";
                         data += "<td id=c_datakeepnm class='text-center'>"+list1[i].datakeepnm+"</td>";
                         data += "<td id=c_totalvolume class='text-center'>"+list1[i].totalvolume+"</td>";
@@ -629,7 +628,7 @@
                         data += "<td id=c_apvolume class='text-center'>"+list1[i].apvolume+"</td>";
                         data += "<td id=c_dbmsvolume class='text-center'>"+list1[i].dbmsvolume+"</td>";
                         data += "<td id=c_fmsvolume class='text-center'>"+list1[i].fmsvolume+"</td>";
-                        data += "<td id=c_totalcharge class='text-center'>"+list1[i].totalcharge+"</td>";
+                        data += "<td id=c_totalcharge class='text-center'>"+list1[i].format_totalcharge+"</td>";
                         data += "<td id=c_userate class='text-center'>"+list1[i].userate+"</td>";
                         data += "<td class='text-center'></td>";
                         data += "</tr>";
@@ -648,7 +647,7 @@
                         data2 += "<td class='text-center'>"+list2[i].businesskind+"</td>";
                         data2 += "<td class='text-center'>"+list2[i].businesscondition+"</td>";
                         data2 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list2[i].strissuedate+"</td>";
-                        data2 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list2[i].issueamount+"</td>";
+                        data2 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list2[i].format_issueamount+"</td>";
                         data2 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+dateFormatter(list2[i].settlementdt)+"</td>";
                         data2 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list2[i].customer_uid+"</td>";
                         data2 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list2[i].imp_uid+"</td>";

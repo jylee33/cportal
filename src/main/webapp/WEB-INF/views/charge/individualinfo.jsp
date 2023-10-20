@@ -6,8 +6,6 @@
 
 <%@include file="../include/header.jsp" %>
 
-<%@include file="../include/jQWidgets.jsp" %>
-
 <div class="container">
     <div class="cols">
         <div class="col3">

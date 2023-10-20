@@ -306,6 +306,7 @@
             ,str_to_date(j01.settlementdt,'%Y%m%d') strsettlementdt
             ,IFNULL(j01.settlementdt,'')            settlementdt
             ,case when j01.issuedate >= date_format(DATE_ADD(curdate(), interval -15 day), '%Y%m%d') then '' else '체납' end arrearsyn
+             ,j01.settlementmeans
              ,j02.representationname    -- 대표자
              ,j02.businesskind          -- 업태
              ,j02.businesscondition     -- 업종
@@ -426,6 +427,7 @@
         ,IFNULL(j01.imp_uid,'')               imp_uid
         ,str_to_date(j01.settlementdt,'%Y%m%d') strsettlementdt
         ,IFNULL(j01.settlementdt,'')            settlementdt
+        ,j01.settlementmeans
         ,j02.representationname    -- 대표자
         ,j02.businesskind          -- 업태
         ,j02.businesscondition     -- 업종

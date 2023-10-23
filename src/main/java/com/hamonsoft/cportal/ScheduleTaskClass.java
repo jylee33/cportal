@@ -2,6 +2,7 @@ package com.hamonsoft.cportal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -17,6 +18,9 @@ import java.util.Map;
 public class ScheduleTaskClass {
 
     private static final Logger logger = LoggerFactory.getLogger(ScheduleTaskClass.class);
+
+    @Value("${server.servlet.context-path:/portal}")
+    String cpath;
 
     @Scheduled(cron = "0 30 9 * * ?") // 초, 분, 일, 월 - 매일 오전 9시 30분에 실행
     @Scheduled(cron = "0 30 17 * * ?") // 초, 분, 일, 월 - 매일 오후 5시 30분에 실행
@@ -59,7 +63,8 @@ public class ScheduleTaskClass {
 
         // 아래는 POST 방식으로 전 멤버에 대해 pay 루틴을 타도록 한다.
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8080/portal/iamport/payall";
+        logger.info("cpath -------------- " + cpath);
+        String url = "http://localhost:8080/" + cpath + "/iamport/payall";
         logger.info("url - " + url);
 
         // Header set
@@ -90,7 +95,7 @@ public class ScheduleTaskClass {
     @Scheduled(cron = "0 58 16 * * ?") // 초, 분, 일, 월 - 매일 오전 10시 0분에 실행
     public void schedulerPayAll2() {
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8080/portal/iamport/payall";
+        String url = "http://localhost:8080/" + cpath + "/iamport/payall";
         logger.info("url - " + url);
 
         // Header set

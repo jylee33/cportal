@@ -53,8 +53,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 response.addCookie(loginCookie);
             }
 
-//            response.sendRedirect(cpath);
-            Object dest = session.getAttribute("dest");
+            response.sendRedirect(cpath + "/");
+//            Object dest = session.getAttribute("dest");
 //            response.sendRedirect(dest != null ? (String)dest : cpath);
         }
     }

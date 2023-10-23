@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,8 +27,13 @@ import javax.sql.DataSource;
 @MapperScan(value = "com.hamonsoft.cportal", sqlSessionFactoryRef = "SqlSessionFactory")
 public class MyBatisConfig extends WebMvcConfigurerAdapter {
 
+    private static final Logger logger = LoggerFactory.getLogger(MyBatisConfig.class);
+
     @Value("${spring.datasource.mapper-locations}")
     String mPath;
+
+    @Value("${server.servlet.context-path:/portal}")
+    String cpath;
 
     @Bean(name = "dataSource")
     @ConfigurationProperties(prefix = "spring.datasource")
@@ -72,6 +79,8 @@ public class MyBatisConfig extends WebMvcConfigurerAdapter {
                 .excludePathPatterns("/**/*.css")
                 .excludePathPatterns("/**/**/*.css")
                 .excludePathPatterns("/boards");    // 해당 경로는 인터셉터가 가로채지 않는다.
+
+        logger.info("cpath -------------- " + cpath);
 
         registry.addInterceptor(authInterceptor())
 //                .addPathPatterns("/**/*")

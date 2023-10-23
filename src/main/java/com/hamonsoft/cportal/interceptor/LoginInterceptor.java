@@ -48,7 +48,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             if (request.getParameter("useCookie") != null) {
                 logger.info("remember me.......");
                 Cookie loginCookie = new Cookie("loginCookie", session.getId());
-                loginCookie.setPath(cpath);
+                loginCookie.setPath(cpath + "/");
                 loginCookie.setMaxAge(60 * 60 * 24 * 7);    // 초단위, 1주일
                 response.addCookie(loginCookie);
             }

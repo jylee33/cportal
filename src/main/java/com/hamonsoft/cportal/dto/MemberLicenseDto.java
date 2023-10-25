@@ -10,6 +10,8 @@ public class MemberLicenseDto {
     private Integer addcharge;
     private Integer datakeepterm;
     private String datakeepunit;
-    private String serverdomainname;
+    private String hostname;
+    private Integer preaddvolume;
+    private Integer preservicevolume;
 
 }

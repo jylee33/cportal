@@ -18,5 +18,6 @@ public interface SchedulerRepository {
 
     public void batchUseDeviceInsert(ArrayList<JsonUseVolume> createUseDivice) throws Exception;
 
+    ArrayList<HashMap<String, Object>> commoncode100();
 }
 

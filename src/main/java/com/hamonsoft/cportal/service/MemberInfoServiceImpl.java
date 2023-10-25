@@ -119,8 +119,39 @@ public class MemberInfoServiceImpl implements MemberInfoService {
         return memberinfoRepository.memberTaxList(email);
     };
 
-    public void licenseUpdate(MemberLicenseDto memberLicenseDto) throws Exception{
-        memberinfoRepository.licenseUpdate(memberLicenseDto);
+    public ResultDto licenseUpdate(MemberLicenseDto memberLicenseDto) throws Exception{
+        ResultDto resultDto = new ResultDto();
+        try {
+            String email = memberLicenseDto.getEmail();
+            int preaddvolume = 0;
+            int preservicevolume = 0;
+            int addvolume = 0;
+            int servicevolume = 0;
+            if(memberLicenseDto.getPreaddvolume() != null) {
+                preaddvolume = memberLicenseDto.getPreaddvolume();
+            }
+            if(memberLicenseDto.getAddvolume() != null) {
+                addvolume = memberLicenseDto.getAddvolume();
+            }
+            String hostname = memberLicenseDto.getHostname();
+            if(addvolume != preaddvolume){
+                resultDto = manage_credit(email, addvolume, hostname);
+                if (resultDto.getTRAN_STATUS() != 1) {
+                    logger.info("MemberInfoServiceImpl memberLicenseInfo ---->"+email+".."+resultDto.getERROR_CODE());
+                    throw new RuntimeException();
+                }
+                logger.info("MemberInfoServiceImpl memberLicenseInfo ---->"+resultDto.toString());
+            }
+            memberinfoRepository.licenseUpdate(memberLicenseDto);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            resultDto.setTRAN_STATUS(-1);
+            throw new RuntimeException(e);
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+            resultDto.setTRAN_STATUS(-1);
+        }
+        return resultDto;
     };
 
     public void memberUpdate(MemberLicenseDto memberLicenseDto) throws Exception{
@@ -165,6 +196,36 @@ public class MemberInfoServiceImpl implements MemberInfoService {
         logger.info("response - " + resBody);
 
         NetisUseServiceDto dto = objectMapper.readValue(resBody, NetisUseServiceDto.class);
+
+        return dto;
+    }
+
+    private ResultDto manage_credit(String email, int addvolume, String hostname) throws JsonProcessingException {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "http://aws.lb.hamon.vip/cloud/v1/user_manager/manage_credit";
+        logger.info("manage_credit   url - " + url);
+        // Header set
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("netis-route", hostname);
+        // Body set
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("USER_ID", email);
+        body.put("CREDIT", addvolume);
+        // Request Message
+        HttpEntity<?> request = new HttpEntity<>(body, headers);
+
+        // Request
+        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+
+        // Response 파싱
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        String resBody = response.getBody();
+        logger.info("response - " + resBody);
+
+        ResultDto dto = objectMapper.readValue(resBody, ResultDto.class);
 
         return dto;
     }

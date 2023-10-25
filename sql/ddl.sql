@@ -232,3 +232,32 @@ ALTER TABLE tbloginhistory modify COLUMN logindate datetime default current_time
 
 -- 2023.10.20 jylee
 ALTER TABLE tbmember ADD COLUMN access_token VARCHAR(300) null COMMENT 'SSO 로긴용 access_token';
+
+
+
+-- 2023.10.25 수정 not null -> null
+alter table tbmemberusemonth modify column   basevolume tinyint(3) unsigned NULL COMMENT '기본장비수량';
+alter table tbmemberusemonth modify column   basecharge int(8) unsigned NULL COMMENT '기본요금(라이센스요금)';
+alter table tbmemberusemonth modify column   servicevolume tinyint(3) unsigned NULL COMMENT '서비스장비수량';
+alter table tbmemberusemonth modify column   addvolume tinyint(3) unsigned NULL COMMENT '추가장비수량';
+alter table tbmemberusemonth modify column   addcharge int(8) unsigned  NULL COMMENT '추가라이센스요금';
+alter table tbmemberusemonth modify column   totalvolume tinyint(3) unsigned  NULL COMMENT '전체사용장비수량';
+alter table tbmemberusemonth modify column   networkvolume tinyint(3) unsigned  NULL COMMENT '네트워크장비수량';
+alter table tbmemberusemonth modify column   servervolume tinyint(3) unsigned  NULL COMMENT '서버장비수량';
+alter table tbmemberusemonth modify column   apvolume tinyint(3) unsigned  NULL COMMENT 'ap장비수량';
+alter table tbmemberusemonth modify column   dbmsvolume tinyint(3) unsigned  NULL COMMENT '데이터장비수량';
+alter table tbmemberusemonth modify column   fmsvolume tinyint(3) unsigned  NULL COMMENT '시설장비수량';
+alter table tbmemberusemonth modify column   totalcharge int(8) unsigned NULL  COMMENT '전체사용금액';
+
+alter table tbmemberusehistory modify column   basevolume tinyint(3) unsigned NULL COMMENT '기본장비수량';
+alter table tbmemberusehistory modify column   basecharge int(8) unsigned NULL COMMENT '기본요금(라이센스요금)';
+alter table tbmemberusehistory modify column   servicevolume tinyint(3) unsigned NULL COMMENT '서비스장비수량';
+alter table tbmemberusehistory modify column   addvolume tinyint(3) unsigned NULL COMMENT '추가장비수량';
+alter table tbmemberusehistory modify column   addcharge int(8) unsigned  NULL COMMENT '추가라이센스요금';
+alter table tbmemberusehistory modify column   totalvolume tinyint(3) unsigned  NULL COMMENT '전체사용장비수량';
+alter table tbmemberusehistory modify column   networkvolume tinyint(3) unsigned  NULL COMMENT '네트워크장비수량';
+alter table tbmemberusehistory modify column   servervolume tinyint(3) unsigned  NULL COMMENT '서버장비수량';
+alter table tbmemberusehistory modify column   apvolume tinyint(3) unsigned  NULL COMMENT 'ap장비수량';
+alter table tbmemberusehistory modify column   dbmsvolume tinyint(3) unsigned  NULL COMMENT '데이터장비수량';
+alter table tbmemberusehistory modify column   fmsvolume tinyint(3) unsigned  NULL COMMENT '시설장비수량';
+alter table tbmemberusehistory modify column   totalcharge int(8) unsigned NULL  COMMENT '전체사용금액';

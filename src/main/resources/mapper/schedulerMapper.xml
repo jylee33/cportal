@@ -32,6 +32,13 @@
     </insert>
 
 
+    <select id="commoncode100" resultType="hashmap">
+        select groupcode,	commoncode,	codename,	infomalityname
+        from tbcommoncode
+        where groupcode = '100'
+          and useyn = 'Y'
+    </select>
+
     <!--  사용자사용장비 수 -->
     <insert id="batchUseDeviceInsert" >
             insert into tbusedevice(

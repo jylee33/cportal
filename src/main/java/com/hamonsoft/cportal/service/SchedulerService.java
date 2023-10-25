@@ -6,6 +6,7 @@ import com.hamonsoft.cportal.ScheduleTaskClass;
 import com.hamonsoft.cportal.domain.JsonUseVolume;
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.dto.ChildResultDto;
+import com.hamonsoft.cportal.dto.DeviceUseAllDto;
 import com.hamonsoft.cportal.dto.NetisUseServiceDto;
 import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.repository.MemberInfoRepository;
@@ -45,7 +46,6 @@ public class SchedulerService {
 
     @Autowired
     MemberRepository memberRepository;
-
 
     public String memberAllList() throws Exception{
         String msgtext = "";
@@ -142,6 +142,99 @@ public class SchedulerService {
         NetisUseServiceDto dto = objectMapper.readValue(resBody, NetisUseServiceDto.class);
 
         return dto;
+    }
+    public String allUseServiceInfo() throws Exception{
+        String msgtext = "";
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            String url = restURL + "/user_manager/all_service_info";
+            logger.info("url - " + url);
+            ArrayList <HashMap<String,Object>> code100 = schedulerrepository.commoncode100();
+            logger.info("code100.size()  -->" + code100.size());
+            for(int i = 0; i < code100.size(); i++) {
+                String commoncode = code100.get(i).get("commoncode").toString();
+                logger.info("commoncode  -->" + commoncode);
+
+                // Header set
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                headers.add("netis-route", commoncode);
+
+                // Body set
+                Map<String, Object> body = new HashMap<>();
+                // Request Message
+                HttpEntity<?> request = new HttpEntity<>(body, headers);
+
+                // Request
+                ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+
+                // Response 파싱
+                ObjectMapper objectMapper = new ObjectMapper();
+
+                String resBody = response.getBody();
+                logger.info("response - " + resBody);
+
+                DeviceUseAllDto dto = objectMapper.readValue(resBody, DeviceUseAllDto.class);
+                if (dto.getTRAN_STATUS() != 1) {
+                    throw new RuntimeException();
+                }
+                logger.info("resultDto----- memberLicenseInfo ---->"+dto.getTRAN_STATUS()+".."+dto.getERROR_CODE());
+                logger.info("DeviceUseAllDto----- DeviceUseAllDto ---->"+dto);
+                dto.getINFO()
+                        .stream()
+                        .forEach(d -> {
+                            JsonUseVolume jsonUseVolume = new JsonUseVolume();
+                            jsonUseVolume.setUserid(d.getUSER_ID());
+                            jsonUseVolume.setNmscount(d.getNMS_COUNT());
+                            jsonUseVolume.setSmscount(d.getSMS_COUNT());
+                            jsonUseVolume.setDbmscount(d.getDBMS_COUNT());
+                            jsonUseVolume.setApcount(d.getAP_COUNT());
+                            jsonUseVolume.setFmscount(d.getFMS_COUNT());
+                            jsonUseVolume.setInfo(d.toString());
+                            jsonUseVolume.setTranstatus(dto.getTRAN_STATUS());
+                            jsonUseVolume.setReason(dto.getREASON());
+                            try {
+                                String deviceUuid = memberinfoRepository.jsonUseDeviceCount(d.getUSER_ID());
+                                logger.info("deviceUuid --> "+deviceUuid+"   d.getUSER_ID()-->"+d.getUSER_ID());
+                                if(deviceUuid != null) {
+                                    jsonUseVolume.setUsedeviceid(deviceUuid);
+                                    memberinfoRepository.jsonUseDeviceInsert(jsonUseVolume);
+                                }
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                            logger.info("dto.getTRAN_STATUS() - " + dto.getTRAN_STATUS()+"..........."+d.getUSER_ID());
+                        });
+    //            if (dto.getTRAN_STATUS() != 1) {
+    //                logger.info("MemberInfoServiceImpl memberLicenseInfo ---->"+email+".."+dto.getERROR_CODE());
+    //                throw new RuntimeException();
+    //            }
+    //            logger.info("MemberInfoServiceImpl memberLicenseInfo ---->"+dto.toString());
+    //            JsonUseVolume jsonUseVolume = new JsonUseVolume();
+    //
+    //            jsonUseVolume.setUserid(dto.getINFO().getUSER_ID());
+    //            jsonUseVolume.setNmscount(dto.getINFO().getNMS_COUNT());
+    //            jsonUseVolume.setSmscount(dto.getINFO().getSMS_COUNT());
+    //            jsonUseVolume.setDbmscount(dto.getINFO().getDBMS_COUNT());
+    //            jsonUseVolume.setApcount(dto.getINFO().getAP_COUNT());
+    //            jsonUseVolume.setFmscount(dto.getINFO().getFMS_COUNT());
+    //            jsonUseVolume.setInfo(dto.getINFO().toString());
+    //            jsonUseVolume.setTranstatus(dto.getTRAN_STATUS());
+    //            jsonUseVolume.setReason(dto.getREASON());
+    //            jsonUseVolume.setUsedeviceid(memberinfoRepository.jsonUseDeviceCount(email));
+    //            memberinfoRepository.jsonUseDeviceInsert(jsonUseVolume);
+            }
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            logger.info("JsonProcessingException----- JsonProcessingException ---->");
+            throw new RuntimeException(e);
+        } catch (RuntimeException ex) {
+            logger.info("RuntimeException----- memberLicenseInfo ---->");
+            ex.printStackTrace();
+            msgtext = "자료저장에 실패 했습니다.";
+        }finally {
+            return msgtext;
+        }
     }
 }
 

@@ -41,7 +41,7 @@ public interface MemberInfoService {
     public List<Map<String, Object>> memberTaxInfo(String email) throws Exception;
 
     @Transactional(rollbackFor = {Exception.class})
-    public void licenseUpdate(MemberLicenseDto memberLicenseDto) throws Exception;
+    public ResultDto licenseUpdate(MemberLicenseDto memberLicenseDto) throws Exception;
     @Transactional(rollbackFor = {Exception.class})
     public void memberUpdate(MemberLicenseDto memberLicenseDto) throws Exception;
 

@@ -24,16 +24,17 @@ public class NetisUseServiceDto {
 
     @Data
     public static class INFO {
-        @JsonProperty("FMS_COUNT")
-        private int FMS_COUNT;
-        @JsonProperty("AP_COUNT")
-        private int AP_COUNT;
-        @JsonProperty("DBMS_COUNT")
-        private int DBMS_COUNT;
-        @JsonProperty("SMS_COUNT")
-        private int SMS_COUNT;
+        @JsonProperty("USER_ID")
+        private String USER_ID;
         @JsonProperty("NMS_COUNT")
         private int NMS_COUNT;
+        @JsonProperty("SMS_COUNT")
+        private int SMS_COUNT;
+        @JsonProperty("DBMS_COUNT")
+        private int DBMS_COUNT;
+        @JsonProperty("AP_COUNT")
+        private int AP_COUNT;
+        @JsonProperty("FMS_COUNT")
+        private int FMS_COUNT;
     }
-
 }

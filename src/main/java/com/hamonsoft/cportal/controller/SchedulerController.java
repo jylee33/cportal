@@ -35,4 +35,9 @@ public class SchedulerController {
         String msgText = schedulerService.memberAllList();
         logger.info(msgText);
     }
+    @Scheduled(cron="0/5 * * * * ?") //cron = "0 0 0 1/1 * *")
+    public void allUseServiceInfo() throws Exception {
+        String msgText = schedulerService.allUseServiceInfo();
+        logger.info(msgText);
+    }
 }

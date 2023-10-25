@@ -2,8 +2,10 @@ package com.hamonsoft.cportal.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
+@ToString
 public class ResultDto {
 
     @JsonProperty("TRAN_STATUS")

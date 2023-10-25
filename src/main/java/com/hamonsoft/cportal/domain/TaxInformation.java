@@ -1,10 +1,12 @@
 package com.hamonsoft.cportal.domain;
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.Date;
 
 @Data
+@ToString
 public class TaxInformation {
 
     private String taxid;
@@ -27,28 +29,4 @@ public class TaxInformation {
     private String updatedBy;   //수정자
     private Date updatedAt; //수정일시
 
-    @Override
-    public String toString() {
-        return "TaxInformation{" +
-                "taxid='" + taxid + '\'' +
-                ", email='" + email + '\'' +
-                ", companyname='" + companyname + '\'' +
-                ", representationname='" + representationname + '\'' +
-                ", taxcompanynumber='" + taxcompanynumber + '\'' +
-                ", taxemail='" + taxemail + '\'' +
-                ", postnumber='" + postnumber + '\'' +
-                ", address='" + address + '\'' +
-                ", detailaddress='" + detailaddress + '\'' +
-                ", businesscondition='" + businesscondition + '\'' +
-                ", businesskind='" + businesskind + '\'' +
-                ", settlementmeans='" + settlementmeans + '\'' +
-                ", baseamount=" + baseamount +
-                ", customer_uid='" + customer_uid + '\'' +
-                ", next_pay_date=" + next_pay_date +
-                ", paid_amount=" + paid_amount +
-                ", createdAt=" + createdAt +
-                ", updatedBy='" + updatedBy + '\'' +
-                ", updatedAt=" + updatedAt +
-                '}';
-    }
 }

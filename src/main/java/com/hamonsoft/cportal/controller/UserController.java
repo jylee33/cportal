@@ -2,7 +2,6 @@ package com.hamonsoft.cportal.controller;
 
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.domain.MemberLicense;
-import com.hamonsoft.cportal.domain.MemberTaxInformation;
 import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.ResponseDTO;
 import com.hamonsoft.cportal.dto.ResultDto;

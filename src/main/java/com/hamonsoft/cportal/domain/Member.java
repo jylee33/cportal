@@ -1,11 +1,13 @@
 package com.hamonsoft.cportal.domain;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Data
+@ToString
 public class Member {
 
     private String memberid;
@@ -51,34 +53,4 @@ public class Member {
         this.memberUseTaxVO = memberUseTaxVO;
     }
 
-    @Override
-    public String toString() {
-        return "Member{" +
-                "memberid='" + memberid + '\'' +
-                ", email='" + email + '\'' +
-                ", membername='" + membername + '\'' +
-                ", grpname='" + grpname + '\'' +
-                ", celltel='" + celltel + '\'' +
-                ", password='" + password + '\'' +
-                ", businessname='" + businessname + '\'' +
-                ", businessnumber='" + businessnumber + '\'' +
-                ", prelicensegrade=" + prelicensegrade +
-                ", licensegrade=" + licensegrade +
-                ", credit=" + credit +
-                ", companyphone='" + companyphone + '\'' +
-                ", administratoryn='" + administratoryn + '\'' +
-                ", emailcertificationyn=" + emailcertificationyn +
-                ", withdrawalyn='" + withdrawalyn + '\'' +
-                ", withdrawaldate='" + withdrawaldate + '\'' +
-                ", joindate='" + joindate + '\'' +
-                ", hostname='" + hostname + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedBy='" + updatedBy + '\'' +
-                ", serverdomainname='" + serverdomainname + '\'' +
-                ", updatedAt=" + updatedAt +
-                ", memberLicenseVO=" + memberLicenseVO +
-                ", memberUseTaxVO=" + memberUseTaxVO +
-                ", access_token='" + access_token + '\'' +
-                '}';
-    }
 }

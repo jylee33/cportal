@@ -8,6 +8,7 @@ import com.hamonsoft.cportal.domain.MemberLicense;
 import com.hamonsoft.cportal.domain.TaxInformation;
 import com.hamonsoft.cportal.dto.*;
 import com.hamonsoft.cportal.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
 
+@RequiredArgsConstructor
 @Service
 //@Transactional
 public class MemberService {
@@ -33,13 +35,15 @@ public class MemberService {
     @Value("${rest.url}")
     String restURL;
 
-    MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
     private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
 
-    @Autowired
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
+    // @RequiredArgsConstructor 를 사용함으로써 final 로 선언된 필드를 파라미터로 가지는 생성자가 자동으로 생성됨.
+    // 아래 @Autowired 를 사용해서 생성자 주입을 명시적으로 할 필요가 없음.
+//    @Autowired
+//    public MemberService(MemberRepository memberRepository) {
+//        this.memberRepository = memberRepository;
+//    }
 
     public String getTime() {
         return memberRepository.getTime();

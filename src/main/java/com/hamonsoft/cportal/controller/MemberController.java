@@ -8,6 +8,7 @@ import com.hamonsoft.cportal.dto.MemberLicenseDto;
 import com.hamonsoft.cportal.dto.ResultAuthDto;
 import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,18 +30,22 @@ import java.net.URLEncoder;
 import java.util.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/member")
 public class MemberController {
 
     private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
-    MemberService memberService;
+    private final MemberService memberService;
 
-    @Autowired
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
-    }
+    // @RequiredArgsConstructor 를 사용함으로써 final 로 선언된 필드를 파라미터로 가지는 생성자가 자동으로 생성됨.
+    // 아래 @Autowired 를 사용해서 생성자 주입을 명시적으로 할 필요가 없음.
+//    @Autowired
+//    public MemberController(MemberService memberService) {
+//        this.memberService = memberService;
+//    }
 
     @GetMapping(value = "")
     public void member(Model model) {

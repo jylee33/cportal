@@ -112,7 +112,7 @@
                         </div>
                     </c:if>
                     <c:if test="${empty login}">
-                        <a href="#">서비스안내</a>
+                        <a href="${path}/serviceguide">서비스안내</a>
                         <a href="${path}/member/login">로그인</a>
                         <a href="${path}/member/insertMember">회원 가입</a>
                     </c:if>

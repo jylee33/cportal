@@ -280,16 +280,17 @@
                                     </tr>
                                     <tr>
                                         <th colspan="3">회원접속도메인</th>
-                                        <td colspan="2" id=serverdomainname class="text-center">
-                                            <input type="text" class="inp small" style="text-align:center; width:100%"  name="hostname" value="${userInfo.hostname}">
-                                        </td>
+                                        <td colspan="2" id=hostname class="text-center">${userInfo.hostname}</td>>
+                                    </tr>
+                                    <tr>
+                                           <input type="hidden" name="preservicevolume" value="${userInfo.preservicevolume}">
+                                           <input type="hidden" name="preaddvolume" value="${userInfo.preaddvolume}">
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="bottom-btns">
                                 <button class="btn" id="userInfoSave">저장</button>
-                                <%--                                <button userInfoSave class="btn">저장</button>--%>
                             </div>
                         </div>
                         <div class="col4" style="width: 25%; color:#8B0000;">
@@ -442,7 +443,7 @@
                                         <td id=t_strissuedate class="text-center" style="color:#8B0000;font: 17px">${tax.strissuedate}</td>
                                         <td id=t_issueamount class="text-center" style="color:#8B0000;font: 17px">${tax.format_issueamount}</td>
                                         <td id=t_settlementmeans class="text-center" style="color:#8B0000;font: 17px">${tax.settlementmeans}</td>
-                                        <td id=t_strsettlementdt class="text-center" style="color:#8B0000;font: 17px">${tax.strsettlementdt}</td>
+                                        <td id=t_strsettlementdt class="text-center" style="color:#8B0000;font: 17px"><input type="text" maxlength="8"  value=${tax.strsettlementdt}</td>
                                         <td id=t_customer_uid class="text-center" style="color:#8B0000;font: 17px">${tax.customer_uid}</td>
                                         <td id=t_imp_uid class="text-center" style="color:#8B0000;font: 17px">${tax.imp_uid}</td>
                                         <td id=t_arrearsyn class="text-center" style="color:#8B0000;font: 17px">${tax.arrearsyn}</td>
@@ -495,7 +496,9 @@
             "addcharge": $('input[name=addcharge]').val(),
             "datakeepterm": $('input[name=datakeepterm]').val(),
             "datakeepunit": $('select[name=datakeepunit]').val(),
-            "serverdomainname": $('input[name=serverdomainname]').val()
+            "hostname": '${userInfo.hostname}',
+            "datakeepterm": $('input[name=preservicevolume]').val(),
+            "datakeepterm": $('input[name=preaddvolume]').val()
         };
 
         $.ajax({

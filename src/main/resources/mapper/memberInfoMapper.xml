@@ -45,8 +45,10 @@
             ,j01.basevolume + j01.servicevolume + j01.addvolume totalsoluble
             ,j01.basevolume
             ,j01.basecharge
-            ,j01.servicevolume
-            ,j01.addvolume
+            ,ifnull(j01.servicevolume,0)  servicevolume          -- 서비스장비수량
+            ,ifnull(j01.addvolume,0)       addvolume              -- 추가장비수량
+            ,ifnull(j01.servicevolume,0)   preservicevolume    -- 이전서비스장비수량
+            ,ifnull(j01.addvolume,0)       preaddvolume    -- 이전추가장비수량
             ,j01.addcharge
             ,j02.postnumber
             ,j02.address
@@ -177,8 +179,10 @@
              ,j01.basevolume + IFNULL(j01.servicevolume,0) + IFNULL(j01.addvolume,0) totalsoluble -- 전체가용장비
              ,j01.basevolume            -- 기본장비수량
              ,j01.basecharge            -- 기본요금(라이센스요금)
-             ,j01.servicevolume         -- 서비스장비수량
-             ,j01.addvolume             -- 추가장비수량
+            ,ifnull(j01.servicevolume,0)  servicevolume          -- 서비스장비수량
+            ,ifnull(j01.addvolume,0)       addvolume              -- 추가장비수량
+            ,ifnull(j01.servicevolume,0)   preservicevolume    -- 이전서비스장비수량
+            ,ifnull(j01.addvolume,0)       preaddvolume    -- 이전추가장비수량
              ,j01.addcharge             -- 추가라이센스요금
              ,j01.basecharge + IFNULL(j01.addcharge,0) totcharge  -- 라이센스합계금액
              ,j02.representationname
@@ -306,7 +310,7 @@
             ,str_to_date(j01.settlementdt,'%Y%m%d') strsettlementdt
             ,IFNULL(j01.settlementdt,'')            settlementdt
             ,case when j01.issuedate >= date_format(DATE_ADD(curdate(), interval -15 day), '%Y%m%d') then '' else '체납' end arrearsyn
-             ,j01.settlementmeans
+             ,IFNULL(j01.settlementmeans,'')  settlementmeans
              ,j02.representationname    -- 대표자
              ,j02.businesskind          -- 업태
              ,j02.businesscondition     -- 업종
@@ -427,7 +431,7 @@
         ,IFNULL(j01.imp_uid,'')               imp_uid
         ,str_to_date(j01.settlementdt,'%Y%m%d') strsettlementdt
         ,IFNULL(j01.settlementdt,'')            settlementdt
-        ,j01.settlementmeans
+        ,IFNULL(j01.settlementmeans,'')  settlementmeans
         ,j02.representationname    -- 대표자
         ,j02.businesskind          -- 업태
         ,j02.businesscondition     -- 업종
@@ -502,13 +506,15 @@
         where emial = #{email}         <!-- netis 서버명 -->
     </select>
 
-    <!--  사용자 전체 건수  -->
+    <!--  사용자 전체 건수 usedeviceid is null 인 경우 회원 미등록 자료 -->
     <select id="jsonUseDeviceCount" resultType="String">
-        select IFNULL( max(usedeviceid), uuid()) usedeviceid
-        from tbusedevice            a01
+        select case when a01.email is not null then IFNULL(max(usedeviceid), uuid()) else null end usedeviceid
+        from tbmember a01
+        join tbusedevice a02
+        on a01.email = a02.userid
+        and a02.useday = date_format(curdate(),'%Y%m%d')
         where 1 = 1
-          and a01.userid = #{userid}
-          and a01.useday = date_format(curdate(),'%Y%m%d')
+        and a01.email = #{userid}
     </select>
     <!--  사용자등록장비  -->
     <insert id="jsonUseDeviceInsert">

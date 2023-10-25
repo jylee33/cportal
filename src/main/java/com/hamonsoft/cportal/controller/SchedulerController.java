@@ -30,12 +30,12 @@ public class SchedulerController {
     //@Scheduled(cron = "0 0 0 1/1 * *")
     //@Scheduled(cron = "0/5 * * * * *")
 
+//    @Scheduled(cron = "0 0 0 1/1 * *")
+//    public void deviceUseScheduler() throws Exception {
+//        String msgText = schedulerService.memberAllList();
+//        logger.info(msgText);
+//    }
     @Scheduled(cron = "0 0 0 1/1 * *")
-    public void deviceUseScheduler() throws Exception {
-        String msgText = schedulerService.memberAllList();
-        logger.info(msgText);
-    }
-    @Scheduled(cron="0/5 * * * * ?") //cron = "0 0 0 1/1 * *")
     public void allUseServiceInfo() throws Exception {
         String msgText = schedulerService.allUseServiceInfo();
         logger.info(msgText);

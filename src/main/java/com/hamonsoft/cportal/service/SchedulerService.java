@@ -178,51 +178,34 @@ public class SchedulerService {
                 if (dto.getTRAN_STATUS() != 1) {
                     throw new RuntimeException();
                 }
-                logger.info("resultDto----- memberLicenseInfo ---->"+dto.getTRAN_STATUS()+".."+dto.getERROR_CODE());
-                logger.info("DeviceUseAllDto----- DeviceUseAllDto ---->"+dto);
+                // logger.info("resultDto----- memberLicenseInfo ---->"+dto.getTRAN_STATUS()+".."+dto.getERROR_CODE());
+                // logger.info("DeviceUseAllDto----- DeviceUseAllDto ---->"+dto);
                 dto.getINFO()
-                        .stream()
-                        .forEach(d -> {
-                            JsonUseVolume jsonUseVolume = new JsonUseVolume();
-                            jsonUseVolume.setUserid(d.getUSER_ID());
-                            jsonUseVolume.setNmscount(d.getNMS_COUNT());
-                            jsonUseVolume.setSmscount(d.getSMS_COUNT());
-                            jsonUseVolume.setDbmscount(d.getDBMS_COUNT());
-                            jsonUseVolume.setApcount(d.getAP_COUNT());
-                            jsonUseVolume.setFmscount(d.getFMS_COUNT());
-                            jsonUseVolume.setInfo(d.toString());
-                            jsonUseVolume.setTranstatus(dto.getTRAN_STATUS());
-                            jsonUseVolume.setReason(dto.getREASON());
-                            try {
-                                String deviceUuid = memberinfoRepository.jsonUseDeviceCount(d.getUSER_ID());
-                                logger.info("deviceUuid --> "+deviceUuid+"   d.getUSER_ID()-->"+d.getUSER_ID());
-                                if(deviceUuid != null) {
-                                    jsonUseVolume.setUsedeviceid(deviceUuid);
-                                    memberinfoRepository.jsonUseDeviceInsert(jsonUseVolume);
-                                }
-                            } catch (Exception e) {
-                                throw new RuntimeException(e);
+                    .stream()
+                    .forEach(d -> {
+                        JsonUseVolume jsonUseVolume = new JsonUseVolume();
+                        jsonUseVolume.setUserid(d.getUSER_ID());
+                        jsonUseVolume.setNmscount(d.getNMS_COUNT());
+                        jsonUseVolume.setSmscount(d.getSMS_COUNT());
+                        jsonUseVolume.setDbmscount(d.getDBMS_COUNT());
+                        jsonUseVolume.setApcount(d.getAP_COUNT());
+                        jsonUseVolume.setFmscount(d.getFMS_COUNT());
+                        jsonUseVolume.setInfo(d.toString());
+                        jsonUseVolume.setTranstatus(dto.getTRAN_STATUS());
+                        jsonUseVolume.setReason(dto.getREASON());
+                        try {
+                            String deviceUuid = memberinfoRepository.jsonUseDeviceCount(d.getUSER_ID());
+                            // logger.info("deviceUuid --> "+deviceUuid+"   d.getUSER_ID()-->"+d.getUSER_ID());
+                            if(deviceUuid != null) {
+                                jsonUseVolume.setUsedeviceid(deviceUuid);
+                                memberinfoRepository.jsonUseDeviceInsert(jsonUseVolume);
                             }
-                            logger.info("dto.getTRAN_STATUS() - " + dto.getTRAN_STATUS()+"..........."+d.getUSER_ID());
-                        });
-    //            if (dto.getTRAN_STATUS() != 1) {
-    //                logger.info("MemberInfoServiceImpl memberLicenseInfo ---->"+email+".."+dto.getERROR_CODE());
-    //                throw new RuntimeException();
-    //            }
-    //            logger.info("MemberInfoServiceImpl memberLicenseInfo ---->"+dto.toString());
-    //            JsonUseVolume jsonUseVolume = new JsonUseVolume();
-    //
-    //            jsonUseVolume.setUserid(dto.getINFO().getUSER_ID());
-    //            jsonUseVolume.setNmscount(dto.getINFO().getNMS_COUNT());
-    //            jsonUseVolume.setSmscount(dto.getINFO().getSMS_COUNT());
-    //            jsonUseVolume.setDbmscount(dto.getINFO().getDBMS_COUNT());
-    //            jsonUseVolume.setApcount(dto.getINFO().getAP_COUNT());
-    //            jsonUseVolume.setFmscount(dto.getINFO().getFMS_COUNT());
-    //            jsonUseVolume.setInfo(dto.getINFO().toString());
-    //            jsonUseVolume.setTranstatus(dto.getTRAN_STATUS());
-    //            jsonUseVolume.setReason(dto.getREASON());
-    //            jsonUseVolume.setUsedeviceid(memberinfoRepository.jsonUseDeviceCount(email));
-    //            memberinfoRepository.jsonUseDeviceInsert(jsonUseVolume);
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                        // logger.info("dto.getTRAN_STATUS() - " + dto.getTRAN_STATUS()+"..........."+d.getUSER_ID());
+                    });
+
             }
         } catch (JsonProcessingException e) {
             e.printStackTrace();

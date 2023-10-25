@@ -2,6 +2,7 @@ package com.hamonsoft.cportal.controller;
 
 import com.hamonsoft.cportal.domain.Member;
 import com.hamonsoft.cportal.dto.MemberLicenseDto;
+import com.hamonsoft.cportal.dto.ResultDto;
 import com.hamonsoft.cportal.service.MemberInfoService;
 import com.hamonsoft.cportal.utils.Pagination;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.net.URLEncoder;
 import java.util.*;
 
 @RestController
@@ -220,7 +222,7 @@ public class MemberInfoController {
     public void MemberInfoPostSave(@RequestBody MemberLicenseDto memberLicenseDto) throws Exception {
         logger.info("memberLicenseDto --> "+memberLicenseDto);
 
-        memberinfoService.licenseUpdate(memberLicenseDto);
+        ResultDto resultDto = memberinfoService.licenseUpdate(memberLicenseDto);
 
         memberinfoService.memberUpdate(memberLicenseDto);
        // licenseUpdate

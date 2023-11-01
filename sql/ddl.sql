@@ -261,3 +261,67 @@ alter table tbmemberusehistory modify column   apvolume tinyint(3) unsigned  NUL
 alter table tbmemberusehistory modify column   dbmsvolume tinyint(3) unsigned  NULL COMMENT '데이터장비수량';
 alter table tbmemberusehistory modify column   fmsvolume tinyint(3) unsigned  NULL COMMENT '시설장비수량';
 alter table tbmemberusehistory modify column   totalcharge int(8) unsigned NULL  COMMENT '전체사용금액';
+
+
+-- 2023.11.01 수정
+alter table tbmemberlicensehistory modify column   stdate varchar(8) NOT NULL DEFAULT date_format(curdate(),'%Y%m%d') COMMENT '시작일자';
+alter table tbmemberlicensehistory modify column   eddate varchar(8) NOT NULL DEFAULT '21991231' COMMENT '만료일';
+ALTER TABLE tbmemberlicensehistory ADD COLUMN modifycontent VARCHAR(100) null COMMENT '라이센스변경내용' AFTER eddate;;
+
+----------------tgr_tbmemberlicense_insert -------------------
+CREATE DEFINER=`root`@`%` TRIGGER tgr_tbmemberlicense_insert
+AFTER insert
+ON tbmemberlicense FOR EACH row
+BEGIN
+	INSERT INTO tbmemberlicensehistory( -- tbmemberlicensehistory 테이블 각 컬럼에 데이터를 추가해주겠다
+	       licenseid        ,email            ,prelicensegrade  ,licensegrade     ,datakeepterm     ,
+	       datakeepunit     ,basevolume       ,basecharge       ,servicevolume    ,addvolume        ,
+	       addcharge        ,modifycontent    ,updatedBy                                            )
+	select uuid()           ,a01.email        ,''               ,a01.licensegrade ,a01.datakeepterm ,
+	       a01.datakeepunit ,a01.basevolume   ,a01.basecharge   ,a01.servicevolume,a01.addvolume    ,
+	       a01.addcharge    ,'신규가입'          ,a01.email
+      from tbmemberlicense a01
+     where a01.email = new.userid ;
+END
+------------------tgr_tbmemberlicense_update ------------
+CREATE DEFINER=`root`@`%` TRIGGER tgr_tbmemberlicense_update
+AFTER update
+ON tbmemberlicense FOR EACH ROW
+begin
+
+	DECLARE MODIFY_CONTENT VARCHAR(100) default '';
+	DECLARE MODIFYFG       VARCHAR(001) default '';
+
+	if NEW.licensegrade != OLD.licensegrade then
+	   set MODIFY_CONTENT = concat('라이센스 등급변경(',OLD.licensegrade,'->',NEW.licensegrade,')');
+	end IF;
+
+
+    if LENGTH(MODIFY_CONTENT) >= 1 then
+       set MODIFYFG = ',';
+    end if;
+
+    if NEW.addvolume != OLD.addvolume then
+	   set MODIFY_CONTENT = concat(MODIFY_CONTENT,MODIFYFG,'장비추가');
+	end IF;
+
+    if LENGTH(MODIFY_CONTENT) = 0 then
+       set MODIFYFG = '';
+    else
+       set MODIFYFG = ',';
+    end if;
+
+	if NEW.servicevolume != OLD.servicevolume then
+	   set MODIFY_CONTENT = concat(MODIFY_CONTENT,MODIFYFG,'서비스장비');
+	end IF;
+
+	INSERT INTO tbmemberlicensehistory(
+	       licenseid        ,email            ,prelicensegrade  ,licensegrade     ,datakeepterm     ,
+	       datakeepunit     ,basevolume       ,basecharge       ,servicevolume    ,addvolume        ,
+	       addcharge        ,modifycontent    ,updatedBy                                            )
+	select uuid()           ,a01.email        ,old.licensegrade ,a01.licensegrade ,a01.datakeepterm ,
+	       a01.datakeepunit ,a01.basevolume   ,a01.basecharge   ,a01.servicevolume,a01.addvolume    ,
+	       a01.addcharge    ,MODIFY_CONTENT   ,a01.email
+      from tbmemberlicense a01
+     where a01.email = new.email ;
+END

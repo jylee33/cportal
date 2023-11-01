@@ -80,7 +80,7 @@ public class UserService {
 
                 userRepository.chggrade(member);
                 userRepository.chgLicenseGrade(member);
-                userRepository.insertMemberLicenseHistory(license);
+               // userRepository.insertMemberLicenseHistory(license);
 
                 Date dtCreated = userRepository.getUserCreatedDate(tax);
 

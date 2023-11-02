@@ -47,7 +47,8 @@ public class BillController {
         String reqUrl = request.getRequestURL().toString();
         String contextPath = request.getContextPath();
         String cpath = reqUrl.substring(0, reqUrl.indexOf(contextPath)) + contextPath;
-        String url = cpath + "/iamport/payall";
+        String port = String.valueOf(request.getServerPort());
+        String url = "http://localhost:" + port + "/" + cpath + "/iamport/payall";
         logger.info("url - " + url);
 
         // Header set

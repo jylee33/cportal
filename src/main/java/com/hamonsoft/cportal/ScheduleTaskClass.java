@@ -22,6 +22,9 @@ public class ScheduleTaskClass {
     @Value("${server.servlet.context-path:/portal}")
     String cpath;
 
+    @Value("${server.port:8080}")
+    String port;
+
     @Scheduled(cron = "0 30 9 * * ?") // 초, 분, 일, 월 - 매일 오전 9시 30분에 실행
     @Scheduled(cron = "0 30 17 * * ?") // 초, 분, 일, 월 - 매일 오후 5시 30분에 실행
 // @Scheduled(cron = "0 15 10 15 11 ?") // 11월 15일 오전 10시 15분에 실행
@@ -64,7 +67,8 @@ public class ScheduleTaskClass {
         // 아래는 POST 방식으로 전 멤버에 대해 pay 루틴을 타도록 한다.
         RestTemplate restTemplate = new RestTemplate();
         logger.info("cpath -------------- " + cpath);
-        String url = "http://localhost:8080/" + cpath + "/iamport/payall";
+        logger.info("port -------------- " + port);
+        String url = "http://localhost:" + port + "/" + cpath + "/iamport/payall";
         logger.info("url - " + url);
 
         // Header set

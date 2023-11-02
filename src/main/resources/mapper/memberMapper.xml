@@ -47,7 +47,7 @@
 
 	<insert id="insertMemberLicense" >
 		insert into tbmemberlicense (
-			email   , licensegrade   , datakeepterm   , datakeepunit   , basevolume   , addcharge , updatedBy)
+			email   , licensegrade   , datakeepterm   , datakeepunit   , basevolume   , basecharge , updatedBy)
 		select #{email}, #{licensegrade}
 			,case when commoncode = 1 then SUBSTRING_INDEX(freeaid , '일', 1)
 			when commoncode = 2 then SUBSTRING_INDEX(basicaid, '일', 1)

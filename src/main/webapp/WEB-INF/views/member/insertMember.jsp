@@ -540,6 +540,13 @@
             var grade = $("#licensegrade").val();
             var settlementmeans = $("#settlementmeans").val();
 
+            var membername = $("input[name='membername']").val();
+            var basecharge = $("input[name='basecharge']").val();
+            var addcharge = $("input[name='addcharge']").val();
+            var paid_amount = Number(basecharge) + Number(addcharge);
+            $("input[name='paid_amount']").val(paid_amount);
+            console.log("paid_amount", paid_amount);
+
             if (grade != "1" && settlementmeans == "card") {
                 alert('다음은 카드 등록을 위한 화면입니다.\n실제 결제는 이루어지지 않습니다.\n카드 정보는 따로 저장하지 않습니다.');
                 let IMP = window.IMP;
@@ -554,13 +561,6 @@
                 }).done(function (auth) {
                     console.log("getauth result ---------------");
                     console.log(auth);
-
-                    var membername = $("input[name='membername']").val();
-                    var basecharge = $("input[name='basecharge']").val();
-                    var addcharge = $("input[name='addcharge']").val();
-                    var paid_amount = Number(basecharge) + Number(addcharge);
-                    $("input[name='paid_amount']").val(paid_amount);
-                    console.log("paid_amount", paid_amount);
 
                     IMP.request_pay({
                         pg: "html5_inicis.INIBillTst",

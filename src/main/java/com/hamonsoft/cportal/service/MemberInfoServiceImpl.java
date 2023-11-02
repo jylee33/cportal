@@ -118,6 +118,13 @@ public class MemberInfoServiceImpl implements MemberInfoService {
     public List<Map<String, Object>> memberTaxInfo(String email) throws Exception{
         return memberinfoRepository.memberTaxList(email);
     };
+    public List<Map<String, Object>> licenseHistoryInfo(String email) throws Exception{
+        return memberinfoRepository.licenseHistoryList(email);
+    };
+
+    public List<Map<String, Object>> memberHistoryInfo(String email) throws Exception{
+        return memberinfoRepository.memberHistoryList(email);
+    };
 
     public ResultDto licenseUpdate(MemberLicenseDto memberLicenseDto) throws Exception{
         ResultDto resultDto = new ResultDto();

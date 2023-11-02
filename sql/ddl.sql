@@ -325,3 +325,197 @@ begin
       from tbmemberlicense a01
      where a01.email = new.email ;
 END
+
+
+2023.11.02 추가
+-- netiscloud.tbmemberhistory definition
+
+CREATE TABLE `tbmemberhistory` (
+  `memberhistoryid` varchar(36) NOT NULL COMMENT '회원정보변경(uuid)',
+  `memberid` varchar(36) NOT NULL COMMENT '회원관리번호(uuid)',
+  `membername` varchar(50) NOT NULL COMMENT '회원명',
+  `grpname` varchar(50) NOT NULL DEFAULT '' COMMENT '그룹명',
+  `celltel` varchar(15) NOT NULL COMMENT '회원전화번호',
+  `password` varchar(128) NOT NULL COMMENT '비밀번호(단방향:sha-256,sha-512)',
+  `businessname` varchar(100) NOT NULL COMMENT '사업장명',
+  `businessnumber` varchar(10) NOT NULL COMMENT '사업자등록번호',
+  `companyphone` varchar(15) NOT NULL COMMENT '사업장전화번호',
+  `companyname` varchar(50) DEFAULT NULL COMMENT '법인(회사)명',
+  `representationname` varchar(50) NOT NULL COMMENT '대표자명',
+  `taxcompanynumber` varchar(10) NOT NULL COMMENT '계산서발행용사업자등록번호',
+  `taxemail` varchar(50) NOT NULL COMMENT '세금계산서발송기관메일',
+  `postnumber` varchar(5) NOT NULL COMMENT '우편번호',
+  `address` varchar(100) NOT NULL COMMENT '주소',
+  `detailaddress` varchar(100) NOT NULL COMMENT '상세주소',
+  `businesscondition` varchar(50) NOT NULL COMMENT '업태',
+  `businesskind` varchar(50) NOT NULL COMMENT '업종',
+  `settlementmeans` varchar(6) DEFAULT NULL COMMENT '결제수단',
+  `modifycontent` varchar(500) NOT NULL COMMENT '변경내용',
+  `updateflag` varchar(1) NOT NULL DEFAULT 'Y' COMMENT 'update여부',
+  `createdAt` datetime NOT NULL DEFAULT current_timestamp() COMMENT '등록일시',
+  PRIMARY KEY (`memberhistoryid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='사용자 정보 변경 내역';
+
+
+CREATE DEFINER=`root`@`%` TRIGGER tbmember_after_insert
+AFTER INSERT
+ON tbmember FOR EACH row
+begin
+	INSERT INTO tbmemberhistory(
+	       memberhistoryid      ,memberid             ,membername           ,grpname              ,celltel
+          ,password             ,businessname         ,businessnumber       ,companyphone         ,modifycontent      )
+	values(uuid()               ,new.memberid         ,new.membername       ,new.grpname          ,new.celltel
+          ,new.password         ,new.businessname     ,new.businessnumber   ,new.companyphone     ,'신규가입'             );
+END
+
+
+CREATE DEFINER=`root`@`%` TRIGGER tbmember_after_update
+AFTER update
+ON tbmember FOR EACH row
+begin
+
+	DECLARE MODIFY_CONTENT VARCHAR(100) default '';
+	DECLARE MODIFYFG       VARCHAR(001) default '';
+
+    update tbmemberhistory
+       set updateflag = 'N'
+     where memberid = new.memberid
+       and updateflag = 'Y';
+
+	if NEW.membername != OLD.membername then
+	   set MODIFY_CONTENT = concat('사용자 이릅');
+       set MODIFYFG = ',';
+	end IF;
+
+    if NEW.celltel != OLD.celltel then
+	   set MODIFY_CONTENT = concat(MODIFY_CONTENT,MODIFYFG,'핸드폰번호');
+       set MODIFYFG = ',';
+	end IF;
+
+    if NEW.businessname != OLD.businessname then
+	   set MODIFY_CONTENT = concat(MODIFY_CONTENT,MODIFYFG,'사업장명');
+       set MODIFYFG = ',';
+	end IF;
+
+    if NEW.businessnumber != OLD.businessnumber then
+	   set MODIFY_CONTENT = concat(MODIFY_CONTENT,MODIFYFG,'사업자등록번호');
+       set MODIFYFG = ',';
+	end IF;
+
+    if NEW.companyphone != OLD.companyphone then
+	   set MODIFY_CONTENT = concat(MODIFY_CONTENT,MODIFYFG,'사업장전화번호');
+	end IF;
+
+    if length(MODIFY_CONTENT) >= 1 then
+	    INSERT INTO tbmemberhistory(
+		       memberhistoryid      ,memberid             ,membername           ,grpname              ,celltel
+	          ,password             ,businessname         ,businessnumber       ,companyphone         ,modifycontent      )
+		values(uuid()               ,new.memberid         ,new.membername       ,new.grpname          ,new.celltel
+	          ,new.password         ,new.businessname     ,new.businessnumber   ,new.companyphone     ,MODIFY_CONTENT     );
+    end if;
+END
+
+
+CREATE DEFINER=`root`@`localhost` TRIGGER `tbtaxinformation_after_insert`
+AFTER INSERT
+ON tbtaxinformation FOR EACH ROW
+begin
+	insert into tbmemberhistory(
+	       memberhistoryid      ,memberid             ,membername           ,grpname              ,celltel
+          ,password             ,businessname         ,businessnumber       ,companyphone         ,modifycontent
+          ,companyname          ,representationname   ,taxcompanynumber     ,taxemail             ,postnumber
+          ,address              ,detailaddress        ,businesscondition    ,businesskind         ,settlementmeans  )
+    select ifnull(j01.memberhistoryid,uuid()),a01.memberid,a01.membername   ,a01.grpname          ,a01.celltel
+          ,a01.password         ,a01.businessname     ,a01.businessnumber   ,companyphone         ,'신규가입'
+          ,new.companyname      ,new.representationname,new.taxcompanynumber,new.taxemail         ,new.postnumber
+          ,new.address          ,new.detailaddress    ,new.businesscondition,new.businesskind     ,new.settlementmeans
+      from tbmember a01
+           left join tbmemberhistory j01
+                  on a01.memberid = j01.memberid
+                 and j01.updateflag = 'Y'
+     where a01.email = new.email
+    ON DUPLICATE KEY UPDATE
+           companyname = new.companyname
+          ,representationname = new.representationname
+          ,taxcompanynumber   = new.taxcompanynumber
+          ,taxemail           = new.taxemail
+          ,postnumber         = new.postnumber
+          ,address            = new.address
+          ,detailaddress      = new.detailaddress
+          ,businesscondition  = new.businesscondition
+          ,businesskind       = new.businesskind
+          ,settlementmeans    = new.settlementmeans
+          ,updateflag         = 'N';
+END
+
+
+
+CREATE DEFINER=`root`@`localhost` TRIGGER `tbtaxinformation_after_update`
+AFTER update
+ON tbtaxinformation FOR EACH ROW
+begin
+
+	DECLARE MODIFY_CONTENT VARCHAR(500) default '';
+	DECLARE MODIFYFG       VARCHAR(001) default '';
+
+	if NEW.companyname != OLD.companyname then
+	   set MODIFY_CONTENT = concat('사업체명');
+       set MODIFYFG = ',';
+	end IF;
+
+    if NEW.representationname != OLD.representationname then
+	   set MODIFY_CONTENT = concat(MODIFY_CONTENT,MODIFYFG,'대표자명');
+       set MODIFYFG = ',';
+	end IF;
+
+    if NEW.taxcompanynumber != OLD.taxcompanynumber then
+	   set MODIFY_CONTENT = concat(MODIFY_CONTENT,MODIFYFG,'사업자등록번호');
+       set MODIFYFG = ',';
+	end IF;
+
+    if NEW.taxemail != OLD.taxemail then
+	   set MODIFY_CONTENT = concat(MODIFY_CONTENT,MODIFYFG,'발송기관메일');
+       set MODIFYFG = ',';
+	end IF;
+
+    if NEW.postnumber != OLD.postnumber then
+	   set MODIFY_CONTENT = concat(MODIFY_CONTENT,MODIFYFG,'주소');
+       set MODIFYFG = ',';
+    elseif NEW.address != OLD.address then
+	   set MODIFY_CONTENT = concat(MODIFY_CONTENT,MODIFYFG,'주소');
+       set MODIFYFG = ',';
+    elseif NEW.detailaddress != OLD.detailaddress then
+	   set MODIFY_CONTENT = concat(MODIFY_CONTENT,MODIFYFG,'상세주소');
+       set MODIFYFG = ',';
+	end IF;
+
+    if length(MODIFY_CONTENT) >= 1 then
+		insert into tbmemberhistory(
+		       memberhistoryid      ,memberid             ,membername           ,grpname              ,celltel
+	          ,password             ,businessname         ,businessnumber       ,companyphone         ,modifycontent
+	          ,companyname          ,representationname   ,taxcompanynumber     ,taxemail             ,postnumber
+	          ,address              ,detailaddress        ,businesscondition    ,businesskind         ,settlementmeans  ,updateflag)
+	    select ifnull(j01.memberhistoryid,uuid()),a01.memberid,a01.membername   ,a01.grpname          ,a01.celltel
+	          ,a01.password         ,a01.businessname     ,a01.businessnumber   ,a01.companyphone     ,concat(MODIFY_CONTENT,' 변경')
+	          ,new.companyname      ,new.representationname,new.taxcompanynumber,new.taxemail         ,new.postnumber
+	          ,new.address          ,new.detailaddress    ,new.businesscondition,new.businesskind     ,new.settlementmeans,'N'
+	      from tbmember a01
+	           left join tbmemberhistory j01
+	                  on a01.memberid = j01.memberid
+	                 and j01.updateflag = 'Y'
+	     where a01.email = new.email
+	    ON DUPLICATE KEY UPDATE
+	           companyname = new.companyname
+	          ,representationname = new.representationname
+	          ,taxcompanynumber   = new.taxcompanynumber
+	          ,taxemail           = new.taxemail
+	          ,postnumber         = new.postnumber
+	          ,address            = new.address
+	          ,detailaddress      = new.detailaddress
+	          ,businesscondition  = new.businesscondition
+	          ,businesskind       = new.businesskind
+	          ,settlementmeans    = new.settlementmeans
+	          ,updateflag         = 'N';
+    end if;
+END
+

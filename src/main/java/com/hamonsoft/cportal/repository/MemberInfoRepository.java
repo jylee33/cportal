@@ -29,6 +29,10 @@ public interface MemberInfoRepository {
     public List<Map<String, Object>> memberTaxList(String email) throws Exception;
 
 
+    public List<Map<String, Object>> licenseHistoryList(String email) throws Exception;
+
+    public List<Map<String, Object>> memberHistoryList(String email) throws Exception;
+
     public List<Map<String, Object>> memberChargePageList(Pagination pagination) throws Exception;
 
     public List<Map<String, Object>> memberTaxPageList(Pagination pagination) throws Exception;

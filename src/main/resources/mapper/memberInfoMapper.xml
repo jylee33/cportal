@@ -334,6 +334,102 @@
         order by j01.issuedate DESC, j01.createdAt desc
     </select>
 
+    <!--  회원정보 변경이력  -->
+    <select id="memberHistoryList" resultType="hashmap">
+        select a01.memberid
+        ,a01.membername          -- 회원명
+        ,a01.email                 -- 이메일
+        ,a01.licensegrade          -- 라이센스등급
+        ,j11.codename licensegradenm
+        ,j01.memberhistoryid
+        ,j01.memberid
+        ,j01.membername
+        ,j01.grpname
+        ,j01.celltel
+        ,j01.password
+        ,j01.businessname
+        ,j01.businessnumber
+        ,j01.companyphone
+        ,j01.companyname
+        ,j01.representationname
+        ,j01.taxcompanynumber
+        ,j01.taxemail
+        ,j01.postnumber
+        ,j01.address
+        ,j01.detailaddress
+        ,j01.businesscondition
+        ,j01.businesskind
+        ,j01.settlementmeans
+        ,j12.codename settlementmeansnm
+        ,j01.modifycontent
+        ,j01.updateflag
+        ,j01.createdAt
+        ,DATE_FORMAT(j01.createdAt, '%Y-%m-%d %H:%i:%s') format_createdAt
+        ,row_number() over(order by j01.createdAt desc) AS rownum
+        from tbmember                   a01
+        left  join tbcommoncode j11 on j11.groupcode = '001' and j11.commoncode = a01.licensegrade
+        inner join tbmemberhistory  j01
+        left  join tbcommoncode j12 on j12.groupcode = '009' and j12.commoncode = j01.settlementmeans
+        on a01.memberid = j01.memberid
+        left  join tbcommoncode       j04
+        on j04.groupcode = '100'
+        and j04.commoncode = a01.hostname
+        where 1 = 1
+        and a01.email = #{searchName}
+        and a01.withdrawalyn != '1'
+    </select>
+    <!--  라이센스변경이력  -->
+    <select id="licenseHistoryList" resultType="hashmap">
+        select a01.memberid
+        ,a01.membername          -- 회원명
+        ,a01.email                 -- 이메일
+        ,a01.licensegrade          -- 라이센스등급
+        ,a01.celltel               -- 회원전화번호
+        ,a01.businessname          -- 사업장명
+        ,a01.businessnumber        -- 사업자등록번호
+        ,j02.representationname    -- 대표자
+        ,concat(substring(a01.businessnumber,1,3),'-',substring(a01.businessnumber,4,2),'-',substring(a01.businessnumber,6,5)) strbusinessnumber
+        ,a01.joindate              -- 가입일자
+        ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
+        ,a01.hostname
+        ,j04.codename hostip
+        ,a01.serverdomainname
+        ,case when a01.withdrawalyn = '0' then '회원' when a01.withdrawalyn = '1' then '탈퇴' else '중지' end statusnm
+        ,j01.licenseid
+        ,j01.prelicensegrade
+        ,j11.codename prelicensegradenm
+        ,j01.licensegrade licensegrade2
+        ,j12.codename licensegradenm
+        ,concat(j01.datakeepterm,'(',j13.codename,')') datakeepterm
+        ,j01.datakeepunit
+        ,j01.basevolume
+        ,j01.basecharge
+        ,FORMAT(j01.basecharge, 0) format_basecharge
+        ,j01.servicevolume
+        ,j01.addvolume
+        ,j01.addcharge
+        ,FORMAT(j01.addcharge, 0) format_addcharge
+        ,j01.modifycontent
+        ,j01.createdAt
+        ,DATE_FORMAT(j01.createdAt, '%Y-%m-%d %H:%i:%s') format_createdAt
+        ,j01.stdate
+        ,row_number() over(order by j01.stdate DESC, j01.createdAt desc) AS rownum
+        from tbmember                    a01
+            inner join tbmemberlicensehistory  j01
+                left  join tbcommoncode j11 on j11.groupcode = '001' and j11.commoncode = j01.prelicensegrade
+                left  join tbcommoncode j12 on j12.groupcode = '001' and j12.commoncode = j01.licensegrade
+                left  join tbcommoncode j13 on j13.groupcode = '008' and j13.commoncode = j01.datakeepunit
+              on a01.email = j01.email
+            inner  join tbtaxinformation   j02
+            on a01.email = j02.email
+           left  join tbcommoncode       j04
+              on j04.groupcode = '100'
+             and j04.commoncode = a01.hostname
+        where 1 = 1
+        and a01.email = #{searchName}
+        and a01.withdrawalyn != '1'
+        order by j01.stdate DESC, j01.createdAt desc
+    </select>
 
     <!--  과금내역 정보 조회  paging구현-->
     <select id="memberChargePageList" resultType="hashmap">
@@ -459,7 +555,58 @@
         order by a.issuedate DESC, a.createdAt desc
     </select>
 
-
+    <!--  라이센스변경이력  paging구현 -->
+    <select id="licenseHistoryPageList" resultType="hashmap">
+        select a.*
+        from(
+        select a01.memberid
+        ,a01.membername          -- 회원명
+        ,a01.email                 -- 이메일
+        ,a01.licensegrade          -- 라이센스등급
+        ,a01.celltel               -- 회원전화번호
+        ,a01.businessname          -- 사업장명
+        ,a01.businessnumber        -- 사업자등록번호
+        ,concat(substring(a01.businessnumber,1,3),'-',substring(a01.businessnumber,4,2),'-',substring(a01.businessnumber,6,5)) strbusinessnumber
+        ,a01.joindate              -- 가입일자
+        ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
+        ,a01.hostname
+        ,j04.codename hostip
+        ,a01.serverdomainname
+        ,case when a01.withdrawalyn = '0' then '회원' when a01.withdrawalyn = '1' then '탈퇴' else '중지' end statusnm
+        ,j01.licenseid
+        ,j01.prelicensegrade
+        ,j11.codename prelicensegradenm
+        ,j01.licensegrade licensegrade2
+        ,j12.codename licensegradenm
+        ,concat(j01.datakeepterm,'(',j13.codename,')') datakeepterm
+        ,j01.datakeepunit
+        ,j01.basevolume
+        ,j01.basecharge
+        ,j01.servicevolume
+        ,j01.addvolume
+        ,j01.addcharge
+        ,j01.modifycontent
+        ,j01.createdAt
+        ,j01.stdate
+        ,row_number() over(order by j01.stdate DESC, j01.createdAt desc) AS rownum
+        from tbmember                    a01
+        inner join tbmemberlicensehistory  j01
+        left  join tbcommoncode j11 on j11.groupcode = '001' and j11.commoncode = j01.prelicensegrade
+        left  join tbcommoncode j12 on j12.groupcode = '001' and j12.commoncode = j01.licensegrade
+        left  join tbcommoncode j13 on j13.groupcode = '008' and j13.commoncode = j01.datakeepunit
+        on a01.email = j01.email
+        left  join tbcommoncode       j04
+        on j04.groupcode = '100'
+        and j04.commoncode = a01.hostname
+        where 1 = 1
+        and a01.email = #{searchName}
+        and a01.withdrawalyn != '1')  as a
+        where 1 = 1
+        <if test="firstRecordIndex !=null and lastRecordIndex != null">
+            and a.rownum BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
+        </if>
+        order by a.stdate DESC, a.createdAt desc
+    </select>
 
     <!--  과금내역, 세금계산서 건수  -->
     <select id="memberChargeAndTaxCount" resultType="hashmap">

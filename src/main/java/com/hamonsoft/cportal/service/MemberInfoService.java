@@ -25,6 +25,10 @@ public interface MemberInfoService {
 
     public int memberTaxCount(String email) throws Exception;  //회원 세금계산서 현황
 
+    public int memberHisCount(String email) throws Exception;  //회원 회원정보 변경이력
+
+    public int lienseHisCount(String email) throws Exception;  //회원 라이센스변경이력
+
     public List<Map<String, Object>> memberInfoList(Pagination pagination) throws Exception;
 
     //public List<Map<String, Object>> memberInfoList(String searchname) throws Exception;
@@ -35,6 +39,10 @@ public interface MemberInfoService {
     public List<Map<String, Object>> memberChargePageInfo(Pagination pagination) throws Exception;
 
     public List<Map<String, Object>> memberTaxPageInfo(Pagination pagination) throws Exception;
+
+    public List<Map<String, Object>> memberModifyPageInfo(Pagination pagination) throws Exception;
+
+    public List<Map<String, Object>> lienseModifyPageInfo(Pagination pagination) throws Exception;
 
     public List<Map<String, Object>> memberChargeInfo(String email) throws Exception;
 

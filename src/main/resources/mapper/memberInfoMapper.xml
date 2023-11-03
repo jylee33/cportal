@@ -309,6 +309,7 @@
             ,IFNULL(j01.imp_uid,'')               imp_uid
             ,str_to_date(j01.settlementdt,'%Y%m%d') strsettlementdt
             ,IFNULL(j01.settlementdt,'')            settlementdt
+            ,str_to_date(j01.settlementdt,'%Y%m%d') format_settlementdt
             ,case when j01.issuedate >= date_format(DATE_ADD(curdate(), interval -15 day), '%Y%m%d') then '' else '체납' end arrearsyn
              ,IFNULL(j01.settlementmeans,'')  settlementmeans
              ,j02.representationname    -- 대표자
@@ -324,6 +325,7 @@
                  inner join tbtaxinformation j02
                      inner join tbtaxhistory     j01
                                 on j02.taxid = j01.taxid
+                              and IFNULL(j01.issueamount,0) >= 1
                           on a01.email = j02.email
                 left  join tbcommoncode       j04
                 on j04.groupcode = '100'
@@ -337,47 +339,49 @@
     <!--  회원정보 변경이력  -->
     <select id="memberHistoryList" resultType="hashmap">
         select a01.memberid
-        ,a01.membername          -- 회원명
-        ,a01.email                 -- 이메일
-        ,a01.licensegrade          -- 라이센스등급
-        ,j11.codename licensegradenm
-        ,j01.memberhistoryid
-        ,j01.memberid
-        ,j01.membername
-        ,j01.grpname
-        ,j01.celltel
-        ,j01.password
-        ,j01.businessname
-        ,j01.businessnumber
-        ,j01.companyphone
-        ,j01.companyname
-        ,j01.representationname
-        ,j01.taxcompanynumber
-        ,j01.taxemail
-        ,j01.postnumber
-        ,j01.address
-        ,j01.detailaddress
-        ,j01.businesscondition
-        ,j01.businesskind
-        ,j01.settlementmeans
-        ,j12.codename settlementmeansnm
-        ,j01.modifycontent
-        ,j01.updateflag
-        ,j01.createdAt
-        ,DATE_FORMAT(j01.createdAt, '%Y-%m-%d %H:%i:%s') format_createdAt
-        ,row_number() over(order by j01.createdAt desc) AS rownum
+            ,a01.email                 -- 이메일
+            ,a01.licensegrade          -- 라이센스등급
+            ,j11.codename licensegradenm
+            ,j01.memberhistoryid
+            ,j01.membername
+            ,j01.grpname
+            ,REGEXP_REPLACE(replace(j01.celltel,'-',''), '(02|.{3})(.+)(.{4})', '\\1-\\2-\\3') celltel
+            ,j01.password
+            ,j01.businessname
+            ,j01.businessnumber
+            ,concat(substring(j01.businessnumber,1,3),'-',substring(j01.businessnumber,4,2),'-',substring(j01.businessnumber,6,5)) strbusinessnumber
+            ,REGEXP_REPLACE(replace(j01.companyphone,'-',''), '(02|.{3})(.+)(.{4})', '\\1-\\2-\\3') companyphone
+            ,j01.companyname
+            ,j01.representationname
+            ,j01.taxcompanynumber
+            ,concat(substring(j01.taxcompanynumber,1,3),'-',substring(j01.taxcompanynumber,4,2),'-',substring(j01.taxcompanynumber,6,5)) strtaxcompanynumber
+            ,j01.taxemail
+            ,j01.postnumber
+            ,j01.address
+            ,j01.detailaddress
+            ,concat(j01.postnumber,' ',j01.address,' ',j01.detailaddress) zipaddress
+            ,j01.businesscondition
+            ,j01.businesskind
+            ,j01.settlementmeans
+            ,j12.codename settlementmeansnm
+            ,j01.modifycontent
+            ,j01.updateflag
+            ,j01.createdAt
+            ,DATE_FORMAT(j01.createdAt, '%Y-%m-%d %H:%i:%s') format_createdAt
+            ,row_number() over(order by j01.createdAt desc) AS rownum
         from tbmember                   a01
-        left  join tbcommoncode j11 on j11.groupcode = '001' and j11.commoncode = a01.licensegrade
-        inner join tbmemberhistory  j01
-        left  join tbcommoncode j12 on j12.groupcode = '009' and j12.commoncode = j01.settlementmeans
-        on a01.memberid = j01.memberid
-        left  join tbcommoncode       j04
-        on j04.groupcode = '100'
-        and j04.commoncode = a01.hostname
+            left  join tbcommoncode j11 on j11.groupcode = '001' and j11.commoncode = a01.licensegrade
+            inner join tbmemberhistory  j01
+            left  join tbcommoncode j12 on j12.groupcode = '009' and j12.commoncode = j01.settlementmeans
+            on a01.memberid = j01.memberid
+            left  join tbcommoncode       j04
+            on j04.groupcode = '100'
+            and j04.commoncode = a01.hostname
         where 1 = 1
         and a01.email = #{searchName}
         and a01.withdrawalyn != '1'
     </select>
+
     <!--  라이센스변경이력  -->
     <select id="licenseHistoryList" resultType="hashmap">
         select a01.memberid
@@ -433,7 +437,7 @@
 
     <!--  과금내역 정보 조회  paging구현-->
     <select id="memberChargePageList" resultType="hashmap">
-        select a.*
+        select a.*, case when unpaidcnt >= 1 then concat(a.unpaidcnt,'건 미납(',format(a.unpaidamt,0),'원)') else '' end unpaiddscr
         from(select a01.memberid
         ,a01.membername          -- 회원명
         ,a01.email                 -- 이메일
@@ -476,6 +480,8 @@
         ,IFNULL(j03.totalcharge,0)   totalcharge
         ,concat(substring(j03.useyym,1,4),'.',substring(j03.useyym,5,2)) struseyym
         ,round(IFNULL(j03.totalvolume,0) / (j01.basevolume + IFNULL(j01.servicevolume,0) + IFNULL(j01.addvolume,0)) * 100,2) userate
+        ,(select count(i01.taxhistoryid) from tbtaxhistory i01 where i01.taxid = j02.taxid and length(settlementdt) = 0) unpaidcnt
+        ,(select sum(i01.issueamount)    from tbtaxhistory i01 where i01.taxid = j02.taxid and length(settlementdt) = 0) unpaidamt
         ,row_number() over(order by j03.useyym DESC) AS rownum
         from tbmember                      a01
             inner join tbmemberlicense    j01
@@ -522,12 +528,14 @@
         ,FORMAT(j01.issueamount, 0) format_issueamount
         ,j01.issuedate             -- 발행일자
         ,str_to_date(j01.issuedate,'%Y%m%d') strissuedate
-        ,case when j01.issuedate >= date_format(DATE_ADD(curdate(), interval -15 day), '%Y%m%d') then '' else '체납' end arrearsyn
+        ,case when j01.settlementdt is not null then '' else '체납' end arrearsyn
         ,IFNULL(j01.customer_uid,'')          customer_uid
         ,IFNULL(j01.imp_uid,'')               imp_uid
         ,str_to_date(j01.settlementdt,'%Y%m%d') strsettlementdt
         ,IFNULL(j01.settlementdt,'')            settlementdt
+        ,str_to_date(j01.settlementdt,'%Y%m%d') format_settlementdt
         ,IFNULL(j01.settlementmeans,'')  settlementmeans
+        ,j12.codename settlementmeansnm
         ,j02.representationname    -- 대표자
         ,j02.businesskind          -- 업태
         ,j02.businesscondition     -- 업종
@@ -540,7 +548,9 @@
         from tbmember                    a01
              inner join tbtaxinformation j02
                      inner join tbtaxhistory     j01
+                                left  join tbcommoncode j12 on j12.groupcode = '009' and j12.commoncode = j01.settlementmeans
                            on j02.taxid = j01.taxid
+                          and IFNULL(j01.issueamount,0) >= 1
                       on a01.email = j02.email
              left  join tbcommoncode       j04
                       on j04.groupcode = '100'
@@ -555,8 +565,62 @@
         order by a.issuedate DESC, a.createdAt desc
     </select>
 
+
+    <!--  회원정보 변경이력  paging구현 -->
+    <select id="memberModifyPageList" resultType="hashmap">
+        select a.*
+        from(
+        select a01.memberid
+            ,a01.email                 -- 이메일
+            ,a01.licensegrade          -- 라이센스등급
+            ,j11.codename licensegradenm
+            ,j01.memberhistoryid
+            ,j01.membername
+            ,j01.grpname
+            ,REGEXP_REPLACE(replace(j01.celltel,'-',''), '(02|.{3})(.+)(.{4})', '\\1-\\2-\\3') celltel
+            ,j01.password
+            ,j01.businessname
+            ,j01.businessnumber
+            ,concat(substring(j01.businessnumber,1,3),'-',substring(j01.businessnumber,4,2),'-',substring(j01.businessnumber,6,5)) strbusinessnumber
+            ,REGEXP_REPLACE(replace(j01.companyphone,'-',''), '(02|.{3})(.+)(.{4})', '\\1-\\2-\\3') companyphone
+            ,j01.companyname
+            ,j01.representationname
+            ,j01.taxcompanynumber
+            ,concat(substring(j01.taxcompanynumber,1,3),'-',substring(j01.taxcompanynumber,4,2),'-',substring(j01.taxcompanynumber,6,5)) strtaxcompanynumber
+            ,j01.taxemail
+            ,j01.postnumber
+            ,j01.address
+            ,j01.detailaddress
+            ,concat(j01.postnumber,' ',j01.address,' ',j01.detailaddress) zipaddress
+            ,j01.businesscondition
+            ,j01.businesskind
+            ,j01.settlementmeans
+            ,j12.codename settlementmeansnm
+            ,j01.modifycontent
+            ,j01.updateflag
+            ,j01.createdAt
+            ,DATE_FORMAT(j01.createdAt, '%Y-%m-%d %H:%i:%s') format_createdAt
+            ,row_number() over(order by j01.createdAt desc) AS rownum
+        from tbmember                   a01
+            left  join tbcommoncode j11 on j11.groupcode = '001' and j11.commoncode = a01.licensegrade
+            inner join tbmemberhistory  j01
+            left  join tbcommoncode j12 on j12.groupcode = '009' and j12.commoncode = j01.settlementmeans
+            on a01.memberid = j01.memberid
+            left  join tbcommoncode       j04
+            on j04.groupcode = '100'
+            and j04.commoncode = a01.hostname
+        where 1 = 1
+        and a01.email = #{searchName}
+        and a01.withdrawalyn != '1')  as a
+        where 1 = 1
+        <if test="firstRecordIndex !=null and lastRecordIndex != null">
+            and a.rownum BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
+        </if>
+        order by a.createdAt desc
+    </select>
+
     <!--  라이센스변경이력  paging구현 -->
-    <select id="licenseHistoryPageList" resultType="hashmap">
+    <select id="lienseModifyPageList" resultType="hashmap">
         select a.*
         from(
         select a01.memberid
@@ -566,6 +630,7 @@
         ,a01.celltel               -- 회원전화번호
         ,a01.businessname          -- 사업장명
         ,a01.businessnumber        -- 사업자등록번호
+        ,j02.representationname    -- 대표자
         ,concat(substring(a01.businessnumber,1,3),'-',substring(a01.businessnumber,4,2),'-',substring(a01.businessnumber,6,5)) strbusinessnumber
         ,a01.joindate              -- 가입일자
         ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
@@ -582,11 +647,14 @@
         ,j01.datakeepunit
         ,j01.basevolume
         ,j01.basecharge
+        ,FORMAT(j01.basecharge, 0) format_basecharge
         ,j01.servicevolume
         ,j01.addvolume
         ,j01.addcharge
+        ,FORMAT(j01.addcharge, 0) format_addcharge
         ,j01.modifycontent
         ,j01.createdAt
+        ,DATE_FORMAT(j01.createdAt, '%Y-%m-%d %H:%i:%s') format_createdAt
         ,j01.stdate
         ,row_number() over(order by j01.stdate DESC, j01.createdAt desc) AS rownum
         from tbmember                    a01
@@ -595,6 +663,8 @@
         left  join tbcommoncode j12 on j12.groupcode = '001' and j12.commoncode = j01.licensegrade
         left  join tbcommoncode j13 on j13.groupcode = '008' and j13.commoncode = j01.datakeepunit
         on a01.email = j01.email
+        inner  join tbtaxinformation   j02
+        on a01.email = j02.email
         left  join tbcommoncode       j04
         on j04.groupcode = '100'
         and j04.commoncode = a01.hostname
@@ -626,6 +696,20 @@
         where taxid in (select taxid
         from tbtaxinformation
         where (email, createdAt) in (select email, max(createdAt) from tbtaxinformation where email = #{email}))         <!-- 세금계산서 건수 -->
+    </select>
+
+    <!--  회원 회원정보 변경이력  건수-->
+    <select id="memberModifyHisCount" resultType="int">
+        select count(memberhistoryid)
+        from tbmemberhistory a01
+             join tbmember   j01 on j01.memberid = a01.memberid and j01.email = #{email}  <!-- 회원 회원정보 변경이력 건수 -->
+    </select>
+
+    <!--  회원 라이센스변경이력 건수 -->
+    <select id="lienseModifyHisCount" resultType="int">
+        select count(licenseid)
+        from tbmemberlicensehistory
+        where email = #{email}        <!-- 회원 라이센스변경이력 건수 -->
     </select>
 
     <!-- 라이센스 수정  -->

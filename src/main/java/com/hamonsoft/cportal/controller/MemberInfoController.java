@@ -223,6 +223,22 @@ public class MemberInfoController {
         mav.addObject("taxInfo",memberinfoService.memberTaxPageInfo(pagination));
         logger.info("mav.getViewName() = mav.getViewName() --->" +mav.getViewName());
         logger.info("mav.getModelMap() = mav.getModelMap() --->" +mav.getModelMap());
+
+        listCnt = memberinfoService.memberHisCount(member.getEmail());
+        pagination = new Pagination(currentPage, cntPerPage, pageSize, member.getEmail());
+        pagination.setTotalRecordCount(listCnt);
+        mav.addObject("pagination3",pagination);
+        mav.addObject("memberhisInfo",memberinfoService.memberModifyPageInfo(pagination));
+        logger.info("mav.getViewName() = mav.getViewName() --->" +mav.getViewName());
+        logger.info("mav.getModelMap() = mav.getModelMap() --->" +mav.getModelMap());
+
+        listCnt = memberinfoService.lienseHisCount(member.getEmail());
+        pagination = new Pagination(currentPage, cntPerPage, pageSize, member.getEmail());
+        pagination.setTotalRecordCount(listCnt);
+        mav.addObject("pagination4",pagination);
+        mav.addObject("licenseinfo",memberinfoService.lienseModifyPageInfo(pagination));
+        logger.info("mav.getViewName() = mav.getViewName() --->" +mav.getViewName());
+        logger.info("mav.getModelMap() = mav.getModelMap() --->" +mav.getModelMap());
         return mav;
 
     }

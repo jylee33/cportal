@@ -472,36 +472,34 @@
                             <th>주소</th>
                             <th>업태</th>
                             <th>업종</th>
-                            <th>발행일자</th>
-                            <th>발행금액</th>
+                            <th>회원전화번호</th>
+                            <th>사업장전화번호</th>
                             <th>결제방법</th>
-                            <th>결제일자</th>
-                            <th>카드고객 uid</th>
-                            <th>카드결제 결과</th>
-                            <th>체납여부</th>
-                            <th>비고</th>
+                            <th>계산서발행용</br>사업자등록번호</th>
+                            <th>세금계산서</br>발송기관메일</th>
+                            <th>변경내용</th>
+                            <th>변경 일자</th>
                         </tr>
                         </thead>
-                        <tbody id="taxinfo">
+                        <tbody id="memberhisInfo">
                         <c:choose>
-                            <c:when test="${fn:length(taxInfo) > 0}">
-                                <c:forEach items="${taxInfo}" var="tax">
+                            <c:when test="${fn:length(memberhisInfo) > 0}">
+                                <c:forEach items="${memberhisInfo}" var="memberhis">
                                     <tr>
-                                        <td id=t_rownum class="text-center">${tax.rownum}</td>
-                                        <td id=t_representationname class="text-center">${tax.businessname}</td>
-                                        <td id=t_representationname class="text-center">${tax.representationname}</td>
-                                        <td id=t_strbusinessnumber class="text-center">${tax.strbusinessnumber}</td>
-                                        <td id=t_zipaddress class="text-left">${tax.zipaddress}</td>
-                                        <td id=t_businesskind class="text-center">${tax.businesskind}</td>
-                                        <td id=t_businesscondition class="text-center">${tax.businesscondition}</td>
-                                        <td id=t_strissuedate class="text-center" style="color:#8B0000;font: 17px">${tax.strissuedate}</td>
-                                        <td id=t_issueamount class="text-center" style="color:#8B0000;font: 17px">${tax.format_issueamount}</td>
-                                        <td id=t_settlementmeans class="text-center" style="color:#8B0000;font: 17px">${tax.settlementmeans}</td>
-                                        <td id=t_strsettlementdt class="text-center" style="color:#8B0000;font: 17px"><input type="text" maxlength="8"  value=${tax.strsettlementdt}</td>
-                                        <td id=t_customer_uid class="text-center" style="color:#8B0000;font: 17px">${tax.customer_uid}</td>
-                                        <td id=t_imp_uid class="text-center" style="color:#8B0000;font: 17px">${tax.imp_uid}</td>
-                                        <td id=t_arrearsyn class="text-center" style="color:#8B0000;font: 17px">${tax.arrearsyn}</td>
-                                        <td class="text-center"></td>
+                                        <td id=h0_rownum class="text-center">${memberhis.rownum}</td>
+                                        <td id=h0_representationname class="text-center">${memberhis.businessname}</td>
+                                        <td id=h0_representationname class="text-center">${memberhis.representationname}</td>
+                                        <td id=h0_strbusinessnumber class="text-center">${memberhis.strbusinessnumber}</td>
+                                        <td id=h0_zipaddress class="text-left">${memberhis.zipaddress}</td>
+                                        <td id=h0_businesskind class="text-center">${memberhis.businesskind}</td>
+                                        <td id=h0_businesscondition class="text-center">${memberhis.businesscondition}</td>
+                                        <td id=h0_strissuedate class="text-center" style="color:#8B0000;font: 17px">${memberhis.celltel}</td>
+                                        <td id=h0_issueamount class="text-center" style="color:#8B0000;font: 17px">${memberhis.companyphone}</td>
+                                        <td id=h0_settlementmeans class="text-center" style="color:#8B0000;font: 17px">${memberhis.settlementmeansnm}</td>
+                                        <td id=h0_strsettlementdt class="text-center" style="color:#8B0000;font: 17px">${memberhis.taxcompanynumber}</td>
+                                        <td id=h0_customer_uid class="text-center" style="color:#8B0000;font: 17px">${memberhis.taxemail}</td>
+                                        <td id=h0_imp_uid class="text-center" style="color:#8B0000;font: 17px">${memberhis.modifycontent}</td>
+                                        <td id=h0_createdAt class="text-center" style="color:#8B0000;font: 17px">${memberhis.format_createdAt}</td>
                                     </tr>
                                 </c:forEach>
                             </c:when>
@@ -682,6 +680,8 @@
                             jsonmap[i] = JSON.stringify(map); //.replace('{"chargeInfo":', '').replace('}]}', '}]');
                         } else if (i == 2) {
                             jsonmap[i] = JSON.stringify(map); //.replace('{"taxInfo":', '').replace('}]}', '}]');
+                        } else if (i == 3) {
+                            jsonmap[i] = JSON.stringify(map); //.replace('{"memberhisInfo":', '').replace('}]}', '}]');
                         } else {
                             jsonmap[i] = JSON.stringify(map); //.replace('{"licenseInfo":', '').replace('}]}', '}]');
                         }
@@ -773,9 +773,8 @@
                     }
                     $("#taxinfo").html(data2);
 
-
                     var data3 = "";
-                    const list3 = jsonmap[3]['licenseInfo'];
+                    const list3 = jsonmap[3]['memberhisInfo'];
                     for(var i=0;i<list3.length;i++) {
                     console.log("data--->"+JSON.stringify(list3[i]));
                         data3 += "<tr>";
@@ -783,19 +782,43 @@
                         data3 += "<td class='text-center'>"+list3[i].businessname+"</td>";
                         data3 += "<td class='text-center'>"+list3[i].representationname+"</td>";
                         data3 += "<td class='text-center'>"+list3[i].strbusinessnumber+"</td>";
-                        data3 += "<td class='text-center'>"+list3[i].prelicensegradenm+"</td>";
-                        data3 += "<td class='text-center'>"+list3[i].licensegradenm+"</td>";
-                        data3 += "<td class='text-center'>"+list3[i].datakeepterm+"</td>";
-                        data3 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list3[i].basevolume+"</td>";
-                        data3 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list3[i].format_basecharge+"</td>";
-                        data3 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list3[i].servicevolume+"</td>";
-                        data3 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list3[i].addvolume+"</td>";
-                        data3 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list3[i].format_addcharge+"</td>";
+                        data3 += "<td class='text-center'>"+list3[i].zipaddress+"</td>";
+                        data3 += "<td class='text-center'>"+list3[i].businesskind+"</td>";
+                        data3 += "<td class='text-center'>"+list3[i].businesscondition+"</td>";
+                        data3 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list3[i].celltel+"</td>";
+                        data3 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list3[i].companyphone+"</td>";
+                        data3 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list3[i].settlementmeansnm+"</td>";
+                        data3 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list3[i].strtaxcompanynumber+"</td>";
+                        data3 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list3[i].taxemail+"</td>";
                         data3 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list3[i].modifycontent+"</td>";
                         data3 += "<td class='text-center'>"+list3[i].format_createdAt+"</td>";
                         data3 += "</tr>";
                     }
-                    $("#licenseinfo").html(data3);
+                    $("#memberhisInfo").html(data3);
+
+
+                    var data4 = "";
+                    const list4 = jsonmap[4]['licenseInfo'];
+                    for(var i=0;i<list4.length;i++) {
+                    console.log("data--->"+JSON.stringify(list4[i]));
+                        data4 += "<tr>";
+                        data4 += "<td class='text-center'>"+list4[i].rownum+"</td>";
+                        data4 += "<td class='text-center'>"+list4[i].businessname+"</td>";
+                        data4 += "<td class='text-center'>"+list4[i].representationname+"</td>";
+                        data4 += "<td class='text-center'>"+list4[i].strbusinessnumber+"</td>";
+                        data4 += "<td class='text-center'>"+list4[i].prelicensegradenm+"</td>";
+                        data4 += "<td class='text-center'>"+list4[i].licensegradenm+"</td>";
+                        data4 += "<td class='text-center'>"+list4[i].datakeepterm+"</td>";
+                        data4 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list4[i].basevolume+"</td>";
+                        data4 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list4[i].format_basecharge+"</td>";
+                        data4 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list4[i].servicevolume+"</td>";
+                        data4 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list4[i].addvolume+"</td>";
+                        data4 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list4[i].format_addcharge+"</td>";
+                        data4 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list4[i].modifycontent+"</td>";
+                        data4 += "<td class='text-center'>"+list4[i].format_createdAt+"</td>";
+                        data4 += "</tr>";
+                    }
+                    $("#licenseinfo").html(data4);
 
                 },
                 error: function(err){

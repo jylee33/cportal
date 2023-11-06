@@ -59,6 +59,15 @@ public class MemberInfoServiceImpl implements MemberInfoService {
     public int memberTaxCount(String email) throws Exception {
         return memberinfoRepository.memberTaxCount(email);  //회원 세금계산서 현황
     }
+
+    @Override
+    public int memberHisCount(String email) throws Exception {
+        return memberinfoRepository.memberModifyHisCount(email); //회원 회원정보 변경이력
+    }
+    @Override
+    public int lienseHisCount(String email) throws Exception {
+        return memberinfoRepository.lienseModifyHisCount(email);  //회원 라이센스변경이력
+    }
     @Override
     public List<Map<String, Object>> memberInfoList(Pagination pagination) throws Exception {
         return memberinfoRepository.memberInfoList(pagination);
@@ -110,6 +119,13 @@ public class MemberInfoServiceImpl implements MemberInfoService {
     public List<Map<String, Object>> memberTaxPageInfo(Pagination pagination) throws Exception{
         return memberinfoRepository.memberTaxPageList(pagination);
     };
+    public List<Map<String, Object>> memberModifyPageInfo(Pagination pagination) throws Exception{
+        return memberinfoRepository.memberModifyPageList(pagination);
+    };
+
+    public List<Map<String, Object>> lienseModifyPageInfo(Pagination pagination) throws Exception{
+        return memberinfoRepository.lienseModifyPageList(pagination);
+    };
 
     public List<Map<String, Object>> memberChargeInfo(String email) throws Exception{
         return memberinfoRepository.memberChargeList(email);
@@ -117,6 +133,13 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 
     public List<Map<String, Object>> memberTaxInfo(String email) throws Exception{
         return memberinfoRepository.memberTaxList(email);
+    };
+    public List<Map<String, Object>> licenseHistoryInfo(String email) throws Exception{
+        return memberinfoRepository.licenseHistoryList(email);
+    };
+
+    public List<Map<String, Object>> memberHistoryInfo(String email) throws Exception{
+        return memberinfoRepository.memberHistoryList(email);
     };
 
     public ResultDto licenseUpdate(MemberLicenseDto memberLicenseDto) throws Exception{

@@ -122,6 +122,8 @@
             <a href="#" class="active">사용자 정보</a>
             <a href="#">과금내역</a>
             <a href="#">세금계산서 발행내역</a>
+            <a href="#">회원정보변경이력</a>
+            <a href="#">라이센스변경이력</a>
         </div>
         <%--        <div class="tabs">--%>
         <%--            <a href="${path}/charge/memberinfo" class="active">사용자 정보</a>--%>
@@ -280,7 +282,7 @@
                                     </tr>
                                     <tr>
                                         <th colspan="3">회원접속도메인</th>
-                                        <td colspan="2" id=hostname class="text-center">${userInfo.hostname}</td>>
+                                        <td colspan="2" id=hostname class="text-center">${userInfo.hostname}</td>
                                     </tr>
                                     <tr>
                                            <input type="hidden" name="preservicevolume" value="${userInfo.preservicevolume}">
@@ -456,6 +458,107 @@
                     </table>
                 </div>
             </div>
+
+            <!-- //회원정보변경이력 -->
+            <div class="cont" style="display: none;">
+                <div class="table-type1 center">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>연번</th>
+                            <th>사업장명</th>
+                            <th>대표자명</th>
+                            <th>사업자등록번호</th>
+                            <th>주소</th>
+                            <th>업태</th>
+                            <th>업종</th>
+                            <th>회원전화번호</th>
+                            <th>사업장전화번호</th>
+                            <th>결제방법</th>
+                            <th>계산서발행용</br>사업자등록번호</th>
+                            <th>세금계산서</br>발송기관메일</th>
+                            <th>변경내용</th>
+                            <th>변경 일자</th>
+                        </tr>
+                        </thead>
+                        <tbody id="memberhisInfo">
+                        <c:choose>
+                            <c:when test="${fn:length(memberhisInfo) > 0}">
+                                <c:forEach items="${memberhisInfo}" var="memberhis">
+                                    <tr>
+                                        <td id=h0_rownum class="text-center">${memberhis.rownum}</td>
+                                        <td id=h0_representationname class="text-center">${memberhis.businessname}</td>
+                                        <td id=h0_representationname class="text-center">${memberhis.representationname}</td>
+                                        <td id=h0_strbusinessnumber class="text-center">${memberhis.strbusinessnumber}</td>
+                                        <td id=h0_zipaddress class="text-left">${memberhis.zipaddress}</td>
+                                        <td id=h0_businesskind class="text-center">${memberhis.businesskind}</td>
+                                        <td id=h0_businesscondition class="text-center">${memberhis.businesscondition}</td>
+                                        <td id=h0_strissuedate class="text-center" style="color:#8B0000;font: 17px">${memberhis.celltel}</td>
+                                        <td id=h0_issueamount class="text-center" style="color:#8B0000;font: 17px">${memberhis.companyphone}</td>
+                                        <td id=h0_settlementmeans class="text-center" style="color:#8B0000;font: 17px">${memberhis.settlementmeansnm}</td>
+                                        <td id=h0_strsettlementdt class="text-center" style="color:#8B0000;font: 17px">${memberhis.taxcompanynumber}</td>
+                                        <td id=h0_customer_uid class="text-center" style="color:#8B0000;font: 17px">${memberhis.taxemail}</td>
+                                        <td id=h0_imp_uid class="text-center" style="color:#8B0000;font: 17px">${memberhis.modifycontent}</td>
+                                        <td id=h0_createdAt class="text-center" style="color:#8B0000;font: 17px">${memberhis.format_createdAt}</td>
+                                    </tr>
+                                </c:forEach>
+                            </c:when>
+                        </c:choose>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- //라이센스변경이력 -->
+            <div class="cont" style="display: none;">
+                <div class="table-type1 center">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>연번</th>
+                            <th>사업장명</th>
+                            <th>대표자명</th>
+                            <th>사업자등록번호</th>
+                            <th>이전전라이센스등급</th>
+                            <th>라이센스등급</th>
+                            <th>데이터보관기간</th>
+                            <th>기본장비수량</th>
+                            <th>기본요금</th>
+                            <th>서비스장비수량</th>
+                            <th>추가장비수량</th>
+                            <th>추가요금</th>
+                            <th>라이센스변경내용</th>
+                            <th>변경일시</th>
+                        </tr>
+                        </thead>
+                        <tbody id="licenseinfo">
+                        <c:choose>
+                            <c:when test="${fn:length(licenseinfo) > 0}">
+                                <c:forEach items="${licenseinfo}" var="license">
+                                    <tr>
+                                        <td id=h1_rownum class="text-center">${license.rownum}</td>
+                                        <td id=h1_businessname class="text-center">${license.businessname}</td>
+                                        <td id=h1_representationname class="text-center">${license.representationname}</td>
+                                        <td id=h1_strbusinessnumber class="text-center">${license.strbusinessnumber}</td>
+                                        <td id=h1_prelicensegradenm class="text-center">${license.prelicensegradenm}</td>
+                                        <td id=h1_licensegradenm class="text-center">${license.licensegradenm}</td>
+                                        <td id=h1_datakeepterm class="text-center">${license.datakeepterm}</td>
+                                        <td id=h1_basevolume class="text-center" style="color:#8B0000;font: 17px">${license.basevolume}</td>
+                                        <td id=h1_basecharge class="text-center" style="color:#8B0000;font: 17px">${license.format_basecharge}</td>
+                                        <td id=h1_servicevolume class="text-center" style="color:#8B0000;font: 17px">${license.servicevolume}</td>
+                                        <td id=h1_addvolume class="text-center" style="color:#8B0000;font: 17px">${license.addvolume}</td>
+                                        <td id=h1_addcharge class="text-center" style="color:#8B0000;font: 17px">${license.format_addcharge}</td>
+                                        <td id=h1_modifycontent class="text-center" style="color:#8B0000;font: 17px">${license.modifycontent}</td>
+                                        <td id=h1_createdAt class="text-center" style="color:#8B0000;font: 17px">${license.format_createdAt}</td>
+                                    </tr>
+                                </c:forEach>
+                            </c:when>
+                        </c:choose>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <script>
                 $('.tabs a').click(function(){
                     $(this).addClass('active').siblings().removeClass('active');
@@ -575,10 +678,14 @@
                             jsonmap[i] = JSON.stringify(map);//.replace('{"userInfo":', '').replace('}}', '}');
                         } else if (i == 1) {
                             jsonmap[i] = JSON.stringify(map); //.replace('{"chargeInfo":', '').replace('}]}', '}]');
-                        } else {
+                        } else if (i == 2) {
                             jsonmap[i] = JSON.stringify(map); //.replace('{"taxInfo":', '').replace('}]}', '}]');
+                        } else if (i == 3) {
+                            jsonmap[i] = JSON.stringify(map); //.replace('{"memberhisInfo":', '').replace('}]}', '}]');
+                        } else {
+                            jsonmap[i] = JSON.stringify(map); //.replace('{"licenseInfo":', '').replace('}]}', '}]');
                         }
-                        // console.log("map1.  --> " + i + "..." + jsonmap[i]);
+                         console.log("map.  --> " + i + "..." + jsonmap[i]);
                         // console.log("map2   --> " + i + "..." + JSON.parse(jsonmap[i]));
                         // console.log("map2   --> " + i + "..." + JSON.parse(jsonmap[i]).length);
                         jsonmap[i] = JSON.parse(jsonmap[i]);
@@ -665,6 +772,54 @@
                         data2 += "</tr>";
                     }
                     $("#taxinfo").html(data2);
+
+                    var data3 = "";
+                    const list3 = jsonmap[3]['memberhisInfo'];
+                    for(var i=0;i<list3.length;i++) {
+                    console.log("data--->"+JSON.stringify(list3[i]));
+                        data3 += "<tr>";
+                        data3 += "<td class='text-center'>"+list3[i].rownum+"</td>";
+                        data3 += "<td class='text-center'>"+list3[i].businessname+"</td>";
+                        data3 += "<td class='text-center'>"+list3[i].representationname+"</td>";
+                        data3 += "<td class='text-center'>"+list3[i].strbusinessnumber+"</td>";
+                        data3 += "<td class='text-center'>"+list3[i].zipaddress+"</td>";
+                        data3 += "<td class='text-center'>"+list3[i].businesskind+"</td>";
+                        data3 += "<td class='text-center'>"+list3[i].businesscondition+"</td>";
+                        data3 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list3[i].celltel+"</td>";
+                        data3 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list3[i].companyphone+"</td>";
+                        data3 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list3[i].settlementmeansnm+"</td>";
+                        data3 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list3[i].strtaxcompanynumber+"</td>";
+                        data3 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list3[i].taxemail+"</td>";
+                        data3 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list3[i].modifycontent+"</td>";
+                        data3 += "<td class='text-center'>"+list3[i].format_createdAt+"</td>";
+                        data3 += "</tr>";
+                    }
+                    $("#memberhisInfo").html(data3);
+
+
+                    var data4 = "";
+                    const list4 = jsonmap[4]['licenseInfo'];
+                    for(var i=0;i<list4.length;i++) {
+                    console.log("data--->"+JSON.stringify(list4[i]));
+                        data4 += "<tr>";
+                        data4 += "<td class='text-center'>"+list4[i].rownum+"</td>";
+                        data4 += "<td class='text-center'>"+list4[i].businessname+"</td>";
+                        data4 += "<td class='text-center'>"+list4[i].representationname+"</td>";
+                        data4 += "<td class='text-center'>"+list4[i].strbusinessnumber+"</td>";
+                        data4 += "<td class='text-center'>"+list4[i].prelicensegradenm+"</td>";
+                        data4 += "<td class='text-center'>"+list4[i].licensegradenm+"</td>";
+                        data4 += "<td class='text-center'>"+list4[i].datakeepterm+"</td>";
+                        data4 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list4[i].basevolume+"</td>";
+                        data4 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list4[i].format_basecharge+"</td>";
+                        data4 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list4[i].servicevolume+"</td>";
+                        data4 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list4[i].addvolume+"</td>";
+                        data4 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list4[i].format_addcharge+"</td>";
+                        data4 += "<td class='text-center' style='color:#8B0000;font: 17px'>"+list4[i].modifycontent+"</td>";
+                        data4 += "<td class='text-center'>"+list4[i].format_createdAt+"</td>";
+                        data4 += "</tr>";
+                    }
+                    $("#licenseinfo").html(data4);
+
                 },
                 error: function(err){
 

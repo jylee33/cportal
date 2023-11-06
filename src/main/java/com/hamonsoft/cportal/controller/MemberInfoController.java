@@ -93,6 +93,9 @@ public class MemberInfoController {
         mav.addObject("userInfo",memberinfoService.memberLicenseInfo(strEmail));
         mav.addObject("chargeInfo",memberinfoService.memberChargeInfo(strEmail));
         mav.addObject("taxInfo",memberinfoService.memberTaxInfo(strEmail));
+      //  mav.addObject("taxInfo",memberinfoService.memberTaxInfo(strEmail));
+        mav.addObject("memberhisInfo",memberinfoService.memberHistoryInfo(strEmail));
+        mav.addObject("licenseInfo",memberinfoService.licenseHistoryInfo(strEmail));
         logger.info("mav.getViewName() = mav.getViewName() --->" +mav.getViewName());
         logger.info("mav.getModelMap() = mav.getModelMap() --->" +mav.getModelMap());
         logger.info("MemberSetListPost strEmail = memberInfo.toString() --->" + memberSet.get(0).toString());
@@ -119,16 +122,24 @@ public class MemberInfoController {
         Map<String, Object> userInfo = memberinfoService.memberLicenseInfo(strEmail);
         List<Map<String, Object>> chargeInfo = memberinfoService.memberChargeInfo(strEmail);
         List<Map<String, Object>> taxInfo = memberinfoService.memberTaxInfo(strEmail);
+        List<Map<String, Object>> memberhisInfo = memberinfoService.memberHistoryInfo(strEmail);
+        List<Map<String, Object>> licenseInfo = memberinfoService.licenseHistoryInfo(strEmail);
         List<Map<String, Object>> listMap =  new ArrayList<Map<String, Object>>();
         Map<String, Object> map1 = new HashMap<String, Object>();
         Map<String, Object> map2 = new HashMap<String, Object>();
         Map<String, Object> map3 = new HashMap<String, Object>();
+        Map<String, Object> map4 = new HashMap<String, Object>();
+        Map<String, Object> map5 = new HashMap<String, Object>();
         map1.put("userInfo",userInfo);
         map2.put("chargeInfo",chargeInfo);
         map3.put("taxInfo",taxInfo);
+        map4.put("memberhisInfo",memberhisInfo);
+        map5.put("licenseInfo",licenseInfo);
         listMap.add(map1);
         listMap.add(map2);
         listMap.add(map3);
+        listMap.add(map4);
+        listMap.add(map5);
 
         logger.info("taxInfo ---->"+taxInfo);
         logger.info("strEmail ---------------------------------------------------------------------------------->"+listMap);
@@ -210,6 +221,22 @@ public class MemberInfoController {
         pagination.setTotalRecordCount(listCnt);
         mav.addObject("pagination2",pagination);
         mav.addObject("taxInfo",memberinfoService.memberTaxPageInfo(pagination));
+        logger.info("mav.getViewName() = mav.getViewName() --->" +mav.getViewName());
+        logger.info("mav.getModelMap() = mav.getModelMap() --->" +mav.getModelMap());
+
+        listCnt = memberinfoService.memberHisCount(member.getEmail());
+        pagination = new Pagination(currentPage, cntPerPage, pageSize, member.getEmail());
+        pagination.setTotalRecordCount(listCnt);
+        mav.addObject("pagination3",pagination);
+        mav.addObject("memberhisInfo",memberinfoService.memberModifyPageInfo(pagination));
+        logger.info("mav.getViewName() = mav.getViewName() --->" +mav.getViewName());
+        logger.info("mav.getModelMap() = mav.getModelMap() --->" +mav.getModelMap());
+
+        listCnt = memberinfoService.lienseHisCount(member.getEmail());
+        pagination = new Pagination(currentPage, cntPerPage, pageSize, member.getEmail());
+        pagination.setTotalRecordCount(listCnt);
+        mav.addObject("pagination4",pagination);
+        mav.addObject("licenseinfo",memberinfoService.lienseModifyPageInfo(pagination));
         logger.info("mav.getViewName() = mav.getViewName() --->" +mav.getViewName());
         logger.info("mav.getModelMap() = mav.getModelMap() --->" +mav.getModelMap());
         return mav;

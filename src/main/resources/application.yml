@@ -79,10 +79,9 @@ spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     mapper-locations: classpath:mapper/**/*Mapper.xml
-    jdbc-url: jdbc:mariadb://localhost:53306/netiscloud?&serverTimezone=Asia/Seoul&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
-#    username: portal # KTC
-    username: root
-    password: ntflow
+    jdbc-url: jdbc:mariadb://database-1.c7guygjgqqpy.ap-northeast-2.rds.amazonaws.com:53306/netiscloud?&serverTimezone=Asia/Seoul&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
+    username: portal
+    password: vhxkf1234!
 
   mvc:
     view:

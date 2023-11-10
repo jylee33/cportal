@@ -21,6 +21,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 //import java.util.*;
 
@@ -178,25 +183,6 @@ public class LicenseManageController {
         logger.info("LicenseManageController creditview ResponseDTO---->"+responseDTO);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);//
     }
-//
-//
-//    @PostMapping(value = "/creditinfo") // memberinfo
-//    public ModelAndView creditListPost(Map<String, Object> map, HttpServletRequest request) throws Exception {
-//        ModelAndView mav = new ModelAndView();
-//        mav.setViewName("/license/creditinfo");
-//
-//        HttpSession session = request.getSession();
-////        Member member = (Member) session.getAttribute("login");
-////        String diviceid = request.getParameter("diviceid");
-////        logger.info("LicenseManageController creditList ---->"+member.getEmail());
-////        logger.info("LicenseManageController creditList ---->"+member.getEmailcertificationyn());
-////        logger.info("LicenseManageController creditList ---->"+member.getBusinessname());
-//        logger.info("LicenseManageController creditList ---->");
-//        mav.addObject("credit",licensemanageService.creditList());
-//
-//
-//        return mav;
-//    }
 
     @PostMapping(value = "/aidInfoSave")
     @ResponseBody
@@ -304,6 +290,94 @@ public class LicenseManageController {
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);//
     }
 
+
+    @RequestMapping(value = "/settleinfo") // memberinfo
+    public void settleinfo(Map<String, Object> map, HttpServletRequest request) throws Exception {
+        logger.info("LicenseManageController settleinfo ---->");
+    }
+
+    @RequestMapping(value="/settleview", method = RequestMethod.GET)
+    public ResponseEntity<?> settleview(@RequestParam Map<String,Object> param
+                                        ,HttpServletRequest request) throws IOException {
+        String stDate =  request.getParameter("stDate").replace("-","");
+        String edDate =  request.getParameter("edDate").replace("-","");
+        if(stDate == null || stDate.length() == 0){
+            LocalDate date = LocalDate.now();
+            DateTimeFormatter fm = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            edDate = date.format(fm).replace("-","");
+            stDate = date.minusMonths(1).toString().replace("-","");
+        }
+        logger.info("stDate----->"+stDate+"........edDate-->"+edDate);
+        logger.info("request----->"+request.getParameterMap().toString());
+
+        ResponseDTO responseDTO = new ResponseDTO();
+        responseDTO.setResultCode("S0001");
+        responseDTO.setRes(licensemanageService.chargeSettleList(stDate, edDate));
+        logger.info("LicenseManageController chargeSettleList ResponseDTO---->"+responseDTO);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);//
+    }
+
+    @PostMapping(value = "/settleSave")
+    @ResponseBody
+    public void settleSave(@RequestBody String settleData) throws Exception {
+
+        JSONParser jsonParser = new JSONParser();
+        JSONArray insertParam = null;
+        try {
+            insertParam = (JSONArray) jsonParser.parse(settleData);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        logger.info("insertParam.size-->"+insertParam.size());
+        for(int i=0; i<insertParam.size(); i++){
+            //배열 안에 있는것도 JSON형식 이기 때문에 JSON Object 로 추출
+            JSONObject insertData = (JSONObject) insertParam.get(i);
+            logger.info("insertParam-->"+insertData+".........."+insertData.get("settlementmeans")+".............."+insertData.get("strsettlementdt").toString().length());
+            Map<String, Object> saveData = new HashMap<>();
+            if ("cash".equals(insertData.get("settlementmeans")) && insertData.get("strsettlementdt").toString().length() >= 8){
+                String localDate = utcToLocaltime(insertData.get("strsettlementdt").toString());
+                insertData.put("strsettlementdt",localDate);
+                logger.info("settleUpdate-->"+insertData+"........");
+                licensemanageService.settleUpdate(insertData);
+            }
+        }
+
+    }
+
+    /* UTC time to local time
+     */
+    public static String utcToLocaltime(String datetime) throws Exception {
+
+        String formatTimeZone = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+        String koreaDate = "";
+        try {
+            // [UTC 형식 Date 값 정의 실시]
+            String utcDateValue = datetime;
+
+            // [UTC 값을 포맷 형식 지정해 Date 객체로 선언]
+            Date date = new SimpleDateFormat(formatTimeZone).parse(utcDateValue);
+
+            // [Date to Calendar 변환]
+            Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+            calendar.setTime(date);
+
+
+            // [한국형 시간은 UTC 시간보다 9시간 앞선다]
+            calendar.add(Calendar.HOUR, 9);
+
+
+            // [한국형 시간으로 변경된 값 저장 실시]
+            SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            koreaDate = sdformat.format(calendar.getTime());
+        } catch(Exception e) {
+            e.printStackTrace();
+            throw new Exception(e);
+        }
+
+        return koreaDate;
+    }
 
     @RequestMapping(value = "/jqgrid", method = RequestMethod.GET)
     public ModelAndView jqgrid (ModelAndView mav)

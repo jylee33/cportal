@@ -43,6 +43,7 @@
             <a href="${path}/license/licensemanage" >라이선스 정책 관리</a>
             <a href="${path}/license/aidcodeinfo" >라이선스 제공 기능</a>
             <a href="#" class="active">Credit 제공</a>
+            <a href="${path}/license/settleinfo">결제일자등록</a>
         </div>
     </div>
     <div class="flex align-items-center gap10 align-end mb10">

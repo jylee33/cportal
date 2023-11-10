@@ -34,4 +34,8 @@ public interface LicenseManageRepository {
 
     void creditUpdate(Map<String, Object> insertData);
 
+    void settleUpdate(Map<String, Object> insertData);
+
+    ArrayList<HashMap<String, Object>> chargeSettleList(String stDate, String edDate);
+
 }

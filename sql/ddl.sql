@@ -519,3 +519,7 @@ begin
     end if;
 END
 
+2023.11.14
+-- db생성 및 pod생성 요청에 따른 임시저장 flag 추가  temporary_yn = 'Y'
+ALTER TABLE netiscloud.tbmember ADD COLUMN temporary_yn VARCHAR(1)  COMMENT '임시저장여부' AFTER access_token;
+-- db, pod생성 완료 응답시 임시저장 temporary_yn = 'N', 권한 부여 완료 메일 전송

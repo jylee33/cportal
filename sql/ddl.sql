@@ -520,6 +520,14 @@ begin
 END
 
 2023.11.14
+2023.11.14
+ALTER TABLE netiscloud.tbmember CHANGE sessionkey sessionkey varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT 'none' NOT NULL COMMENT '로그인 세션 아이디' AFTER hostname;
+ALTER TABLE netiscloud.tbmember CHANGE sessionlimit sessionlimit timestamp DEFAULT current_timestamp() on update current_timestamp() NOT NULL COMMENT '아이디 저장 만료 기간' AFTER sessionkey;
+ALTER TABLE netiscloud.tbmember CHANGE serverdomainname serverdomainname varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT '' NULL COMMENT '회원접속도메인' AFTER sessionlimit;
+ALTER TABLE netiscloud.tbmember CHANGE access_token access_token varchar(300) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL NULL COMMENT 'SSO 로긴용 access_token' AFTER serverdomainname;
+-- db생성 및 pod생성 요청에 따른 임시저장 flag 추가  temporary_yn = 'Y'
+ALTER TABLE netiscloud.tbmember ADD COLUMN temporary_yn VARCHAR(1)  COMMENT '임시저장여부' AFTER access_token;
+-- db, pod생성 완료 응답시 임시저장 temporary_yn = 'N', 권한 부여 완료 메일 전송
 -- db생성 및 pod생성 요청에 따른 임시저장 flag 추가  temporary_yn = 'Y'
 ALTER TABLE netiscloud.tbmember ADD COLUMN temporary_yn VARCHAR(1)  COMMENT '임시저장여부' AFTER access_token;
 -- db, pod생성 완료 응답시 임시저장 temporary_yn = 'N', 권한 부여 완료 메일 전송

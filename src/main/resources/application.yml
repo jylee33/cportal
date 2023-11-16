@@ -77,9 +77,9 @@ spring:
     allow-bean-definition-overriding: true
 
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     mapper-locations: classpath:mapper/**/*Mapper.xml
-    jdbc-url: jdbc:mariadb://database-1.c7guygjgqqpy.ap-northeast-2.rds.amazonaws.com:53306/netiscloud?&serverTimezone=Asia/Seoul&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
+    jdbc-url: jdbc:mysql://13.125.138.12:53306/netiscloud?&serverTimezone=Asia/Seoul&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
     username: portal
     password: vhxkf1234!
 

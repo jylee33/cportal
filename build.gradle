@@ -55,6 +55,7 @@ dependencies {
     implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4' /* Apache Commons FileUpload */
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    runtimeOnly 'mysql:mysql-connector-java:8.0.25'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.4.7'

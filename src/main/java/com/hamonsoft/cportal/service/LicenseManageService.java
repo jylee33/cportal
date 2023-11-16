@@ -59,12 +59,6 @@ public class LicenseManageService {
         return "수정완료";
     }
 
-
-
-
-
-
-
     public ArrayList<HashMap<String, Object>> aidfunctionList(String functioncode) {
         return licensemanageRepository.aidfunctionList(functioncode);
     }
@@ -98,5 +92,13 @@ public class LicenseManageService {
         licensemanageRepository.creditUpdate(insertData);
         return "수정완료";
     }
+    /* 현금결제 정보 수정 */
+    public String settleUpdate(Map<String, Object> insertData) {
+        licensemanageRepository.settleUpdate(insertData);
+        return "수정완료";
+    }
 
+    public ArrayList<HashMap<String, Object>> chargeSettleList(String stDate, String edDate) {
+        return licensemanageRepository.chargeSettleList(stDate, edDate);
+    }
 }

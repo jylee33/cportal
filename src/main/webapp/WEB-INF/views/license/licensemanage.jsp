@@ -43,6 +43,7 @@
             <a href="#" class="active">라이선스 정책 관리</a>
             <a href="${path}/license/aidcodeinfo" >라이선스 제공 기능</a>
             <a href="${path}/license/creditinfo">Credit 제공</a>
+            <a href="${path}/license/settleinfo">결제일자등록</a>
         </div>
         <div class="right">
             <span class="tit">솔루션 선택</span>
@@ -74,6 +75,7 @@
 
     $(document).ready(function(){
         console.log("jqxGridCreate-->");
+        $("#sltdeviceid").SumoSelect();
         proc_jqxGridSelect();
     });
 

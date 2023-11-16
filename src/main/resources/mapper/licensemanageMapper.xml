@@ -241,4 +241,67 @@
         WHERE groupcode = #{groupcode}
           and commoncode = #{commoncode}
     </update>
+
+
+    <select id="chargeSettleList" resultType="hashmap">
+
+        select a01.memberid
+        ,a01.membername          -- 회원명
+        ,a01.email                 -- 이메일
+        ,a01.licensegrade          -- 라이센스등급
+        ,a01.celltel               -- 회원전화번호
+        ,a01.businessname          -- 사업장명
+        ,a01.businessnumber        -- 사업자등록번호
+        ,concat(substring(a01.businessnumber,1,3),'-',substring(a01.businessnumber,4,2),'-',substring(a01.businessnumber,6,5)) strbusinessnumber
+        ,a01.joindate              -- 가입일자
+        ,str_to_date(a01.joindate,'%Y%m%d') strjoindate
+        ,a01.hostname
+        ,j04.codename hostip
+        ,a01.serverdomainname
+        ,case when a01.withdrawalyn = '0' then '회원' when a01.withdrawalyn = '1' then '탈퇴' else '중지' end statusnm
+        ,j01.taxhistoryid          -- 세금계산서발행내역
+        ,j01.taxid                 -- 세금계산서발행기관정보
+        ,j01.issueamount
+        ,FORMAT(j01.issueamount, 0) format_issueamount
+        ,j01.issuedate             -- 발행일자
+        ,str_to_date(j01.issuedate,'%Y%m%d %H:%i%S') strissuedate
+        ,case when j01.settlementdt is not null then '' else '체납' end arrearsyn
+        ,IFNULL(j01.customer_uid,'')          customer_uid
+        ,IFNULL(j01.imp_uid,'')               imp_uid
+        ,str_to_date(j01.settlementdt,'%Y%m%d %H:%i%S') strsettlementdt
+        ,IFNULL(j01.settlementdt,'')            settlementdt
+        ,str_to_date(j01.settlementdt,'%Y%m%d') format_settlementdt
+        ,IFNULL(j01.settlementmeans,'')  settlementmeans
+        ,j12.codename settlementmeansnm
+        ,j02.representationname    -- 대표자
+        ,j02.businesskind          -- 업태
+        ,j02.businesscondition     -- 업종
+        ,j02.postnumber            -- 우편번호
+        ,j02.address               -- 주소
+        ,j02.detailaddress         -- 상세주소
+        ,concat(j02.postnumber,' ',j02.address,' ',j02.detailaddress) zipaddress
+        ,j01.createdAt
+        ,row_number() over(order by j01.issuedate DESC, j01.createdAt desc) AS rownum
+        from tbmember                    a01
+        inner join tbtaxinformation j02
+                   inner join tbtaxhistory     j01
+                              left  join tbcommoncode j12 on j12.groupcode = '009' and j12.commoncode = j01.settlementmeans
+                           on j02.taxid = j01.taxid
+                          and IFNULL(j01.issueamount,0) >= 1
+                          and j01.issuedate between #{stDate} and #{edDate}
+                 on a01.email = j02.email
+        left  join tbcommoncode       j04
+        on j04.groupcode = '100'
+        and j04.commoncode = a01.hostname
+        where 1 = 1
+        and a01.withdrawalyn != '1'
+    </select>
+
+
+    <!--  현금결제 정보 수정  -->
+    <update id="settleUpdate">
+        UPDATE tbtaxhistory
+        SET settlementdt = DATE_FORMAT(#{strsettlementdt}, '%Y%m%d')
+        WHERE taxhistoryid = #{taxhistoryid}
+    </update>
 </mapper>

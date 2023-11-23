@@ -79,7 +79,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     mapper-locations: classpath:mapper/**/*Mapper.xml
-    jdbc-url: jdbc:mysql://13.125.138.12:53306/netiscloud?&serverTimezone=Asia/Seoul&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
+    jdbc-url: jdbc:mysql://15.164.1.225:53306/netiscloud?&serverTimezone=Asia/Seoul&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
     username: portal
     password: vhxkf1234!
 

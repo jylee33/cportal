@@ -14,7 +14,6 @@
             name="viewport"
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" type="text/css" href="${path}/resources/css/sumoselect.css" />
     <link rel="stylesheet" type="text/css" href="${path}/resources/css/front.css" />
